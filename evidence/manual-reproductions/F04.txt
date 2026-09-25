@@ -1,0 +1,18 @@
+Updated Git hooks.
+Git LFS initialized.
+Working copy changes:
+D .gitattributes
+Working copy  (@) : ykznzzqv 2da48d72 (no description set)
+Parent commit (@-): unyvuzmv f93d0823 main | Seed fixture
+Working copy changes:
+D .gitattributes
+M asset.bin
+Working copy  (@) : ykznzzqv 11e2a354 (no description set)
+Parent commit (@-): unyvuzmv f93d0823 main | Seed fixture
+first_is_pointer= True
+second_is_raw= True
+same_bytes= False
+
+STDERR:
+Done importing changes from the underlying Git repo.
+Initialized repo in "."

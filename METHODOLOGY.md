@@ -105,6 +105,14 @@ Specific corrections matter when reading earlier artifacts:
 The [model-calibration record](model-calibration.md) discusses the delegated execution experiment.
 It is separate from product findings and contains no measured cost or token-efficiency claim.
 
+## Standalone finding reproductions
+
+The shared setup and all eight finding blocks in [the report](FINDINGS.md) were executed against the
+pinned macOS debug binary with a 1,100-byte synthetic seed. Each reproduced its stated observation.
+These are reduced confirmations of existing findings, not new core scenarios or a Windows rerun.
+[Transcripts and binary hash](evidence/manual-reproductions) record the verification. Runner-specific
+temporary paths and thread identifiers are normalized. Suggested fixes remain unimplemented.
+
 ## Limits and source basis
 
 The source archive, build profile, configuration, platform, and fixture scope limit every result.

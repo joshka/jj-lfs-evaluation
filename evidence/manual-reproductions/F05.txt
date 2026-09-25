@@ -1,0 +1,13 @@
+Updated Git hooks.
+Git LFS initialized.
+120000 97922aee98474ad751b77adb4aa5e4f3dce681fe 0	link.bin
+The working copy has no changes.
+Working copy  (@) : ztmkopyo 41408781 (empty) (no description set)
+Parent commit (@-): ptkpssmn d8b9e683 main | Seed fixture
+.gitattributes
+asset.bin
+note.txt
+
+STDERR:
+Done importing changes from the underlying Git repo.
+Initialized repo in "."

@@ -1,0 +1,30 @@
+Updated Git hooks.
+Git LFS initialized.
+a.bin: filter: lfs
+Working copy changes:
+A a.bin
+Working copy  (@) : tvvvstls cb1d84c1 (no description set)
+Parent commit (@-): nvmoporl cef0f7ad main | Seed fixture
+.gitattributes
+a.bin
+asset.bin
+note.txt
+new payload
+Updated Git hooks.
+Git LFS initialized.
+a.bin: filter: lfs
+Working copy changes:
+A a.bin
+Working copy  (@) : kzmrkrss f679dcfd (no description set)
+Parent commit (@-): vkkxxwst efeb40ed main | Seed fixture
+.gitattributes
+a.bin
+asset.bin
+note.txt
+new payload
+
+STDERR:
+Done importing changes from the underlying Git repo.
+Initialized repo in "."
+Done importing changes from the underlying Git repo.
+Initialized repo in "."

@@ -1,0 +1,13 @@
+Updated Git hooks.
+Git LFS initialized.
+status exit=101
+
+STDERR:
+Done importing changes from the underlying Git repo.
+Initialized repo in "."
+
+thread 'main' (<thread-id>) panicked at lib/src/local_working_copy.rs:1464:13:
+assertion `left == right` failed
+  left: {".gitattributes", "asset.bin/child.txt", "asset.bin", "note.txt"}
+ right: {"note.txt", ".gitattributes", "asset.bin/child.txt"}
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace

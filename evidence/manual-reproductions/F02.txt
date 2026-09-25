@@ -1,0 +1,15 @@
+Updated Git hooks.
+Git LFS initialized.
+untrack exit=0
+Working copy changes:
+D asset.bin
+Working copy  (@) : orpntqsl da3ecdc8 (no description set)
+Parent commit (@-): kxzmzrpo c8ea16de main | Seed fixture
+.gitattributes
+note.txt
+show exit=1
+
+STDERR:
+Done importing changes from the underlying Git repo.
+Initialized repo in "."
+Error: No such path: asset.bin

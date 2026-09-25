@@ -1,0 +1,11 @@
+Updated Git hooks.
+Git LFS initialized.
+track exit=0
+stderr bytes=       0
+.gitattributes
+asset.bin
+note.txt
+
+STDERR:
+Done importing changes from the underlying Git repo.
+Initialized repo in "."

@@ -1,0 +1,12 @@
+Updated Git hooks.
+Git LFS initialized.
+sparse exit=0
+disk=missing
+version https://git-lfs.github.com/spec/v1
+oid sha256:9abbe117c88beba0f7d17a0bd786a71d0429be27bbaaf3904ca1dd3a430cea31
+size 1100
+
+STDERR:
+Done importing changes from the underlying Git repo.
+Initialized repo in "."
+Added 0 files, modified 0 files, removed 2 files

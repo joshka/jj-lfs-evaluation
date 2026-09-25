@@ -1,0 +1,17 @@
+{
+  "source_sha": "d8a56d1a38cae110529ef8e67e72e3e2057ed3ca",
+  "binary_sha256": "cdac7b05ed382fcc4b17bc2ba4269390633c9794011279ec80480422fdc17074",
+  "platform": "macOS arm64",
+  "profile": "debug",
+  "cases": [
+    "F01",
+    "F02",
+    "F03",
+    "F04",
+    "F05",
+    "F06",
+    "F07",
+    "F08"
+  ],
+  "note": "Standalone report reproductions using 1100-byte synthetic seed; confirms existing findings, not additional core scenarios. Commands extracted from the report fixture and finding blocks. Runner path and thread identifier normalized."
+}

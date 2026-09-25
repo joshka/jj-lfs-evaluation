@@ -1,0 +1,222 @@
+{
+  "baseline": {
+    "payload.bin": {
+      "size": 129,
+      "sha256": "178ba39b2e4e92264f35dafbd416ba3c8beb0dc87b395415f068c181d837def0"
+    },
+    "missing.bin": {
+      "size": 129,
+      "sha256": "f049f89fcceec2e1d8aead99b8142c08b6ecf57b02eb85c7c0c1afd051f4fbeb"
+    }
+  },
+  "results": [
+    {
+      "case": "batch-401",
+      "fetch_exit": 2,
+      "elapsed_seconds": 0.12,
+      "requests": [
+        {
+          "method": "POST",
+          "path": "/lfs/objects/batch",
+          "bytes": 333
+        }
+      ],
+      "disk_unchanged": true,
+      "store_unchanged": true,
+      "cache_files": [],
+      "setup_valid": true,
+      "jj_exit": 0,
+      "stderr_first_lines": [
+        "Fetching reference refs/heads/joshka/lfs-eval-fixture",
+        "fatal: could not read Username for 'http://127.0.0.1:58828': terminal prompts disabled",
+        "batch response: Git credentials for http://127.0.0.1:58828/lfs not found.",
+        "error: failed to fetch some objects from 'http://127.0.0.1:58828/lfs'"
+      ]
+    },
+    {
+      "case": "batch-403",
+      "fetch_exit": 2,
+      "elapsed_seconds": 0.11,
+      "requests": [
+        {
+          "method": "POST",
+          "path": "/lfs/objects/batch",
+          "bytes": 333
+        }
+      ],
+      "disk_unchanged": true,
+      "store_unchanged": true,
+      "cache_files": [],
+      "setup_valid": true,
+      "jj_exit": 0,
+      "stderr_first_lines": [
+        "Fetching reference refs/heads/joshka/lfs-eval-fixture",
+        "batch response: mock 403 LFS batch failure",
+        "error: failed to fetch some objects from 'http://127.0.0.1:58831/lfs'"
+      ]
+    },
+    {
+      "case": "batch-404",
+      "fetch_exit": 2,
+      "elapsed_seconds": 0.2,
+      "requests": [
+        {
+          "method": "POST",
+          "path": "/lfs/objects/batch",
+          "bytes": 333
+        }
+      ],
+      "disk_unchanged": true,
+      "store_unchanged": true,
+      "cache_files": [],
+      "setup_valid": true,
+      "jj_exit": 0,
+      "stderr_first_lines": [
+        "Fetching reference refs/heads/joshka/lfs-eval-fixture",
+        "batch response: mock 404 LFS batch failure",
+        "error: failed to fetch some objects from 'http://127.0.0.1:58833/lfs'"
+      ]
+    },
+    {
+      "case": "batch-429",
+      "fetch_exit": 2,
+      "elapsed_seconds": 6.88,
+      "requests": [
+        {
+          "method": "POST",
+          "path": "/lfs/objects/batch",
+          "bytes": 333
+        },
+        {
+          "method": "POST",
+          "path": "/lfs/objects/batch",
+          "bytes": 333
+        },
+        {
+          "method": "POST",
+          "path": "/lfs/objects/batch",
+          "bytes": 333
+        },
+        {
+          "method": "POST",
+          "path": "/lfs/objects/batch",
+          "bytes": 333
+        },
+        {
+          "method": "POST",
+          "path": "/lfs/objects/batch",
+          "bytes": 333
+        },
+        {
+          "method": "POST",
+          "path": "/lfs/objects/batch",
+          "bytes": 333
+        },
+        {
+          "method": "POST",
+          "path": "/lfs/objects/batch",
+          "bytes": 333
+        },
+        {
+          "method": "POST",
+          "path": "/lfs/objects/batch",
+          "bytes": 333
+        },
+        {
+          "method": "POST",
+          "path": "/lfs/objects/batch",
+          "bytes": 333
+        }
+      ],
+      "disk_unchanged": true,
+      "store_unchanged": true,
+      "cache_files": [],
+      "setup_valid": true,
+      "jj_exit": 0,
+      "stderr_first_lines": [
+        "Fetching reference refs/heads/joshka/lfs-eval-fixture",
+        "batch response: LFS: mock 429 LFS batch failure",
+        "error: failed to fetch some objects from 'http://127.0.0.1:58846/lfs'"
+      ]
+    },
+    {
+      "case": "batch-500",
+      "fetch_exit": 2,
+      "elapsed_seconds": 0.12,
+      "requests": [
+        {
+          "method": "POST",
+          "path": "/lfs/objects/batch",
+          "bytes": 333
+        }
+      ],
+      "disk_unchanged": true,
+      "store_unchanged": true,
+      "cache_files": [],
+      "setup_valid": true,
+      "jj_exit": 0,
+      "stderr_first_lines": [
+        "Fetching reference refs/heads/joshka/lfs-eval-fixture",
+        "batch response: Fatal error: mock 500 LFS batch failure",
+        "",
+        "Errors logged to '/tmp/jj-lfs-evaluation/failures-sol/fixture/.git/lfs/logs/20260925T110407.342381.log'.",
+        "Use `git lfs logs last` to view the log.",
+        "error: failed to fetch some objects from 'http://127.0.0.1:58881/lfs'"
+      ]
+    },
+    {
+      "case": "object-404",
+      "fetch_exit": 2,
+      "elapsed_seconds": 0.1,
+      "requests": [
+        {
+          "method": "POST",
+          "path": "/lfs/objects/batch",
+          "bytes": 333
+        }
+      ],
+      "disk_unchanged": true,
+      "store_unchanged": true,
+      "cache_files": [],
+      "setup_valid": true,
+      "jj_exit": 0,
+      "stderr_first_lines": [
+        "Fetching reference refs/heads/joshka/lfs-eval-fixture",
+        "[c8f5d0341d54d951a71b136e6e2afcb14d11ed8489a7ae126a8fee0df6ecf193] mock missing LFS object: [404] mock missing LFS object",
+        "[f942803ce9c94a8ac8798db8970dda1b66186fe7452736d21f6ba16a5ae5ae8c] mock missing LFS object: [404] mock missing LFS object",
+        "error: failed to fetch some objects from 'http://127.0.0.1:58887/lfs'"
+      ]
+    },
+    {
+      "case": "corrupt-data",
+      "fetch_exit": 2,
+      "elapsed_seconds": 0.22,
+      "requests": [
+        {
+          "method": "POST",
+          "path": "/lfs/objects/batch",
+          "bytes": 333
+        },
+        {
+          "method": "GET",
+          "path": "/object/c8f5d0341d54d951a71b136e6e2afcb14d11ed8489a7ae126a8fee0df6ecf193"
+        },
+        {
+          "method": "GET",
+          "path": "/object/f942803ce9c94a8ac8798db8970dda1b66186fe7452736d21f6ba16a5ae5ae8c"
+        }
+      ],
+      "disk_unchanged": true,
+      "store_unchanged": true,
+      "cache_files": [],
+      "setup_valid": true,
+      "jj_exit": 0,
+      "stderr_first_lines": [
+        "Fetching reference refs/heads/joshka/lfs-eval-fixture",
+        "expected OID c8f5d0341d54d951a71b136e6e2afcb14d11ed8489a7ae126a8fee0df6ecf193, got a2e659dacb4691e887ac0139f8893d04764ee197d70fb73d3190d56113d18e3e after 4096 bytes written",
+        "expected OID f942803ce9c94a8ac8798db8970dda1b66186fe7452736d21f6ba16a5ae5ae8c, got a2e659dacb4691e887ac0139f8893d04764ee197d70fb73d3190d56113d18e3e after 4096 bytes written",
+        "error: failed to fetch some objects from 'http://127.0.0.1:58889/lfs'"
+      ]
+    }
+  ]
+}

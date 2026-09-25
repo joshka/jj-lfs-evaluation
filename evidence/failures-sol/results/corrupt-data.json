@@ -1,0 +1,51 @@
+{
+  "case": "corrupt-data",
+  "endpoint": "http://127.0.0.1:58889/lfs",
+  "command": [
+    "git",
+    "-c",
+    "lfs.url=http://127.0.0.1:58889/lfs",
+    "-c",
+    "lfs.transfer.maxretries=0",
+    "-c",
+    "lfs.transfer.maxretrydelay=1",
+    "-c",
+    "lfs.activitytimeout=2",
+    "-c",
+    "lfs.dialtimeout=2",
+    "lfs",
+    "fetch",
+    "origin",
+    "HEAD"
+  ],
+  "elapsed_seconds": 0.22,
+  "fetch": {
+    "exit": 2,
+    "stdout": "",
+    "stderr": "Fetching reference refs/heads/joshka/lfs-eval-fixture\nexpected OID c8f5d0341d54d951a71b136e6e2afcb14d11ed8489a7ae126a8fee0df6ecf193, got a2e659dacb4691e887ac0139f8893d04764ee197d70fb73d3190d56113d18e3e after 4096 bytes written\nexpected OID f942803ce9c94a8ac8798db8970dda1b66186fe7452736d21f6ba16a5ae5ae8c, got a2e659dacb4691e887ac0139f8893d04764ee197d70fb73d3190d56113d18e3e after 4096 bytes written\nerror: failed to fetch some objects from 'http://127.0.0.1:58889/lfs'\n"
+  },
+  "http_requests": [
+    {
+      "method": "POST",
+      "path": "/lfs/objects/batch",
+      "bytes": 333
+    },
+    {
+      "method": "GET",
+      "path": "/object/c8f5d0341d54d951a71b136e6e2afcb14d11ed8489a7ae126a8fee0df6ecf193"
+    },
+    {
+      "method": "GET",
+      "path": "/object/f942803ce9c94a8ac8798db8970dda1b66186fe7452736d21f6ba16a5ae5ae8c"
+    }
+  ],
+  "jj_status": {
+    "exit": 0,
+    "stdout": "The working copy has no changes.\nWorking copy  (@) : qspmvzoy 073d7a8c (empty) (no description set)\nParent commit (@-): nysuymrl 48dee535 joshka/lfs-eval-fixture joshka/lfs-eval-fixture@origin | Publish pointer before LFS object upload\n",
+    "stderr": ""
+  },
+  "disk_unchanged": true,
+  "store_unchanged": true,
+  "cache_files_after": [],
+  "setup_valid": true
+}

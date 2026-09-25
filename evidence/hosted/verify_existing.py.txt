@@ -1,0 +1,91 @@
+#!/usr/bin/env python3
+"""Read-only verification of the retained hosted LFS transport fixtures."""
+import hashlib
+import json
+from pathlib import Path
+import subprocess
+import tarfile
+
+ROOT = Path(__file__).resolve().parent
+REPO = "joshka/jj-lfs-eval-20260925"
+POINTERS = {
+    "payload.bin": (4096, "c8f5d0341d54d951a71b136e6e2afcb14d11ed8489a7ae126a8fee0df6ecf193"),
+    "missing.bin": (3072, "f942803ce9c94a8ac8798db8970dda1b66186fe7452736d21f6ba16a5ae5ae8c"),
+}
+
+
+def command(argv, cwd=None):
+    p = subprocess.run(argv, cwd=cwd, capture_output=True, text=True)
+    return {"command": argv, "exit": p.returncode, "stdout": p.stdout, "stderr": p.stderr}
+
+
+def digest(path):
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+result = {"repo": REPO, "checks": [], "remote": {}, "archive": {}}
+for branch in ("main", "joshka/lfs-eval-fixture"):
+    r = command(["gh", "api", f"repos/{REPO}/branches/{branch}", "--jq", ".commit.sha"])
+    result["remote"][branch] = r
+    result["checks"].append({"name": f"remote {branch} readable", "pass": r["exit"] == 0})
+
+for clone, names in (("fresh", ("payload.bin",)), ("fresh2", ("payload.bin",)),
+                     ("fresh3", ("payload.bin", "missing.bin"))):
+    path = ROOT / clone
+    if not path.is_dir():
+        result["checks"].append({"name": f"{clone} retained", "pass": False})
+        continue
+    head = command(["git", "rev-parse", "HEAD"], cwd=path)
+    result[clone] = {"head": head, "files": {}}
+    for name in names:
+        expected_size, expected_hash = POINTERS[name]
+        file = path / name
+        pointer = command(["git", "show", f"HEAD:{name}"], cwd=path)
+        content = pointer["stdout"]
+        checked = {
+            "size": file.stat().st_size,
+            "sha256": digest(file),
+            "pointer_command": pointer,
+            "pointer_valid": pointer["exit"] == 0
+                and content.startswith("version https://git-lfs.github.com/spec/v1\n")
+                and f"oid sha256:{expected_hash}\n" in content
+                and f"size {expected_size}\n" in content,
+        }
+        result[clone]["files"][name] = checked
+        hydrated = checked["size"] == expected_size and checked["sha256"] == expected_hash
+        # The original fresh clone was later reused for the pointer-before-upload
+        # experiment, which deliberately replaced its hydrated disk file with a pointer.
+        disk_expected = checked["size"] == len(content.encode()) and file.read_text() == content if clone == "fresh" else hydrated
+        result["checks"].append({"name": f"{clone}/{name} retained disk state and pointer",
+                                 "pass": disk_expected and checked["pointer_valid"]})
+
+archive = ROOT / "fixture.tar.gz"
+if archive.exists():
+    with tarfile.open(archive) as tar:
+        for member in tar:
+            name = member.name.rsplit("/", 1)[-1]
+            if name not in POINTERS:
+                continue
+            body = tar.extractfile(member).read()
+            expected_size, expected_hash = POINTERS[name]
+            result["archive"][name] = {"archive_size": len(body), "text": body.decode(),
+                "pointer_valid": body.startswith(b"version https://git-lfs.github.com/spec/v1\n")
+                    and f"oid sha256:{expected_hash}\n".encode() in body
+                    and f"size {expected_size}\n".encode() in body}
+            result["checks"].append({"name": f"archive {name} is pointer",
+                                     "pass": result["archive"][name]["pointer_valid"]})
+else:
+    result["checks"].append({"name": "archive retained", "pass": False})
+
+result["checks"].append({"name": "CI main unchanged",
+                         "pass": result["remote"]["main"]["stdout"].strip()
+                             == "82df288386a490be61160b7fcd0f5c46acb1dd83"})
+result["checks"].append({"name": "fixture remote at recovered head",
+                         "pass": result["remote"]["joshka/lfs-eval-fixture"]["stdout"].strip()
+                             == "48dee535ac3768109793d5bd4991afa41d4a0647"})
+out = ROOT / "repository-state.json"
+out.write_text(json.dumps(result, indent=2) + "\n")
+print(json.dumps({"checks": len(result["checks"]),
+                  "passed": sum(c["pass"] for c in result["checks"]),
+                  "state": str(out)}, indent=2))
+raise SystemExit(0 if all(c["pass"] for c in result["checks"]) else 1)

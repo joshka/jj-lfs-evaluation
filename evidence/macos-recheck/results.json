@@ -1,0 +1,58 @@
+[
+  {
+    "id": "A10-file-directory",
+    "purpose": "File-to-directory replacement is handled",
+    "category": "contract",
+    "status": "FAIL",
+    "seconds": 1.7620720826089382,
+    "checks": [
+      {
+        "label": "File-to-directory transition completes without panic",
+        "pass": false
+      }
+    ],
+    "observations": {
+      "status": {
+        "rc": 101,
+        "stderr": "\nthread 'main' (138336810) panicked at lib/src/local_working_copy.rs:1464:13:\nassertion `left == right` failed\n  left: {\"asset.bin\", \".gitattributes\", \"asset.bin/child.txt\", \"note.txt\"}\n right: {\"note.txt\", \"asset.bin/child.txt\", \".gitattributes\"}\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\n"
+      }
+    }
+  },
+  {
+    "id": "W03-workspace",
+    "purpose": "Additional workspace and missing Git context",
+    "category": "contract",
+    "status": "PASS",
+    "seconds": 2.1090712076984346,
+    "checks": [
+      {
+        "label": "Additional workspace initially contains pointer",
+        "pass": true,
+        "actual_sha256": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+        "expected_sha256": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+        "actual_size": 129,
+        "expected_size": 129
+      },
+      {
+        "label": "Colocated additional workspace supports external hydration",
+        "pass": true,
+        "status": "The working copy has no changes.\nWorking copy  (@) : lksnwvlu 56539f6c (empty) (no description set)\nParent commit (@-): swvosnvl 94638f10 main | Seed LFS fixture\n"
+      },
+      {
+        "label": "Hydrated additional workspace retains stored pointer",
+        "pass": true,
+        "actual_sha256": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+        "expected_sha256": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+        "actual_size": 129,
+        "expected_size": 129
+      }
+    ],
+    "observations": {
+      "plain_git_lfs": {
+        "rc": 0,
+        "stderr": ""
+      },
+      "git_context": "gitdir: ../W03-workspace/.git/worktrees/W03-workspace-workspace\n"
+    }
+  }
+]

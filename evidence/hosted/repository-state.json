@@ -1,0 +1,185 @@
+{
+  "repo": "joshka/jj-lfs-eval-20260925",
+  "checks": [
+    {
+      "name": "remote main readable",
+      "pass": true
+    },
+    {
+      "name": "remote joshka/lfs-eval-fixture readable",
+      "pass": true
+    },
+    {
+      "name": "fresh/payload.bin retained disk state and pointer",
+      "pass": true
+    },
+    {
+      "name": "fresh2/payload.bin retained disk state and pointer",
+      "pass": true
+    },
+    {
+      "name": "fresh3/payload.bin retained disk state and pointer",
+      "pass": true
+    },
+    {
+      "name": "fresh3/missing.bin retained disk state and pointer",
+      "pass": true
+    },
+    {
+      "name": "archive missing.bin is pointer",
+      "pass": true
+    },
+    {
+      "name": "archive payload.bin is pointer",
+      "pass": true
+    },
+    {
+      "name": "CI main unchanged",
+      "pass": true
+    },
+    {
+      "name": "fixture remote at recovered head",
+      "pass": true
+    }
+  ],
+  "remote": {
+    "main": {
+      "command": [
+        "gh",
+        "api",
+        "repos/joshka/jj-lfs-eval-20260925/branches/main",
+        "--jq",
+        ".commit.sha"
+      ],
+      "exit": 0,
+      "stdout": "82df288386a490be61160b7fcd0f5c46acb1dd83\n",
+      "stderr": ""
+    },
+    "joshka/lfs-eval-fixture": {
+      "command": [
+        "gh",
+        "api",
+        "repos/joshka/jj-lfs-eval-20260925/branches/joshka/lfs-eval-fixture",
+        "--jq",
+        ".commit.sha"
+      ],
+      "exit": 0,
+      "stdout": "48dee535ac3768109793d5bd4991afa41d4a0647\n",
+      "stderr": ""
+    }
+  },
+  "archive": {
+    "missing.bin": {
+      "archive_size": 129,
+      "text": "version https://git-lfs.github.com/spec/v1\noid sha256:f942803ce9c94a8ac8798db8970dda1b66186fe7452736d21f6ba16a5ae5ae8c\nsize 3072\n",
+      "pointer_valid": true
+    },
+    "payload.bin": {
+      "archive_size": 129,
+      "text": "version https://git-lfs.github.com/spec/v1\noid sha256:c8f5d0341d54d951a71b136e6e2afcb14d11ed8489a7ae126a8fee0df6ecf193\nsize 4096\n",
+      "pointer_valid": true
+    }
+  },
+  "fresh": {
+    "head": {
+      "command": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "exit": 0,
+      "stdout": "ad4f2ecf3e8f0b2cf4ff03f99967f2dbe2a00a63\n",
+      "stderr": ""
+    },
+    "files": {
+      "payload.bin": {
+        "size": 129,
+        "sha256": "178ba39b2e4e92264f35dafbd416ba3c8beb0dc87b395415f068c181d837def0",
+        "pointer_command": {
+          "command": [
+            "git",
+            "show",
+            "HEAD:payload.bin"
+          ],
+          "exit": 0,
+          "stdout": "version https://git-lfs.github.com/spec/v1\noid sha256:c8f5d0341d54d951a71b136e6e2afcb14d11ed8489a7ae126a8fee0df6ecf193\nsize 4096\n",
+          "stderr": ""
+        },
+        "pointer_valid": true
+      }
+    }
+  },
+  "fresh2": {
+    "head": {
+      "command": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "exit": 0,
+      "stdout": "ad4f2ecf3e8f0b2cf4ff03f99967f2dbe2a00a63\n",
+      "stderr": ""
+    },
+    "files": {
+      "payload.bin": {
+        "size": 4096,
+        "sha256": "c8f5d0341d54d951a71b136e6e2afcb14d11ed8489a7ae126a8fee0df6ecf193",
+        "pointer_command": {
+          "command": [
+            "git",
+            "show",
+            "HEAD:payload.bin"
+          ],
+          "exit": 0,
+          "stdout": "version https://git-lfs.github.com/spec/v1\noid sha256:c8f5d0341d54d951a71b136e6e2afcb14d11ed8489a7ae126a8fee0df6ecf193\nsize 4096\n",
+          "stderr": ""
+        },
+        "pointer_valid": true
+      }
+    }
+  },
+  "fresh3": {
+    "head": {
+      "command": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "exit": 0,
+      "stdout": "48dee535ac3768109793d5bd4991afa41d4a0647\n",
+      "stderr": ""
+    },
+    "files": {
+      "payload.bin": {
+        "size": 4096,
+        "sha256": "c8f5d0341d54d951a71b136e6e2afcb14d11ed8489a7ae126a8fee0df6ecf193",
+        "pointer_command": {
+          "command": [
+            "git",
+            "show",
+            "HEAD:payload.bin"
+          ],
+          "exit": 0,
+          "stdout": "version https://git-lfs.github.com/spec/v1\noid sha256:c8f5d0341d54d951a71b136e6e2afcb14d11ed8489a7ae126a8fee0df6ecf193\nsize 4096\n",
+          "stderr": ""
+        },
+        "pointer_valid": true
+      },
+      "missing.bin": {
+        "size": 3072,
+        "sha256": "f942803ce9c94a8ac8798db8970dda1b66186fe7452736d21f6ba16a5ae5ae8c",
+        "pointer_command": {
+          "command": [
+            "git",
+            "show",
+            "HEAD:missing.bin"
+          ],
+          "exit": 0,
+          "stdout": "version https://git-lfs.github.com/spec/v1\noid sha256:f942803ce9c94a8ac8798db8970dda1b66186fe7452736d21f6ba16a5ae5ae8c\nsize 3072\n",
+          "stderr": ""
+        },
+        "pointer_valid": true
+      }
+    }
+  }
+}

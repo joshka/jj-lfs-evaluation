@@ -1,0 +1,196 @@
+{
+  "id": "migrate-before",
+  "purpose": "Git LFS migration before jj init",
+  "category": "lifecycle",
+  "status": "PASS",
+  "seconds": 3.410505791194737,
+  "checks": [
+    {
+      "label": "jj sees imported pointer",
+      "pass": true,
+      "actual_sha256": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+      "expected_sha256": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+      "actual_size": 129,
+      "expected_size": 129
+    }
+  ],
+  "observations": {
+    "migrate_import": {
+      "rc": 0,
+      "stdout": "",
+      "stderr": "Fetching remote refs: ..., done.\nSorting commits: ..., done.\nRewriting commits: 100% (1/1), done.\nUpdating refs: ..., done.\nCheckout: ..., done.\n"
+    },
+    "old_head": "0a7a16af402595843ddbd4c4f1eb638b117f4ab8",
+    "new_head": "be7672d629958a33d53284a2269eea3d982e76bd"
+  },
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "init",
+        "-b",
+        "main"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/lifecycle-sol/repos/migrate-before",
+      "rc": 0,
+      "seconds": 0.3179372497834265,
+      "stdout": "Initialized empty Git repository in /tmp/jj-lfs-evaluation/lifecycle-sol/repos/migrate-before/.git/\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.name",
+        "LFS Evaluation"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/lifecycle-sol/repos/migrate-before",
+      "rc": 0,
+      "seconds": 0.03528412478044629,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.email",
+        "eval@example.invalid"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/lifecycle-sol/repos/migrate-before",
+      "rc": 0,
+      "seconds": 0.03532629134133458,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "commit.gpgsign",
+        "false"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/lifecycle-sol/repos/migrate-before",
+      "rc": 0,
+      "seconds": 0.04430662514641881,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "core.autocrlf",
+        "false"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/lifecycle-sol/repos/migrate-before",
+      "rc": 0,
+      "seconds": 0.037372250109910965,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "lfs",
+        "install",
+        "--local"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/lifecycle-sol/repos/migrate-before",
+      "rc": 0,
+      "seconds": 0.31139124976471066,
+      "stdout": "Updated Git hooks.\nGit LFS initialized.\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "add",
+        "."
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/lifecycle-sol/repos/migrate-before",
+      "rc": 0,
+      "seconds": 0.05497937509790063,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "commit",
+        "-m",
+        "raw asset"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/lifecycle-sol/repos/migrate-before",
+      "rc": 0,
+      "seconds": 0.4750251672230661,
+      "stdout": "[main (root-commit) 0a7a16a] raw asset\n 1 file changed, 0 insertions(+), 0 deletions(-)\n create mode 100644 asset.bin\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/lifecycle-sol/repos/migrate-before",
+      "rc": 0,
+      "seconds": 0.00815850030630827,
+      "stdout": "0a7a16af402595843ddbd4c4f1eb638b117f4ab8\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "lfs",
+        "migrate",
+        "import",
+        "--include=*.bin",
+        "--yes"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/lifecycle-sol/repos/migrate-before",
+      "rc": 0,
+      "seconds": 0.9014982092194259,
+      "stdout": "",
+      "stderr": "Fetching remote refs: ..., done.\nSorting commits: ..., done.\nRewriting commits: 100% (1/1), done.\nUpdating refs: ..., done.\nCheckout: ..., done.\n"
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr",
+        "git",
+        "init",
+        "--colocate"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/lifecycle-sol/repos/migrate-before",
+      "rc": 0,
+      "seconds": 1.1075428752228618,
+      "stdout": "",
+      "stderr": "Done importing changes from the underlying Git repo.\nInitialized repo in \".\"\n"
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr",
+        "file",
+        "show",
+        "asset.bin"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/lifecycle-sol/repos/migrate-before",
+      "rc": 0,
+      "seconds": 0.056600417010486126,
+      "stdout": "version https://git-lfs.github.com/spec/v1\noid sha256:dad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f\nsize 2500\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/lifecycle-sol/repos/migrate-before",
+      "rc": 0,
+      "seconds": 0.009518500417470932,
+      "stdout": "be7672d629958a33d53284a2269eea3d982e76bd\n",
+      "stderr": ""
+    }
+  ]
+}

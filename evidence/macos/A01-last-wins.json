@@ -1,0 +1,200 @@
+{
+  "id": "A01-last-wins",
+  "purpose": "Attribute matching agrees with Git",
+  "category": "contract",
+  "status": "PASS",
+  "seconds": 0.8760640830732882,
+  "checks": [
+    {
+      "label": "Expected exclusion matches Git attribute decision",
+      "pass": true,
+      "expected_excluded": false,
+      "actual_included": true,
+      "git_check_attr": "a.bin: filter: other\n",
+      "jj_status": "Working copy changes:\nA a.bin\nWorking copy  (@) : wzlsypxr c9afb891 (no description set)\nParent commit (@-): vwrwyqvl e04829b1 main | Seed LFS fixture\n"
+    }
+  ],
+  "observations": {
+    "stored_payload_sha256": "dad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f"
+  },
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "init",
+        "-b",
+        "main"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos/repos/A01-last-wins",
+      "rc": 0,
+      "seconds": 0.013235958758741617,
+      "stdout": "Initialized empty Git repository in /tmp/jj-lfs-evaluation/macos/repos/A01-last-wins/.git/\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.name",
+        "LFS Evaluation"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos/repos/A01-last-wins",
+      "rc": 0,
+      "seconds": 0.008533542044460773,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.email",
+        "eval@example.invalid"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos/repos/A01-last-wins",
+      "rc": 0,
+      "seconds": 0.007872917223721743,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "commit.gpgsign",
+        "false"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos/repos/A01-last-wins",
+      "rc": 0,
+      "seconds": 0.008628791198134422,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "core.autocrlf",
+        "false"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos/repos/A01-last-wins",
+      "rc": 0,
+      "seconds": 0.00775137497112155,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "lfs",
+        "install",
+        "--local"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos/repos/A01-last-wins",
+      "rc": 0,
+      "seconds": 0.18176779197528958,
+      "stdout": "Updated Git hooks.\nGit LFS initialized.\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "add",
+        "."
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos/repos/A01-last-wins",
+      "rc": 0,
+      "seconds": 0.011244374793022871,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "commit",
+        "-m",
+        "Seed LFS fixture"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos/repos/A01-last-wins",
+      "rc": 0,
+      "seconds": 0.3159521669149399,
+      "stdout": "[main (root-commit) e04829b] Seed LFS fixture\n 2 files changed, 3 insertions(+)\n create mode 100644 .gitattributes\n create mode 100644 note.txt\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos/repos/A01-last-wins",
+      "rc": 0,
+      "seconds": 0.007920290809124708,
+      "stdout": "e04829b167f06ed1458f5072c1f4e16f7298c1c2\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr",
+        "git",
+        "init",
+        "--colocate"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos/repos/A01-last-wins",
+      "rc": 0,
+      "seconds": 0.17481895769014955,
+      "stdout": "",
+      "stderr": "Done importing changes from the underlying Git repo.\nInitialized repo in \".\"\n"
+    },
+    {
+      "argv": [
+        "git",
+        "check-attr",
+        "filter",
+        "--",
+        "a.bin"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos/repos/A01-last-wins",
+      "rc": 0,
+      "seconds": 0.008010916411876678,
+      "stdout": "a.bin: filter: other\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr",
+        "status"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos/repos/A01-last-wins",
+      "rc": 0,
+      "seconds": 0.07465375028550625,
+      "stdout": "Working copy changes:\nA a.bin\nWorking copy  (@) : wzlsypxr c9afb891 (no description set)\nParent commit (@-): vwrwyqvl e04829b1 main | Seed LFS fixture\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr",
+        "file",
+        "list"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos/repos/A01-last-wins",
+      "rc": 0,
+      "seconds": 0.028615124989300966,
+      "stdout": ".gitattributes\na.bin\nnote.txt\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr",
+        "file",
+        "show",
+        "a.bin"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos/repos/A01-last-wins",
+      "rc": 0,
+      "seconds": 0.02587020816281438,
+      "stdout": "LFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\n",
+      "stderr": ""
+    }
+  ]
+}

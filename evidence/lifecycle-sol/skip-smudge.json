@@ -1,0 +1,184 @@
+{
+  "id": "skip-smudge",
+  "purpose": "GIT_LFS_SKIP_SMUDGE interoperability",
+  "category": "lifecycle",
+  "status": "PASS",
+  "seconds": 1.8907222501002252,
+  "checks": [
+    {
+      "label": "skip-smudge leaves pointer on disk",
+      "pass": true,
+      "actual_sha256": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+      "expected_sha256": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+      "actual_size": 129,
+      "expected_size": 129
+    },
+    {
+      "label": "jj tree remains pointer",
+      "pass": true,
+      "actual_sha256": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+      "expected_sha256": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+      "actual_size": 129,
+      "expected_size": 129
+    }
+  ],
+  "observations": {
+    "disk_sha": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+    "pointer_sha": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a"
+  },
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "init",
+        "-b",
+        "main"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/lifecycle-sol/repos/skip-smudge",
+      "rc": 0,
+      "seconds": 0.016426583752036095,
+      "stdout": "Initialized empty Git repository in /tmp/jj-lfs-evaluation/lifecycle-sol/repos/skip-smudge/.git/\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.name",
+        "LFS Evaluation"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/lifecycle-sol/repos/skip-smudge",
+      "rc": 0,
+      "seconds": 0.009713416919112206,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.email",
+        "eval@example.invalid"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/lifecycle-sol/repos/skip-smudge",
+      "rc": 0,
+      "seconds": 0.010355541948229074,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "commit.gpgsign",
+        "false"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/lifecycle-sol/repos/skip-smudge",
+      "rc": 0,
+      "seconds": 0.00988033413887024,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "core.autocrlf",
+        "false"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/lifecycle-sol/repos/skip-smudge",
+      "rc": 0,
+      "seconds": 0.009564457926899195,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "lfs",
+        "install",
+        "--local"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/lifecycle-sol/repos/skip-smudge",
+      "rc": 0,
+      "seconds": 0.2340556662529707,
+      "stdout": "Updated Git hooks.\nGit LFS initialized.\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "add",
+        "."
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/lifecycle-sol/repos/skip-smudge",
+      "rc": 0,
+      "seconds": 0.14702924992889166,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "commit",
+        "-m",
+        "seed"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/lifecycle-sol/repos/skip-smudge",
+      "rc": 0,
+      "seconds": 0.5840046252124012,
+      "stdout": "[main (root-commit) 5920131] seed\n 2 files changed, 4 insertions(+)\n create mode 100644 .gitattributes\n create mode 100644 asset.bin\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "checkout",
+        "--",
+        "asset.bin"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/lifecycle-sol/repos/skip-smudge",
+      "rc": 0,
+      "seconds": 0.45686554117128253,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr",
+        "git",
+        "init",
+        "--colocate"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/lifecycle-sol/repos/skip-smudge",
+      "rc": 0,
+      "seconds": 0.26379370829090476,
+      "stdout": "",
+      "stderr": "Done importing changes from the underlying Git repo.\nInitialized repo in \".\"\n"
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr",
+        "new"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/lifecycle-sol/repos/skip-smudge",
+      "rc": 0,
+      "seconds": 0.09411875018849969,
+      "stdout": "",
+      "stderr": "Working copy  (@) now at: stnuluvp bf00bc65 (empty) (no description set)\nParent commit (@-)      : xvwuwwky e48cdc66 (empty) (no description set)\n"
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr",
+        "file",
+        "show",
+        "asset.bin"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/lifecycle-sol/repos/skip-smudge",
+      "rc": 0,
+      "seconds": 0.05334929237142205,
+      "stdout": "version https://git-lfs.github.com/spec/v1\noid sha256:dad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f\nsize 2500\n",
+      "stderr": ""
+    }
+  ]
+}

@@ -1,0 +1,193 @@
+{
+  "id": "A08-symlink-asset",
+  "purpose": "LFS patterns do not suppress symlink versioning",
+  "category": "compatibility",
+  "status": "FAIL",
+  "seconds": 0.4197362920000103,
+  "checks": [
+    {
+      "label": "LFS pattern does not hide a Git symlink",
+      "pass": false,
+      "git_entry": "120000 97922aee98474ad751b77adb4aa5e4f3dce681fe 0\tlink.bin\n"
+    }
+  ],
+  "observations": {},
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "init",
+        "-b",
+        "main"
+      ],
+      "cwd": "/eval/linux/repos/A08-symlink-asset",
+      "rc": 0,
+      "seconds": 0.0670901249999929,
+      "stdout": "Initialized empty Git repository in /eval/linux/repos/A08-symlink-asset/.git/\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.name",
+        "LFS Evaluation"
+      ],
+      "cwd": "/eval/linux/repos/A08-symlink-asset",
+      "rc": 0,
+      "seconds": 0.005602167000006375,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.email",
+        "eval@example.invalid"
+      ],
+      "cwd": "/eval/linux/repos/A08-symlink-asset",
+      "rc": 0,
+      "seconds": 0.010331957999994756,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "commit.gpgsign",
+        "false"
+      ],
+      "cwd": "/eval/linux/repos/A08-symlink-asset",
+      "rc": 0,
+      "seconds": 0.009847540999999183,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "core.autocrlf",
+        "false"
+      ],
+      "cwd": "/eval/linux/repos/A08-symlink-asset",
+      "rc": 0,
+      "seconds": 0.011030959000009943,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "lfs",
+        "install",
+        "--local"
+      ],
+      "cwd": "/eval/linux/repos/A08-symlink-asset",
+      "rc": 0,
+      "seconds": 0.06178725000000895,
+      "stdout": "Updated Git hooks.\nGit LFS initialized.\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "add",
+        "."
+      ],
+      "cwd": "/eval/linux/repos/A08-symlink-asset",
+      "rc": 0,
+      "seconds": 0.022278957999986915,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "commit",
+        "-m",
+        "Seed LFS fixture"
+      ],
+      "cwd": "/eval/linux/repos/A08-symlink-asset",
+      "rc": 0,
+      "seconds": 0.03995233300000223,
+      "stdout": "[main (root-commit) 5e39620] Seed LFS fixture\n 2 files changed, 2 insertions(+)\n create mode 100644 .gitattributes\n create mode 100644 note.txt\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "/eval/linux/repos/A08-symlink-asset",
+      "rc": 0,
+      "seconds": 0.001257583000011664,
+      "stdout": "5e3962083161d96e0db0d487c48855fd3b40e6c8\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/target/debug/jj",
+        "git",
+        "init",
+        "--colocate"
+      ],
+      "cwd": "/eval/linux/repos/A08-symlink-asset",
+      "rc": 0,
+      "seconds": 0.11688791700001389,
+      "stdout": "",
+      "stderr": "Done importing changes from the underlying Git repo.\nInitialized repo in \".\"\n"
+    },
+    {
+      "argv": [
+        "git",
+        "add",
+        "link.bin"
+      ],
+      "cwd": "/eval/linux/repos/A08-symlink-asset",
+      "rc": 0,
+      "seconds": 0.013562291999988929,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "ls-files",
+        "--stage",
+        "link.bin"
+      ],
+      "cwd": "/eval/linux/repos/A08-symlink-asset",
+      "rc": 0,
+      "seconds": 0.0014564580000069327,
+      "stdout": "120000 97922aee98474ad751b77adb4aa5e4f3dce681fe 0\tlink.bin\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/target/debug/jj",
+        "status"
+      ],
+      "cwd": "/eval/linux/repos/A08-symlink-asset",
+      "rc": 0,
+      "seconds": 0.025649041999997735,
+      "stdout": "The working copy has no changes.\nWorking copy  (@) : wlqxvqnz ec03b169 (empty) (no description set)\nParent commit (@-): ywtszxmn 5e396208 main | Seed LFS fixture\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/target/debug/jj",
+        "file",
+        "list"
+      ],
+      "cwd": "/eval/linux/repos/A08-symlink-asset",
+      "rc": 0,
+      "seconds": 0.024146000000001777,
+      "stdout": ".gitattributes\nnote.txt\n",
+      "stderr": ""
+    }
+  ]
+}

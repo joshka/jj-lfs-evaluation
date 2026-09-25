@@ -1,0 +1,213 @@
+{
+  "id": "A03-global-attributes",
+  "purpose": "Configured global attributes protect LFS payload",
+  "category": "compatibility",
+  "status": "FAIL",
+  "seconds": 0.2384716669999989,
+  "checks": [
+    {
+      "label": "Expected exclusion matches Git attribute decision",
+      "pass": false,
+      "expected_excluded": true,
+      "actual_included": true,
+      "git_check_attr": "a.bin: filter: lfs\n",
+      "jj_status": "Working copy changes:\nA a.bin\nWorking copy  (@) : yxwutwkm 6314301e (no description set)\nParent commit (@-): ruxxxyxn bdfe55a3 main | Seed LFS fixture\n"
+    }
+  ],
+  "observations": {
+    "stored_payload_sha256": "dad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f"
+  },
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "init",
+        "-b",
+        "main"
+      ],
+      "cwd": "/eval/linux-modern/repos/A03-global-attributes",
+      "rc": 0,
+      "seconds": 0.014477125000041724,
+      "stdout": "Initialized empty Git repository in /eval/linux-modern/repos/A03-global-attributes/.git/\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.name",
+        "LFS Evaluation"
+      ],
+      "cwd": "/eval/linux-modern/repos/A03-global-attributes",
+      "rc": 0,
+      "seconds": 0.0036045829999693524,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.email",
+        "eval@example.invalid"
+      ],
+      "cwd": "/eval/linux-modern/repos/A03-global-attributes",
+      "rc": 0,
+      "seconds": 0.002534416000003148,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "commit.gpgsign",
+        "false"
+      ],
+      "cwd": "/eval/linux-modern/repos/A03-global-attributes",
+      "rc": 0,
+      "seconds": 0.002980916000012712,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "core.autocrlf",
+        "false"
+      ],
+      "cwd": "/eval/linux-modern/repos/A03-global-attributes",
+      "rc": 0,
+      "seconds": 0.002969167000003381,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "lfs",
+        "install",
+        "--local"
+      ],
+      "cwd": "/eval/linux-modern/repos/A03-global-attributes",
+      "rc": 0,
+      "seconds": 0.029096750000007887,
+      "stdout": "Updated Git hooks.\nGit LFS initialized.\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "add",
+        "."
+      ],
+      "cwd": "/eval/linux-modern/repos/A03-global-attributes",
+      "rc": 0,
+      "seconds": 0.006401332999985243,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "commit",
+        "-m",
+        "Seed LFS fixture"
+      ],
+      "cwd": "/eval/linux-modern/repos/A03-global-attributes",
+      "rc": 0,
+      "seconds": 0.03411775000000716,
+      "stdout": "[main (root-commit) bdfe55a] Seed LFS fixture\n 2 files changed, 1 insertion(+)\n create mode 100644 .gitattributes\n create mode 100644 note.txt\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "/eval/linux-modern/repos/A03-global-attributes",
+      "rc": 0,
+      "seconds": 0.001741750000007869,
+      "stdout": "bdfe55a3fb6cf40e06b201b27af18d46348444a1\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/target/debug/jj",
+        "git",
+        "init",
+        "--colocate"
+      ],
+      "cwd": "/eval/linux-modern/repos/A03-global-attributes",
+      "rc": 0,
+      "seconds": 0.05300070800001322,
+      "stdout": "",
+      "stderr": "Done importing changes from the underlying Git repo.\nInitialized repo in \".\"\n"
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "core.attributesFile",
+        "/eval/linux-modern/repos/A03-global-attributes-global-attributes"
+      ],
+      "cwd": "/eval/linux-modern/repos/A03-global-attributes",
+      "rc": 0,
+      "seconds": 0.0032904170000165323,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "check-attr",
+        "filter",
+        "--",
+        "a.bin"
+      ],
+      "cwd": "/eval/linux-modern/repos/A03-global-attributes",
+      "rc": 0,
+      "seconds": 0.002623416999995243,
+      "stdout": "a.bin: filter: lfs\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/target/debug/jj",
+        "status"
+      ],
+      "cwd": "/eval/linux-modern/repos/A03-global-attributes",
+      "rc": 0,
+      "seconds": 0.0359082090000129,
+      "stdout": "Working copy changes:\nA a.bin\nWorking copy  (@) : yxwutwkm 6314301e (no description set)\nParent commit (@-): ruxxxyxn bdfe55a3 main | Seed LFS fixture\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/target/debug/jj",
+        "file",
+        "list"
+      ],
+      "cwd": "/eval/linux-modern/repos/A03-global-attributes",
+      "rc": 0,
+      "seconds": 0.022157333999984985,
+      "stdout": ".gitattributes\na.bin\nnote.txt\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/target/debug/jj",
+        "file",
+        "show",
+        "a.bin"
+      ],
+      "cwd": "/eval/linux-modern/repos/A03-global-attributes",
+      "rc": 0,
+      "seconds": 0.02156716700000061,
+      "stdout": "LFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\n",
+      "stderr": ""
+    }
+  ]
+}

@@ -1,0 +1,200 @@
+{
+  "id": "A01-nested-unset",
+  "purpose": "Attribute matching agrees with Git",
+  "category": "contract",
+  "status": "PASS",
+  "seconds": 0.3609421250000082,
+  "checks": [
+    {
+      "label": "Expected exclusion matches Git attribute decision",
+      "pass": true,
+      "expected_excluded": false,
+      "actual_included": true,
+      "git_check_attr": "sub/a.bin: filter: unset\n",
+      "jj_status": "Working copy changes:\nA sub/.gitattributes\nA sub/a.bin\nWorking copy  (@) : kmxqmmpr 5a05cc51 (no description set)\nParent commit (@-): snozoksz 5dc69954 main | Seed LFS fixture\n"
+    }
+  ],
+  "observations": {
+    "stored_payload_sha256": "dad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f"
+  },
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "init",
+        "-b",
+        "main"
+      ],
+      "cwd": "/eval/linux/repos/A01-nested-unset",
+      "rc": 0,
+      "seconds": 0.07362179200001151,
+      "stdout": "Initialized empty Git repository in /eval/linux/repos/A01-nested-unset/.git/\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.name",
+        "LFS Evaluation"
+      ],
+      "cwd": "/eval/linux/repos/A01-nested-unset",
+      "rc": 0,
+      "seconds": 0.005689582999991671,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.email",
+        "eval@example.invalid"
+      ],
+      "cwd": "/eval/linux/repos/A01-nested-unset",
+      "rc": 0,
+      "seconds": 0.004209333000005699,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "commit.gpgsign",
+        "false"
+      ],
+      "cwd": "/eval/linux/repos/A01-nested-unset",
+      "rc": 0,
+      "seconds": 0.0033022080000080223,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "core.autocrlf",
+        "false"
+      ],
+      "cwd": "/eval/linux/repos/A01-nested-unset",
+      "rc": 0,
+      "seconds": 0.004780291999992414,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "lfs",
+        "install",
+        "--local"
+      ],
+      "cwd": "/eval/linux/repos/A01-nested-unset",
+      "rc": 0,
+      "seconds": 0.03980362499999046,
+      "stdout": "Updated Git hooks.\nGit LFS initialized.\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "add",
+        "."
+      ],
+      "cwd": "/eval/linux/repos/A01-nested-unset",
+      "rc": 0,
+      "seconds": 0.008063999999990301,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "commit",
+        "-m",
+        "Seed LFS fixture"
+      ],
+      "cwd": "/eval/linux/repos/A01-nested-unset",
+      "rc": 0,
+      "seconds": 0.03751029099998959,
+      "stdout": "[main (root-commit) 5dc6995] Seed LFS fixture\n 2 files changed, 2 insertions(+)\n create mode 100644 .gitattributes\n create mode 100644 note.txt\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "/eval/linux/repos/A01-nested-unset",
+      "rc": 0,
+      "seconds": 0.00206725000001029,
+      "stdout": "5dc699545701c817a2ddfc94b0beffeb0efd0d3e\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/target/debug/jj",
+        "git",
+        "init",
+        "--colocate"
+      ],
+      "cwd": "/eval/linux/repos/A01-nested-unset",
+      "rc": 0,
+      "seconds": 0.07101041700002497,
+      "stdout": "",
+      "stderr": "Done importing changes from the underlying Git repo.\nInitialized repo in \".\"\n"
+    },
+    {
+      "argv": [
+        "git",
+        "check-attr",
+        "filter",
+        "--",
+        "sub/a.bin"
+      ],
+      "cwd": "/eval/linux/repos/A01-nested-unset",
+      "rc": 0,
+      "seconds": 0.004361541999998053,
+      "stdout": "sub/a.bin: filter: unset\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/target/debug/jj",
+        "status"
+      ],
+      "cwd": "/eval/linux/repos/A01-nested-unset",
+      "rc": 0,
+      "seconds": 0.05056566700000076,
+      "stdout": "Working copy changes:\nA sub/.gitattributes\nA sub/a.bin\nWorking copy  (@) : kmxqmmpr 5a05cc51 (no description set)\nParent commit (@-): snozoksz 5dc69954 main | Seed LFS fixture\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/target/debug/jj",
+        "file",
+        "list"
+      ],
+      "cwd": "/eval/linux/repos/A01-nested-unset",
+      "rc": 0,
+      "seconds": 0.027055625000002692,
+      "stdout": ".gitattributes\nnote.txt\nsub/.gitattributes\nsub/a.bin\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/target/debug/jj",
+        "file",
+        "show",
+        "sub/a.bin"
+      ],
+      "cwd": "/eval/linux/repos/A01-nested-unset",
+      "rc": 0,
+      "seconds": 0.025838334000013674,
+      "stdout": "LFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\n",
+      "stderr": ""
+    }
+  ]
+}

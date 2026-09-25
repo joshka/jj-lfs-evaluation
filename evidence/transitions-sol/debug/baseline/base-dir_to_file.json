@@ -1,0 +1,251 @@
+{
+  "id": "base-dir_to_file",
+  "purpose": "dir_to_file",
+  "category": "contract",
+  "status": "PASS",
+  "seconds": 1.231690667103976,
+  "checks": [
+    {
+      "label": "Recovery leaves usable path",
+      "pass": true,
+      "first_status_rc": 0
+    }
+  ],
+  "observations": {
+    "before": {
+      "type": "directory",
+      "children": [
+        "child.txt"
+      ]
+    },
+    "first_status": {
+      "rc": 0,
+      "out": "Working copy changes:\nA dir.bin\nD dir.bin/child.txt\nWorking copy  (@) : qzrqtwuv a7280244 (no description set)\nParent commit (@-): qwukuwmz 95ce9a98 main | Seed LFS fixture\n",
+      "err": ""
+    },
+    "second_status": {
+      "rc": 0,
+      "out": "Working copy changes:\nA dir.bin\nD dir.bin/child.txt\nWorking copy  (@) : qzrqtwuv a7280244 (no description set)\nParent commit (@-): qwukuwmz 95ce9a98 main | Seed LFS fixture\n",
+      "err": ""
+    },
+    "after_transition_tree": {
+      "rc": 0,
+      "files": ".gitattributes\ndir.bin\nnote.txt\n",
+      "err": ""
+    },
+    "after_transition": {
+      "type": "file",
+      "sha256": "dad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f",
+      "size": 2500,
+      "pointer": false
+    },
+    "recovery_status": {
+      "rc": 0,
+      "out": "The working copy has no changes.\nWorking copy  (@) : qzrqtwuv 4774ba01 (empty) (no description set)\nParent commit (@-): qwukuwmz 95ce9a98 main | Seed LFS fixture\n",
+      "err": ""
+    },
+    "after_recovery_tree": {
+      "rc": 0,
+      "files": ".gitattributes\ndir.bin/child.txt\nnote.txt\n",
+      "err": ""
+    },
+    "after_recovery": {
+      "type": "directory",
+      "children": [
+        "child.txt"
+      ]
+    }
+  },
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "init",
+        "-b",
+        "main"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/transitions-sol/debug/baseline/repos/base-dir_to_file",
+      "rc": 0,
+      "seconds": 0.022715874947607517,
+      "stdout": "Initialized empty Git repository in /tmp/jj-lfs-evaluation/transitions-sol/debug/baseline/repos/base-dir_to_file/.git/\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.name",
+        "LFS Evaluation"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/transitions-sol/debug/baseline/repos/base-dir_to_file",
+      "rc": 0,
+      "seconds": 0.012816041707992554,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.email",
+        "eval@example.invalid"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/transitions-sol/debug/baseline/repos/base-dir_to_file",
+      "rc": 0,
+      "seconds": 0.01231599971652031,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "commit.gpgsign",
+        "false"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/transitions-sol/debug/baseline/repos/base-dir_to_file",
+      "rc": 0,
+      "seconds": 0.014421749860048294,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "core.autocrlf",
+        "false"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/transitions-sol/debug/baseline/repos/base-dir_to_file",
+      "rc": 0,
+      "seconds": 0.012961916159838438,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "lfs",
+        "install",
+        "--local"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/transitions-sol/debug/baseline/repos/base-dir_to_file",
+      "rc": 0,
+      "seconds": 0.19356824969872832,
+      "stdout": "Updated Git hooks.\nGit LFS initialized.\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "add",
+        "."
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/transitions-sol/debug/baseline/repos/base-dir_to_file",
+      "rc": 0,
+      "seconds": 0.011790874879807234,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "commit",
+        "-m",
+        "Seed LFS fixture"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/transitions-sol/debug/baseline/repos/base-dir_to_file",
+      "rc": 0,
+      "seconds": 0.5920038339681923,
+      "stdout": "[main (root-commit) 95ce9a9] Seed LFS fixture\n 3 files changed, 3 insertions(+)\n create mode 100644 .gitattributes\n create mode 100644 dir.bin/child.txt\n create mode 100644 note.txt\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/transitions-sol/debug/baseline/repos/base-dir_to_file",
+      "rc": 0,
+      "seconds": 0.006670165807008743,
+      "stdout": "95ce9a98f60abbcd0414370e995b4d380bcafac9\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-base",
+        "git",
+        "init",
+        "--colocate"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/transitions-sol/debug/baseline/repos/base-dir_to_file",
+      "rc": 0,
+      "seconds": 0.1426544999703765,
+      "stdout": "",
+      "stderr": "Done importing changes from the underlying Git repo.\nInitialized repo in \".\"\n"
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-base",
+        "--config=git.ignore-filters=[]",
+        "status"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/transitions-sol/debug/baseline/repos/base-dir_to_file",
+      "rc": 0,
+      "seconds": 0.06925945822149515,
+      "stdout": "Working copy changes:\nA dir.bin\nD dir.bin/child.txt\nWorking copy  (@) : qzrqtwuv a7280244 (no description set)\nParent commit (@-): qwukuwmz 95ce9a98 main | Seed LFS fixture\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-base",
+        "--config=git.ignore-filters=[]",
+        "status"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/transitions-sol/debug/baseline/repos/base-dir_to_file",
+      "rc": 0,
+      "seconds": 0.0304064997471869,
+      "stdout": "Working copy changes:\nA dir.bin\nD dir.bin/child.txt\nWorking copy  (@) : qzrqtwuv a7280244 (no description set)\nParent commit (@-): qwukuwmz 95ce9a98 main | Seed LFS fixture\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-base",
+        "--ignore-working-copy",
+        "file",
+        "list"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/transitions-sol/debug/baseline/repos/base-dir_to_file",
+      "rc": 0,
+      "seconds": 0.02237720787525177,
+      "stdout": ".gitattributes\ndir.bin\nnote.txt\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-base",
+        "--config=git.ignore-filters=[]",
+        "status"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/transitions-sol/debug/baseline/repos/base-dir_to_file",
+      "rc": 0,
+      "seconds": 0.06273108394816518,
+      "stdout": "The working copy has no changes.\nWorking copy  (@) : qzrqtwuv 4774ba01 (empty) (no description set)\nParent commit (@-): qwukuwmz 95ce9a98 main | Seed LFS fixture\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-base",
+        "--ignore-working-copy",
+        "file",
+        "list"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/transitions-sol/debug/baseline/repos/base-dir_to_file",
+      "rc": 0,
+      "seconds": 0.022445208858698606,
+      "stdout": ".gitattributes\ndir.bin/child.txt\nnote.txt\n",
+      "stderr": ""
+    }
+  ]
+}

@@ -1,0 +1,313 @@
+{
+  "id": "base-rebase",
+  "purpose": "rebase",
+  "category": "contract",
+  "status": "PASS",
+  "seconds": 2.664750167168677,
+  "checks": [
+    {
+      "label": "Initial hydration has expected bytes",
+      "pass": true
+    },
+    {
+      "label": "No silent loss of hydrated edit",
+      "pass": true,
+      "operation": "rebase",
+      "disk_sha": "8539cd42ffcfc1a6739e3ce19ebc3790009c1bb3f3d8f4980c356e57ba945a46",
+      "prior_sha": "79014f34a44dbd4fa5b5bea4c010d55d1c009c5ddf310a6abf24e23cc7c4832a",
+      "edited_sha": "79014f34a44dbd4fa5b5bea4c010d55d1c009c5ddf310a6abf24e23cc7c4832a"
+    }
+  ],
+  "observations": {
+    "edit_a": {
+      "rc": 0,
+      "out": "",
+      "err": "Working copy  (@) now at: tnksrypu d2853e8d Seed LFS fixture\nParent commit (@-)      : zzzzzzzz 00000000 (empty) (no description set)\nAdded 0 files, modified 1 files, removed 0 files\n"
+    },
+    "after_local_edit_status": {
+      "rc": 0,
+      "out": "Working copy changes:\nA .gitattributes\nA asset.bin\nA note.txt\nWorking copy  (@) : tnksrypu 571d4789 Seed LFS fixture\nParent commit (@-): zzzzzzzz 00000000 (empty) (no description set)\n",
+      "err": "Rebased 3 descendant commits onto updated working copy.\n"
+    },
+    "local": {
+      "edited_sha": "79014f34a44dbd4fa5b5bea4c010d55d1c009c5ddf310a6abf24e23cc7c4832a",
+      "stored_sha": "79014f34a44dbd4fa5b5bea4c010d55d1c009c5ddf310a6abf24e23cc7c4832a",
+      "stored_pointer": false,
+      "rev": "571d47898a896536b7c1f7d0072294c0d0b48f40"
+    },
+    "rebase": {
+      "rc": 0,
+      "out": "",
+      "err": "Rebased 1 commits to destination.\nRebased 3 descendant commits.\nWorking copy  (@) now at: tnksrypu/0 f1609bb8 (divergent) (conflict) Seed LFS fixture\nParent commit (@-)      : nmwonzxx/2 e55cb3ad (divergent) Second LFS version\nAdded 0 files, modified 1 files, removed 0 files\nWarning: There are unresolved conflicts at these paths:\nasset.bin    2-sided conflict\nNew conflicts appeared in 1 commits:\n  tnksrypu/0 f1609bb8 (divergent) (conflict) Seed LFS fixture\nHint: To resolve the conflicts, start by creating a commit on top of\none of the first conflicted commits:\n  jj new nmwonzxx/0\n  jj new oqynzwtq\n  jj new tnksrypu/0\nThen use `jj resolve`, or edit the conflict markers in the file directly.\nOnce the conflicts are resolved, you can inspect the result with `jj diff`.\nThen run `jj squash` to move the resolution into the conflicted commit.\n"
+    },
+    "after": {
+      "disk_sha": "8539cd42ffcfc1a6739e3ce19ebc3790009c1bb3f3d8f4980c356e57ba945a46",
+      "disk_is_pointer": false,
+      "prior_rc": 0,
+      "prior_sha": "79014f34a44dbd4fa5b5bea4c010d55d1c009c5ddf310a6abf24e23cc7c4832a",
+      "edited_recoverable": true
+    }
+  },
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "init",
+        "-b",
+        "main"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/baseline/repos/base-rebase",
+      "rc": 0,
+      "seconds": 0.0511872498318553,
+      "stdout": "Initialized empty Git repository in /tmp/jj-lfs-evaluation/workflows-sol/baseline/repos/base-rebase/.git/\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.name",
+        "LFS Evaluation"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/baseline/repos/base-rebase",
+      "rc": 0,
+      "seconds": 0.03763699997216463,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.email",
+        "eval@example.invalid"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/baseline/repos/base-rebase",
+      "rc": 0,
+      "seconds": 0.016241708770394325,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "commit.gpgsign",
+        "false"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/baseline/repos/base-rebase",
+      "rc": 0,
+      "seconds": 0.011481749825179577,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "core.autocrlf",
+        "false"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/baseline/repos/base-rebase",
+      "rc": 0,
+      "seconds": 0.012659542262554169,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "lfs",
+        "install",
+        "--local"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/baseline/repos/base-rebase",
+      "rc": 0,
+      "seconds": 0.3196493745781481,
+      "stdout": "Updated Git hooks.\nGit LFS initialized.\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "add",
+        "."
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/baseline/repos/base-rebase",
+      "rc": 0,
+      "seconds": 0.22807649988681078,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "commit",
+        "-m",
+        "Seed LFS fixture"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/baseline/repos/base-rebase",
+      "rc": 0,
+      "seconds": 0.45985679095610976,
+      "stdout": "[main (root-commit) d2853e8] Seed LFS fixture\n 3 files changed, 5 insertions(+)\n create mode 100644 .gitattributes\n create mode 100644 asset.bin\n create mode 100644 note.txt\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/baseline/repos/base-rebase",
+      "rc": 0,
+      "seconds": 0.01652766577899456,
+      "stdout": "d2853e8dcd793e32abaadcf390fc0e66a581ef36\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/opt/homebrew/Cellar/jj/0.45.1/bin/jj",
+        "git",
+        "init",
+        "--colocate"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/baseline/repos/base-rebase",
+      "rc": 0,
+      "seconds": 0.2712988327257335,
+      "stdout": "",
+      "stderr": "Done importing changes from the underlying Git repo.\nInitialized repo in \".\"\n"
+    },
+    {
+      "argv": [
+        "git",
+        "add",
+        "asset.bin"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/baseline/repos/base-rebase",
+      "rc": 0,
+      "seconds": 0.1954296249896288,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "commit",
+        "-m",
+        "Second LFS version"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/baseline/repos/base-rebase",
+      "rc": 0,
+      "seconds": 0.21430708328261971,
+      "stdout": "[main e55cb3a] Second LFS version\n 1 file changed, 2 insertions(+), 2 deletions(-)\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/baseline/repos/base-rebase",
+      "rc": 0,
+      "seconds": 0.01570062479004264,
+      "stdout": "e55cb3ad894a777a31ab49a6ad329aed4403dcb3\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/opt/homebrew/Cellar/jj/0.45.1/bin/jj",
+        "status"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/baseline/repos/base-rebase",
+      "rc": 0,
+      "seconds": 0.23282370809465647,
+      "stdout": "Working copy changes:\nM asset.bin\nWorking copy  (@) : oxytypqp d9a5c49c (no description set)\nParent commit (@-): nmwonzxx e55cb3ad main | Second LFS version\n",
+      "stderr": "Reset the working copy parent to the new Git HEAD.\nDone importing changes from the underlying Git repo.\n"
+    },
+    {
+      "argv": [
+        "/opt/homebrew/Cellar/jj/0.45.1/bin/jj",
+        "edit",
+        "d2853e8dcd793e32abaadcf390fc0e66a581ef36"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/baseline/repos/base-rebase",
+      "rc": 0,
+      "seconds": 0.07437175000086427,
+      "stdout": "",
+      "stderr": "Working copy  (@) now at: tnksrypu d2853e8d Seed LFS fixture\nParent commit (@-)      : zzzzzzzz 00000000 (empty) (no description set)\nAdded 0 files, modified 1 files, removed 0 files\n"
+    },
+    {
+      "argv": [
+        "/opt/homebrew/Cellar/jj/0.45.1/bin/jj",
+        "status"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/baseline/repos/base-rebase",
+      "rc": 0,
+      "seconds": 0.17786529194563627,
+      "stdout": "Working copy changes:\nA .gitattributes\nA asset.bin\nA note.txt\nWorking copy  (@) : tnksrypu 571d4789 Seed LFS fixture\nParent commit (@-): zzzzzzzz 00000000 (empty) (no description set)\n",
+      "stderr": "Rebased 3 descendant commits onto updated working copy.\n"
+    },
+    {
+      "argv": [
+        "/opt/homebrew/Cellar/jj/0.45.1/bin/jj",
+        "log",
+        "-r",
+        "@",
+        "--no-graph",
+        "-T",
+        "commit_id"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/baseline/repos/base-rebase",
+      "rc": 0,
+      "seconds": 0.06928658299148083,
+      "stdout": "571d47898a896536b7c1f7d0072294c0d0b48f40",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/opt/homebrew/Cellar/jj/0.45.1/bin/jj",
+        "file",
+        "show",
+        "-r",
+        "571d47898a896536b7c1f7d0072294c0d0b48f40",
+        "asset.bin"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/baseline/repos/base-rebase",
+      "rc": 0,
+      "seconds": 0.02917099976912141,
+      "stdout": "local modified hydrated asset\u0000\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/opt/homebrew/Cellar/jj/0.45.1/bin/jj",
+        "rebase",
+        "-r",
+        "@",
+        "-d",
+        "e55cb3ad894a777a31ab49a6ad329aed4403dcb3"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/baseline/repos/base-rebase",
+      "rc": 0,
+      "seconds": 0.18044133391231298,
+      "stdout": "",
+      "stderr": "Rebased 1 commits to destination.\nRebased 3 descendant commits.\nWorking copy  (@) now at: tnksrypu/0 f1609bb8 (divergent) (conflict) Seed LFS fixture\nParent commit (@-)      : nmwonzxx/2 e55cb3ad (divergent) Second LFS version\nAdded 0 files, modified 1 files, removed 0 files\nWarning: There are unresolved conflicts at these paths:\nasset.bin    2-sided conflict\nNew conflicts appeared in 1 commits:\n  tnksrypu/0 f1609bb8 (divergent) (conflict) Seed LFS fixture\nHint: To resolve the conflicts, start by creating a commit on top of\none of the first conflicted commits:\n  jj new nmwonzxx/0\n  jj new oqynzwtq\n  jj new tnksrypu/0\nThen use `jj resolve`, or edit the conflict markers in the file directly.\nOnce the conflicts are resolved, you can inspect the result with `jj diff`.\nThen run `jj squash` to move the resolution into the conflicted commit.\n"
+    },
+    {
+      "argv": [
+        "/opt/homebrew/Cellar/jj/0.45.1/bin/jj",
+        "file",
+        "show",
+        "-r",
+        "571d47898a896536b7c1f7d0072294c0d0b48f40",
+        "asset.bin"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/baseline/repos/base-rebase",
+      "rc": 0,
+      "seconds": 0.04528424981981516,
+      "stdout": "local modified hydrated asset\u0000\n",
+      "stderr": ""
+    }
+  ]
+}

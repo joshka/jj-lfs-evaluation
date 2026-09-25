@@ -1,0 +1,207 @@
+{
+  "id": "S02-delete",
+  "purpose": "Characterize silent snapshot exclusion: delete",
+  "category": "contract",
+  "status": "PASS",
+  "seconds": 0.4660722920000069,
+  "checks": [
+    {
+      "label": "Stored pointer unchanged by excluded mutation",
+      "pass": true,
+      "actual_sha256": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+      "expected_sha256": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+      "actual_size": 129,
+      "expected_size": 129
+    },
+    {
+      "label": "No new excluded path snapshots",
+      "pass": true
+    }
+  ],
+  "observations": {
+    "status": "The working copy has no changes.\nWorking copy  (@) : xxqqmyxz 2bacde05 (empty) (no description set)\nParent commit (@-): yxwvkxmo 56e735e4 main | Seed LFS fixture\n",
+    "mutation": "delete",
+    "disk_files": [
+      "note.txt",
+      ".gitattributes"
+    ]
+  },
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "init",
+        "-b",
+        "main"
+      ],
+      "cwd": "/eval/linux/repos/S02-delete",
+      "rc": 0,
+      "seconds": 0.023261708999996245,
+      "stdout": "Initialized empty Git repository in /eval/linux/repos/S02-delete/.git/\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.name",
+        "LFS Evaluation"
+      ],
+      "cwd": "/eval/linux/repos/S02-delete",
+      "rc": 0,
+      "seconds": 0.004574542000000292,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.email",
+        "eval@example.invalid"
+      ],
+      "cwd": "/eval/linux/repos/S02-delete",
+      "rc": 0,
+      "seconds": 0.004687040999982628,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "commit.gpgsign",
+        "false"
+      ],
+      "cwd": "/eval/linux/repos/S02-delete",
+      "rc": 0,
+      "seconds": 0.003570749999994405,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "core.autocrlf",
+        "false"
+      ],
+      "cwd": "/eval/linux/repos/S02-delete",
+      "rc": 0,
+      "seconds": 0.004128583000010622,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "lfs",
+        "install",
+        "--local"
+      ],
+      "cwd": "/eval/linux/repos/S02-delete",
+      "rc": 0,
+      "seconds": 0.03961216600001194,
+      "stdout": "Updated Git hooks.\nGit LFS initialized.\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "add",
+        "."
+      ],
+      "cwd": "/eval/linux/repos/S02-delete",
+      "rc": 0,
+      "seconds": 0.02505270800000403,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "commit",
+        "-m",
+        "Seed LFS fixture"
+      ],
+      "cwd": "/eval/linux/repos/S02-delete",
+      "rc": 0,
+      "seconds": 0.04840437499998984,
+      "stdout": "[main (root-commit) 56e735e] Seed LFS fixture\n 3 files changed, 5 insertions(+)\n create mode 100644 .gitattributes\n create mode 100644 asset.bin\n create mode 100644 note.txt\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "/eval/linux/repos/S02-delete",
+      "rc": 0,
+      "seconds": 0.0016436249999856045,
+      "stdout": "56e735e4aee4a6b8d0d5e1e2e73e3d94db4f2c48\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/target/debug/jj",
+        "git",
+        "init",
+        "--colocate"
+      ],
+      "cwd": "/eval/linux/repos/S02-delete",
+      "rc": 0,
+      "seconds": 0.18514570899998262,
+      "stdout": "",
+      "stderr": "Done importing changes from the underlying Git repo.\nInitialized repo in \".\"\n"
+    },
+    {
+      "argv": [
+        "/target/debug/jj",
+        "status"
+      ],
+      "cwd": "/eval/linux/repos/S02-delete",
+      "rc": 0,
+      "seconds": 0.03011891599999217,
+      "stdout": "The working copy has no changes.\nWorking copy  (@) : xxqqmyxz 2bacde05 (empty) (no description set)\nParent commit (@-): yxwvkxmo 56e735e4 main | Seed LFS fixture\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/target/debug/jj",
+        "file",
+        "show",
+        "asset.bin"
+      ],
+      "cwd": "/eval/linux/repos/S02-delete",
+      "rc": 0,
+      "seconds": 0.0292251249999822,
+      "stdout": "version https://git-lfs.github.com/spec/v1\noid sha256:dad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f\nsize 2500\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/target/debug/jj",
+        "file",
+        "list"
+      ],
+      "cwd": "/eval/linux/repos/S02-delete",
+      "rc": 0,
+      "seconds": 0.032856874999993124,
+      "stdout": ".gitattributes\nasset.bin\nnote.txt\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/target/debug/jj",
+        "file",
+        "list"
+      ],
+      "cwd": "/eval/linux/repos/S02-delete",
+      "rc": 0,
+      "seconds": 0.031404167000005145,
+      "stdout": ".gitattributes\nasset.bin\nnote.txt\n",
+      "stderr": ""
+    }
+  ]
+}

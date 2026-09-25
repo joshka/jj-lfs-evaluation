@@ -1,0 +1,7 @@
+Fetching into new repo in "/tmp/jj-lfs-evaluation/rebase"
+bookmark: main@origin                        [new] tracked
+bookmark: sbarfurth/push-uulvmqxnpmzk@origin [new] untracked
+Setting the revset alias `trunk()` to `main@origin`.
+Working copy  (@) now at: zxxlovnv 3da96dc0 (empty) (no description set)
+Parent commit (@-)      : nsupmwwm f1b29bce main | revset: merge in indexes of at_operation() repos as needed
+Added 718 files, modified 0 files, removed 0 files

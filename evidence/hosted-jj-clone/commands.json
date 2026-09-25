@@ -1,0 +1,57 @@
+[
+  {
+    "argv": [
+      "/tmp/jj-lfs-evaluation/bin/jj-pr-release",
+      "git",
+      "clone",
+      "--branch",
+      "joshka/lfs-eval-fixture",
+      "https://github.com/joshka/jj-lfs-eval-20260925",
+      "/tmp/jj-lfs-evaluation/hosted-jj-clone/repo"
+    ],
+    "rc": 0,
+    "stdout": "",
+    "stderr": "Fetching into new repo in \"/tmp/jj-lfs-evaluation/hosted-jj-clone/repo\"\nbookmark: joshka/lfs-eval-fixture@origin [new] untracked\nWorking copy  (@) now at: spqqurrr dd85e0af (empty) (no description set)\nParent commit (@-)      : nysuymrl 48dee535 joshka/lfs-eval-fixture@origin | Publish pointer before LFS object upload\nAdded 6 files, modified 0 files, removed 0 files\n"
+  },
+  {
+    "argv": [
+      "git",
+      "lfs",
+      "pull"
+    ],
+    "rc": 0,
+    "stdout": "Skipping object checkout, Git LFS is not installed for this repository.\nConsider installing it with 'git lfs install'.\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "/tmp/jj-lfs-evaluation/bin/jj-pr-release",
+      "status"
+    ],
+    "rc": 0,
+    "stdout": "The working copy has no changes.\nWorking copy  (@) : spqqurrr dd85e0af (empty) (no description set)\nParent commit (@-): nysuymrl 48dee535 joshka/lfs-eval-fixture@origin | Publish pointer before LFS object upload\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "/tmp/jj-lfs-evaluation/bin/jj-pr-release",
+      "file",
+      "show",
+      "payload.bin"
+    ],
+    "rc": 0,
+    "stdout": "version https://git-lfs.github.com/spec/v1\noid sha256:c8f5d0341d54d951a71b136e6e2afcb14d11ed8489a7ae126a8fee0df6ecf193\nsize 4096\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "/tmp/jj-lfs-evaluation/bin/jj-pr-release",
+      "file",
+      "show",
+      "missing.bin"
+    ],
+    "rc": 0,
+    "stdout": "version https://git-lfs.github.com/spec/v1\noid sha256:f942803ce9c94a8ac8798db8970dda1b66186fe7452736d21f6ba16a5ae5ae8c\nsize 3072\n",
+    "stderr": ""
+  }
+]

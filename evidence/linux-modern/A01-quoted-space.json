@@ -1,0 +1,185 @@
+{
+  "id": "A01-quoted-space",
+  "purpose": "Attribute matching agrees with Git",
+  "category": "contract",
+  "status": "PASS",
+  "seconds": 0.20089429199998676,
+  "checks": [
+    {
+      "label": "Expected exclusion matches Git attribute decision",
+      "pass": true,
+      "expected_excluded": true,
+      "actual_included": false,
+      "git_check_attr": "space name.bin: filter: lfs\n",
+      "jj_status": "The working copy has no changes.\nWorking copy  (@) : utywpsul 45b06c70 (empty) (no description set)\nParent commit (@-): rpmmruuq 0665ebd1 main | Seed LFS fixture\n"
+    }
+  ],
+  "observations": {},
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "init",
+        "-b",
+        "main"
+      ],
+      "cwd": "/eval/linux-modern/repos/A01-quoted-space",
+      "rc": 0,
+      "seconds": 0.016189999999994598,
+      "stdout": "Initialized empty Git repository in /eval/linux-modern/repos/A01-quoted-space/.git/\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.name",
+        "LFS Evaluation"
+      ],
+      "cwd": "/eval/linux-modern/repos/A01-quoted-space",
+      "rc": 0,
+      "seconds": 0.0036542920000215418,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.email",
+        "eval@example.invalid"
+      ],
+      "cwd": "/eval/linux-modern/repos/A01-quoted-space",
+      "rc": 0,
+      "seconds": 0.004023125000003347,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "commit.gpgsign",
+        "false"
+      ],
+      "cwd": "/eval/linux-modern/repos/A01-quoted-space",
+      "rc": 0,
+      "seconds": 0.003002584000000752,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "core.autocrlf",
+        "false"
+      ],
+      "cwd": "/eval/linux-modern/repos/A01-quoted-space",
+      "rc": 0,
+      "seconds": 0.0019832919999771548,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "lfs",
+        "install",
+        "--local"
+      ],
+      "cwd": "/eval/linux-modern/repos/A01-quoted-space",
+      "rc": 0,
+      "seconds": 0.03142095800001243,
+      "stdout": "Updated Git hooks.\nGit LFS initialized.\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "add",
+        "."
+      ],
+      "cwd": "/eval/linux-modern/repos/A01-quoted-space",
+      "rc": 0,
+      "seconds": 0.006045540999991772,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "commit",
+        "-m",
+        "Seed LFS fixture"
+      ],
+      "cwd": "/eval/linux-modern/repos/A01-quoted-space",
+      "rc": 0,
+      "seconds": 0.032256458000006205,
+      "stdout": "[main (root-commit) 0665ebd] Seed LFS fixture\n 2 files changed, 2 insertions(+)\n create mode 100644 .gitattributes\n create mode 100644 note.txt\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "/eval/linux-modern/repos/A01-quoted-space",
+      "rc": 0,
+      "seconds": 0.001902916999995341,
+      "stdout": "0665ebd183be61cffa0ccb3fa1820dc39aa1bb51\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/target/debug/jj",
+        "git",
+        "init",
+        "--colocate"
+      ],
+      "cwd": "/eval/linux-modern/repos/A01-quoted-space",
+      "rc": 0,
+      "seconds": 0.052847041999996236,
+      "stdout": "",
+      "stderr": "Done importing changes from the underlying Git repo.\nInitialized repo in \".\"\n"
+    },
+    {
+      "argv": [
+        "git",
+        "check-attr",
+        "filter",
+        "--",
+        "space name.bin"
+      ],
+      "cwd": "/eval/linux-modern/repos/A01-quoted-space",
+      "rc": 0,
+      "seconds": 0.0026095419999592195,
+      "stdout": "space name.bin: filter: lfs\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/target/debug/jj",
+        "status"
+      ],
+      "cwd": "/eval/linux-modern/repos/A01-quoted-space",
+      "rc": 0,
+      "seconds": 0.022959458999991966,
+      "stdout": "The working copy has no changes.\nWorking copy  (@) : utywpsul 45b06c70 (empty) (no description set)\nParent commit (@-): rpmmruuq 0665ebd1 main | Seed LFS fixture\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/target/debug/jj",
+        "file",
+        "list"
+      ],
+      "cwd": "/eval/linux-modern/repos/A01-quoted-space",
+      "rc": 0,
+      "seconds": 0.02044554200000448,
+      "stdout": ".gitattributes\nnote.txt\n",
+      "stderr": ""
+    }
+  ]
+}

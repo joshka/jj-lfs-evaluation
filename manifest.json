@@ -1,0 +1,12 @@
+{
+  "pr": "https://github.com/jj-vcs/jj/pull/9635",
+  "head": "d8a56d1a38cae110529ef8e67e72e3e2057ed3ca",
+  "parent": "e9f48b3e4c1c5e816fbbfbfd06c154a6a96b0215",
+  "main_rebase_target": "f1b29bced933e289096a9c98276153e29dd95674",
+  "recommendation": "Do not merge pinned head unchanged",
+  "core_scenarios": 40,
+  "upstream_distinct_relevant_tests_passed": 174,
+  "windows": "Initial execution unavailable; see current report for follow-up results.",
+  "temporary_workspace": "/tmp/jj-lfs-evaluation (normalized historical path)",
+  "source_files_modified": []
+}

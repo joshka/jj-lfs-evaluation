@@ -1,0 +1,261 @@
+{
+  "id": "pr-file_to_symlink",
+  "purpose": "file_to_symlink",
+  "category": "contract",
+  "status": "PASS",
+  "seconds": 5.033926082774997,
+  "checks": [
+    {
+      "label": "Initial committed blob is valid LFS pointer",
+      "pass": true
+    },
+    {
+      "label": "Recovery leaves valid pointer",
+      "pass": true,
+      "first_status_rc": 0
+    }
+  ],
+  "observations": {
+    "before": {
+      "type": "symlink",
+      "target": "note.txt"
+    },
+    "first_status": {
+      "rc": 0,
+      "out": "The working copy has no changes.\nWorking copy  (@) : rlqwlyoz eeed7c4a (empty) (no description set)\nParent commit (@-): myswsmrw f5f99254 main | Seed LFS fixture\n",
+      "err": ""
+    },
+    "second_status": {
+      "rc": 0,
+      "out": "The working copy has no changes.\nWorking copy  (@) : rlqwlyoz eeed7c4a (empty) (no description set)\nParent commit (@-): myswsmrw f5f99254 main | Seed LFS fixture\n",
+      "err": ""
+    },
+    "after_transition_tree": {
+      "rc": 0,
+      "files": ".gitattributes\nasset.bin\nnote.txt\n",
+      "err": ""
+    },
+    "after_transition": {
+      "type": "symlink",
+      "target": "note.txt"
+    },
+    "recovery_status": {
+      "rc": 0,
+      "out": "The working copy has no changes.\nWorking copy  (@) : rlqwlyoz eeed7c4a (empty) (no description set)\nParent commit (@-): myswsmrw f5f99254 main | Seed LFS fixture\n",
+      "err": ""
+    },
+    "after_recovery_tree": {
+      "rc": 0,
+      "files": ".gitattributes\nasset.bin\nnote.txt\n",
+      "err": ""
+    },
+    "after_recovery": {
+      "type": "file",
+      "sha256": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+      "size": 129,
+      "pointer": true
+    }
+  },
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "init",
+        "-b",
+        "main"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/transitions-sol/release/pr/repos/pr-file_to_symlink",
+      "rc": 0,
+      "seconds": 0.01201079087331891,
+      "stdout": "Initialized empty Git repository in /tmp/jj-lfs-evaluation/transitions-sol/release/pr/repos/pr-file_to_symlink/.git/\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.name",
+        "LFS Evaluation"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/transitions-sol/release/pr/repos/pr-file_to_symlink",
+      "rc": 0,
+      "seconds": 0.006908874958753586,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.email",
+        "eval@example.invalid"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/transitions-sol/release/pr/repos/pr-file_to_symlink",
+      "rc": 0,
+      "seconds": 0.006695208139717579,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "commit.gpgsign",
+        "false"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/transitions-sol/release/pr/repos/pr-file_to_symlink",
+      "rc": 0,
+      "seconds": 0.006524208001792431,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "core.autocrlf",
+        "false"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/transitions-sol/release/pr/repos/pr-file_to_symlink",
+      "rc": 0,
+      "seconds": 0.007160417269915342,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "lfs",
+        "install",
+        "--local"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/transitions-sol/release/pr/repos/pr-file_to_symlink",
+      "rc": 0,
+      "seconds": 0.1454627919010818,
+      "stdout": "Updated Git hooks.\nGit LFS initialized.\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "add",
+        "."
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/transitions-sol/release/pr/repos/pr-file_to_symlink",
+      "rc": 0,
+      "seconds": 0.07851450005546212,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "commit",
+        "-m",
+        "Seed LFS fixture"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/transitions-sol/release/pr/repos/pr-file_to_symlink",
+      "rc": 0,
+      "seconds": 4.284017624799162,
+      "stdout": "[main (root-commit) f5f9925] Seed LFS fixture\n 3 files changed, 5 insertions(+)\n create mode 100644 .gitattributes\n create mode 100644 asset.bin\n create mode 100644 note.txt\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/transitions-sol/release/pr/repos/pr-file_to_symlink",
+      "rc": 0,
+      "seconds": 0.012456666678190231,
+      "stdout": "f5f99254c6e0c045eb8245af21c80c5dc1bece8b\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr-release",
+        "git",
+        "init",
+        "--colocate"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/transitions-sol/release/pr/repos/pr-file_to_symlink",
+      "rc": 0,
+      "seconds": 0.3718303325586021,
+      "stdout": "",
+      "stderr": "Done importing changes from the underlying Git repo.\nInitialized repo in \".\"\n"
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr-release",
+        "file",
+        "show",
+        "asset.bin"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/transitions-sol/release/pr/repos/pr-file_to_symlink",
+      "rc": 0,
+      "seconds": 0.0191299170255661,
+      "stdout": "version https://git-lfs.github.com/spec/v1\noid sha256:dad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f\nsize 2500\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr-release",
+        "status"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/transitions-sol/release/pr/repos/pr-file_to_symlink",
+      "rc": 0,
+      "seconds": 0.03148900019004941,
+      "stdout": "The working copy has no changes.\nWorking copy  (@) : rlqwlyoz eeed7c4a (empty) (no description set)\nParent commit (@-): myswsmrw f5f99254 main | Seed LFS fixture\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr-release",
+        "status"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/transitions-sol/release/pr/repos/pr-file_to_symlink",
+      "rc": 0,
+      "seconds": 0.013713916763663292,
+      "stdout": "The working copy has no changes.\nWorking copy  (@) : rlqwlyoz eeed7c4a (empty) (no description set)\nParent commit (@-): myswsmrw f5f99254 main | Seed LFS fixture\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr-release",
+        "--ignore-working-copy",
+        "file",
+        "list"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/transitions-sol/release/pr/repos/pr-file_to_symlink",
+      "rc": 0,
+      "seconds": 0.011472125072032213,
+      "stdout": ".gitattributes\nasset.bin\nnote.txt\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr-release",
+        "status"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/transitions-sol/release/pr/repos/pr-file_to_symlink",
+      "rc": 0,
+      "seconds": 0.012856250163167715,
+      "stdout": "The working copy has no changes.\nWorking copy  (@) : rlqwlyoz eeed7c4a (empty) (no description set)\nParent commit (@-): myswsmrw f5f99254 main | Seed LFS fixture\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr-release",
+        "--ignore-working-copy",
+        "file",
+        "list"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/transitions-sol/release/pr/repos/pr-file_to_symlink",
+      "rc": 0,
+      "seconds": 0.011999708134680986,
+      "stdout": ".gitattributes\nasset.bin\nnote.txt\n",
+      "stderr": ""
+    }
+  ]
+}

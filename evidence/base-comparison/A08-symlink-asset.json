@@ -1,0 +1,193 @@
+{
+  "id": "A08-symlink-asset",
+  "purpose": "LFS patterns do not suppress symlink versioning",
+  "category": "compatibility",
+  "status": "PASS",
+  "seconds": 1.338400417007506,
+  "checks": [
+    {
+      "label": "LFS pattern does not hide a Git symlink",
+      "pass": true,
+      "git_entry": "120000 97922aee98474ad751b77adb4aa5e4f3dce681fe 0\tlink.bin\n"
+    }
+  ],
+  "observations": {},
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "init",
+        "-b",
+        "main"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/base-comparison/repos/A08-symlink-asset",
+      "rc": 0,
+      "seconds": 0.020337707828730345,
+      "stdout": "Initialized empty Git repository in /tmp/jj-lfs-evaluation/base-comparison/repos/A08-symlink-asset/.git/\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.name",
+        "LFS Evaluation"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/base-comparison/repos/A08-symlink-asset",
+      "rc": 0,
+      "seconds": 0.012875332962721586,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.email",
+        "eval@example.invalid"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/base-comparison/repos/A08-symlink-asset",
+      "rc": 0,
+      "seconds": 0.019027165602892637,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "commit.gpgsign",
+        "false"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/base-comparison/repos/A08-symlink-asset",
+      "rc": 0,
+      "seconds": 0.01760154217481613,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "core.autocrlf",
+        "false"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/base-comparison/repos/A08-symlink-asset",
+      "rc": 0,
+      "seconds": 0.016489041969180107,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "lfs",
+        "install",
+        "--local"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/base-comparison/repos/A08-symlink-asset",
+      "rc": 0,
+      "seconds": 0.3587227496318519,
+      "stdout": "Updated Git hooks.\nGit LFS initialized.\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "add",
+        "."
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/base-comparison/repos/A08-symlink-asset",
+      "rc": 0,
+      "seconds": 0.01693599997088313,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "commit",
+        "-m",
+        "Seed LFS fixture"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/base-comparison/repos/A08-symlink-asset",
+      "rc": 0,
+      "seconds": 0.42652533389627934,
+      "stdout": "[main (root-commit) 7812f2f] Seed LFS fixture\n 2 files changed, 2 insertions(+)\n create mode 100644 .gitattributes\n create mode 100644 note.txt\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/base-comparison/repos/A08-symlink-asset",
+      "rc": 0,
+      "seconds": 0.013727291021496058,
+      "stdout": "7812f2f2bf74f8ee95e11c22ea93d3745f77075f\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-base",
+        "git",
+        "init",
+        "--colocate"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/base-comparison/repos/A08-symlink-asset",
+      "rc": 0,
+      "seconds": 0.2743374998681247,
+      "stdout": "",
+      "stderr": "Done importing changes from the underlying Git repo.\nInitialized repo in \".\"\n"
+    },
+    {
+      "argv": [
+        "git",
+        "add",
+        "link.bin"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/base-comparison/repos/A08-symlink-asset",
+      "rc": 0,
+      "seconds": 0.016145209316164255,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "ls-files",
+        "--stage",
+        "link.bin"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/base-comparison/repos/A08-symlink-asset",
+      "rc": 0,
+      "seconds": 0.01421525003388524,
+      "stdout": "120000 97922aee98474ad751b77adb4aa5e4f3dce681fe 0\tlink.bin\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-base",
+        "status"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/base-comparison/repos/A08-symlink-asset",
+      "rc": 0,
+      "seconds": 0.09349262528121471,
+      "stdout": "Working copy changes:\nA link.bin\nWorking copy  (@) : xxwsmyuk c105562c (no description set)\nParent commit (@-): kplzllkp 7812f2f2 main | Seed LFS fixture\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-base",
+        "file",
+        "list"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/base-comparison/repos/A08-symlink-asset",
+      "rc": 0,
+      "seconds": 0.036544584203511477,
+      "stdout": ".gitattributes\nlink.bin\nnote.txt\n",
+      "stderr": ""
+    }
+  ]
+}

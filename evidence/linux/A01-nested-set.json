@@ -1,0 +1,185 @@
+{
+  "id": "A01-nested-set",
+  "purpose": "Attribute matching agrees with Git",
+  "category": "contract",
+  "status": "PASS",
+  "seconds": 0.2758117909999953,
+  "checks": [
+    {
+      "label": "Expected exclusion matches Git attribute decision",
+      "pass": true,
+      "expected_excluded": true,
+      "actual_included": false,
+      "git_check_attr": "sub/a.bin: filter: lfs\n",
+      "jj_status": "Working copy changes:\nA sub/.gitattributes\nWorking copy  (@) : tmwxqwny a5c6ea11 (no description set)\nParent commit (@-): nwmtvpqs 847e6dda main | Seed LFS fixture\n"
+    }
+  ],
+  "observations": {},
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "init",
+        "-b",
+        "main"
+      ],
+      "cwd": "/eval/linux/repos/A01-nested-set",
+      "rc": 0,
+      "seconds": 0.02057345800000121,
+      "stdout": "Initialized empty Git repository in /eval/linux/repos/A01-nested-set/.git/\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.name",
+        "LFS Evaluation"
+      ],
+      "cwd": "/eval/linux/repos/A01-nested-set",
+      "rc": 0,
+      "seconds": 0.003982124999993175,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.email",
+        "eval@example.invalid"
+      ],
+      "cwd": "/eval/linux/repos/A01-nested-set",
+      "rc": 0,
+      "seconds": 0.0033733340000026146,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "commit.gpgsign",
+        "false"
+      ],
+      "cwd": "/eval/linux/repos/A01-nested-set",
+      "rc": 0,
+      "seconds": 0.005131417000001193,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "core.autocrlf",
+        "false"
+      ],
+      "cwd": "/eval/linux/repos/A01-nested-set",
+      "rc": 0,
+      "seconds": 0.0034197919999883197,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "lfs",
+        "install",
+        "--local"
+      ],
+      "cwd": "/eval/linux/repos/A01-nested-set",
+      "rc": 0,
+      "seconds": 0.03976137500001187,
+      "stdout": "Updated Git hooks.\nGit LFS initialized.\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "add",
+        "."
+      ],
+      "cwd": "/eval/linux/repos/A01-nested-set",
+      "rc": 0,
+      "seconds": 0.00774866700001553,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "commit",
+        "-m",
+        "Seed LFS fixture"
+      ],
+      "cwd": "/eval/linux/repos/A01-nested-set",
+      "rc": 0,
+      "seconds": 0.03780537499997649,
+      "stdout": "[main (root-commit) 847e6dd] Seed LFS fixture\n 2 files changed, 2 insertions(+)\n create mode 100644 .gitattributes\n create mode 100644 note.txt\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "/eval/linux/repos/A01-nested-set",
+      "rc": 0,
+      "seconds": 0.0014598329999842008,
+      "stdout": "847e6ddae6e5b84e00734602bb8078ede9526bc3\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/target/debug/jj",
+        "git",
+        "init",
+        "--colocate"
+      ],
+      "cwd": "/eval/linux/repos/A01-nested-set",
+      "rc": 0,
+      "seconds": 0.06238666600000897,
+      "stdout": "",
+      "stderr": "Done importing changes from the underlying Git repo.\nInitialized repo in \".\"\n"
+    },
+    {
+      "argv": [
+        "git",
+        "check-attr",
+        "filter",
+        "--",
+        "sub/a.bin"
+      ],
+      "cwd": "/eval/linux/repos/A01-nested-set",
+      "rc": 0,
+      "seconds": 0.0039825409999991734,
+      "stdout": "sub/a.bin: filter: lfs\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/target/debug/jj",
+        "status"
+      ],
+      "cwd": "/eval/linux/repos/A01-nested-set",
+      "rc": 0,
+      "seconds": 0.056101999999981444,
+      "stdout": "Working copy changes:\nA sub/.gitattributes\nWorking copy  (@) : tmwxqwny a5c6ea11 (no description set)\nParent commit (@-): nwmtvpqs 847e6dda main | Seed LFS fixture\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/target/debug/jj",
+        "file",
+        "list"
+      ],
+      "cwd": "/eval/linux/repos/A01-nested-set",
+      "rc": 0,
+      "seconds": 0.027839999999997644,
+      "stdout": ".gitattributes\nnote.txt\nsub/.gitattributes\n",
+      "stderr": ""
+    }
+  ]
+}

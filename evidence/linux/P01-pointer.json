@@ -1,0 +1,180 @@
+{
+  "id": "P01-pointer",
+  "purpose": "Literal pointer snapshots unchanged",
+  "category": "contract",
+  "status": "PASS",
+  "seconds": 0.2270572090000087,
+  "checks": [
+    {
+      "label": "Filtered arbitrary disk bytes do not alter stored pointer",
+      "pass": true,
+      "actual_sha256": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+      "expected_sha256": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+      "actual_size": 129,
+      "expected_size": 129
+    },
+    {
+      "label": "Snapshot preserves disk bytes",
+      "pass": true,
+      "actual_sha256": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+      "expected_sha256": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+      "actual_size": 129,
+      "expected_size": 129
+    }
+  ],
+  "observations": {},
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "init",
+        "-b",
+        "main"
+      ],
+      "cwd": "/eval/linux/repos/P01-pointer",
+      "rc": 0,
+      "seconds": 0.013850750000017342,
+      "stdout": "Initialized empty Git repository in /eval/linux/repos/P01-pointer/.git/\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.name",
+        "LFS Evaluation"
+      ],
+      "cwd": "/eval/linux/repos/P01-pointer",
+      "rc": 0,
+      "seconds": 0.0024596660000213433,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.email",
+        "eval@example.invalid"
+      ],
+      "cwd": "/eval/linux/repos/P01-pointer",
+      "rc": 0,
+      "seconds": 0.0026604999999904066,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "commit.gpgsign",
+        "false"
+      ],
+      "cwd": "/eval/linux/repos/P01-pointer",
+      "rc": 0,
+      "seconds": 0.0033226669999919523,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "core.autocrlf",
+        "false"
+      ],
+      "cwd": "/eval/linux/repos/P01-pointer",
+      "rc": 0,
+      "seconds": 0.0030972500000245873,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "lfs",
+        "install",
+        "--local"
+      ],
+      "cwd": "/eval/linux/repos/P01-pointer",
+      "rc": 0,
+      "seconds": 0.03001537500000495,
+      "stdout": "Updated Git hooks.\nGit LFS initialized.\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "add",
+        "."
+      ],
+      "cwd": "/eval/linux/repos/P01-pointer",
+      "rc": 0,
+      "seconds": 0.019281999999975596,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "commit",
+        "-m",
+        "Seed LFS fixture"
+      ],
+      "cwd": "/eval/linux/repos/P01-pointer",
+      "rc": 0,
+      "seconds": 0.04781175000002236,
+      "stdout": "[main (root-commit) a4bf397] Seed LFS fixture\n 3 files changed, 5 insertions(+)\n create mode 100644 .gitattributes\n create mode 100644 asset.bin\n create mode 100644 note.txt\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "/eval/linux/repos/P01-pointer",
+      "rc": 0,
+      "seconds": 0.0014354580000031092,
+      "stdout": "a4bf397263eb9a55317d71e855292cfcb5953149\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/target/debug/jj",
+        "git",
+        "init",
+        "--colocate"
+      ],
+      "cwd": "/eval/linux/repos/P01-pointer",
+      "rc": 0,
+      "seconds": 0.05652091700000028,
+      "stdout": "",
+      "stderr": "Done importing changes from the underlying Git repo.\nInitialized repo in \".\"\n"
+    },
+    {
+      "argv": [
+        "/target/debug/jj",
+        "status"
+      ],
+      "cwd": "/eval/linux/repos/P01-pointer",
+      "rc": 0,
+      "seconds": 0.023648624999992762,
+      "stdout": "The working copy has no changes.\nWorking copy  (@) : nzvuzvpv 22c60807 (empty) (no description set)\nParent commit (@-): qxrnpqpm a4bf3972 main | Seed LFS fixture\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/target/debug/jj",
+        "file",
+        "show",
+        "asset.bin"
+      ],
+      "cwd": "/eval/linux/repos/P01-pointer",
+      "rc": 0,
+      "seconds": 0.020692083999989563,
+      "stdout": "version https://git-lfs.github.com/spec/v1\noid sha256:dad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f\nsize 2500\n",
+      "stderr": ""
+    }
+  ]
+}

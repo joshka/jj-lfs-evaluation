@@ -1,0 +1,24 @@
+[
+  {
+    "id": "W02-sparse-dirty",
+    "purpose": "Sparse removal must not silently lose local edits",
+    "category": "data-integrity",
+    "status": "FAIL",
+    "seconds": 1.5823747087270021,
+    "checks": [
+      {
+        "label": "Sparse exclusion preserves, snapshots, or rejects local edits",
+        "pass": false,
+        "stored_sha256": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+        "edited_sha256": "f373b3bf36856f8fd4d1045d39a945690f960207ffaadc274305d5f90619a816"
+      }
+    ],
+    "observations": {
+      "sparse": {
+        "rc": 0,
+        "stderr": "Added 0 files, modified 0 files, removed 2 files\n",
+        "asset_exists": false
+      }
+    }
+  }
+]

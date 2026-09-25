@@ -1,0 +1,968 @@
+{
+  "C1": {
+    "binary": "/tmp/jj-lfs-evaluation/bin/jj-pr",
+    "checks": [
+      {
+        "expected": {
+          "base64": "dmVyc2lvbiBodHRwczovL2dpdC1sZnMuZ2l0aHViLmNvbS9zcGVjL3YxCm9pZCBzaGEyNTY6MGRmM2UzZjRjMmNkYmNhZGQ0OWY4ZTRiNDg0ZDY3OWEwZDcwOTlhZjZiOWNmYmFjNmFkMWFjNTZkNmY2NzUyZApzaXplIDMyCg==",
+          "lfs_pointer": {
+            "oid": "0df3e3f4c2cdbcadd49f8e4b484d679a0d7099af6b9cfbac6ad1ac56d6f6752d",
+            "pointer_sha256": "7ec0c13c6ec544b8afc2adf1a71c5570a7fde1a16d2fc259787e73ce13af4f60",
+            "size": 32
+          },
+          "present": true,
+          "sha256": "7ec0c13c6ec544b8afc2adf1a71c5570a7fde1a16d2fc259787e73ce13af4f60",
+          "size": 127
+        },
+        "matches_expected": true,
+        "name": "git_stored_pointer",
+        "observed": {
+          "base64": "dmVyc2lvbiBodHRwczovL2dpdC1sZnMuZ2l0aHViLmNvbS9zcGVjL3YxCm9pZCBzaGEyNTY6MGRmM2UzZjRjMmNkYmNhZGQ0OWY4ZTRiNDg0ZDY3OWEwZDcwOTlhZjZiOWNmYmFjNmFkMWFjNTZkNmY2NzUyZApzaXplIDMyCg==",
+          "lfs_pointer": {
+            "oid": "0df3e3f4c2cdbcadd49f8e4b484d679a0d7099af6b9cfbac6ad1ac56d6f6752d",
+            "pointer_sha256": "7ec0c13c6ec544b8afc2adf1a71c5570a7fde1a16d2fc259787e73ce13af4f60",
+            "size": 32
+          },
+          "present": true,
+          "sha256": "7ec0c13c6ec544b8afc2adf1a71c5570a7fde1a16d2fc259787e73ce13af4f60",
+          "size": 127
+        }
+      },
+      {
+        "expected": {
+          "base64": "QzEgZGV0ZXJtaW5pc3RpYyBMRlMgcGF5bG9hZAABAgo=",
+          "lfs_pointer": null,
+          "present": true,
+          "sha256": "0df3e3f4c2cdbcadd49f8e4b484d679a0d7099af6b9cfbac6ad1ac56d6f6752d",
+          "size": 32
+        },
+        "matches_expected": true,
+        "name": "initial_hydrated_disk",
+        "observed": {
+          "base64": "QzEgZGV0ZXJtaW5pc3RpYyBMRlMgcGF5bG9hZAABAgo=",
+          "lfs_pointer": null,
+          "present": true,
+          "sha256": "0df3e3f4c2cdbcadd49f8e4b484d679a0d7099af6b9cfbac6ad1ac56d6f6752d",
+          "size": 32
+        }
+      },
+      {
+        "expected": {
+          "base64": "dmVyc2lvbiBodHRwczovL2dpdC1sZnMuZ2l0aHViLmNvbS9zcGVjL3YxCm9pZCBzaGEyNTY6MGRmM2UzZjRjMmNkYmNhZGQ0OWY4ZTRiNDg0ZDY3OWEwZDcwOTlhZjZiOWNmYmFjNmFkMWFjNTZkNmY2NzUyZApzaXplIDMyCg==",
+          "lfs_pointer": {
+            "oid": "0df3e3f4c2cdbcadd49f8e4b484d679a0d7099af6b9cfbac6ad1ac56d6f6752d",
+            "pointer_sha256": "7ec0c13c6ec544b8afc2adf1a71c5570a7fde1a16d2fc259787e73ce13af4f60",
+            "size": 32
+          },
+          "present": true,
+          "sha256": "7ec0c13c6ec544b8afc2adf1a71c5570a7fde1a16d2fc259787e73ce13af4f60",
+          "size": 127
+        },
+        "matches_expected": true,
+        "name": "snapshot_1.stored_blob",
+        "observed": {
+          "base64": "dmVyc2lvbiBodHRwczovL2dpdC1sZnMuZ2l0aHViLmNvbS9zcGVjL3YxCm9pZCBzaGEyNTY6MGRmM2UzZjRjMmNkYmNhZGQ0OWY4ZTRiNDg0ZDY3OWEwZDcwOTlhZjZiOWNmYmFjNmFkMWFjNTZkNmY2NzUyZApzaXplIDMyCg==",
+          "lfs_pointer": {
+            "oid": "0df3e3f4c2cdbcadd49f8e4b484d679a0d7099af6b9cfbac6ad1ac56d6f6752d",
+            "pointer_sha256": "7ec0c13c6ec544b8afc2adf1a71c5570a7fde1a16d2fc259787e73ce13af4f60",
+            "size": 32
+          },
+          "present": true,
+          "sha256": "7ec0c13c6ec544b8afc2adf1a71c5570a7fde1a16d2fc259787e73ce13af4f60",
+          "size": 127
+        }
+      },
+      {
+        "expected": {
+          "base64": "QzEgZGV0ZXJtaW5pc3RpYyBMRlMgcGF5bG9hZAABAgo=",
+          "lfs_pointer": null,
+          "present": true,
+          "sha256": "0df3e3f4c2cdbcadd49f8e4b484d679a0d7099af6b9cfbac6ad1ac56d6f6752d",
+          "size": 32
+        },
+        "matches_expected": true,
+        "name": "snapshot_1.disk",
+        "observed": {
+          "base64": "QzEgZGV0ZXJtaW5pc3RpYyBMRlMgcGF5bG9hZAABAgo=",
+          "lfs_pointer": null,
+          "present": true,
+          "sha256": "0df3e3f4c2cdbcadd49f8e4b484d679a0d7099af6b9cfbac6ad1ac56d6f6752d",
+          "size": 32
+        }
+      },
+      {
+        "expected": {
+          "base64": "dmVyc2lvbiBodHRwczovL2dpdC1sZnMuZ2l0aHViLmNvbS9zcGVjL3YxCm9pZCBzaGEyNTY6MGRmM2UzZjRjMmNkYmNhZGQ0OWY4ZTRiNDg0ZDY3OWEwZDcwOTlhZjZiOWNmYmFjNmFkMWFjNTZkNmY2NzUyZApzaXplIDMyCg==",
+          "lfs_pointer": {
+            "oid": "0df3e3f4c2cdbcadd49f8e4b484d679a0d7099af6b9cfbac6ad1ac56d6f6752d",
+            "pointer_sha256": "7ec0c13c6ec544b8afc2adf1a71c5570a7fde1a16d2fc259787e73ce13af4f60",
+            "size": 32
+          },
+          "present": true,
+          "sha256": "7ec0c13c6ec544b8afc2adf1a71c5570a7fde1a16d2fc259787e73ce13af4f60",
+          "size": 127
+        },
+        "matches_expected": true,
+        "name": "snapshot_2.stored_blob",
+        "observed": {
+          "base64": "dmVyc2lvbiBodHRwczovL2dpdC1sZnMuZ2l0aHViLmNvbS9zcGVjL3YxCm9pZCBzaGEyNTY6MGRmM2UzZjRjMmNkYmNhZGQ0OWY4ZTRiNDg0ZDY3OWEwZDcwOTlhZjZiOWNmYmFjNmFkMWFjNTZkNmY2NzUyZApzaXplIDMyCg==",
+          "lfs_pointer": {
+            "oid": "0df3e3f4c2cdbcadd49f8e4b484d679a0d7099af6b9cfbac6ad1ac56d6f6752d",
+            "pointer_sha256": "7ec0c13c6ec544b8afc2adf1a71c5570a7fde1a16d2fc259787e73ce13af4f60",
+            "size": 32
+          },
+          "present": true,
+          "sha256": "7ec0c13c6ec544b8afc2adf1a71c5570a7fde1a16d2fc259787e73ce13af4f60",
+          "size": 127
+        }
+      },
+      {
+        "expected": {
+          "base64": "QzEgZGV0ZXJtaW5pc3RpYyBMRlMgcGF5bG9hZAABAgo=",
+          "lfs_pointer": null,
+          "present": true,
+          "sha256": "0df3e3f4c2cdbcadd49f8e4b484d679a0d7099af6b9cfbac6ad1ac56d6f6752d",
+          "size": 32
+        },
+        "matches_expected": true,
+        "name": "snapshot_2.disk",
+        "observed": {
+          "base64": "QzEgZGV0ZXJtaW5pc3RpYyBMRlMgcGF5bG9hZAABAgo=",
+          "lfs_pointer": null,
+          "present": true,
+          "sha256": "0df3e3f4c2cdbcadd49f8e4b484d679a0d7099af6b9cfbac6ad1ac56d6f6752d",
+          "size": 32
+        }
+      },
+      {
+        "expected": {
+          "base64": "dmVyc2lvbiBodHRwczovL2dpdC1sZnMuZ2l0aHViLmNvbS9zcGVjL3YxCm9pZCBzaGEyNTY6MGRmM2UzZjRjMmNkYmNhZGQ0OWY4ZTRiNDg0ZDY3OWEwZDcwOTlhZjZiOWNmYmFjNmFkMWFjNTZkNmY2NzUyZApzaXplIDMyCg==",
+          "lfs_pointer": {
+            "oid": "0df3e3f4c2cdbcadd49f8e4b484d679a0d7099af6b9cfbac6ad1ac56d6f6752d",
+            "pointer_sha256": "7ec0c13c6ec544b8afc2adf1a71c5570a7fde1a16d2fc259787e73ce13af4f60",
+            "size": 32
+          },
+          "present": true,
+          "sha256": "7ec0c13c6ec544b8afc2adf1a71c5570a7fde1a16d2fc259787e73ce13af4f60",
+          "size": 127
+        },
+        "matches_expected": true,
+        "name": "snapshot_3.stored_blob",
+        "observed": {
+          "base64": "dmVyc2lvbiBodHRwczovL2dpdC1sZnMuZ2l0aHViLmNvbS9zcGVjL3YxCm9pZCBzaGEyNTY6MGRmM2UzZjRjMmNkYmNhZGQ0OWY4ZTRiNDg0ZDY3OWEwZDcwOTlhZjZiOWNmYmFjNmFkMWFjNTZkNmY2NzUyZApzaXplIDMyCg==",
+          "lfs_pointer": {
+            "oid": "0df3e3f4c2cdbcadd49f8e4b484d679a0d7099af6b9cfbac6ad1ac56d6f6752d",
+            "pointer_sha256": "7ec0c13c6ec544b8afc2adf1a71c5570a7fde1a16d2fc259787e73ce13af4f60",
+            "size": 32
+          },
+          "present": true,
+          "sha256": "7ec0c13c6ec544b8afc2adf1a71c5570a7fde1a16d2fc259787e73ce13af4f60",
+          "size": 127
+        }
+      },
+      {
+        "expected": {
+          "base64": "QzEgZGV0ZXJtaW5pc3RpYyBMRlMgcGF5bG9hZAABAgo=",
+          "lfs_pointer": null,
+          "present": true,
+          "sha256": "0df3e3f4c2cdbcadd49f8e4b484d679a0d7099af6b9cfbac6ad1ac56d6f6752d",
+          "size": 32
+        },
+        "matches_expected": true,
+        "name": "snapshot_3.disk",
+        "observed": {
+          "base64": "QzEgZGV0ZXJtaW5pc3RpYyBMRlMgcGF5bG9hZAABAgo=",
+          "lfs_pointer": null,
+          "present": true,
+          "sha256": "0df3e3f4c2cdbcadd49f8e4b484d679a0d7099af6b9cfbac6ad1ac56d6f6752d",
+          "size": 32
+        }
+      },
+      {
+        "expected": {
+          "base64": "dmVyc2lvbiBodHRwczovL2dpdC1sZnMuZ2l0aHViLmNvbS9zcGVjL3YxCm9pZCBzaGEyNTY6MGRmM2UzZjRjMmNkYmNhZGQ0OWY4ZTRiNDg0ZDY3OWEwZDcwOTlhZjZiOWNmYmFjNmFkMWFjNTZkNmY2NzUyZApzaXplIDMyCg==",
+          "lfs_pointer": {
+            "oid": "0df3e3f4c2cdbcadd49f8e4b484d679a0d7099af6b9cfbac6ad1ac56d6f6752d",
+            "pointer_sha256": "7ec0c13c6ec544b8afc2adf1a71c5570a7fde1a16d2fc259787e73ce13af4f60",
+            "size": 32
+          },
+          "present": true,
+          "sha256": "7ec0c13c6ec544b8afc2adf1a71c5570a7fde1a16d2fc259787e73ce13af4f60",
+          "size": 127
+        },
+        "matches_expected": true,
+        "name": "literal_pointer_on_disk",
+        "observed": {
+          "base64": "dmVyc2lvbiBodHRwczovL2dpdC1sZnMuZ2l0aHViLmNvbS9zcGVjL3YxCm9pZCBzaGEyNTY6MGRmM2UzZjRjMmNkYmNhZGQ0OWY4ZTRiNDg0ZDY3OWEwZDcwOTlhZjZiOWNmYmFjNmFkMWFjNTZkNmY2NzUyZApzaXplIDMyCg==",
+          "lfs_pointer": {
+            "oid": "0df3e3f4c2cdbcadd49f8e4b484d679a0d7099af6b9cfbac6ad1ac56d6f6752d",
+            "pointer_sha256": "7ec0c13c6ec544b8afc2adf1a71c5570a7fde1a16d2fc259787e73ce13af4f60",
+            "size": 32
+          },
+          "present": true,
+          "sha256": "7ec0c13c6ec544b8afc2adf1a71c5570a7fde1a16d2fc259787e73ce13af4f60",
+          "size": 127
+        }
+      },
+      {
+        "expected": {
+          "base64": "dmVyc2lvbiBodHRwczovL2dpdC1sZnMuZ2l0aHViLmNvbS9zcGVjL3YxCm9pZCBzaGEyNTY6MGRmM2UzZjRjMmNkYmNhZGQ0OWY4ZTRiNDg0ZDY3OWEwZDcwOTlhZjZiOWNmYmFjNmFkMWFjNTZkNmY2NzUyZApzaXplIDMyCg==",
+          "lfs_pointer": {
+            "oid": "0df3e3f4c2cdbcadd49f8e4b484d679a0d7099af6b9cfbac6ad1ac56d6f6752d",
+            "pointer_sha256": "7ec0c13c6ec544b8afc2adf1a71c5570a7fde1a16d2fc259787e73ce13af4f60",
+            "size": 32
+          },
+          "present": true,
+          "sha256": "7ec0c13c6ec544b8afc2adf1a71c5570a7fde1a16d2fc259787e73ce13af4f60",
+          "size": 127
+        },
+        "matches_expected": true,
+        "name": "literal_snapshot.stored_blob",
+        "observed": {
+          "base64": "dmVyc2lvbiBodHRwczovL2dpdC1sZnMuZ2l0aHViLmNvbS9zcGVjL3YxCm9pZCBzaGEyNTY6MGRmM2UzZjRjMmNkYmNhZGQ0OWY4ZTRiNDg0ZDY3OWEwZDcwOTlhZjZiOWNmYmFjNmFkMWFjNTZkNmY2NzUyZApzaXplIDMyCg==",
+          "lfs_pointer": {
+            "oid": "0df3e3f4c2cdbcadd49f8e4b484d679a0d7099af6b9cfbac6ad1ac56d6f6752d",
+            "pointer_sha256": "7ec0c13c6ec544b8afc2adf1a71c5570a7fde1a16d2fc259787e73ce13af4f60",
+            "size": 32
+          },
+          "present": true,
+          "sha256": "7ec0c13c6ec544b8afc2adf1a71c5570a7fde1a16d2fc259787e73ce13af4f60",
+          "size": 127
+        }
+      },
+      {
+        "expected": {
+          "base64": "dmVyc2lvbiBodHRwczovL2dpdC1sZnMuZ2l0aHViLmNvbS9zcGVjL3YxCm9pZCBzaGEyNTY6MGRmM2UzZjRjMmNkYmNhZGQ0OWY4ZTRiNDg0ZDY3OWEwZDcwOTlhZjZiOWNmYmFjNmFkMWFjNTZkNmY2NzUyZApzaXplIDMyCg==",
+          "lfs_pointer": {
+            "oid": "0df3e3f4c2cdbcadd49f8e4b484d679a0d7099af6b9cfbac6ad1ac56d6f6752d",
+            "pointer_sha256": "7ec0c13c6ec544b8afc2adf1a71c5570a7fde1a16d2fc259787e73ce13af4f60",
+            "size": 32
+          },
+          "present": true,
+          "sha256": "7ec0c13c6ec544b8afc2adf1a71c5570a7fde1a16d2fc259787e73ce13af4f60",
+          "size": 127
+        },
+        "matches_expected": true,
+        "name": "literal_snapshot.disk",
+        "observed": {
+          "base64": "dmVyc2lvbiBodHRwczovL2dpdC1sZnMuZ2l0aHViLmNvbS9zcGVjL3YxCm9pZCBzaGEyNTY6MGRmM2UzZjRjMmNkYmNhZGQ0OWY4ZTRiNDg0ZDY3OWEwZDcwOTlhZjZiOWNmYmFjNmFkMWFjNTZkNmY2NzUyZApzaXplIDMyCg==",
+          "lfs_pointer": {
+            "oid": "0df3e3f4c2cdbcadd49f8e4b484d679a0d7099af6b9cfbac6ad1ac56d6f6752d",
+            "pointer_sha256": "7ec0c13c6ec544b8afc2adf1a71c5570a7fde1a16d2fc259787e73ce13af4f60",
+            "size": 32
+          },
+          "present": true,
+          "sha256": "7ec0c13c6ec544b8afc2adf1a71c5570a7fde1a16d2fc259787e73ce13af4f60",
+          "size": 127
+        }
+      },
+      {
+        "expected": {
+          "base64": "QzEgZGV0ZXJtaW5pc3RpYyBMRlMgcGF5bG9hZAABAgo=",
+          "lfs_pointer": null,
+          "present": true,
+          "sha256": "0df3e3f4c2cdbcadd49f8e4b484d679a0d7099af6b9cfbac6ad1ac56d6f6752d",
+          "size": 32
+        },
+        "matches_expected": true,
+        "name": "rehydrated.disk",
+        "observed": {
+          "base64": "QzEgZGV0ZXJtaW5pc3RpYyBMRlMgcGF5bG9hZAABAgo=",
+          "lfs_pointer": null,
+          "present": true,
+          "sha256": "0df3e3f4c2cdbcadd49f8e4b484d679a0d7099af6b9cfbac6ad1ac56d6f6752d",
+          "size": 32
+        }
+      },
+      {
+        "expected": {
+          "base64": "dmVyc2lvbiBodHRwczovL2dpdC1sZnMuZ2l0aHViLmNvbS9zcGVjL3YxCm9pZCBzaGEyNTY6MGRmM2UzZjRjMmNkYmNhZGQ0OWY4ZTRiNDg0ZDY3OWEwZDcwOTlhZjZiOWNmYmFjNmFkMWFjNTZkNmY2NzUyZApzaXplIDMyCg==",
+          "lfs_pointer": {
+            "oid": "0df3e3f4c2cdbcadd49f8e4b484d679a0d7099af6b9cfbac6ad1ac56d6f6752d",
+            "pointer_sha256": "7ec0c13c6ec544b8afc2adf1a71c5570a7fde1a16d2fc259787e73ce13af4f60",
+            "size": 32
+          },
+          "present": true,
+          "sha256": "7ec0c13c6ec544b8afc2adf1a71c5570a7fde1a16d2fc259787e73ce13af4f60",
+          "size": 127
+        },
+        "matches_expected": true,
+        "name": "rehydrated_snapshot.stored_blob",
+        "observed": {
+          "base64": "dmVyc2lvbiBodHRwczovL2dpdC1sZnMuZ2l0aHViLmNvbS9zcGVjL3YxCm9pZCBzaGEyNTY6MGRmM2UzZjRjMmNkYmNhZGQ0OWY4ZTRiNDg0ZDY3OWEwZDcwOTlhZjZiOWNmYmFjNmFkMWFjNTZkNmY2NzUyZApzaXplIDMyCg==",
+          "lfs_pointer": {
+            "oid": "0df3e3f4c2cdbcadd49f8e4b484d679a0d7099af6b9cfbac6ad1ac56d6f6752d",
+            "pointer_sha256": "7ec0c13c6ec544b8afc2adf1a71c5570a7fde1a16d2fc259787e73ce13af4f60",
+            "size": 32
+          },
+          "present": true,
+          "sha256": "7ec0c13c6ec544b8afc2adf1a71c5570a7fde1a16d2fc259787e73ce13af4f60",
+          "size": 127
+        }
+      }
+    ],
+    "expectation": "filter=lfs files remain valid Git LFS pointers in jj while disk payloads stay hydrated; literal pointers can be rehydrated.",
+    "id": "C1",
+    "literal_snapshot.stored_blob_exit_code": 0,
+    "rehydrated_snapshot.stored_blob_exit_code": 0,
+    "repo": "/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T180254Z/C1",
+    "setup_ok": true,
+    "snapshot_1.stored_blob_exit_code": 0,
+    "snapshot_2.stored_blob_exit_code": 0,
+    "snapshot_3.stored_blob_exit_code": 0
+  },
+  "C2": {
+    "binary": "/tmp/jj-lfs-evaluation/bin/jj-pr",
+    "checks": [
+      {
+        "expected": {
+          "base64": "dmVyc2lvbiBodHRwczovL2dpdC1sZnMuZ2l0aHViLmNvbS9zcGVjL3YxCm9pZCBzaGEyNTY6NzAyNDliZTZkMjc2MDk1MjllM2E0NWFkZDQ1MzMyMTg0MDYxZjhjYjE0ZTliOWJjYzQ1MjdkMDQxOGIzMDQwNQpzaXplIDI0Cg==",
+          "lfs_pointer": {
+            "oid": "70249be6d27609529e3a45add45332184061f8cb14e9b9bcc4527d0418b30405",
+            "pointer_sha256": "92a8ffbc1bcfa8b4effbb8c97b04fbbd661b729ad3ad6fc7d89a5c11c08b4cf1",
+            "size": 24
+          },
+          "present": true,
+          "sha256": "92a8ffbc1bcfa8b4effbb8c97b04fbbd661b729ad3ad6fc7d89a5c11c08b4cf1",
+          "size": 127
+        },
+        "matches_expected": true,
+        "name": "root_commit_pointer",
+        "observed": {
+          "base64": "dmVyc2lvbiBodHRwczovL2dpdC1sZnMuZ2l0aHViLmNvbS9zcGVjL3YxCm9pZCBzaGEyNTY6NzAyNDliZTZkMjc2MDk1MjllM2E0NWFkZDQ1MzMyMTg0MDYxZjhjYjE0ZTliOWJjYzQ1MjdkMDQxOGIzMDQwNQpzaXplIDI0Cg==",
+          "lfs_pointer": {
+            "oid": "70249be6d27609529e3a45add45332184061f8cb14e9b9bcc4527d0418b30405",
+            "pointer_sha256": "92a8ffbc1bcfa8b4effbb8c97b04fbbd661b729ad3ad6fc7d89a5c11c08b4cf1",
+            "size": 24
+          },
+          "present": true,
+          "sha256": "92a8ffbc1bcfa8b4effbb8c97b04fbbd661b729ad3ad6fc7d89a5c11c08b4cf1",
+          "size": 127
+        }
+      },
+      {
+        "expected": {
+          "base64": "QzIgbmVzdGVkIGluaXRpYWwgcmF3IGRhdGEK",
+          "lfs_pointer": null,
+          "present": true,
+          "sha256": "19189f952d7131f7572699d3eb38a0f7a725f1320c22d2650be79a4c4040eda2",
+          "size": 27
+        },
+        "matches_expected": true,
+        "name": "nested_commit_raw",
+        "observed": {
+          "base64": "QzIgbmVzdGVkIGluaXRpYWwgcmF3IGRhdGEK",
+          "lfs_pointer": null,
+          "present": true,
+          "sha256": "19189f952d7131f7572699d3eb38a0f7a725f1320c22d2650be79a4c4040eda2",
+          "size": 27
+        }
+      },
+      {
+        "expected": {
+          "base64": "dmVyc2lvbiBodHRwczovL2dpdC1sZnMuZ2l0aHViLmNvbS9zcGVjL3YxCm9pZCBzaGEyNTY6NzAyNDliZTZkMjc2MDk1MjllM2E0NWFkZDQ1MzMyMTg0MDYxZjhjYjE0ZTliOWJjYzQ1MjdkMDQxOGIzMDQwNQpzaXplIDI0Cg==",
+          "lfs_pointer": {
+            "oid": "70249be6d27609529e3a45add45332184061f8cb14e9b9bcc4527d0418b30405",
+            "pointer_sha256": "92a8ffbc1bcfa8b4effbb8c97b04fbbd661b729ad3ad6fc7d89a5c11c08b4cf1",
+            "size": 24
+          },
+          "present": true,
+          "sha256": "92a8ffbc1bcfa8b4effbb8c97b04fbbd661b729ad3ad6fc7d89a5c11c08b4cf1",
+          "size": 127
+        },
+        "matches_expected": true,
+        "name": "root_after_snapshot",
+        "observed": {
+          "base64": "dmVyc2lvbiBodHRwczovL2dpdC1sZnMuZ2l0aHViLmNvbS9zcGVjL3YxCm9pZCBzaGEyNTY6NzAyNDliZTZkMjc2MDk1MjllM2E0NWFkZDQ1MzMyMTg0MDYxZjhjYjE0ZTliOWJjYzQ1MjdkMDQxOGIzMDQwNQpzaXplIDI0Cg==",
+          "lfs_pointer": {
+            "oid": "70249be6d27609529e3a45add45332184061f8cb14e9b9bcc4527d0418b30405",
+            "pointer_sha256": "92a8ffbc1bcfa8b4effbb8c97b04fbbd661b729ad3ad6fc7d89a5c11c08b4cf1",
+            "size": 24
+          },
+          "present": true,
+          "sha256": "92a8ffbc1bcfa8b4effbb8c97b04fbbd661b729ad3ad6fc7d89a5c11c08b4cf1",
+          "size": 127
+        }
+      },
+      {
+        "expected": {
+          "base64": "QzIgbmVzdGVkIGNoYW5nZWQgYW5kIHNob3VsZCBiZSB0cmFja2VkCg==",
+          "lfs_pointer": null,
+          "present": true,
+          "sha256": "c17743f4454c6f0ab57f9b55c67aafbaf62ff0774735d57fc90b4e84764a8379",
+          "size": 40
+        },
+        "matches_expected": true,
+        "name": "nested_after_snapshot",
+        "observed": {
+          "base64": "QzIgbmVzdGVkIGNoYW5nZWQgYW5kIHNob3VsZCBiZSB0cmFja2VkCg==",
+          "lfs_pointer": null,
+          "present": true,
+          "sha256": "c17743f4454c6f0ab57f9b55c67aafbaf62ff0774735d57fc90b4e84764a8379",
+          "size": 40
+        }
+      }
+    ],
+    "expectation": "root filter=lfs is excluded from snapshots; nested -filter overrides it and is tracked. Git check-attr and jj behavior are compared for .git/info/attributes.",
+    "git_check_attr_committed_paths": "root.bin: filter: lfs\nnested/child.bin: filter: unset\n",
+    "git_check_attr_info_only": "info-only.bin: filter: lfs\n",
+    "id": "C2",
+    "info_only_discrepancy": {
+      "classification": "no discrepancy observed; this attribute source is not called out explicitly in changed prose",
+      "git_reports_filter_lfs": true,
+      "jj_snapshot_excluded": true
+    },
+    "jj_info_only_tree": {
+      "exit_code": 1,
+      "present": false
+    },
+    "jj_status_info_only": {
+      "exit_code": 0,
+      "stderr": "",
+      "stdout": "Working copy changes:\nM nested/child.bin\nWorking copy  (@) : nzrnrmmy 178ffd45 (no description set)\nParent commit (@-): lyznrvsq abd4bd87 main | Add attributed files\n"
+    },
+    "nested_after_snapshot_exit_code": 0,
+    "repo": "/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T180254Z/C2",
+    "root_after_snapshot_exit_code": 0,
+    "setup_ok": true
+  },
+  "C3": {
+    "after_failed_fetch": {
+      "disk": {
+        "base64": "dmVyc2lvbiBodHRwczovL2dpdC1sZnMuZ2l0aHViLmNvbS9zcGVjL3YxCm9pZCBzaGEyNTY6OWZmMGZiYjQ3ZWE5NmFmNWFjYmJmMmQ0ZTE1NTI5ZWZhZjUwY2NmOWM4MjJhYWRhOGM1NmEzYzc1YmQ3ZWQ5YgpzaXplIDMyCg==",
+        "lfs_pointer": {
+          "oid": "9ff0fbb47ea96af5acbbf2d4e15529efaf50ccf9c822aada8c56a3c75bd7ed9b",
+          "pointer_sha256": "eb1c5eca51c763245f066b2b683fae70f958c6658b4b7c5d568edf4544fd60e8",
+          "size": 32
+        },
+        "present": true,
+        "sha256": "eb1c5eca51c763245f066b2b683fae70f958c6658b4b7c5d568edf4544fd60e8",
+        "size": 127
+      },
+      "local_object_exists": false,
+      "stored_blob": {
+        "base64": "dmVyc2lvbiBodHRwczovL2dpdC1sZnMuZ2l0aHViLmNvbS9zcGVjL3YxCm9pZCBzaGEyNTY6OWZmMGZiYjQ3ZWE5NmFmNWFjYmJmMmQ0ZTE1NTI5ZWZhZjUwY2NmOWM4MjJhYWRhOGM1NmEzYzc1YmQ3ZWQ5YgpzaXplIDMyCg==",
+        "lfs_pointer": {
+          "oid": "9ff0fbb47ea96af5acbbf2d4e15529efaf50ccf9c822aada8c56a3c75bd7ed9b",
+          "pointer_sha256": "eb1c5eca51c763245f066b2b683fae70f958c6658b4b7c5d568edf4544fd60e8",
+          "size": 32
+        },
+        "present": true,
+        "sha256": "eb1c5eca51c763245f066b2b683fae70f958c6658b4b7c5d568edf4544fd60e8",
+        "size": 127
+      },
+      "stored_blob_exit_code": 0
+    },
+    "after_restore": {
+      "disk": {
+        "base64": "QzMgZGlzcG9zYWJsZSByZW1vdGUgcGF5bG9hZBAA/wo=",
+        "lfs_pointer": null,
+        "present": true,
+        "sha256": "9ff0fbb47ea96af5acbbf2d4e15529efaf50ccf9c822aada8c56a3c75bd7ed9b",
+        "size": 32
+      },
+      "local_object": {
+        "base64": "QzMgZGlzcG9zYWJsZSByZW1vdGUgcGF5bG9hZBAA/wo=",
+        "lfs_pointer": null,
+        "present": true,
+        "sha256": "9ff0fbb47ea96af5acbbf2d4e15529efaf50ccf9c822aada8c56a3c75bd7ed9b",
+        "size": 32
+      },
+      "local_object_exists": true,
+      "stored_blob": {
+        "base64": "dmVyc2lvbiBodHRwczovL2dpdC1sZnMuZ2l0aHViLmNvbS9zcGVjL3YxCm9pZCBzaGEyNTY6OWZmMGZiYjQ3ZWE5NmFmNWFjYmJmMmQ0ZTE1NTI5ZWZhZjUwY2NmOWM4MjJhYWRhOGM1NmEzYzc1YmQ3ZWQ5YgpzaXplIDMyCg==",
+        "lfs_pointer": {
+          "oid": "9ff0fbb47ea96af5acbbf2d4e15529efaf50ccf9c822aada8c56a3c75bd7ed9b",
+          "pointer_sha256": "eb1c5eca51c763245f066b2b683fae70f958c6658b4b7c5d568edf4544fd60e8",
+          "size": 32
+        },
+        "present": true,
+        "sha256": "eb1c5eca51c763245f066b2b683fae70f958c6658b4b7c5d568edf4544fd60e8",
+        "size": 127
+      },
+      "stored_blob_exit_code": 0
+    },
+    "binary": "/tmp/jj-lfs-evaluation/bin/jj-pr",
+    "checks": [
+      {
+        "expected": false,
+        "matches_expected": true,
+        "name": "local_object_before_failure",
+        "observed": false
+      },
+      {
+        "expected": true,
+        "matches_expected": true,
+        "name": "failed_fetch_exit_nonzero",
+        "observed": true
+      },
+      {
+        "expected": {
+          "base64": "dmVyc2lvbiBodHRwczovL2dpdC1sZnMuZ2l0aHViLmNvbS9zcGVjL3YxCm9pZCBzaGEyNTY6OWZmMGZiYjQ3ZWE5NmFmNWFjYmJmMmQ0ZTE1NTI5ZWZhZjUwY2NmOWM4MjJhYWRhOGM1NmEzYzc1YmQ3ZWQ5YgpzaXplIDMyCg==",
+          "lfs_pointer": {
+            "oid": "9ff0fbb47ea96af5acbbf2d4e15529efaf50ccf9c822aada8c56a3c75bd7ed9b",
+            "pointer_sha256": "eb1c5eca51c763245f066b2b683fae70f958c6658b4b7c5d568edf4544fd60e8",
+            "size": 32
+          },
+          "present": true,
+          "sha256": "eb1c5eca51c763245f066b2b683fae70f958c6658b4b7c5d568edf4544fd60e8",
+          "size": 127
+        },
+        "matches_expected": true,
+        "name": "failed_fetch_disk_stays_pointer",
+        "observed": {
+          "base64": "dmVyc2lvbiBodHRwczovL2dpdC1sZnMuZ2l0aHViLmNvbS9zcGVjL3YxCm9pZCBzaGEyNTY6OWZmMGZiYjQ3ZWE5NmFmNWFjYmJmMmQ0ZTE1NTI5ZWZhZjUwY2NmOWM4MjJhYWRhOGM1NmEzYzc1YmQ3ZWQ5YgpzaXplIDMyCg==",
+          "lfs_pointer": {
+            "oid": "9ff0fbb47ea96af5acbbf2d4e15529efaf50ccf9c822aada8c56a3c75bd7ed9b",
+            "pointer_sha256": "eb1c5eca51c763245f066b2b683fae70f958c6658b4b7c5d568edf4544fd60e8",
+            "size": 32
+          },
+          "present": true,
+          "sha256": "eb1c5eca51c763245f066b2b683fae70f958c6658b4b7c5d568edf4544fd60e8",
+          "size": 127
+        }
+      },
+      {
+        "expected": {
+          "base64": "dmVyc2lvbiBodHRwczovL2dpdC1sZnMuZ2l0aHViLmNvbS9zcGVjL3YxCm9pZCBzaGEyNTY6OWZmMGZiYjQ3ZWE5NmFmNWFjYmJmMmQ0ZTE1NTI5ZWZhZjUwY2NmOWM4MjJhYWRhOGM1NmEzYzc1YmQ3ZWQ5YgpzaXplIDMyCg==",
+          "lfs_pointer": {
+            "oid": "9ff0fbb47ea96af5acbbf2d4e15529efaf50ccf9c822aada8c56a3c75bd7ed9b",
+            "pointer_sha256": "eb1c5eca51c763245f066b2b683fae70f958c6658b4b7c5d568edf4544fd60e8",
+            "size": 32
+          },
+          "present": true,
+          "sha256": "eb1c5eca51c763245f066b2b683fae70f958c6658b4b7c5d568edf4544fd60e8",
+          "size": 127
+        },
+        "matches_expected": true,
+        "name": "failed_fetch_tree_stays_pointer",
+        "observed": {
+          "base64": "dmVyc2lvbiBodHRwczovL2dpdC1sZnMuZ2l0aHViLmNvbS9zcGVjL3YxCm9pZCBzaGEyNTY6OWZmMGZiYjQ3ZWE5NmFmNWFjYmJmMmQ0ZTE1NTI5ZWZhZjUwY2NmOWM4MjJhYWRhOGM1NmEzYzc1YmQ3ZWQ5YgpzaXplIDMyCg==",
+          "lfs_pointer": {
+            "oid": "9ff0fbb47ea96af5acbbf2d4e15529efaf50ccf9c822aada8c56a3c75bd7ed9b",
+            "pointer_sha256": "eb1c5eca51c763245f066b2b683fae70f958c6658b4b7c5d568edf4544fd60e8",
+            "size": 32
+          },
+          "present": true,
+          "sha256": "eb1c5eca51c763245f066b2b683fae70f958c6658b4b7c5d568edf4544fd60e8",
+          "size": 127
+        }
+      },
+      {
+        "expected": false,
+        "matches_expected": true,
+        "name": "failed_fetch_local_object_absent",
+        "observed": false
+      },
+      {
+        "expected": 0,
+        "matches_expected": true,
+        "name": "restored_fetch_exit_zero",
+        "observed": 0
+      },
+      {
+        "expected": {
+          "base64": "QzMgZGlzcG9zYWJsZSByZW1vdGUgcGF5bG9hZBAA/wo=",
+          "lfs_pointer": null,
+          "present": true,
+          "sha256": "9ff0fbb47ea96af5acbbf2d4e15529efaf50ccf9c822aada8c56a3c75bd7ed9b",
+          "size": 32
+        },
+        "matches_expected": true,
+        "name": "restored_fetch_disk_payload",
+        "observed": {
+          "base64": "QzMgZGlzcG9zYWJsZSByZW1vdGUgcGF5bG9hZBAA/wo=",
+          "lfs_pointer": null,
+          "present": true,
+          "sha256": "9ff0fbb47ea96af5acbbf2d4e15529efaf50ccf9c822aada8c56a3c75bd7ed9b",
+          "size": 32
+        }
+      },
+      {
+        "expected": {
+          "base64": "dmVyc2lvbiBodHRwczovL2dpdC1sZnMuZ2l0aHViLmNvbS9zcGVjL3YxCm9pZCBzaGEyNTY6OWZmMGZiYjQ3ZWE5NmFmNWFjYmJmMmQ0ZTE1NTI5ZWZhZjUwY2NmOWM4MjJhYWRhOGM1NmEzYzc1YmQ3ZWQ5YgpzaXplIDMyCg==",
+          "lfs_pointer": {
+            "oid": "9ff0fbb47ea96af5acbbf2d4e15529efaf50ccf9c822aada8c56a3c75bd7ed9b",
+            "pointer_sha256": "eb1c5eca51c763245f066b2b683fae70f958c6658b4b7c5d568edf4544fd60e8",
+            "size": 32
+          },
+          "present": true,
+          "sha256": "eb1c5eca51c763245f066b2b683fae70f958c6658b4b7c5d568edf4544fd60e8",
+          "size": 127
+        },
+        "matches_expected": true,
+        "name": "restored_fetch_tree_stays_pointer",
+        "observed": {
+          "base64": "dmVyc2lvbiBodHRwczovL2dpdC1sZnMuZ2l0aHViLmNvbS9zcGVjL3YxCm9pZCBzaGEyNTY6OWZmMGZiYjQ3ZWE5NmFmNWFjYmJmMmQ0ZTE1NTI5ZWZhZjUwY2NmOWM4MjJhYWRhOGM1NmEzYzc1YmQ3ZWQ5YgpzaXplIDMyCg==",
+          "lfs_pointer": {
+            "oid": "9ff0fbb47ea96af5acbbf2d4e15529efaf50ccf9c822aada8c56a3c75bd7ed9b",
+            "pointer_sha256": "eb1c5eca51c763245f066b2b683fae70f958c6658b4b7c5d568edf4544fd60e8",
+            "size": 32
+          },
+          "present": true,
+          "sha256": "eb1c5eca51c763245f066b2b683fae70f958c6658b4b7c5d568edf4544fd60e8",
+          "size": 127
+        }
+      },
+      {
+        "expected": {
+          "base64": "QzMgZGlzcG9zYWJsZSByZW1vdGUgcGF5bG9hZBAA/wo=",
+          "lfs_pointer": null,
+          "present": true,
+          "sha256": "9ff0fbb47ea96af5acbbf2d4e15529efaf50ccf9c822aada8c56a3c75bd7ed9b",
+          "size": 32
+        },
+        "matches_expected": true,
+        "name": "restored_fetch_local_object_payload",
+        "observed": {
+          "base64": "QzMgZGlzcG9zYWJsZSByZW1vdGUgcGF5bG9hZBAA/wo=",
+          "lfs_pointer": null,
+          "present": true,
+          "sha256": "9ff0fbb47ea96af5acbbf2d4e15529efaf50ccf9c822aada8c56a3c75bd7ed9b",
+          "size": 32
+        }
+      }
+    ],
+    "expectation": "a missing local object and absent remote payload cause hydration failure without changing the stored pointer; restoring the remote object permits fetch and hydration.",
+    "failed_pull": {
+      "exit_code": 2,
+      "stderr": "[9ff0fbb47ea96af5acbbf2d4e15529efaf50ccf9c822aada8c56a3c75bd7ed9b] Object absent from disposable local LFS remote: [404] Object absent from disposable local LFS remote\nFailed to fetch some objects from 'http://127.0.0.1:58499/lfs'\n",
+      "stdout": ""
+    },
+    "git_lfs_env": "git-lfs/3.8.0 (GitHub; darwin arm64; go 1.27.0)\ngit version 2.55.0\n\nEndpoint=http://127.0.0.1:58499/lfs (auth=none)\nLocalWorkingDir=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T180254Z/C3\nLocalGitDir=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T180254Z/C3/.git\nLocalGitStorageDir=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T180254Z/C3/.git\nLocalMediaDir=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T180254Z/C3/.git/lfs/objects\nLocalReferenceDirs=\nTempDir=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T180254Z/C3/.git/lfs/tmp\nConcurrentTransfers=8\nTusTransfers=false\nBasicTransfersOnly=false\nSkipDownloadErrors=false\nFetchRecentAlways=false\nFetchRecentRefsDays=7\nFetchRecentCommitsDays=0\nFetchRecentRefsIncludeRemotes=true\nPruneOffsetDays=3\nPruneVerifyRemoteAlways=false\nPruneVerifyUnreachableAlways=false\nPruneRemoteName=origin\nLfsStorageDir=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T180254Z/C3/.git/lfs\nAccessDownload=none\nAccessUpload=none\nDownloadTransfers=basic,lfs-standalone-file,ssh\nUploadTransfers=basic,lfs-standalone-file,ssh\nGIT_ATTR_NOSYSTEM=1\nGIT_AUTHOR_DATE=2020-01-02T03:04:05+0000\nGIT_AUTHOR_EMAIL=eval@example.invalid\nGIT_AUTHOR_NAME=Evaluation\nGIT_COMMITTER_DATE=2020-01-02T03:04:05+0000\nGIT_COMMITTER_EMAIL=eval@example.invalid\nGIT_COMMITTER_NAME=Evaluation\nGIT_CONFIG_GLOBAL=/tmp/jj-lfs-evaluation/calibration-luna/config/gitconfig\nGIT_CONFIG_NOSYSTEM=1\nGIT_EXEC_PATH=/opt/homebrew/opt/git/libexec/git-core\nGIT_PAGER=cat\nGIT_TERMINAL_PROMPT=0\ngit config filter.lfs.process = \"git-lfs filter-process\"\ngit config filter.lfs.smudge = \"git-lfs smudge -- %f\"\ngit config filter.lfs.clean = \"git-lfs clean -- %f\"\n",
+    "git_remote": "/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T180254Z/C3-remote.git",
+    "id": "C3",
+    "lfs_endpoint": "http://127.0.0.1:58499/lfs",
+    "lfs_http_requests": [
+      {
+        "body": {
+          "hash_algo": "sha256",
+          "objects": [
+            {
+              "oid": "9ff0fbb47ea96af5acbbf2d4e15529efaf50ccf9c822aada8c56a3c75bd7ed9b",
+              "size": 32
+            }
+          ],
+          "operation": "download",
+          "ref": {
+            "name": "refs/heads/main"
+          },
+          "transfers": [
+            "lfs-standalone-file",
+            "basic",
+            "ssh"
+          ]
+        },
+        "method": "POST",
+        "path": "/lfs/objects/batch"
+      },
+      {
+        "body": {
+          "hash_algo": "sha256",
+          "objects": [
+            {
+              "oid": "9ff0fbb47ea96af5acbbf2d4e15529efaf50ccf9c822aada8c56a3c75bd7ed9b",
+              "size": 32
+            }
+          ],
+          "operation": "download",
+          "ref": {
+            "name": "refs/heads/main"
+          },
+          "transfers": [
+            "lfs-standalone-file",
+            "basic",
+            "ssh"
+          ]
+        },
+        "method": "POST",
+        "path": "/lfs/objects/batch"
+      },
+      {
+        "method": "GET",
+        "oid": "9ff0fbb47ea96af5acbbf2d4e15529efaf50ccf9c822aada8c56a3c75bd7ed9b",
+        "path": "/lfs/objects/9ff0fbb47ea96af5acbbf2d4e15529efaf50ccf9c822aada8c56a3c75bd7ed9b"
+      }
+    ],
+    "repo": "/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T180254Z/C3",
+    "restored_pull": {
+      "exit_code": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    "setup_ok": true
+  },
+  "C4_baseline": {
+    "before_edit_disk": {
+      "base64": "QzQgcmV2aXNpb24gdHdvIHBheWxvYWQDAAQK",
+      "lfs_pointer": null,
+      "present": true,
+      "sha256": "c2a90f924d7ad0b224ca759c6557c6f54d4f6978d9a7935de249457e513e7117",
+      "size": 27
+    },
+    "binary": "/opt/homebrew/bin/jj",
+    "checks": [
+      {
+        "expected": {
+          "base64": "QzQgcmV2aXNpb24gdHdvIHBheWxvYWQDAAQK",
+          "lfs_pointer": null,
+          "present": true,
+          "sha256": "c2a90f924d7ad0b224ca759c6557c6f54d4f6978d9a7935de249457e513e7117",
+          "size": 27
+        },
+        "matches_expected": true,
+        "name": "before_edit_disk_v2",
+        "observed": {
+          "base64": "QzQgcmV2aXNpb24gdHdvIHBheWxvYWQDAAQK",
+          "lfs_pointer": null,
+          "present": true,
+          "sha256": "c2a90f924d7ad0b224ca759c6557c6f54d4f6978d9a7935de249457e513e7117",
+          "size": 27
+        }
+      }
+    ],
+    "commits": {
+      "v1": "97cf276f6118edea93c93fbde7b533cead485783",
+      "v2": "d45df76aecca803f53a04bea3b0cec1c37172312"
+    },
+    "disk_after_local_edit": {
+      "base64": "QzQgdXNlcidzIHVuY29tbWl0dGVkIGxvY2FsIGVkaXSZAAo=",
+      "lfs_pointer": null,
+      "present": true,
+      "sha256": "e503110e85280017d1fbe6c787b184db9ac24f769f65bf6dae03905e60905756",
+      "size": 35
+    },
+    "disk_immediately_after_switch": {
+      "base64": "dmVyc2lvbiBodHRwczovL2dpdC1sZnMuZ2l0aHViLmNvbS9zcGVjL3YxCm9pZCBzaGEyNTY6Yjk0YWNjMjE0MmZjMjI4N2NkOGNjMmQ3ZjZlMjE5YTI1YjgxZGYyMDcwMDY0MGM5NmQyN2ZhZGIwZWZhOWRmMwpzaXplIDI3Cg==",
+      "lfs_pointer": {
+        "oid": "b94acc2142fc2287cd8cc2d7f6e219a25b81df20700640c96d27fadb0efa9df3",
+        "pointer_sha256": "491d5125bc3d91d97f64f4037f6f41ca2b7c4ea61f3ed569e55efdd1c64c46c9",
+        "size": 27
+      },
+      "present": true,
+      "sha256": "491d5125bc3d91d97f64f4037f6f41ca2b7c4ea61f3ed569e55efdd1c64c46c9",
+      "size": 127
+    },
+    "disk_is_v1_payload_after_switch": false,
+    "disk_is_v1_pointer_after_switch": true,
+    "expectation": "a hydrated local edit is observed before and after switching from the second committed LFS pointer version to the first; record report, stored tree, and bytes even if the edit is silently lost.",
+    "local_edit_observed_in_status": true,
+    "local_edit_stored": true,
+    "local_edit_survived_switch": false,
+    "pointers": {
+      "v1": {
+        "base64": "dmVyc2lvbiBodHRwczovL2dpdC1sZnMuZ2l0aHViLmNvbS9zcGVjL3YxCm9pZCBzaGEyNTY6Yjk0YWNjMjE0MmZjMjI4N2NkOGNjMmQ3ZjZlMjE5YTI1YjgxZGYyMDcwMDY0MGM5NmQyN2ZhZGIwZWZhOWRmMwpzaXplIDI3Cg==",
+        "lfs_pointer": {
+          "oid": "b94acc2142fc2287cd8cc2d7f6e219a25b81df20700640c96d27fadb0efa9df3",
+          "pointer_sha256": "491d5125bc3d91d97f64f4037f6f41ca2b7c4ea61f3ed569e55efdd1c64c46c9",
+          "size": 27
+        },
+        "present": true,
+        "sha256": "491d5125bc3d91d97f64f4037f6f41ca2b7c4ea61f3ed569e55efdd1c64c46c9",
+        "size": 127
+      },
+      "v2": {
+        "base64": "dmVyc2lvbiBodHRwczovL2dpdC1sZnMuZ2l0aHViLmNvbS9zcGVjL3YxCm9pZCBzaGEyNTY6YzJhOTBmOTI0ZDdhZDBiMjI0Y2E3NTljNjU1N2M2ZjU0ZDRmNjk3OGQ5YTc5MzVkZTI0OTQ1N2U1MTNlNzExNwpzaXplIDI3Cg==",
+        "lfs_pointer": {
+          "oid": "c2a90f924d7ad0b224ca759c6557c6f54d4f6978d9a7935de249457e513e7117",
+          "pointer_sha256": "8f938630bf04be558eaae0f7addc202b899ac884fec1941097455649fc0cc837",
+          "size": 27
+        },
+        "present": true,
+        "sha256": "8f938630bf04be558eaae0f7addc202b899ac884fec1941097455649fc0cc837",
+        "size": 127
+      }
+    },
+    "repo": "/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T180254Z/C4-baseline",
+    "role": "Homebrew baseline",
+    "setup_ok": true,
+    "status_after_local_edit": {
+      "exit_code": 0,
+      "stderr": "",
+      "stdout": "Working copy changes:\nM asset.bin\nWorking copy  (@) : ounswprq ff09b205 (no description set)\nParent commit (@-): vrnvlrln d45df76a main | Add LFS version two\n"
+    },
+    "status_after_switch": {
+      "exit_code": 0,
+      "stderr": "",
+      "stdout": "Working copy changes:\nA .gitattributes\nA asset.bin\nWorking copy  (@) : nylpyxou 97cf276f Add LFS version one\nParent commit (@-): zzzzzzzz 00000000 (empty) (no description set)\n"
+    },
+    "stored_after_local_edit": {
+      "base64": "QzQgdXNlcidzIHVuY29tbWl0dGVkIGxvY2FsIGVkaXSZAAo=",
+      "exit_code": 0,
+      "lfs_pointer": null,
+      "present": true,
+      "sha256": "e503110e85280017d1fbe6c787b184db9ac24f769f65bf6dae03905e60905756",
+      "size": 35
+    },
+    "stored_at_v1_after_switch": {
+      "base64": "dmVyc2lvbiBodHRwczovL2dpdC1sZnMuZ2l0aHViLmNvbS9zcGVjL3YxCm9pZCBzaGEyNTY6Yjk0YWNjMjE0MmZjMjI4N2NkOGNjMmQ3ZjZlMjE5YTI1YjgxZGYyMDcwMDY0MGM5NmQyN2ZhZGIwZWZhOWRmMwpzaXplIDI3Cg==",
+      "exit_code": 0,
+      "lfs_pointer": {
+        "oid": "b94acc2142fc2287cd8cc2d7f6e219a25b81df20700640c96d27fadb0efa9df3",
+        "pointer_sha256": "491d5125bc3d91d97f64f4037f6f41ca2b7c4ea61f3ed569e55efdd1c64c46c9",
+        "size": 27
+      },
+      "present": true,
+      "sha256": "491d5125bc3d91d97f64f4037f6f41ca2b7c4ea61f3ed569e55efdd1c64c46c9",
+      "size": 127
+    },
+    "stored_tree_is_v1_pointer_after_switch": true,
+    "switch_to_v1": {
+      "exit_code": 0,
+      "stderr": "Working copy  (@) now at: nylpyxou 97cf276f Add LFS version one\nParent commit (@-)      : zzzzzzzz 00000000 (empty) (no description set)\nAdded 0 files, modified 1 files, removed 0 files\n",
+      "stdout": ""
+    }
+  },
+  "C4_pr": {
+    "before_edit_disk": {
+      "base64": "QzQgcmV2aXNpb24gdHdvIHBheWxvYWQDAAQK",
+      "lfs_pointer": null,
+      "present": true,
+      "sha256": "c2a90f924d7ad0b224ca759c6557c6f54d4f6978d9a7935de249457e513e7117",
+      "size": 27
+    },
+    "binary": "/tmp/jj-lfs-evaluation/bin/jj-pr",
+    "checks": [
+      {
+        "expected": {
+          "base64": "QzQgcmV2aXNpb24gdHdvIHBheWxvYWQDAAQK",
+          "lfs_pointer": null,
+          "present": true,
+          "sha256": "c2a90f924d7ad0b224ca759c6557c6f54d4f6978d9a7935de249457e513e7117",
+          "size": 27
+        },
+        "matches_expected": true,
+        "name": "before_edit_disk_v2",
+        "observed": {
+          "base64": "QzQgcmV2aXNpb24gdHdvIHBheWxvYWQDAAQK",
+          "lfs_pointer": null,
+          "present": true,
+          "sha256": "c2a90f924d7ad0b224ca759c6557c6f54d4f6978d9a7935de249457e513e7117",
+          "size": 27
+        }
+      }
+    ],
+    "commits": {
+      "v1": "97cf276f6118edea93c93fbde7b533cead485783",
+      "v2": "d45df76aecca803f53a04bea3b0cec1c37172312"
+    },
+    "disk_after_local_edit": {
+      "base64": "QzQgdXNlcidzIHVuY29tbWl0dGVkIGxvY2FsIGVkaXSZAAo=",
+      "lfs_pointer": null,
+      "present": true,
+      "sha256": "e503110e85280017d1fbe6c787b184db9ac24f769f65bf6dae03905e60905756",
+      "size": 35
+    },
+    "disk_immediately_after_switch": {
+      "base64": "dmVyc2lvbiBodHRwczovL2dpdC1sZnMuZ2l0aHViLmNvbS9zcGVjL3YxCm9pZCBzaGEyNTY6Yjk0YWNjMjE0MmZjMjI4N2NkOGNjMmQ3ZjZlMjE5YTI1YjgxZGYyMDcwMDY0MGM5NmQyN2ZhZGIwZWZhOWRmMwpzaXplIDI3Cg==",
+      "lfs_pointer": {
+        "oid": "b94acc2142fc2287cd8cc2d7f6e219a25b81df20700640c96d27fadb0efa9df3",
+        "pointer_sha256": "491d5125bc3d91d97f64f4037f6f41ca2b7c4ea61f3ed569e55efdd1c64c46c9",
+        "size": 27
+      },
+      "present": true,
+      "sha256": "491d5125bc3d91d97f64f4037f6f41ca2b7c4ea61f3ed569e55efdd1c64c46c9",
+      "size": 127
+    },
+    "disk_is_v1_payload_after_switch": false,
+    "disk_is_v1_pointer_after_switch": true,
+    "expectation": "a hydrated local edit is observed before and after switching from the second committed LFS pointer version to the first; record report, stored tree, and bytes even if the edit is silently lost.",
+    "local_edit_observed_in_status": false,
+    "local_edit_stored": false,
+    "local_edit_survived_switch": false,
+    "pointers": {
+      "v1": {
+        "base64": "dmVyc2lvbiBodHRwczovL2dpdC1sZnMuZ2l0aHViLmNvbS9zcGVjL3YxCm9pZCBzaGEyNTY6Yjk0YWNjMjE0MmZjMjI4N2NkOGNjMmQ3ZjZlMjE5YTI1YjgxZGYyMDcwMDY0MGM5NmQyN2ZhZGIwZWZhOWRmMwpzaXplIDI3Cg==",
+        "lfs_pointer": {
+          "oid": "b94acc2142fc2287cd8cc2d7f6e219a25b81df20700640c96d27fadb0efa9df3",
+          "pointer_sha256": "491d5125bc3d91d97f64f4037f6f41ca2b7c4ea61f3ed569e55efdd1c64c46c9",
+          "size": 27
+        },
+        "present": true,
+        "sha256": "491d5125bc3d91d97f64f4037f6f41ca2b7c4ea61f3ed569e55efdd1c64c46c9",
+        "size": 127
+      },
+      "v2": {
+        "base64": "dmVyc2lvbiBodHRwczovL2dpdC1sZnMuZ2l0aHViLmNvbS9zcGVjL3YxCm9pZCBzaGEyNTY6YzJhOTBmOTI0ZDdhZDBiMjI0Y2E3NTljNjU1N2M2ZjU0ZDRmNjk3OGQ5YTc5MzVkZTI0OTQ1N2U1MTNlNzExNwpzaXplIDI3Cg==",
+        "lfs_pointer": {
+          "oid": "c2a90f924d7ad0b224ca759c6557c6f54d4f6978d9a7935de249457e513e7117",
+          "pointer_sha256": "8f938630bf04be558eaae0f7addc202b899ac884fec1941097455649fc0cc837",
+          "size": 27
+        },
+        "present": true,
+        "sha256": "8f938630bf04be558eaae0f7addc202b899ac884fec1941097455649fc0cc837",
+        "size": 127
+      }
+    },
+    "repo": "/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T180254Z/C4-pr",
+    "role": "PR",
+    "setup_ok": true,
+    "status_after_local_edit": {
+      "exit_code": 0,
+      "stderr": "",
+      "stdout": "The working copy has no changes.\nWorking copy  (@) : vlmqrpvl 12a61f11 (empty) (no description set)\nParent commit (@-): vrnvlrln d45df76a main | Add LFS version two\n"
+    },
+    "status_after_switch": {
+      "exit_code": 0,
+      "stderr": "",
+      "stdout": "Working copy changes:\nA .gitattributes\nA asset.bin\nWorking copy  (@) : nylpyxou 97cf276f Add LFS version one\nParent commit (@-): zzzzzzzz 00000000 (empty) (no description set)\n"
+    },
+    "stored_after_local_edit": {
+      "base64": "dmVyc2lvbiBodHRwczovL2dpdC1sZnMuZ2l0aHViLmNvbS9zcGVjL3YxCm9pZCBzaGEyNTY6YzJhOTBmOTI0ZDdhZDBiMjI0Y2E3NTljNjU1N2M2ZjU0ZDRmNjk3OGQ5YTc5MzVkZTI0OTQ1N2U1MTNlNzExNwpzaXplIDI3Cg==",
+      "exit_code": 0,
+      "lfs_pointer": {
+        "oid": "c2a90f924d7ad0b224ca759c6557c6f54d4f6978d9a7935de249457e513e7117",
+        "pointer_sha256": "8f938630bf04be558eaae0f7addc202b899ac884fec1941097455649fc0cc837",
+        "size": 27
+      },
+      "present": true,
+      "sha256": "8f938630bf04be558eaae0f7addc202b899ac884fec1941097455649fc0cc837",
+      "size": 127
+    },
+    "stored_at_v1_after_switch": {
+      "base64": "dmVyc2lvbiBodHRwczovL2dpdC1sZnMuZ2l0aHViLmNvbS9zcGVjL3YxCm9pZCBzaGEyNTY6Yjk0YWNjMjE0MmZjMjI4N2NkOGNjMmQ3ZjZlMjE5YTI1YjgxZGYyMDcwMDY0MGM5NmQyN2ZhZGIwZWZhOWRmMwpzaXplIDI3Cg==",
+      "exit_code": 0,
+      "lfs_pointer": {
+        "oid": "b94acc2142fc2287cd8cc2d7f6e219a25b81df20700640c96d27fadb0efa9df3",
+        "pointer_sha256": "491d5125bc3d91d97f64f4037f6f41ca2b7c4ea61f3ed569e55efdd1c64c46c9",
+        "size": 27
+      },
+      "present": true,
+      "sha256": "491d5125bc3d91d97f64f4037f6f41ca2b7c4ea61f3ed569e55efdd1c64c46c9",
+      "size": 127
+    },
+    "stored_tree_is_v1_pointer_after_switch": true,
+    "switch_to_v1": {
+      "exit_code": 0,
+      "stderr": "Working copy  (@) now at: nylpyxou 97cf276f Add LFS version one\nParent commit (@-)      : zzzzzzzz 00000000 (empty) (no description set)\nAdded 0 files, modified 1 files, removed 0 files\n",
+      "stdout": ""
+    }
+  },
+  "binaries": {
+    "baseline": "/opt/homebrew/bin/jj",
+    "pr": "/tmp/jj-lfs-evaluation/bin/jj-pr"
+  },
+  "elapsed_seconds": 33.862,
+  "environment": {
+    "GIT_ATTR_NOSYSTEM": "1",
+    "GIT_CONFIG_GLOBAL": "/tmp/jj-lfs-evaluation/calibration-luna/config/gitconfig",
+    "GIT_CONFIG_NOSYSTEM": "1",
+    "JJ_CONFIG": "/tmp/jj-lfs-evaluation/calibration-luna/config/jj.toml",
+    "git_commit_date": "2020-01-02T03:04:05+0000",
+    "home_overridden": false
+  },
+  "finished_at_utc": "2026-09-25T18:03:28.629165+00:00",
+  "fixture_root": "/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T180254Z",
+  "initial_run_elapsed_seconds": 15.348,
+  "initial_task_started_at_utc": "2026-09-25T17:56:14.634416+00:00",
+  "run_stamp": "20260925T180254Z",
+  "task": "four-case Git LFS calibration",
+  "task_started_at_utc": "2026-09-25T18:02:54.767061+00:00",
+  "total_task_seconds_from_first_run": 433.995,
+  "versions": {
+    "git": "git version 2.55.0",
+    "git_lfs": "git-lfs/3.8.0 (GitHub; darwin arm64; go 1.27.0)",
+    "jj_baseline": "jj 0.45.1",
+    "jj_pr": "jj 0.45.1"
+  }
+}

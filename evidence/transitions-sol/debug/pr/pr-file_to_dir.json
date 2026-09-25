@@ -1,0 +1,265 @@
+{
+  "id": "pr-file_to_dir",
+  "purpose": "file_to_dir",
+  "category": "contract",
+  "status": "PASS",
+  "seconds": 6.274675291962922,
+  "checks": [
+    {
+      "label": "Initial committed blob is valid LFS pointer",
+      "pass": true
+    },
+    {
+      "label": "Recovery leaves usable path",
+      "pass": true,
+      "first_status_rc": 101
+    }
+  ],
+  "observations": {
+    "before": {
+      "type": "directory",
+      "children": [
+        "child.txt"
+      ]
+    },
+    "first_status": {
+      "rc": 101,
+      "out": "",
+      "err": "\nthread 'main' (138504255) panicked at lib/src/local_working_copy.rs:1464:13:\nassertion `left == right` failed\n  left: {\".gitattributes\", \"asset.bin\", \"note.txt\", \"asset.bin/child.txt\"}\n right: {\"note.txt\", \"asset.bin/child.txt\", \".gitattributes\"}\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\n"
+    },
+    "second_status": {
+      "rc": 101,
+      "out": "",
+      "err": "\nthread 'main' (138504270) panicked at lib/src/local_working_copy.rs:1464:13:\nassertion `left == right` failed\n  left: {\"asset.bin/child.txt\", \".gitattributes\", \"asset.bin\", \"note.txt\"}\n right: {\".gitattributes\", \"note.txt\", \"asset.bin/child.txt\"}\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\n"
+    },
+    "after_transition_tree": {
+      "rc": 0,
+      "files": ".gitattributes\nasset.bin\nnote.txt\n",
+      "err": ""
+    },
+    "after_transition": {
+      "type": "directory",
+      "children": [
+        "child.txt"
+      ]
+    },
+    "recovery_status": {
+      "rc": 0,
+      "out": "The working copy has no changes.\nWorking copy  (@) : yqrwsvzk 873a0692 (empty) (no description set)\nParent commit (@-): vlyvrrvl 3ddc4cc3 main | Seed LFS fixture\n",
+      "err": ""
+    },
+    "after_recovery_tree": {
+      "rc": 0,
+      "files": ".gitattributes\nasset.bin\nnote.txt\n",
+      "err": ""
+    },
+    "after_recovery": {
+      "type": "file",
+      "sha256": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+      "size": 129,
+      "pointer": true
+    }
+  },
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "init",
+        "-b",
+        "main"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/transitions-sol/debug/pr/repos/pr-file_to_dir",
+      "rc": 0,
+      "seconds": 0.05880429223179817,
+      "stdout": "Initialized empty Git repository in /tmp/jj-lfs-evaluation/transitions-sol/debug/pr/repos/pr-file_to_dir/.git/\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.name",
+        "LFS Evaluation"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/transitions-sol/debug/pr/repos/pr-file_to_dir",
+      "rc": 0,
+      "seconds": 0.017536332830786705,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.email",
+        "eval@example.invalid"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/transitions-sol/debug/pr/repos/pr-file_to_dir",
+      "rc": 0,
+      "seconds": 0.013463249895721674,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "commit.gpgsign",
+        "false"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/transitions-sol/debug/pr/repos/pr-file_to_dir",
+      "rc": 0,
+      "seconds": 0.029269082937389612,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "core.autocrlf",
+        "false"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/transitions-sol/debug/pr/repos/pr-file_to_dir",
+      "rc": 0,
+      "seconds": 0.012543709017336369,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "lfs",
+        "install",
+        "--local"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/transitions-sol/debug/pr/repos/pr-file_to_dir",
+      "rc": 0,
+      "seconds": 0.2886864999309182,
+      "stdout": "Updated Git hooks.\nGit LFS initialized.\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "add",
+        "."
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/transitions-sol/debug/pr/repos/pr-file_to_dir",
+      "rc": 0,
+      "seconds": 0.14534995891153812,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "commit",
+        "-m",
+        "Seed LFS fixture"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/transitions-sol/debug/pr/repos/pr-file_to_dir",
+      "rc": 0,
+      "seconds": 5.3873365838080645,
+      "stdout": "[main (root-commit) 3ddc4cc] Seed LFS fixture\n 3 files changed, 5 insertions(+)\n create mode 100644 .gitattributes\n create mode 100644 asset.bin\n create mode 100644 note.txt\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/transitions-sol/debug/pr/repos/pr-file_to_dir",
+      "rc": 0,
+      "seconds": 0.006484000012278557,
+      "stdout": "3ddc4cc3a78d5da57b28af3b682bb63372112872\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr",
+        "git",
+        "init",
+        "--colocate"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/transitions-sol/debug/pr/repos/pr-file_to_dir",
+      "rc": 0,
+      "seconds": 0.1721170418895781,
+      "stdout": "",
+      "stderr": "Done importing changes from the underlying Git repo.\nInitialized repo in \".\"\n"
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr",
+        "file",
+        "show",
+        "asset.bin"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/transitions-sol/debug/pr/repos/pr-file_to_dir",
+      "rc": 0,
+      "seconds": 0.025534292217344046,
+      "stdout": "version https://git-lfs.github.com/spec/v1\noid sha256:dad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f\nsize 2500\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr",
+        "status"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/transitions-sol/debug/pr/repos/pr-file_to_dir",
+      "rc": 101,
+      "seconds": 0.028060708660632372,
+      "stdout": "",
+      "stderr": "\nthread 'main' (138504255) panicked at lib/src/local_working_copy.rs:1464:13:\nassertion `left == right` failed\n  left: {\".gitattributes\", \"asset.bin\", \"note.txt\", \"asset.bin/child.txt\"}\n right: {\"note.txt\", \"asset.bin/child.txt\", \".gitattributes\"}\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\n"
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr",
+        "status"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/transitions-sol/debug/pr/repos/pr-file_to_dir",
+      "rc": 101,
+      "seconds": 0.022371625062078238,
+      "stdout": "",
+      "stderr": "\nthread 'main' (138504270) panicked at lib/src/local_working_copy.rs:1464:13:\nassertion `left == right` failed\n  left: {\"asset.bin/child.txt\", \".gitattributes\", \"asset.bin\", \"note.txt\"}\n right: {\".gitattributes\", \"note.txt\", \"asset.bin/child.txt\"}\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\n"
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr",
+        "--ignore-working-copy",
+        "file",
+        "list"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/transitions-sol/debug/pr/repos/pr-file_to_dir",
+      "rc": 0,
+      "seconds": 0.020567416679114103,
+      "stdout": ".gitattributes\nasset.bin\nnote.txt\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr",
+        "status"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/transitions-sol/debug/pr/repos/pr-file_to_dir",
+      "rc": 0,
+      "seconds": 0.022156875114887953,
+      "stdout": "The working copy has no changes.\nWorking copy  (@) : yqrwsvzk 873a0692 (empty) (no description set)\nParent commit (@-): vlyvrrvl 3ddc4cc3 main | Seed LFS fixture\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr",
+        "--ignore-working-copy",
+        "file",
+        "list"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/transitions-sol/debug/pr/repos/pr-file_to_dir",
+      "rc": 0,
+      "seconds": 0.020137833431363106,
+      "stdout": ".gitattributes\nasset.bin\nnote.txt\n",
+      "stderr": ""
+    }
+  ]
+}

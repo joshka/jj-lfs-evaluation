@@ -1,0 +1,193 @@
+{
+  "id": "A09-ignored-directory",
+  "purpose": "Ignored directory shortcut respects LFS exclusion",
+  "category": "contract",
+  "status": "PASS",
+  "seconds": 0.8021362093277276,
+  "checks": [
+    {
+      "label": "Ignored-dir fast path preserves LFS pointer",
+      "pass": true,
+      "actual_sha256": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+      "expected_sha256": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+      "actual_size": 129,
+      "expected_size": 129
+    },
+    {
+      "label": "Ignored-dir tracked ordinary edit snapshots",
+      "pass": true,
+      "actual_sha256": "11507a0e2f5e69d5dfa40a62a1bd7b6ee57e6bcd85c67c9b8431b36fff21c437",
+      "expected_sha256": "11507a0e2f5e69d5dfa40a62a1bd7b6ee57e6bcd85c67c9b8431b36fff21c437",
+      "actual_size": 3,
+      "expected_size": 3
+    }
+  ],
+  "observations": {},
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "init",
+        "-b",
+        "main"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos-release/repos/A09-ignored-directory",
+      "rc": 0,
+      "seconds": 0.013379999902099371,
+      "stdout": "Initialized empty Git repository in /tmp/jj-lfs-evaluation/macos-release/repos/A09-ignored-directory/.git/\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.name",
+        "LFS Evaluation"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos-release/repos/A09-ignored-directory",
+      "rc": 0,
+      "seconds": 0.006359917111694813,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.email",
+        "eval@example.invalid"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos-release/repos/A09-ignored-directory",
+      "rc": 0,
+      "seconds": 0.006412582937628031,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "commit.gpgsign",
+        "false"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos-release/repos/A09-ignored-directory",
+      "rc": 0,
+      "seconds": 0.00656725000590086,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "core.autocrlf",
+        "false"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos-release/repos/A09-ignored-directory",
+      "rc": 0,
+      "seconds": 0.006064083892852068,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "lfs",
+        "install",
+        "--local"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos-release/repos/A09-ignored-directory",
+      "rc": 0,
+      "seconds": 0.1316294581629336,
+      "stdout": "Updated Git hooks.\nGit LFS initialized.\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "add",
+        "."
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos-release/repos/A09-ignored-directory",
+      "rc": 0,
+      "seconds": 0.077995290979743,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "commit",
+        "-m",
+        "Seed LFS fixture"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos-release/repos/A09-ignored-directory",
+      "rc": 0,
+      "seconds": 0.3022343749180436,
+      "stdout": "[main (root-commit) 281bb09] Seed LFS fixture\n 3 files changed, 5 insertions(+)\n create mode 100644 .gitattributes\n create mode 100644 ignored/asset.bin\n create mode 100644 ignored/note.txt\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos-release/repos/A09-ignored-directory",
+      "rc": 0,
+      "seconds": 0.007231458090245724,
+      "stdout": "281bb098909e8eaaaaf9066520462039836caef6\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr-release",
+        "git",
+        "init",
+        "--colocate"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos-release/repos/A09-ignored-directory",
+      "rc": 0,
+      "seconds": 0.15320412488654256,
+      "stdout": "",
+      "stderr": "Done importing changes from the underlying Git repo.\nInitialized repo in \".\"\n"
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr-release",
+        "status"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos-release/repos/A09-ignored-directory",
+      "rc": 0,
+      "seconds": 0.061838749796152115,
+      "stdout": "Working copy changes:\nA .gitignore\nM ignored/note.txt\nWorking copy  (@) : rnuxpokw 47a63ec6 (no description set)\nParent commit (@-): tksuwtny 281bb098 main | Seed LFS fixture\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr-release",
+        "file",
+        "show",
+        "ignored/asset.bin"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos-release/repos/A09-ignored-directory",
+      "rc": 0,
+      "seconds": 0.014131041709333658,
+      "stdout": "version https://git-lfs.github.com/spec/v1\noid sha256:dad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f\nsize 2500\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr-release",
+        "file",
+        "show",
+        "ignored/note.txt"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos-release/repos/A09-ignored-directory",
+      "rc": 0,
+      "seconds": 0.013318958226591349,
+      "stdout": "new",
+      "stderr": ""
+    }
+  ]
+}

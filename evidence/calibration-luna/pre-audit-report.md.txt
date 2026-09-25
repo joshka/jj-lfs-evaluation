@@ -1,0 +1,49 @@
+# Git LFS calibration report
+
+Run `20260925T180254Z` used `/tmp/jj-lfs-evaluation/bin/jj-pr` for C1–C4 and `/opt/homebrew/bin/jj` as the C4 baseline.
+This run took 33.862 seconds; total task time from the first
+attempt was 433.995 seconds. First attempt
+started at 2026-09-25T17:56:14.634416+00:00; the corrected run
+completed at 2026-09-25T18:03:28.629165+00:00.
+Tool versions: `git version 2.55.0`, `git-lfs/3.8.0 (GitHub; darwin arm64; go 1.27.0)`, PR
+`jj 0.45.1`, baseline `jj 0.45.1`.
+
+## Expectations
+
+The PR change documents that Git-backed snapshots skip paths whose
+`.gitattributes` `filter` value appears in `git.ignore-filters`, which defaults to
+`["lfs"]` (`source/docs/git-compatibility.md:77–84`). It also says Git LFS
+hydration remains an external Git LFS operation.
+The experiment therefore checks both the pointer stored in the jj tree and the
+actual hydrated bytes on disk. Content evidence records lengths and SHA-256
+digests; pointers are parsed for their payload OID and declared size.
+
+## Observations
+
+- C1: setup `True`, checks all match `True` (13 checks).
+  Repeated snapshots retained the pointer while the payload hash stayed unchanged;
+  the literal pointer was hydrated again and the stored blob remained a pointer.
+- C2: Git check-attr reported filter=lfs and jj left the new info-only file out of its tree. No discrepancy was observed. The changed PR prose names `.gitattributes` but does not spell out `.git/info/attributes`; this run demonstrates behavior for that source.
+- C2 attribute and snapshot checks all match `True` (4 checks).
+- C3: setup `True`, recovery checks all match `True`
+  (9 checks). Failed fetch exit=2; disk remained pointer=True; local object absent=True. Restored fetch exit=0; disk equals payload=True. HTTP request evidence is in `results.json`.
+- C4 pinned PR binary: C4_pr: edit_reported=False, edit_stored_before_switch=False, edit_survived_switch=False, disk_v1_pointer_after_switch=True, v1_pointer_stored=True, v1_payload_after_switch=False.
+- C4 Homebrew baseline: C4_baseline: edit_reported=True, edit_stored_before_switch=True, edit_survived_switch=False, disk_v1_pointer_after_switch=True, v1_pointer_stored=True, v1_payload_after_switch=False.
+  The PR run shows the local edit absent from the jj tree and replaced on disk by the older pointer after switching. Snapshot exclusion being intentional does not make this silent loss safe.
+
+## Interpretation and limits
+
+Setup failures are recorded separately and are not product passes. The C4 baseline
+uses an independently created repository with identical payloads and deterministic
+Git commit metadata; matching Git commit IDs: `True`.
+The baseline measures the installed Homebrew binary, not an additional pristine
+build. The docs also note that existing tracked files may need `jj file untrack`
+before ignore behavior applies; C4 records the behavior without adding that step.
+C3 uses a disposable
+local bare Git remote plus a loopback-only local Git LFS batch/download endpoint.
+The result describes these four small deterministic scenarios only. It does not
+establish behavior for other Git attribute sources, external LFS servers, or other
+revision-switch workflows.
+
+See `transcript.log` for commands, output, exit codes, and command timing; see
+`results.json` for machine-readable checks and content evidence.

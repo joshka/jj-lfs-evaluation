@@ -1,0 +1,208 @@
+{
+  "id": "S02-modify",
+  "purpose": "Characterize silent snapshot exclusion: modify",
+  "category": "contract",
+  "status": "PASS",
+  "seconds": 0.45928666699998644,
+  "checks": [
+    {
+      "label": "Stored pointer unchanged by excluded mutation",
+      "pass": true,
+      "actual_sha256": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+      "expected_sha256": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+      "actual_size": 129,
+      "expected_size": 129
+    },
+    {
+      "label": "No new excluded path snapshots",
+      "pass": true
+    }
+  ],
+  "observations": {
+    "status": "The working copy has no changes.\nWorking copy  (@) : zkvynxuz 5ae2ecc8 (empty) (no description set)\nParent commit (@-): vnwmnyks a18b1a0b main | Seed LFS fixture\n",
+    "mutation": "modify",
+    "disk_files": [
+      "note.txt",
+      ".gitattributes",
+      "asset.bin"
+    ]
+  },
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "init",
+        "-b",
+        "main"
+      ],
+      "cwd": "/eval/linux/repos/S02-modify",
+      "rc": 0,
+      "seconds": 0.016972624999993968,
+      "stdout": "Initialized empty Git repository in /eval/linux/repos/S02-modify/.git/\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.name",
+        "LFS Evaluation"
+      ],
+      "cwd": "/eval/linux/repos/S02-modify",
+      "rc": 0,
+      "seconds": 0.003612124999989419,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.email",
+        "eval@example.invalid"
+      ],
+      "cwd": "/eval/linux/repos/S02-modify",
+      "rc": 0,
+      "seconds": 0.0038142079999943235,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "commit.gpgsign",
+        "false"
+      ],
+      "cwd": "/eval/linux/repos/S02-modify",
+      "rc": 0,
+      "seconds": 0.0043862920000208305,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "core.autocrlf",
+        "false"
+      ],
+      "cwd": "/eval/linux/repos/S02-modify",
+      "rc": 0,
+      "seconds": 0.0033443339999905675,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "lfs",
+        "install",
+        "--local"
+      ],
+      "cwd": "/eval/linux/repos/S02-modify",
+      "rc": 0,
+      "seconds": 0.030439790999992056,
+      "stdout": "Updated Git hooks.\nGit LFS initialized.\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "add",
+        "."
+      ],
+      "cwd": "/eval/linux/repos/S02-modify",
+      "rc": 0,
+      "seconds": 0.026960458000019116,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "commit",
+        "-m",
+        "Seed LFS fixture"
+      ],
+      "cwd": "/eval/linux/repos/S02-modify",
+      "rc": 0,
+      "seconds": 0.04794325000000299,
+      "stdout": "[main (root-commit) a18b1a0] Seed LFS fixture\n 3 files changed, 5 insertions(+)\n create mode 100644 .gitattributes\n create mode 100644 asset.bin\n create mode 100644 note.txt\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "/eval/linux/repos/S02-modify",
+      "rc": 0,
+      "seconds": 0.0029899170000078357,
+      "stdout": "a18b1a0bfebc3697967e6ee7b3073a9cef83bc32\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/target/debug/jj",
+        "git",
+        "init",
+        "--colocate"
+      ],
+      "cwd": "/eval/linux/repos/S02-modify",
+      "rc": 0,
+      "seconds": 0.17697220899998456,
+      "stdout": "",
+      "stderr": "Done importing changes from the underlying Git repo.\nInitialized repo in \".\"\n"
+    },
+    {
+      "argv": [
+        "/target/debug/jj",
+        "status"
+      ],
+      "cwd": "/eval/linux/repos/S02-modify",
+      "rc": 0,
+      "seconds": 0.03780925000000934,
+      "stdout": "The working copy has no changes.\nWorking copy  (@) : zkvynxuz 5ae2ecc8 (empty) (no description set)\nParent commit (@-): vnwmnyks a18b1a0b main | Seed LFS fixture\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/target/debug/jj",
+        "file",
+        "show",
+        "asset.bin"
+      ],
+      "cwd": "/eval/linux/repos/S02-modify",
+      "rc": 0,
+      "seconds": 0.0361237909999943,
+      "stdout": "version https://git-lfs.github.com/spec/v1\noid sha256:dad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f\nsize 2500\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/target/debug/jj",
+        "file",
+        "list"
+      ],
+      "cwd": "/eval/linux/repos/S02-modify",
+      "rc": 0,
+      "seconds": 0.03328725000000077,
+      "stdout": ".gitattributes\nasset.bin\nnote.txt\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/target/debug/jj",
+        "file",
+        "list"
+      ],
+      "cwd": "/eval/linux/repos/S02-modify",
+      "rc": 0,
+      "seconds": 0.030810707999989972,
+      "stdout": ".gitattributes\nasset.bin\nnote.txt\n",
+      "stderr": ""
+    }
+  ]
+}

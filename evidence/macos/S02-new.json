@@ -1,0 +1,209 @@
+{
+  "id": "S02-new",
+  "purpose": "Characterize silent snapshot exclusion: new",
+  "category": "contract",
+  "status": "PASS",
+  "seconds": 1.5005120416171849,
+  "checks": [
+    {
+      "label": "Stored pointer unchanged by excluded mutation",
+      "pass": true,
+      "actual_sha256": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+      "expected_sha256": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+      "actual_size": 129,
+      "expected_size": 129
+    },
+    {
+      "label": "No new excluded path snapshots",
+      "pass": true
+    }
+  ],
+  "observations": {
+    "status": "The working copy has no changes.\nWorking copy  (@) : swrnxtvk 3708bfe2 (empty) (no description set)\nParent commit (@-): xmtuxmrn 314dfcc8 main | Seed LFS fixture\n",
+    "mutation": "new",
+    "disk_files": [
+      "note.txt",
+      ".gitattributes",
+      "asset.bin",
+      "new.bin"
+    ]
+  },
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "init",
+        "-b",
+        "main"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos/repos/S02-new",
+      "rc": 0,
+      "seconds": 0.01803670823574066,
+      "stdout": "Initialized empty Git repository in /tmp/jj-lfs-evaluation/macos/repos/S02-new/.git/\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.name",
+        "LFS Evaluation"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos/repos/S02-new",
+      "rc": 0,
+      "seconds": 0.010090417228639126,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.email",
+        "eval@example.invalid"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos/repos/S02-new",
+      "rc": 0,
+      "seconds": 0.015046374872326851,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "commit.gpgsign",
+        "false"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos/repos/S02-new",
+      "rc": 0,
+      "seconds": 0.014175333082675934,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "core.autocrlf",
+        "false"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos/repos/S02-new",
+      "rc": 0,
+      "seconds": 0.010779291857033968,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "lfs",
+        "install",
+        "--local"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos/repos/S02-new",
+      "rc": 0,
+      "seconds": 0.3413510830141604,
+      "stdout": "Updated Git hooks.\nGit LFS initialized.\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "add",
+        "."
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos/repos/S02-new",
+      "rc": 0,
+      "seconds": 0.15173716703429818,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "commit",
+        "-m",
+        "Seed LFS fixture"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos/repos/S02-new",
+      "rc": 0,
+      "seconds": 0.5459683751687407,
+      "stdout": "[main (root-commit) 314dfcc] Seed LFS fixture\n 3 files changed, 5 insertions(+)\n create mode 100644 .gitattributes\n create mode 100644 asset.bin\n create mode 100644 note.txt\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos/repos/S02-new",
+      "rc": 0,
+      "seconds": 0.012825084384530783,
+      "stdout": "314dfcc8f636a4c130a9b45512e35e7b31b4a6b4\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr",
+        "git",
+        "init",
+        "--colocate"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos/repos/S02-new",
+      "rc": 0,
+      "seconds": 0.20420758286491036,
+      "stdout": "",
+      "stderr": "Done importing changes from the underlying Git repo.\nInitialized repo in \".\"\n"
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr",
+        "status"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos/repos/S02-new",
+      "rc": 0,
+      "seconds": 0.04198841704055667,
+      "stdout": "The working copy has no changes.\nWorking copy  (@) : swrnxtvk 3708bfe2 (empty) (no description set)\nParent commit (@-): xmtuxmrn 314dfcc8 main | Seed LFS fixture\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr",
+        "file",
+        "show",
+        "asset.bin"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos/repos/S02-new",
+      "rc": 0,
+      "seconds": 0.03795741684734821,
+      "stdout": "version https://git-lfs.github.com/spec/v1\noid sha256:dad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f\nsize 2500\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr",
+        "file",
+        "list"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos/repos/S02-new",
+      "rc": 0,
+      "seconds": 0.04150870814919472,
+      "stdout": ".gitattributes\nasset.bin\nnote.txt\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr",
+        "file",
+        "list"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos/repos/S02-new",
+      "rc": 0,
+      "seconds": 0.05207841703668237,
+      "stdout": ".gitattributes\nasset.bin\nnote.txt\n",
+      "stderr": ""
+    }
+  ]
+}

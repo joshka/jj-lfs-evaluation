@@ -1,0 +1,248 @@
+{
+  "id": "pr-dir_to_file",
+  "purpose": "dir_to_file",
+  "category": "contract",
+  "status": "PASS",
+  "seconds": 5.3867548340931535,
+  "checks": [
+    {
+      "label": "Recovery leaves usable path",
+      "pass": true,
+      "first_status_rc": 0
+    }
+  ],
+  "observations": {
+    "before": {
+      "type": "directory",
+      "children": [
+        "child.txt"
+      ]
+    },
+    "first_status": {
+      "rc": 0,
+      "out": "Working copy changes:\nD dir.bin/child.txt\nWorking copy  (@) : rxovwrvv dc37b37d (no description set)\nParent commit (@-): mlvytpoq 4e0f56eb main | Seed LFS fixture\n",
+      "err": ""
+    },
+    "second_status": {
+      "rc": 0,
+      "out": "Working copy changes:\nD dir.bin/child.txt\nWorking copy  (@) : rxovwrvv dc37b37d (no description set)\nParent commit (@-): mlvytpoq 4e0f56eb main | Seed LFS fixture\n",
+      "err": ""
+    },
+    "after_transition_tree": {
+      "rc": 0,
+      "files": ".gitattributes\nnote.txt\n",
+      "err": ""
+    },
+    "after_transition": {
+      "type": "file",
+      "sha256": "dad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f",
+      "size": 2500,
+      "pointer": false
+    },
+    "recovery_status": {
+      "rc": 0,
+      "out": "The working copy has no changes.\nWorking copy  (@) : rxovwrvv 0aa754ee (empty) (no description set)\nParent commit (@-): mlvytpoq 4e0f56eb main | Seed LFS fixture\n",
+      "err": ""
+    },
+    "after_recovery_tree": {
+      "rc": 0,
+      "files": ".gitattributes\ndir.bin/child.txt\nnote.txt\n",
+      "err": ""
+    },
+    "after_recovery": {
+      "type": "directory",
+      "children": [
+        "child.txt"
+      ]
+    }
+  },
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "init",
+        "-b",
+        "main"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/transitions-sol/release/pr/repos/pr-dir_to_file",
+      "rc": 0,
+      "seconds": 0.022467624861747026,
+      "stdout": "Initialized empty Git repository in /tmp/jj-lfs-evaluation/transitions-sol/release/pr/repos/pr-dir_to_file/.git/\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.name",
+        "LFS Evaluation"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/transitions-sol/release/pr/repos/pr-dir_to_file",
+      "rc": 0,
+      "seconds": 0.010748750064522028,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.email",
+        "eval@example.invalid"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/transitions-sol/release/pr/repos/pr-dir_to_file",
+      "rc": 0,
+      "seconds": 0.009424624964594841,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "commit.gpgsign",
+        "false"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/transitions-sol/release/pr/repos/pr-dir_to_file",
+      "rc": 0,
+      "seconds": 0.012243833858519793,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "core.autocrlf",
+        "false"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/transitions-sol/release/pr/repos/pr-dir_to_file",
+      "rc": 0,
+      "seconds": 0.009044792037457228,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "lfs",
+        "install",
+        "--local"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/transitions-sol/release/pr/repos/pr-dir_to_file",
+      "rc": 0,
+      "seconds": 0.2110250829719007,
+      "stdout": "Updated Git hooks.\nGit LFS initialized.\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "add",
+        "."
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/transitions-sol/release/pr/repos/pr-dir_to_file",
+      "rc": 0,
+      "seconds": 0.010404542088508606,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "commit",
+        "-m",
+        "Seed LFS fixture"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/transitions-sol/release/pr/repos/pr-dir_to_file",
+      "rc": 0,
+      "seconds": 4.796744666993618,
+      "stdout": "[main (root-commit) 4e0f56e] Seed LFS fixture\n 3 files changed, 3 insertions(+)\n create mode 100644 .gitattributes\n create mode 100644 dir.bin/child.txt\n create mode 100644 note.txt\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/transitions-sol/release/pr/repos/pr-dir_to_file",
+      "rc": 0,
+      "seconds": 0.00572883291170001,
+      "stdout": "4e0f56eb1ef21bd469ed1b2612c01ead9d56827b\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr-release",
+        "git",
+        "init",
+        "--colocate"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/transitions-sol/release/pr/repos/pr-dir_to_file",
+      "rc": 0,
+      "seconds": 0.14133466687053442,
+      "stdout": "",
+      "stderr": "Done importing changes from the underlying Git repo.\nInitialized repo in \".\"\n"
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr-release",
+        "status"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/transitions-sol/release/pr/repos/pr-dir_to_file",
+      "rc": 0,
+      "seconds": 0.05617870902642608,
+      "stdout": "Working copy changes:\nD dir.bin/child.txt\nWorking copy  (@) : rxovwrvv dc37b37d (no description set)\nParent commit (@-): mlvytpoq 4e0f56eb main | Seed LFS fixture\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr-release",
+        "status"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/transitions-sol/release/pr/repos/pr-dir_to_file",
+      "rc": 0,
+      "seconds": 0.01898320810869336,
+      "stdout": "Working copy changes:\nD dir.bin/child.txt\nWorking copy  (@) : rxovwrvv dc37b37d (no description set)\nParent commit (@-): mlvytpoq 4e0f56eb main | Seed LFS fixture\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr-release",
+        "--ignore-working-copy",
+        "file",
+        "list"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/transitions-sol/release/pr/repos/pr-dir_to_file",
+      "rc": 0,
+      "seconds": 0.013568416237831116,
+      "stdout": ".gitattributes\nnote.txt\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr-release",
+        "status"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/transitions-sol/release/pr/repos/pr-dir_to_file",
+      "rc": 0,
+      "seconds": 0.053576875012367964,
+      "stdout": "The working copy has no changes.\nWorking copy  (@) : rxovwrvv 0aa754ee (empty) (no description set)\nParent commit (@-): mlvytpoq 4e0f56eb main | Seed LFS fixture\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr-release",
+        "--ignore-working-copy",
+        "file",
+        "list"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/transitions-sol/release/pr/repos/pr-dir_to_file",
+      "rc": 0,
+      "seconds": 0.012571457773447037,
+      "stdout": ".gitattributes\ndir.bin/child.txt\nnote.txt\n",
+      "stderr": ""
+    }
+  ]
+}

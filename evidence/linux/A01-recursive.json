@@ -1,0 +1,185 @@
+{
+  "id": "A01-recursive",
+  "purpose": "Attribute matching agrees with Git",
+  "category": "contract",
+  "status": "PASS",
+  "seconds": 0.23617829200000529,
+  "checks": [
+    {
+      "label": "Expected exclusion matches Git attribute decision",
+      "pass": true,
+      "expected_excluded": true,
+      "actual_included": false,
+      "git_check_attr": "assets/sub/a.bin: filter: lfs\n",
+      "jj_status": "The working copy has no changes.\nWorking copy  (@) : qupnsnpp a9d8b4e0 (empty) (no description set)\nParent commit (@-): zttrsuxu 56679c3c main | Seed LFS fixture\n"
+    }
+  ],
+  "observations": {},
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "init",
+        "-b",
+        "main"
+      ],
+      "cwd": "/eval/linux/repos/A01-recursive",
+      "rc": 0,
+      "seconds": 0.017889624999980924,
+      "stdout": "Initialized empty Git repository in /eval/linux/repos/A01-recursive/.git/\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.name",
+        "LFS Evaluation"
+      ],
+      "cwd": "/eval/linux/repos/A01-recursive",
+      "rc": 0,
+      "seconds": 0.0039155830000083824,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.email",
+        "eval@example.invalid"
+      ],
+      "cwd": "/eval/linux/repos/A01-recursive",
+      "rc": 0,
+      "seconds": 0.002883083000000397,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "commit.gpgsign",
+        "false"
+      ],
+      "cwd": "/eval/linux/repos/A01-recursive",
+      "rc": 0,
+      "seconds": 0.004524415999981102,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "core.autocrlf",
+        "false"
+      ],
+      "cwd": "/eval/linux/repos/A01-recursive",
+      "rc": 0,
+      "seconds": 0.003896833999988303,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "lfs",
+        "install",
+        "--local"
+      ],
+      "cwd": "/eval/linux/repos/A01-recursive",
+      "rc": 0,
+      "seconds": 0.03646829200002344,
+      "stdout": "Updated Git hooks.\nGit LFS initialized.\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "add",
+        "."
+      ],
+      "cwd": "/eval/linux/repos/A01-recursive",
+      "rc": 0,
+      "seconds": 0.006301291999989189,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "commit",
+        "-m",
+        "Seed LFS fixture"
+      ],
+      "cwd": "/eval/linux/repos/A01-recursive",
+      "rc": 0,
+      "seconds": 0.03244175000000382,
+      "stdout": "[main (root-commit) 56679c3] Seed LFS fixture\n 2 files changed, 2 insertions(+)\n create mode 100644 .gitattributes\n create mode 100644 note.txt\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "/eval/linux/repos/A01-recursive",
+      "rc": 0,
+      "seconds": 0.0015965830000084225,
+      "stdout": "56679c3c89a92032b4e16b75ae9c60dda4ae1660\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/target/debug/jj",
+        "git",
+        "init",
+        "--colocate"
+      ],
+      "cwd": "/eval/linux/repos/A01-recursive",
+      "rc": 0,
+      "seconds": 0.06813958300000422,
+      "stdout": "",
+      "stderr": "Done importing changes from the underlying Git repo.\nInitialized repo in \".\"\n"
+    },
+    {
+      "argv": [
+        "git",
+        "check-attr",
+        "filter",
+        "--",
+        "assets/sub/a.bin"
+      ],
+      "cwd": "/eval/linux/repos/A01-recursive",
+      "rc": 0,
+      "seconds": 0.0026519160000191278,
+      "stdout": "assets/sub/a.bin: filter: lfs\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/target/debug/jj",
+        "status"
+      ],
+      "cwd": "/eval/linux/repos/A01-recursive",
+      "rc": 0,
+      "seconds": 0.027169208000003664,
+      "stdout": "The working copy has no changes.\nWorking copy  (@) : qupnsnpp a9d8b4e0 (empty) (no description set)\nParent commit (@-): zttrsuxu 56679c3c main | Seed LFS fixture\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/target/debug/jj",
+        "file",
+        "list"
+      ],
+      "cwd": "/eval/linux/repos/A01-recursive",
+      "rc": 0,
+      "seconds": 0.025964458000004242,
+      "stdout": ".gitattributes\nnote.txt\n",
+      "stderr": ""
+    }
+  ]
+}

@@ -1,0 +1,193 @@
+{
+  "id": "W01-sparse",
+  "purpose": "Sparse reset then external hydration",
+  "category": "contract",
+  "status": "PASS",
+  "seconds": 1.253864792175591,
+  "checks": [
+    {
+      "label": "Sparse reset and hydration restore content",
+      "pass": true,
+      "actual_sha256": "dad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f",
+      "expected_sha256": "dad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f",
+      "actual_size": 2500,
+      "expected_size": 2500
+    }
+  ],
+  "observations": {
+    "sparse": {
+      "rc": 0,
+      "stderr": "Added 0 files, modified 0 files, removed 2 files\n",
+      "asset_exists": false
+    }
+  },
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "init",
+        "-b",
+        "main"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos/repos/W01-sparse",
+      "rc": 0,
+      "seconds": 0.0124571667984128,
+      "stdout": "Initialized empty Git repository in /tmp/jj-lfs-evaluation/macos/repos/W01-sparse/.git/\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.name",
+        "LFS Evaluation"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos/repos/W01-sparse",
+      "rc": 0,
+      "seconds": 0.007909415755420923,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.email",
+        "eval@example.invalid"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos/repos/W01-sparse",
+      "rc": 0,
+      "seconds": 0.0074569168500602245,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "commit.gpgsign",
+        "false"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos/repos/W01-sparse",
+      "rc": 0,
+      "seconds": 0.008276917040348053,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "core.autocrlf",
+        "false"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos/repos/W01-sparse",
+      "rc": 0,
+      "seconds": 0.008159333374351263,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "lfs",
+        "install",
+        "--local"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos/repos/W01-sparse",
+      "rc": 0,
+      "seconds": 0.27235774975270033,
+      "stdout": "Updated Git hooks.\nGit LFS initialized.\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "add",
+        "."
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos/repos/W01-sparse",
+      "rc": 0,
+      "seconds": 0.09368262533098459,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "commit",
+        "-m",
+        "Seed LFS fixture"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos/repos/W01-sparse",
+      "rc": 0,
+      "seconds": 0.3877411251887679,
+      "stdout": "[main (root-commit) 93f31c6] Seed LFS fixture\n 3 files changed, 5 insertions(+)\n create mode 100644 .gitattributes\n create mode 100644 assets/asset.bin\n create mode 100644 note.txt\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos/repos/W01-sparse",
+      "rc": 0,
+      "seconds": 0.006998375058174133,
+      "stdout": "93f31c60b0872f3e6d7807f7eb87842cc6efedc2\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr",
+        "git",
+        "init",
+        "--colocate"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos/repos/W01-sparse",
+      "rc": 0,
+      "seconds": 0.17231970792636275,
+      "stdout": "",
+      "stderr": "Done importing changes from the underlying Git repo.\nInitialized repo in \".\"\n"
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr",
+        "sparse",
+        "set",
+        "--clear",
+        "--add",
+        "note.txt"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos/repos/W01-sparse",
+      "rc": 0,
+      "seconds": 0.03252329118549824,
+      "stdout": "",
+      "stderr": "Added 0 files, modified 0 files, removed 2 files\n"
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr",
+        "sparse",
+        "reset"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos/repos/W01-sparse",
+      "rc": 0,
+      "seconds": 0.03517912467941642,
+      "stdout": "",
+      "stderr": "Added 2 files, modified 0 files, removed 0 files\n"
+    },
+    {
+      "argv": [
+        "git",
+        "lfs",
+        "checkout"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos/repos/W01-sparse",
+      "rc": 0,
+      "seconds": 0.2072581248357892,
+      "stdout": "Checking out LFS objects: 100% (1/1), 2.5 KB | 0 B/s, done.\n",
+      "stderr": ""
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+# External Git LFS failure evaluation
+
+This test used the exact PR build (`jj 0.45.1`) and a local clone of the private fixture commit
+`48dee535ac3768109793d5bd4991afa41d4a0647`. The clone has two committed 129-byte LFS
+pointers and no cached LFS objects. A loopback-only Python server supplied controlled Git LFS
+batch responses. Every `git lfs fetch origin HEAD` used an ephemeral `lfs.url` pointing to that
+server, disabled interactive credentials, set short timeouts, and was capped at 15 seconds.
+
+The script is [evaluate_failures.py](evaluate_failures.py.txt); raw per-case JSON is in `results/`, and
+[transcript.txt](results/transcript.txt) contains the commands, exits, error text, and `jj` checks.
+No real credentials or secret-bearing mock URLs were used. The mock endpoint received a batch POST
+for every case; the corrupt-data case also received two object GET requests. These facts confirm
+that the configured loopback endpoint, rather than the GitHub LFS endpoint, was exercised.
+
+| Scenario | `git lfs fetch` | Diagnostic | `jj` / data result |
+| --- | ---: | --- | --- |
+| Batch HTTP 401 | 2 | Credential prompt disabled; “Git credentials … not found.” | Clean; pointers, disk, cache unchanged. |
+| Batch HTTP 403 | 2 | `batch response: mock 403 LFS batch failure` | Same. |
+| Batch HTTP 404 | 2 | `batch response: mock 404 LFS batch failure` | Same. |
+| Batch HTTP 429 | 2 | `batch response: LFS: mock 429 LFS batch failure` | Same; nine batch POSTs over 6.88 seconds despite `lfs.transfer.maxretries=0`. |
+| Batch HTTP 500 | 2 | `batch response: Fatal error: mock 500 LFS batch failure`; Git LFS log path supplied. | Same. |
+| HTTP 200 with per-object 404 | 2 | Both object IDs and `[404] mock missing LFS object` reported. | Same. |
+| HTTP 200 with corrupt object bytes | 2 | Expected and actual SHA-256 IDs reported for both downloads. | Same; no corrupt object entered cache. |
+
+For every case, `jj st` exited 0 and printed `The working copy has no changes.` The SHA-256 of
+both on-disk pointer files and the stored pointer text shown by `jj file show -r @` matched the
+baseline. `.git/lfs/objects` remained empty. This supports the narrow conclusion that failed
+**external Git LFS fetches** did not mutate this checkout or `jj` tree. It does not show `jj`
+performing LFS transport; the errors and integrity checks came from Git LFS.
+
+The 401 diagnostic was not especially actionable beyond signaling a credential failure. Git LFS
+made repeated requests for 429 even with `lfs.transfer.maxretries=0`; the 15-second process guard
+bounded the evaluation, and the case completed in 6.88 seconds. The mock did not send a
+`Retry-After` header, so this does not characterize hosted rate-limit timing. No secret-redaction
+claim is possible because the endpoint URL had no credentials. The HTTP 500 log may contain more
+client detail than stderr; it was not needed to classify this failure.
+
+This run did not test unwritable custom `lfs.storage`, proxy/TLS failures, Git LFS checkout/smudge,
+or hydrated-file preservation during failed refresh. Those require different fixture state or
+host permissions. No hosted writes or PR source changes were made.

@@ -1,0 +1,167 @@
+{
+  "id": "A07-symlink-attrs",
+  "purpose": "Do not follow symlinked attribute files",
+  "category": "contract",
+  "status": "PASS",
+  "seconds": 0.7367686666548252,
+  "checks": [
+    {
+      "label": "Symlinked attributes not followed",
+      "pass": true
+    }
+  ],
+  "observations": {},
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "init",
+        "-b",
+        "main"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos-release/repos/A07-symlink-attrs",
+      "rc": 0,
+      "seconds": 0.012421166989952326,
+      "stdout": "Initialized empty Git repository in /tmp/jj-lfs-evaluation/macos-release/repos/A07-symlink-attrs/.git/\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.name",
+        "LFS Evaluation"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos-release/repos/A07-symlink-attrs",
+      "rc": 0,
+      "seconds": 0.006225749850273132,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.email",
+        "eval@example.invalid"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos-release/repos/A07-symlink-attrs",
+      "rc": 0,
+      "seconds": 0.006293416954576969,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "commit.gpgsign",
+        "false"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos-release/repos/A07-symlink-attrs",
+      "rc": 0,
+      "seconds": 0.005923625081777573,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "core.autocrlf",
+        "false"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos-release/repos/A07-symlink-attrs",
+      "rc": 0,
+      "seconds": 0.006018166895955801,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "lfs",
+        "install",
+        "--local"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos-release/repos/A07-symlink-attrs",
+      "rc": 0,
+      "seconds": 0.13634541630744934,
+      "stdout": "Updated Git hooks.\nGit LFS initialized.\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "add",
+        "."
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos-release/repos/A07-symlink-attrs",
+      "rc": 0,
+      "seconds": 0.009004750289022923,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "commit",
+        "-m",
+        "Seed LFS fixture"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos-release/repos/A07-symlink-attrs",
+      "rc": 0,
+      "seconds": 0.3150620828382671,
+      "stdout": "[main (root-commit) e0b1561] Seed LFS fixture\n 2 files changed, 1 insertion(+)\n create mode 100644 .gitattributes\n create mode 100644 note.txt\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos-release/repos/A07-symlink-attrs",
+      "rc": 0,
+      "seconds": 0.006734333001077175,
+      "stdout": "e0b156106ff78e6eff2a372b0fc2ad72d0f549ae\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr-release",
+        "git",
+        "init",
+        "--colocate"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos-release/repos/A07-symlink-attrs",
+      "rc": 0,
+      "seconds": 0.15427216701209545,
+      "stdout": "",
+      "stderr": "Done importing changes from the underlying Git repo.\nInitialized repo in \".\"\n"
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr-release",
+        "status"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos-release/repos/A07-symlink-attrs",
+      "rc": 0,
+      "seconds": 0.06254024989902973,
+      "stdout": "Working copy changes:\nM .gitattributes\nA new.bin\nA rules\nWorking copy  (@) : qslqnrvq 721dac13 (no description set)\nParent commit (@-): suqxpkzo e0b15610 main | Seed LFS fixture\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr-release",
+        "file",
+        "list"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos-release/repos/A07-symlink-attrs",
+      "rc": 0,
+      "seconds": 0.014122583903372288,
+      "stdout": ".gitattributes\nnew.bin\nnote.txt\nrules\n",
+      "stderr": ""
+    }
+  ]
+}

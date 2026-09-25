@@ -1,0 +1,38 @@
+# Release-binary performance and diagnostic probes
+
+Six disposable probes used `/tmp/jj-lfs-evaluation/bin/jj-pr-release` (`jj 0.45.1`).
+The [script](run.py.txt), [results](results.json), and per-probe JSON files contain exact commands,
+exit codes, output, hashes, and raw timings. All six probes completed.
+
+A 64 MiB LFS asset was seeded through Git LFS. A `jj status` call completed in 0.0144 s,
+left the hydrated disk payload unchanged (SHA-256
+`08304218c78b79e8b507b692f5315a0a66baba08e5253afb7c0c6c4432836c71`),
+and retained a 133-byte pointer in the jj tree (SHA-256
+`bbfda7c4b811c12319edc6017ffe1d1b5842558352e710c806757bdec3103676`).
+There was no max-new-file-size failure. The payload was deterministic and highly repetitive;
+resident memory was not measured. See [large-64m.json](large-64m.json).
+
+Each status fixture contained 3,000 ordinary tracked files. Both modes were warmed once,
+then run five times each in alternating order. These are process wall-clock seconds from one
+local machine, not a controlled performance benchmark:
+
+| Attribute layout | Default `git.ignore-filters` median | Disabled median | Raw data |
+| --- | ---: | ---: | --- |
+| Empty root `.gitattributes` | 0.0185 | 0.0181 | [bench-none.json](bench-none.json) |
+| 5,000 root patterns | 0.0274 | 0.0190 | [bench-root-patterns.json](bench-root-patterns.json) |
+| 60 nested `.gitattributes` files | 0.0196 | 0.0185 | [bench-nested.json](bench-nested.json) |
+
+The root-pattern fixture showed about 8 ms more time with attribute filtering enabled in
+this run. The nested fixture showed about 1 ms more. The fixtures were separate repositories,
+so these numbers should be treated as local observations rather than a general scaling claim.
+
+For a new path matching `filter=lfs`, `jj --debug status` succeeded and excluded the path.
+Its debug output contained generic lock events but did not name `new.bin` or explain the
+filter decision. See [debug-excluded.json](debug-excluded.json).
+
+With `git.ignore-filters=["crypt"]`, a new `filter=crypt` path was excluded and a new
+`filter=lfs` path was included. This only tests attribute matching; no `git-crypt` executable
+was installed or needed. See [custom-filter.json](custom-filter.json).
+
+The fixtures isolated jj and Git configuration, set signing behavior to `drop`, used no
+network, and made no source edits. Version-control commands ran sequentially per fixture.

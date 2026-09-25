@@ -1,0 +1,282 @@
+{
+  "id": "base-restore",
+  "purpose": "restore",
+  "category": "contract",
+  "status": "ERROR",
+  "error": "[Errno 2] No such file or directory: '/tmp/jj-lfs-evaluation/workflows-sol/baseline/repos/base-restore/asset.bin'",
+  "traceback": "Traceback (most recent call last):\n  File \"/tmp/jj-lfs-evaluation/harness/evaluate.py\", line 121, in case\n    fn(f)\n    ~~^^^\n  File \"/tmp/jj-lfs-evaluation/workflows-sol/run.py\", line 157, in <lambda>\n    ('restore',lambda f:switch(f,'restore')),\n                        ~~~~~~^^^^^^^^^^^^^\n  File \"/tmp/jj-lfs-evaluation/workflows-sol/run.py\", line 63, in switch\n    disk=(f.root/'asset.bin').read_bytes()\n  File \"/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/pathlib/__init__.py\", line 777, in read_bytes\n    with self.open(mode='rb', buffering=0) as f:\n         ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/pathlib/__init__.py\", line 771, in open\n    return io.open(self, mode, buffering, encoding, errors, newline)\n           ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nFileNotFoundError: [Errno 2] No such file or directory: '/tmp/jj-lfs-evaluation/workflows-sol/baseline/repos/base-restore/asset.bin'\n",
+  "seconds": 3.519129500258714,
+  "checks": [
+    {
+      "label": "Initial hydration has expected bytes",
+      "pass": true
+    }
+  ],
+  "observations": {
+    "edit_a": {
+      "rc": 0,
+      "out": "",
+      "err": "Working copy  (@) now at: lpqrpkmn e5a66520 Seed LFS fixture\nParent commit (@-)      : zzzzzzzz 00000000 (empty) (no description set)\nAdded 0 files, modified 1 files, removed 0 files\n"
+    },
+    "after_local_edit_status": {
+      "rc": 0,
+      "out": "Working copy changes:\nA .gitattributes\nA asset.bin\nA note.txt\nWorking copy  (@) : lpqrpkmn 0e9f9365 Seed LFS fixture\nParent commit (@-): zzzzzzzz 00000000 (empty) (no description set)\n",
+      "err": "Rebased 3 descendant commits onto updated working copy.\n"
+    },
+    "local": {
+      "edited_sha": "79014f34a44dbd4fa5b5bea4c010d55d1c009c5ddf310a6abf24e23cc7c4832a",
+      "stored_sha": "79014f34a44dbd4fa5b5bea4c010d55d1c009c5ddf310a6abf24e23cc7c4832a",
+      "stored_pointer": false,
+      "rev": "0e9f936599f834c834e4839b20c8630f9657394b"
+    },
+    "restore": {
+      "rc": 0,
+      "out": "",
+      "err": "Rebased 3 descendant commits.\nWorking copy  (@) now at: lpqrpkmn cde82442 Seed LFS fixture\nParent commit (@-)      : zzzzzzzz 00000000 (empty) (no description set)\nAdded 0 files, modified 0 files, removed 1 files\n"
+    }
+  },
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "init",
+        "-b",
+        "main"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/baseline/repos/base-restore",
+      "rc": 0,
+      "seconds": 0.04330158280208707,
+      "stdout": "Initialized empty Git repository in /tmp/jj-lfs-evaluation/workflows-sol/baseline/repos/base-restore/.git/\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.name",
+        "LFS Evaluation"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/baseline/repos/base-restore",
+      "rc": 0,
+      "seconds": 0.03838687529787421,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.email",
+        "eval@example.invalid"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/baseline/repos/base-restore",
+      "rc": 0,
+      "seconds": 0.02481475006788969,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "commit.gpgsign",
+        "false"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/baseline/repos/base-restore",
+      "rc": 0,
+      "seconds": 0.024196792393922806,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "core.autocrlf",
+        "false"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/baseline/repos/base-restore",
+      "rc": 0,
+      "seconds": 0.01901974994689226,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "lfs",
+        "install",
+        "--local"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/baseline/repos/base-restore",
+      "rc": 0,
+      "seconds": 0.38692366564646363,
+      "stdout": "Updated Git hooks.\nGit LFS initialized.\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "add",
+        "."
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/baseline/repos/base-restore",
+      "rc": 0,
+      "seconds": 0.2063567079603672,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "commit",
+        "-m",
+        "Seed LFS fixture"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/baseline/repos/base-restore",
+      "rc": 0,
+      "seconds": 0.7446787082590163,
+      "stdout": "[main (root-commit) e5a6652] Seed LFS fixture\n 3 files changed, 5 insertions(+)\n create mode 100644 .gitattributes\n create mode 100644 asset.bin\n create mode 100644 note.txt\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/baseline/repos/base-restore",
+      "rc": 0,
+      "seconds": 0.03934704093262553,
+      "stdout": "e5a66520b3c97b3bc9b95e628705278a3bf51957\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/opt/homebrew/Cellar/jj/0.45.1/bin/jj",
+        "git",
+        "init",
+        "--colocate"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/baseline/repos/base-restore",
+      "rc": 0,
+      "seconds": 0.4275921671651304,
+      "stdout": "",
+      "stderr": "Done importing changes from the underlying Git repo.\nInitialized repo in \".\"\n"
+    },
+    {
+      "argv": [
+        "git",
+        "add",
+        "asset.bin"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/baseline/repos/base-restore",
+      "rc": 0,
+      "seconds": 0.21573916682973504,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "commit",
+        "-m",
+        "Second LFS version"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/baseline/repos/base-restore",
+      "rc": 0,
+      "seconds": 0.3525542081333697,
+      "stdout": "[main 4d0893c] Second LFS version\n 1 file changed, 2 insertions(+), 2 deletions(-)\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/baseline/repos/base-restore",
+      "rc": 0,
+      "seconds": 0.017167000100016594,
+      "stdout": "4d0893c82c62d10371c965bdcdecb2860aaf062b\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/opt/homebrew/Cellar/jj/0.45.1/bin/jj",
+        "status"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/baseline/repos/base-restore",
+      "rc": 0,
+      "seconds": 0.2614562502130866,
+      "stdout": "Working copy changes:\nM asset.bin\nWorking copy  (@) : nlvvvrxz 79f69033 (no description set)\nParent commit (@-): mvtzkuuz 4d0893c8 main | Second LFS version\n",
+      "stderr": "Reset the working copy parent to the new Git HEAD.\nDone importing changes from the underlying Git repo.\n"
+    },
+    {
+      "argv": [
+        "/opt/homebrew/Cellar/jj/0.45.1/bin/jj",
+        "edit",
+        "e5a66520b3c97b3bc9b95e628705278a3bf51957"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/baseline/repos/base-restore",
+      "rc": 0,
+      "seconds": 0.13382441736757755,
+      "stdout": "",
+      "stderr": "Working copy  (@) now at: lpqrpkmn e5a66520 Seed LFS fixture\nParent commit (@-)      : zzzzzzzz 00000000 (empty) (no description set)\nAdded 0 files, modified 1 files, removed 0 files\n"
+    },
+    {
+      "argv": [
+        "/opt/homebrew/Cellar/jj/0.45.1/bin/jj",
+        "status"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/baseline/repos/base-restore",
+      "rc": 0,
+      "seconds": 0.19825779227539897,
+      "stdout": "Working copy changes:\nA .gitattributes\nA asset.bin\nA note.txt\nWorking copy  (@) : lpqrpkmn 0e9f9365 Seed LFS fixture\nParent commit (@-): zzzzzzzz 00000000 (empty) (no description set)\n",
+      "stderr": "Rebased 3 descendant commits onto updated working copy.\n"
+    },
+    {
+      "argv": [
+        "/opt/homebrew/Cellar/jj/0.45.1/bin/jj",
+        "log",
+        "-r",
+        "@",
+        "--no-graph",
+        "-T",
+        "commit_id"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/baseline/repos/base-restore",
+      "rc": 0,
+      "seconds": 0.08955375012010336,
+      "stdout": "0e9f936599f834c834e4839b20c8630f9657394b",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/opt/homebrew/Cellar/jj/0.45.1/bin/jj",
+        "file",
+        "show",
+        "-r",
+        "0e9f936599f834c834e4839b20c8630f9657394b",
+        "asset.bin"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/baseline/repos/base-restore",
+      "rc": 0,
+      "seconds": 0.05381574993953109,
+      "stdout": "local modified hydrated asset\u0000\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/opt/homebrew/Cellar/jj/0.45.1/bin/jj",
+        "restore",
+        "asset.bin"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/baseline/repos/base-restore",
+      "rc": 0,
+      "seconds": 0.23153958329930902,
+      "stdout": "",
+      "stderr": "Rebased 3 descendant commits.\nWorking copy  (@) now at: lpqrpkmn cde82442 Seed LFS fixture\nParent commit (@-)      : zzzzzzzz 00000000 (empty) (no description set)\nAdded 0 files, modified 0 files, removed 1 files\n"
+    }
+  ]
+}

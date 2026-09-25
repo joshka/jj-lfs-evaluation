@@ -1,0 +1,174 @@
+{
+  "id": "C02-force-track",
+  "purpose": "Explicit tracking has actionable result",
+  "category": "diagnostics",
+  "status": "FAIL",
+  "seconds": 0.19986087500001304,
+  "checks": [
+    {
+      "label": "Explicit tracking either tracks or explains exclusion",
+      "pass": false
+    }
+  ],
+  "observations": {
+    "track": {
+      "rc": 0,
+      "stderr": ""
+    }
+  },
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "init",
+        "-b",
+        "main"
+      ],
+      "cwd": "/eval/linux-modern/repos/C02-force-track",
+      "rc": 0,
+      "seconds": 0.01863283299996965,
+      "stdout": "Initialized empty Git repository in /eval/linux-modern/repos/C02-force-track/.git/\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.name",
+        "LFS Evaluation"
+      ],
+      "cwd": "/eval/linux-modern/repos/C02-force-track",
+      "rc": 0,
+      "seconds": 0.003893959000038194,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.email",
+        "eval@example.invalid"
+      ],
+      "cwd": "/eval/linux-modern/repos/C02-force-track",
+      "rc": 0,
+      "seconds": 0.0032859589999816308,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "commit.gpgsign",
+        "false"
+      ],
+      "cwd": "/eval/linux-modern/repos/C02-force-track",
+      "rc": 0,
+      "seconds": 0.0031248330000153146,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "core.autocrlf",
+        "false"
+      ],
+      "cwd": "/eval/linux-modern/repos/C02-force-track",
+      "rc": 0,
+      "seconds": 0.0031864160000054653,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "lfs",
+        "install",
+        "--local"
+      ],
+      "cwd": "/eval/linux-modern/repos/C02-force-track",
+      "rc": 0,
+      "seconds": 0.029608541000015975,
+      "stdout": "Updated Git hooks.\nGit LFS initialized.\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "add",
+        "."
+      ],
+      "cwd": "/eval/linux-modern/repos/C02-force-track",
+      "rc": 0,
+      "seconds": 0.006309874999999465,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "commit",
+        "-m",
+        "Seed LFS fixture"
+      ],
+      "cwd": "/eval/linux-modern/repos/C02-force-track",
+      "rc": 0,
+      "seconds": 0.031647458999998435,
+      "stdout": "[main (root-commit) 8e39e77] Seed LFS fixture\n 2 files changed, 2 insertions(+)\n create mode 100644 .gitattributes\n create mode 100644 note.txt\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "/eval/linux-modern/repos/C02-force-track",
+      "rc": 0,
+      "seconds": 0.001607999999976073,
+      "stdout": "8e39e77553ca2836bf07d23cce80dfe3c2cdf328\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/target/debug/jj",
+        "git",
+        "init",
+        "--colocate"
+      ],
+      "cwd": "/eval/linux-modern/repos/C02-force-track",
+      "rc": 0,
+      "seconds": 0.050179624999998396,
+      "stdout": "",
+      "stderr": "Done importing changes from the underlying Git repo.\nInitialized repo in \".\"\n"
+    },
+    {
+      "argv": [
+        "/target/debug/jj",
+        "file",
+        "track",
+        "new.bin"
+      ],
+      "cwd": "/eval/linux-modern/repos/C02-force-track",
+      "rc": 0,
+      "seconds": 0.02606562500000109,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/target/debug/jj",
+        "file",
+        "list"
+      ],
+      "cwd": "/eval/linux-modern/repos/C02-force-track",
+      "rc": 0,
+      "seconds": 0.020828083000026254,
+      "stdout": ".gitattributes\nnote.txt\n",
+      "stderr": ""
+    }
+  ]
+}

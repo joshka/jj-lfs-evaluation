@@ -1,0 +1,157 @@
+{
+  "id": "C03-invalid-config",
+  "purpose": "Invalid config has useful error",
+  "category": "contract",
+  "status": "PASS",
+  "seconds": 0.19618920800002115,
+  "checks": [
+    {
+      "label": "Invalid config reports key and fails",
+      "pass": true,
+      "stderr": "Internal error: The repository appears broken or inaccessible\nCaused by:\n1: Invalid type or value for git.ignore-filters\n2: invalid type: string \"lfs\", expected a sequence\n\n"
+    }
+  ],
+  "observations": {},
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "init",
+        "-b",
+        "main"
+      ],
+      "cwd": "/eval/linux-modern/repos/C03-invalid-config",
+      "rc": 0,
+      "seconds": 0.014218999999968673,
+      "stdout": "Initialized empty Git repository in /eval/linux-modern/repos/C03-invalid-config/.git/\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.name",
+        "LFS Evaluation"
+      ],
+      "cwd": "/eval/linux-modern/repos/C03-invalid-config",
+      "rc": 0,
+      "seconds": 0.0034658749999607608,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.email",
+        "eval@example.invalid"
+      ],
+      "cwd": "/eval/linux-modern/repos/C03-invalid-config",
+      "rc": 0,
+      "seconds": 0.003126666000014211,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "commit.gpgsign",
+        "false"
+      ],
+      "cwd": "/eval/linux-modern/repos/C03-invalid-config",
+      "rc": 0,
+      "seconds": 0.00372883299996829,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "core.autocrlf",
+        "false"
+      ],
+      "cwd": "/eval/linux-modern/repos/C03-invalid-config",
+      "rc": 0,
+      "seconds": 0.0029357079999954294,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "lfs",
+        "install",
+        "--local"
+      ],
+      "cwd": "/eval/linux-modern/repos/C03-invalid-config",
+      "rc": 0,
+      "seconds": 0.032105583000031856,
+      "stdout": "Updated Git hooks.\nGit LFS initialized.\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "add",
+        "."
+      ],
+      "cwd": "/eval/linux-modern/repos/C03-invalid-config",
+      "rc": 0,
+      "seconds": 0.021586958000000322,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "commit",
+        "-m",
+        "Seed LFS fixture"
+      ],
+      "cwd": "/eval/linux-modern/repos/C03-invalid-config",
+      "rc": 0,
+      "seconds": 0.047261332999994465,
+      "stdout": "[main (root-commit) bb3c79c] Seed LFS fixture\n 3 files changed, 5 insertions(+)\n create mode 100644 .gitattributes\n create mode 100644 asset.bin\n create mode 100644 note.txt\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "/eval/linux-modern/repos/C03-invalid-config",
+      "rc": 0,
+      "seconds": 0.0017925409999861586,
+      "stdout": "bb3c79c357fe75fabb2e841e9e554f8f7490539d\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/target/debug/jj",
+        "git",
+        "init",
+        "--colocate"
+      ],
+      "cwd": "/eval/linux-modern/repos/C03-invalid-config",
+      "rc": 0,
+      "seconds": 0.053420666000022266,
+      "stdout": "",
+      "stderr": "Done importing changes from the underlying Git repo.\nInitialized repo in \".\"\n"
+    },
+    {
+      "argv": [
+        "/target/debug/jj",
+        "--config=git.ignore-filters=\"lfs\"",
+        "status"
+      ],
+      "cwd": "/eval/linux-modern/repos/C03-invalid-config",
+      "rc": 255,
+      "seconds": 0.010787499999992178,
+      "stdout": "",
+      "stderr": "Internal error: The repository appears broken or inaccessible\nCaused by:\n1: Invalid type or value for git.ignore-filters\n2: invalid type: string \"lfs\", expected a sequence\n\n"
+    }
+  ]
+}

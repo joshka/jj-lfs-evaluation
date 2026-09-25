@@ -1,0 +1,37 @@
+# Git LFS calibration report
+
+Run `20260925T175614Z` used `/tmp/jj-lfs-evaluation/bin/jj-pr` for C1–C4 and `/opt/homebrew/bin/jj` as the C4 baseline.
+Task execution elapsed 15.348 seconds; task start was
+2026-09-25T17:56:14.634416+00:00, and completion was 2026-09-25T17:56:29.982424+00:00.
+
+## Expectations
+
+The PR change documents that Git-backed snapshots skip paths whose
+`.gitattributes` `filter` value appears in `git.ignore-filters`, which defaults to
+`["lfs"]`. It also says Git LFS hydration remains an external Git LFS operation.
+The experiment therefore checks both the pointer stored in the jj tree and the
+actual hydrated bytes on disk. Content evidence records lengths and SHA-256
+digests; pointers are parsed for their payload OID and declared size.
+
+## Observations
+
+- C1: `True`. See `results.json` for each
+  repeated snapshot and the pointer/payload hashes before and after literal-pointer
+  hydration.
+- C2: Git and jj both treated the info-only file as LFS-filtered in this run.
+- C3: Failed fetch exit=0; disk remained pointer=False; local object absent=False. Restored fetch exit=0; disk equals payload=True.
+- C4 pinned PR binary: C4_pr: setup did not complete (CommandError("command failed with exit 2: ['git', 'lfs', 'checkout', '--', 'asset.bin']\nCould not checkout\n\nErrors logged to '/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C4-pr/.git/lfs/logs/20260925T105626.949124.log'.\nUse `git lfs logs last` to view the log.\n")).
+- C4 Homebrew baseline: C4_baseline: setup did not complete (CommandError("command failed with exit 2: ['git', 'lfs', 'checkout', '--', 'asset.bin']\nCould not checkout\n\nErrors logged to '/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C4-baseline/.git/lfs/logs/20260925T105629.873472.log'.\nUse `git lfs logs last` to view the log.\n")).
+
+## Interpretation and limits
+
+Setup failures are recorded separately and are not product passes. The C4 baseline
+uses an independently created repository with identical payloads and deterministic
+Git commit metadata; Git LFS pointer OIDs are content-derived. C3 uses a disposable
+local bare Git remote plus a loopback-only local Git LFS batch/download endpoint.
+The result describes these four small deterministic scenarios only. It does not
+establish behavior for other Git attribute sources, external LFS servers, or other
+revision-switch workflows.
+
+See `transcript.log` for commands, output, exit codes, and command timing; see
+`results.json` for machine-readable checks and content evidence.

@@ -1,0 +1,133 @@
+#!/usr/bin/env python3
+"""Exercise Git LFS HTTP failures against an unchanged jj pointer checkout."""
+import hashlib
+import json
+import os
+from pathlib import Path
+import subprocess
+import sys
+import threading
+import time
+from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+
+ROOT = Path(__file__).resolve().parent
+FIXTURE = ROOT / "fixture"
+JJ = Path("/tmp/jj-lfs-evaluation/bin/jj-pr")
+OUT = ROOT / "results"
+OUT.mkdir(exist_ok=True)
+CASES = ("batch-401", "batch-403", "batch-404", "batch-429", "batch-500", "object-404", "corrupt-data")
+PATHS = ("payload.bin", "missing.bin")
+
+
+def run(args, timeout=15):
+    env = os.environ.copy()
+    env["GIT_TERMINAL_PROMPT"] = "0"
+    env["GCM_INTERACTIVE"] = "never"
+    env["GIT_LFS_SKIP_SMUDGE"] = "1"
+    env["GIT_CONFIG_NOSYSTEM"] = "1"
+    env["GIT_CONFIG_GLOBAL"] = os.devnull
+    env["JJ_CONFIG"] = os.devnull
+    try:
+        p = subprocess.run(args, cwd=FIXTURE, env=env, text=True,
+                           stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=timeout)
+        return {"exit": p.returncode, "stdout": p.stdout, "stderr": p.stderr}
+    except subprocess.TimeoutExpired as ex:
+        return {"exit": "TIMEOUT", "stdout": (ex.stdout or b"").decode(errors="replace") if isinstance(ex.stdout, bytes) else (ex.stdout or ""),
+                "stderr": (ex.stderr or b"").decode(errors="replace") if isinstance(ex.stderr, bytes) else (ex.stderr or "")}
+
+
+class Handler(BaseHTTPRequestHandler):
+    def log_message(self, *_):
+        pass
+
+    def respond(self, code, body, content_type="application/vnd.git-lfs+json"):
+        self.send_response(code)
+        self.send_header("Content-Type", content_type)
+        self.send_header("Content-Length", str(len(body)))
+        self.end_headers()
+        self.wfile.write(body)
+
+    def do_POST(self):
+        body = self.rfile.read(int(self.headers.get("Content-Length", "0")))
+        self.server.requests.append({"method": "POST", "path": self.path, "bytes": len(body)})
+        case = self.server.case
+        if case.startswith("batch-"):
+            code = int(case.split("-")[1])
+            self.respond(code, json.dumps({"message": f"mock {code} LFS batch failure"}).encode())
+            return
+        objects = json.loads(body).get("objects", [])
+        if case == "object-404":
+            response = {"objects": [{"oid": o["oid"], "size": o["size"],
+                                     "error": {"code": 404, "message": "mock missing LFS object"}}
+                                    for o in objects]}
+        else:
+            response = {"objects": [{"oid": o["oid"], "size": o["size"],
+                                     "actions": {"download": {"href": f"http://127.0.0.1:{self.server.server_port}/object/{o['oid']}"}}}
+                                    for o in objects]}
+        self.respond(200, json.dumps(response).encode())
+
+    def do_GET(self):
+        self.server.requests.append({"method": "GET", "path": self.path})
+        if self.server.case == "corrupt-data":
+            self.respond(200, b"x" * 4096, "application/octet-stream")
+        else:
+            self.respond(404, b"mock object not found", "text/plain")
+
+
+def sha(path):
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def snapshot():
+    return {p: {"size": (FIXTURE / p).stat().st_size, "sha256": sha(FIXTURE / p)} for p in PATHS}
+
+
+def cache_files():
+    base = FIXTURE / ".git/lfs/objects"
+    return sorted(str(p.relative_to(base)) for p in base.rglob("*") if p.is_file()) if base.exists() else []
+
+
+def main():
+    baseline = snapshot()
+    store = {p: run([str(JJ), "--ignore-working-copy", "file", "show", "-r", "@", p]) for p in PATHS}
+    if any(v["exit"] != 0 for v in store.values()) or cache_files():
+        raise RuntimeError("Fixture is not a clean absent-cache pointer checkout")
+    results = []
+    for case in CASES:
+        server = ThreadingHTTPServer(("127.0.0.1", 0), Handler)
+        server.case = case
+        server.requests = []
+        thread = threading.Thread(target=server.serve_forever, daemon=True)
+        thread.start()
+        endpoint = f"http://127.0.0.1:{server.server_port}/lfs"
+        command = ["git", "-c", f"lfs.url={endpoint}", "-c", "lfs.transfer.maxretries=0",
+                   "-c", "lfs.transfer.maxretrydelay=1", "-c", "lfs.activitytimeout=2",
+                   "-c", "lfs.dialtimeout=2", "lfs", "fetch", "origin", "HEAD"]
+        started = time.monotonic()
+        fetch = run(command)
+        elapsed = round(time.monotonic() - started, 2)
+        server.shutdown()
+        server.server_close()
+        thread.join(timeout=2)
+        jj_status = run([str(JJ), "st"])
+        store_after = {p: run([str(JJ), "--ignore-working-copy", "file", "show", "-r", "@", p]) for p in PATHS}
+        disk_unchanged = snapshot() == baseline
+        store_unchanged = all(store[p]["stdout"] == store_after[p]["stdout"] and store_after[p]["exit"] == 0 for p in PATHS)
+        result = {"case": case, "endpoint": endpoint, "command": command, "elapsed_seconds": elapsed,
+                  "fetch": fetch, "http_requests": server.requests, "jj_status": jj_status,
+                  "disk_unchanged": disk_unchanged, "store_unchanged": store_unchanged,
+                  "cache_files_after": cache_files(), "setup_valid": bool(server.requests)}
+        (OUT / f"{case}.json").write_text(json.dumps(result, indent=2))
+        results.append({"case": case, "fetch_exit": fetch["exit"], "elapsed_seconds": elapsed,
+                        "requests": server.requests, "disk_unchanged": disk_unchanged,
+                        "store_unchanged": store_unchanged, "cache_files": cache_files(),
+                        "setup_valid": bool(server.requests), "jj_exit": jj_status["exit"],
+                        "stderr_first_lines": fetch["stderr"].splitlines()[:6]})
+        print(json.dumps(results[-1]), flush=True)
+    (OUT / "summary.json").write_text(json.dumps({"baseline": baseline, "results": results}, indent=2))
+    return 0 if all(r["setup_valid"] and r["fetch_exit"] not in (0, "TIMEOUT") and r["disk_unchanged"]
+                    and r["store_unchanged"] and not r["cache_files"] for r in results) else 1
+
+
+if __name__ == "__main__":
+    sys.exit(main())

@@ -1,0 +1,185 @@
+{
+  "id": "A01-subdir-relative",
+  "purpose": "Attribute matching agrees with Git",
+  "category": "contract",
+  "status": "PASS",
+  "seconds": 1.1478937089999874,
+  "checks": [
+    {
+      "label": "Expected exclusion matches Git attribute decision",
+      "pass": true,
+      "expected_excluded": true,
+      "actual_included": false,
+      "git_check_attr": "sub/a.bin: filter: lfs\n",
+      "jj_status": "Working copy changes:\nA sub/.gitattributes\nWorking copy  (@) : krklxkpz 5e3ac537 (no description set)\nParent commit (@-): squxkxvq 8c0ad922 main | Seed LFS fixture\n"
+    }
+  ],
+  "observations": {},
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "init",
+        "-b",
+        "main"
+      ],
+      "cwd": "/eval/linux/repos/A01-subdir-relative",
+      "rc": 0,
+      "seconds": 0.09010745899999506,
+      "stdout": "Initialized empty Git repository in /eval/linux/repos/A01-subdir-relative/.git/\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.name",
+        "LFS Evaluation"
+      ],
+      "cwd": "/eval/linux/repos/A01-subdir-relative",
+      "rc": 0,
+      "seconds": 0.045939416999999594,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.email",
+        "eval@example.invalid"
+      ],
+      "cwd": "/eval/linux/repos/A01-subdir-relative",
+      "rc": 0,
+      "seconds": 0.02351037500000075,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "commit.gpgsign",
+        "false"
+      ],
+      "cwd": "/eval/linux/repos/A01-subdir-relative",
+      "rc": 0,
+      "seconds": 0.006224125000017011,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "core.autocrlf",
+        "false"
+      ],
+      "cwd": "/eval/linux/repos/A01-subdir-relative",
+      "rc": 0,
+      "seconds": 0.04129870799999935,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "lfs",
+        "install",
+        "--local"
+      ],
+      "cwd": "/eval/linux/repos/A01-subdir-relative",
+      "rc": 0,
+      "seconds": 0.06882762499998307,
+      "stdout": "Updated Git hooks.\nGit LFS initialized.\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "add",
+        "."
+      ],
+      "cwd": "/eval/linux/repos/A01-subdir-relative",
+      "rc": 0,
+      "seconds": 0.018281707999989294,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "commit",
+        "-m",
+        "Seed LFS fixture"
+      ],
+      "cwd": "/eval/linux/repos/A01-subdir-relative",
+      "rc": 0,
+      "seconds": 0.18886283300000173,
+      "stdout": "[main (root-commit) 8c0ad92] Seed LFS fixture\n 2 files changed, 1 insertion(+)\n create mode 100644 .gitattributes\n create mode 100644 note.txt\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "/eval/linux/repos/A01-subdir-relative",
+      "rc": 0,
+      "seconds": 0.01060391699999741,
+      "stdout": "8c0ad922b54c662c2b2eb00d15d21d8c924f4a9e\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/target/debug/jj",
+        "git",
+        "init",
+        "--colocate"
+      ],
+      "cwd": "/eval/linux/repos/A01-subdir-relative",
+      "rc": 0,
+      "seconds": 0.4319577090000166,
+      "stdout": "",
+      "stderr": "Done importing changes from the underlying Git repo.\nInitialized repo in \".\"\n"
+    },
+    {
+      "argv": [
+        "git",
+        "check-attr",
+        "filter",
+        "--",
+        "sub/a.bin"
+      ],
+      "cwd": "/eval/linux/repos/A01-subdir-relative",
+      "rc": 0,
+      "seconds": 0.010726750000003449,
+      "stdout": "sub/a.bin: filter: lfs\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/target/debug/jj",
+        "status"
+      ],
+      "cwd": "/eval/linux/repos/A01-subdir-relative",
+      "rc": 0,
+      "seconds": 0.14065733399999658,
+      "stdout": "Working copy changes:\nA sub/.gitattributes\nWorking copy  (@) : krklxkpz 5e3ac537 (no description set)\nParent commit (@-): squxkxvq 8c0ad922 main | Seed LFS fixture\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/target/debug/jj",
+        "file",
+        "list"
+      ],
+      "cwd": "/eval/linux/repos/A01-subdir-relative",
+      "rc": 0,
+      "seconds": 0.045740499999993744,
+      "stdout": ".gitattributes\nnote.txt\nsub/.gitattributes\n",
+      "stderr": ""
+    }
+  ]
+}

@@ -1,0 +1,181 @@
+{
+  "id": "W02-sparse-dirty",
+  "purpose": "Sparse removal must not silently lose local edits",
+  "category": "data-integrity",
+  "status": "PASS",
+  "seconds": 2.003717000130564,
+  "checks": [
+    {
+      "label": "Sparse exclusion preserves, snapshots, or rejects local edits",
+      "pass": true,
+      "stored_sha256": "f373b3bf36856f8fd4d1045d39a945690f960207ffaadc274305d5f90619a816",
+      "edited_sha256": "f373b3bf36856f8fd4d1045d39a945690f960207ffaadc274305d5f90619a816"
+    }
+  ],
+  "observations": {
+    "sparse": {
+      "rc": 0,
+      "stderr": "Added 0 files, modified 0 files, removed 2 files\n",
+      "asset_exists": false
+    }
+  },
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "init",
+        "-b",
+        "main"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/base-sparse-recheck/repos/W02-sparse-dirty",
+      "rc": 0,
+      "seconds": 0.02517654187977314,
+      "stdout": "Initialized empty Git repository in /tmp/jj-lfs-evaluation/base-sparse-recheck/repos/W02-sparse-dirty/.git/\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.name",
+        "LFS Evaluation"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/base-sparse-recheck/repos/W02-sparse-dirty",
+      "rc": 0,
+      "seconds": 0.013397208414971828,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.email",
+        "eval@example.invalid"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/base-sparse-recheck/repos/W02-sparse-dirty",
+      "rc": 0,
+      "seconds": 0.014268625061959028,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "commit.gpgsign",
+        "false"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/base-sparse-recheck/repos/W02-sparse-dirty",
+      "rc": 0,
+      "seconds": 0.013223332818597555,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "core.autocrlf",
+        "false"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/base-sparse-recheck/repos/W02-sparse-dirty",
+      "rc": 0,
+      "seconds": 0.013513374608010054,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "lfs",
+        "install",
+        "--local"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/base-sparse-recheck/repos/W02-sparse-dirty",
+      "rc": 0,
+      "seconds": 0.26197679201141,
+      "stdout": "Updated Git hooks.\nGit LFS initialized.\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "add",
+        "."
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/base-sparse-recheck/repos/W02-sparse-dirty",
+      "rc": 0,
+      "seconds": 0.2589397500269115,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "commit",
+        "-m",
+        "Seed LFS fixture"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/base-sparse-recheck/repos/W02-sparse-dirty",
+      "rc": 0,
+      "seconds": 0.8410198749043047,
+      "stdout": "[main (root-commit) ce216c9] Seed LFS fixture\n 3 files changed, 5 insertions(+)\n create mode 100644 .gitattributes\n create mode 100644 assets/asset.bin\n create mode 100644 note.txt\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/base-sparse-recheck/repos/W02-sparse-dirty",
+      "rc": 0,
+      "seconds": 0.015121374744921923,
+      "stdout": "ce216c9cc161eee7d010b93acb6571b7d26f110e\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-base",
+        "git",
+        "init",
+        "--colocate"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/base-sparse-recheck/repos/W02-sparse-dirty",
+      "rc": 0,
+      "seconds": 0.25514770904555917,
+      "stdout": "",
+      "stderr": "Done importing changes from the underlying Git repo.\nInitialized repo in \".\"\n"
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-base",
+        "sparse",
+        "set",
+        "--clear",
+        "--add",
+        "note.txt"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/base-sparse-recheck/repos/W02-sparse-dirty",
+      "rc": 0,
+      "seconds": 0.17867049993947148,
+      "stdout": "",
+      "stderr": "Added 0 files, modified 0 files, removed 2 files\n"
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-base",
+        "--ignore-working-copy",
+        "file",
+        "show",
+        "assets/asset.bin"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/base-sparse-recheck/repos/W02-sparse-dirty",
+      "rc": 0,
+      "seconds": 0.10778670897707343,
+      "stdout": "second LFS evaluation payload\u0000\\xfe\nsecond LFS evaluation payload\u0000\\xfe\nsecond LFS evaluation payload\u0000\\xfe\nsecond LFS evaluation payload\u0000\\xfe\nsecond LFS evaluation payload\u0000\\xfe\nsecond LFS evaluation payload\u0000\\xfe\nsecond LFS evaluation payload\u0000\\xfe\nsecond LFS evaluation payload\u0000\\xfe\nsecond LFS evaluation payload\u0000\\xfe\nsecond LFS evaluation payload\u0000\\xfe\nsecond LFS evaluation payload\u0000\\xfe\nsecond LFS evaluation payload\u0000\\xfe\nsecond LFS evaluation payload\u0000\\xfe\nsecond LFS evaluation payload\u0000\\xfe\nsecond LFS evaluation payload\u0000\\xfe\nsecond LFS evaluation payload\u0000\\xfe\nsecond LFS evaluation payload\u0000\\xfe\nsecond LFS evaluation payload\u0000\\xfe\nsecond LFS evaluation payload\u0000\\xfe\nsecond LFS evaluation payload\u0000\\xfe\nsecond LFS evaluation payload\u0000\\xfe\nsecond LFS evaluation payload\u0000\\xfe\nsecond LFS evaluation payload\u0000\\xfe\nsecond LFS evaluation payload\u0000\\xfe\nsecond LFS evaluation payload\u0000\\xfe\nsecond LFS evaluation payload\u0000\\xfe\nsecond LFS evaluation payload\u0000\\xfe\nsecond LFS evaluation payload\u0000\\xfe\nsecond LFS evaluation payload\u0000\\xfe\nsecond LFS evaluation payload\u0000\\xfe\nsecond LFS evaluation payload\u0000\\xfe\nsecond LFS evaluation payload\u0000\\xfe\nsecond LFS evaluation payload\u0000\\xfe\nsecond LFS evaluation payload\u0000\\xfe\nsecond LFS evaluation payload\u0000\\xfe\nsecond LFS evaluation payload\u0000\\xfe\nsecond LFS evaluation payload\u0000\\xfe\nsecond LFS evaluation payload\u0000\\xfe\nsecond LFS evaluation payload\u0000\\xfe\nsecond LFS evaluation payload\u0000\\xfe\nsecond LFS evaluation payload\u0000\\xfe\nsecond LFS evaluation payload\u0000\\xfe\nsecond LFS evaluation payload\u0000\\xfe\nsecond LFS evaluation payload\u0000\\xfe\nsecond LFS evaluation payload\u0000\\xfe\nsecond LFS evaluation payload\u0000\\xfe\nsecond LFS evaluation payload\u0000\\xfe\nsecond LFS evaluation payload\u0000\\xfe\nsecond LFS evaluation payload\u0000\\xfe\nsecond LFS evaluation payload\u0000\\xfe\nsecond LFS evaluation payload\u0000\\xfe\nsecond LFS evaluation payload\u0000\\xfe\nsecond LFS evaluation payload\u0000\\xfe\nsecond LFS evaluation payload\u0000\\xfe\nsecond LFS evaluation payload\u0000\\xfe\nsecond LFS evaluation payload\u0000\\xfe\nsecond LFS evaluation payload\u0000\\xfe\nsecond LFS evaluation payload\u0000\\xfe\nsecond LFS evaluation payload\u0000\\xfe\nsecond LFS evaluation payload\u0000\\xfe\nsecond LFS evaluation payload\u0000\\xfe\nsecond LFS evaluation payload\u0000\\xfe\nsecond LFS evaluation payload\u0000\\xfe\nsecond LFS evaluation payload\u0000\\xfe\nsecond LFS evaluation payload\u0000\\xfe\nsecond LFS evaluation payload\u0000\\xfe\nsecond LFS evaluation payload\u0000\\xfe\nsecond LFS evaluation payload\u0000\\xfe\nsecond LFS evaluation payload\u0000\\xfe\nsecond LFS evaluation payload\u0000\\xfe\nsecond LFS evaluation payload\u0000\\xfe\nsecond LFS evaluation payload\u0000\\xfe\nsecond LFS evaluation payload\u0000\\xfe\nsecond LFS evaluation payload\u0000\\xfe\nsecond LFS evaluation payload\u0000\\xfe\nsecond LFS evaluation payload\u0000\\xfe\nsecond LFS evaluation payload\u0000\\xfe\nsecond LFS evaluation payload\u0000\\xfe\nsecond LFS evaluation payload\u0000\\xfe\nsecond LFS evaluation payload\u0000\\xfe\nsecond LFS evaluation payload\u0000\\xfe\nsecond LFS evaluation payload\u0000\\xfe\nsecond LFS evaluation payload\u0000\\xfe\nsecond LFS evaluation payload\u0000\\xfe\nsecond LFS evaluation payload\u0000\\xfe\nsecond LFS evaluation payload\u0000\\xfe\nsecond LFS evaluation payload\u0000\\xfe\nsecond LFS evaluation payload\u0000\\xfe\nsecond LFS evaluation payload\u0000\\xfe\nsecond LFS evaluation payload\u0000\\xfe\nsecond LFS evaluation payload\u0000\\xfe\nsecond LFS evaluation payload\u0000\\xfe\nsecond LFS evaluation payload\u0000\\xfe\nsecond LFS evaluation payload\u0000\\xfe\nsecond LFS evaluation payload\u0000\\xfe\nsecond LFS evaluation payload\u0000\\xfe\nsecond LFS evaluation payload\u0000\\xfe\nsecond LFS evaluation payload\u0000\\xfe\nsecond LFS evaluation payload\u0000\\xfe\nsecond LFS evaluation payload\u0000\\xfe\n",
+      "stderr": ""
+    }
+  ]
+}

@@ -1,0 +1,185 @@
+{
+  "id": "A01-recursive",
+  "purpose": "Attribute matching agrees with Git",
+  "category": "contract",
+  "status": "PASS",
+  "seconds": 1.2204998745582998,
+  "checks": [
+    {
+      "label": "Expected exclusion matches Git attribute decision",
+      "pass": true,
+      "expected_excluded": true,
+      "actual_included": false,
+      "git_check_attr": "assets/sub/a.bin: filter: lfs\n",
+      "jj_status": "The working copy has no changes.\nWorking copy  (@) : svrnoymt 56f5e73d (empty) (no description set)\nParent commit (@-): umrwrwky 0c939972 main | Seed LFS fixture\n"
+    }
+  ],
+  "observations": {},
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "init",
+        "-b",
+        "main"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos/repos/A01-recursive",
+      "rc": 0,
+      "seconds": 0.025017582811415195,
+      "stdout": "Initialized empty Git repository in /tmp/jj-lfs-evaluation/macos/repos/A01-recursive/.git/\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.name",
+        "LFS Evaluation"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos/repos/A01-recursive",
+      "rc": 0,
+      "seconds": 0.021170499734580517,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.email",
+        "eval@example.invalid"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos/repos/A01-recursive",
+      "rc": 0,
+      "seconds": 0.035905332770198584,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "commit.gpgsign",
+        "false"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos/repos/A01-recursive",
+      "rc": 0,
+      "seconds": 0.025105792097747326,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "core.autocrlf",
+        "false"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos/repos/A01-recursive",
+      "rc": 0,
+      "seconds": 0.01633137511089444,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "lfs",
+        "install",
+        "--local"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos/repos/A01-recursive",
+      "rc": 0,
+      "seconds": 0.24909858405590057,
+      "stdout": "Updated Git hooks.\nGit LFS initialized.\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "add",
+        "."
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos/repos/A01-recursive",
+      "rc": 0,
+      "seconds": 0.014324167277663946,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "commit",
+        "-m",
+        "Seed LFS fixture"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos/repos/A01-recursive",
+      "rc": 0,
+      "seconds": 0.45402354188263416,
+      "stdout": "[main (root-commit) 0c93997] Seed LFS fixture\n 2 files changed, 2 insertions(+)\n create mode 100644 .gitattributes\n create mode 100644 note.txt\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos/repos/A01-recursive",
+      "rc": 0,
+      "seconds": 0.010108374990522861,
+      "stdout": "0c93997291fca02300ed6d477aca77bc8fc1c1ba\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr",
+        "git",
+        "init",
+        "--colocate"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos/repos/A01-recursive",
+      "rc": 0,
+      "seconds": 0.23755049984902143,
+      "stdout": "",
+      "stderr": "Done importing changes from the underlying Git repo.\nInitialized repo in \".\"\n"
+    },
+    {
+      "argv": [
+        "git",
+        "check-attr",
+        "filter",
+        "--",
+        "assets/sub/a.bin"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos/repos/A01-recursive",
+      "rc": 0,
+      "seconds": 0.03205504175275564,
+      "stdout": "assets/sub/a.bin: filter: lfs\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr",
+        "status"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos/repos/A01-recursive",
+      "rc": 0,
+      "seconds": 0.04617620864883065,
+      "stdout": "The working copy has no changes.\nWorking copy  (@) : svrnoymt 56f5e73d (empty) (no description set)\nParent commit (@-): umrwrwky 0c939972 main | Seed LFS fixture\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr",
+        "file",
+        "list"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos/repos/A01-recursive",
+      "rc": 0,
+      "seconds": 0.05191349983215332,
+      "stdout": ".gitattributes\nnote.txt\n",
+      "stderr": ""
+    }
+  ]
+}

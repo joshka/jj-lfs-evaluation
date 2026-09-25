@@ -1,0 +1,16 @@
+{
+  "payload.bin": {
+    "before_size": 129,
+    "before_pointer": true,
+    "after_size": 129,
+    "after_sha256": "178ba39b2e4e92264f35dafbd416ba3c8beb0dc87b395415f068c181d837def0",
+    "stored_pointer": true
+  },
+  "missing.bin": {
+    "before_size": 129,
+    "before_pointer": true,
+    "after_size": 129,
+    "after_sha256": "f049f89fcceec2e1d8aead99b8142c08b6ecf57b02eb85c7c0c1afd051f4fbeb",
+    "stored_pointer": true
+  }
+}

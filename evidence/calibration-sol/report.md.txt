@@ -1,0 +1,28 @@
+# Pinned Git LFS calibration
+
+Executed `run.py` against `/tmp/jj-lfs-evaluation/bin/jj-pr` and compared C4 with
+`/opt/homebrew/bin/jj` 0.45.1. Four isolated real Git LFS fixtures were created. The final
+execution took 7.24 seconds; earlier fixture refinement runs are not included in that figure.
+Commands, output, exit codes, and per-command durations are in `transcript.json`; structured
+observations and SHA-256 evidence are in `results.json`. The script can be rerun with
+`python3 run.py /tmp/jj-lfs-evaluation/bin/jj-pr`.
+
+| Case | Expectation | Observation and interpretation |
+| --- | --- | --- |
+| C1 | Repeated snapshots and an ordinary edit preserve the LFS pointer and hydrated bytes. A literal pointer can hydrate again. | Pass. Three snapshots returned 0. Only `note.txt` was reported after its edit. Both Git's committed blob and `jj file show -r @` remained the original pointer. Disk payload SHA-256 remained `15b4eaa5f37de66685988803789b256f621236cff5856e87152c3620f2ac9e6f`; after writing a literal pointer, `git lfs checkout` restored that exact payload. |
+| C2 | Root `filter=lfs` is excluded while nested `-filter` is tracked; compare `.git/info/attributes` with Git. | Root modification was absent from `jj status`; nested modification was reported. Git reported `filter=lfs` for `info-only.dat`, while jj added its raw 24-byte content, SHA-256 `135d1ebff8f75a29d258822e8ef6fbfaeaaa13a93d581c53099348bf322c8647`. This is a Git attribute coverage gap relative to Git, but the PR documentation describes `.gitattributes` support specifically, so it is outside the documented support claim. |
+| C3 | A genuinely missing local and remote object cannot hydrate; restored object can. | `git lfs fetch origin` failed with code 2 and `remote missing object`. `git lfs checkout` returned 0 but explicitly skipped checkout; disk stayed the 127-byte pointer, and `jj status` returned 0 with no changes. After restoring the local content-addressed object, checkout produced the 27-byte payload, SHA-256 `96efc9e1f826ceea06e341ab65a0c50b4337c78027064196e17dfa1caf0e588e`. Stored Git pointer stayed valid. The zero checkout code during absence is a no-op, not a successful hydration. |
+| C4 | A local edit to a hydrated LFS asset should be reported, preserved in a revision, or protected when switching. | **Data-loss gap.** With the PR binary, the modified hydrated bytes (SHA-256 `4c97ef113c894f51e359026f5a19141ad8ffcfe6e89db3cdd295b76297ec5a1a`) were absent from the stored A revision; `jj status` did not mention their modification. `jj edit` of B returned 0 and replaced disk content with B's literal pointer (SHA-256 `43caa8bf48f586ea3d3152b67b680a66d456354d24d215995034c082b8ab8679`). The modified bytes were neither on disk nor in the prior jj commit. |
+
+C4's baseline snapshot **did** store the modified raw bytes in its prior jj commit, though this
+breaks LFS pointer semantics in that jj revision and rewrote descendants. Its switch also replaced
+the disk file with B's pointer. The baseline therefore demonstrates recoverability of the local
+edit, not sound LFS integration. For both variants, `jj edit` initially wrote A's pointer to disk;
+the harness hydrated it by copying the SHA-verified local LFS object into the working tree because
+`git lfs checkout` could not resolve Git `HEAD` after `jj edit`. That method gives the same payload
+bytes but does not exercise a successful Git LFS checkout in C4. C3 separately verifies Git LFS
+checkout and missing-object behavior.
+
+The pinned binary's documented snapshot exclusion is working in C1/C2, but its C4 behavior silently
+discards a modified hydrated file on revision switch. That should not be classified as safe simply
+because exclusion is intentional.

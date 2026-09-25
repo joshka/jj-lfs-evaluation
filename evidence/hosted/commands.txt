@@ -1,0 +1,121 @@
+HOSTED LFS TRANSPORT: COMMAND RECORD
+
+This file copies selected command outputs observed in the tool history of this
+session. It is not a terminal transcript captured automatically. Omitted routine
+setup output is summarized at the end. Exit codes and output shown below came
+from the completed tool calls; no output has been invented. The read-only
+verification script can recheck retained local clones and remote refs.
+
+1. Initial pointer before publication (captured, exit 0)
+   cwd: hosted/seed
+   command: git diff --cached --no-textconv -- .gitattributes payload.bin
+   output excerpt:
+      +payload.bin filter=lfs diff=lfs merge=lfs -text
+      +version https://git-lfs.github.com/spec/v1
+      +oid sha256:c8f5d0341d54d951a71b136e6e2afcb14d11ed8489a7ae126a8fee0df6ecf193
+      +size 4096
+
+2. Initial Git push (captured, exit 0)
+   cwd: hosted/seed
+   command: git push -u origin joshka/lfs-eval-fixture
+   output:
+      Uploading LFS objects: 100% (1/1), 4.1 KB | 0 B/s, done.
+      To https://github.com/joshka/jj-lfs-eval-20260925.git
+       * [new branch]      joshka/lfs-eval-fixture -> joshka/lfs-eval-fixture
+      branch 'joshka/lfs-eval-fixture' set up to track 'origin/joshka/lfs-eval-fixture'.
+   The remote also printed a routine create-PR suggestion, omitted here.
+
+3. First fresh clone (captured, exit 0)
+   command: git -c commit.gpgsign=false clone --single-branch --branch joshka/lfs-eval-fixture https://github.com/joshka/jj-lfs-eval-20260925.git /tmp/jj-lfs-evaluation/hosted/fresh
+   output:
+      Cloning into '/tmp/jj-lfs-evaluation/hosted/fresh'...
+      Filtering content: 100% (1/1), 4.00 KiB | 3.00 KiB/s, done.
+   Immediately after clone, `shasum -a 256 payload.bin` printed
+      c8f5d0341d54d951a71b136e6e2afcb14d11ed8489a7ae126a8fee0df6ecf193  payload.bin
+   and `wc -c payload.bin` printed 4096 bytes. The working disk file was later
+   changed during the pointer-before-upload fixture, so the verifier correctly
+   checks its current pointer state instead of claiming it is still hydrated.
+
+4. jj-only ordinary edit (captured)
+   cwd: hosted/fresh
+   command: /tmp/jj-lfs-evaluation/bin/jj-pr st
+   exit: 0
+   output:
+      Working copy changes:
+      A ordinary.txt
+      Working copy  (@) : xszukkow 39adbe3d Edit ordinary file beside LFS pointer
+      Parent commit (@-): xkomkxxl da0ded07 joshka/lfs-eval-fixture joshka/lfs-eval-fixture@origin | Add small LFS transport fixture
+   Initial `jj git push --remote origin --bookmark joshka/lfs-eval-fixture`
+   exited 1 with `Non-tracking remote bookmark ... exists`. After
+   `jj bookmark track joshka/lfs-eval-fixture@origin` (exit 0), retry exited 0:
+      Updated signatures of 1 commits.
+      Changes to push to origin:
+        bookmark: joshka/lfs-eval-fixture [move forward from da0ded07dbad to ad4f2ecf3e8f]
+   Second fresh clone exited 0; `shasum -a 256 payload.bin` printed the same
+   c8f5d034... hash, `wc -c` printed 4096, and ordinary.txt contained
+   `ordinary edit beside existing LFS pointer`.
+
+5. Pointer-before-object candidate (captured)
+   cwd: hosted/fresh
+   command: /tmp/jj-lfs-evaluation/bin/jj-pr --ignore-working-copy diff --stat
+   exit: 0
+   output:
+      .gitattributes | 1 +
+      missing.bin    | 3 +++
+      2 files changed, 4 insertions(+), 0 deletions(-)
+   `missing.bin` was a 129-byte pointer with SHA-256 OID
+   f942803ce9c94a8ac8798db8970dda1b66186fe7452736d21f6ba16a5ae5ae8c
+   and size 3072. This candidate was prepared with
+   `jj --config='git.ignore-filters=[]' st`. That first snapshot also picked up
+   the hydrated existing payload.bin; it was restored to its committed pointer
+   on disk and resnapshotted before the diff above and before any push.
+
+6. jj push before LFS upload (captured, exit 1)
+   cwd: hosted/fresh
+   command: /tmp/jj-lfs-evaluation/bin/jj-pr git push --remote origin --bookmark joshka/lfs-eval-fixture
+   output:
+      Updated signatures of 1 commits.
+      Changes to push to origin:
+        bookmark: joshka/lfs-eval-fixture [move forward from ad4f2ecf3e8f to e5307aa90061]
+      remote: error: GH008: Your push referenced at least 1 unknown Git LFS object:
+      remote:     f942803ce9c94a8ac8798db8970dda1b66186fe7452736d21f6ba16a5ae5ae8c
+      remote: Try to push them with 'git lfs push --all'.
+      Warning: The remote rejected the following updates:
+        refs/heads/joshka/lfs-eval-fixture (reason: pre-receive hook declined)
+      Error: Failed to push some bookmarks
+   No LFS upload message appeared. The remote branch did not advance.
+
+7. Explicit LFS upload and retry (captured)
+   cwd: hosted/fresh
+   command: git lfs push --object-id origin f942803ce9c94a8ac8798db8970dda1b66186fe7452736d21f6ba16a5ae5ae8c
+   exit: 0
+   output:
+      Uploading LFS objects: 100% (1/1), 3.1 KB | 0 B/s, done.
+   command: /tmp/jj-lfs-evaluation/bin/jj-pr git push --remote origin --bookmark joshka/lfs-eval-fixture
+   exit: 0
+   output:
+      Updated signatures of 1 commits.
+      Changes to push to origin:
+        bookmark: joshka/lfs-eval-fixture [move forward from ad4f2ecf3e8f to 48dee535ac37]
+   Third fresh clone exited 0 and printed
+      Filtering content: 100% (2/2), 7.00 KiB | 6.00 KiB/s, done.
+   `shasum -a 256 payload.bin missing.bin` printed
+      c8f5d0341d54d951a71b136e6e2afcb14d11ed8489a7ae126a8fee0df6ecf193  payload.bin
+      f942803ce9c94a8ac8798db8970dda1b66186fe7452736d21f6ba16a5ae5ae8c  missing.bin
+
+8. Archive and locks (captured)
+   GitHub API source tarball was downloaded to hosted/fixture.tar.gz. A Python
+   tarfile inspection printed:
+      missing.bin 129 b'version https://git-lfs.github.com/spec/v1\noid sha256:f942803ce9c94a8ac8798db8970dda1b66186fe7452736'
+      payload.bin 129 b'version https://git-lfs.github.com/spec/v1\noid sha256:c8f5d0341d54d951a71b136e6e2afcb14d11ed8489a7ae126a'
+   `git lfs lock payload.bin` exited 0: `Locked payload.bin`.
+   `git lfs locks` exited 0: `payload.bin joshka ID:52649422`.
+   `git lfs unlock payload.bin` exited 0: `Unlocked payload.bin`.
+   A final `git lfs locks` exited 0 with no output.
+
+Summarized setup: The private disposable repository existed beforehand for the
+Windows CI evaluation. The fixture used a new personal branch, local signing
+was disabled for Git fixture commits, the first object was 4096 bytes, and the
+second was 3072 bytes. No branch other than joshka/lfs-eval-fixture was pushed
+in this transport evaluation. No further hosted writes occurred during this
+packaging step.

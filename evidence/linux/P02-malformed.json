@@ -1,0 +1,180 @@
+{
+  "id": "P02-malformed",
+  "purpose": "Malformed pointer-like content remains external",
+  "category": "contract",
+  "status": "PASS",
+  "seconds": 0.20955612500000598,
+  "checks": [
+    {
+      "label": "Filtered arbitrary disk bytes do not alter stored pointer",
+      "pass": true,
+      "actual_sha256": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+      "expected_sha256": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+      "actual_size": 129,
+      "expected_size": 129
+    },
+    {
+      "label": "Snapshot preserves disk bytes",
+      "pass": true,
+      "actual_sha256": "fbca9e87e4825d814194f2c7c4d096eb336fec0e64997b4dd8f8ad66a0ba1ffa",
+      "expected_sha256": "fbca9e87e4825d814194f2c7c4d096eb336fec0e64997b4dd8f8ad66a0ba1ffa",
+      "actual_size": 58,
+      "expected_size": 58
+    }
+  ],
+  "observations": {},
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "init",
+        "-b",
+        "main"
+      ],
+      "cwd": "/eval/linux/repos/P02-malformed",
+      "rc": 0,
+      "seconds": 0.014536542000001873,
+      "stdout": "Initialized empty Git repository in /eval/linux/repos/P02-malformed/.git/\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.name",
+        "LFS Evaluation"
+      ],
+      "cwd": "/eval/linux/repos/P02-malformed",
+      "rc": 0,
+      "seconds": 0.002935917000002064,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.email",
+        "eval@example.invalid"
+      ],
+      "cwd": "/eval/linux/repos/P02-malformed",
+      "rc": 0,
+      "seconds": 0.003402125000008027,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "commit.gpgsign",
+        "false"
+      ],
+      "cwd": "/eval/linux/repos/P02-malformed",
+      "rc": 0,
+      "seconds": 0.003621332999983906,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "core.autocrlf",
+        "false"
+      ],
+      "cwd": "/eval/linux/repos/P02-malformed",
+      "rc": 0,
+      "seconds": 0.003121832999994467,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "lfs",
+        "install",
+        "--local"
+      ],
+      "cwd": "/eval/linux/repos/P02-malformed",
+      "rc": 0,
+      "seconds": 0.027233958000010716,
+      "stdout": "Updated Git hooks.\nGit LFS initialized.\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "add",
+        "."
+      ],
+      "cwd": "/eval/linux/repos/P02-malformed",
+      "rc": 0,
+      "seconds": 0.018988624999991544,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "commit",
+        "-m",
+        "Seed LFS fixture"
+      ],
+      "cwd": "/eval/linux/repos/P02-malformed",
+      "rc": 0,
+      "seconds": 0.04024995800000397,
+      "stdout": "[main (root-commit) b1921fd] Seed LFS fixture\n 3 files changed, 5 insertions(+)\n create mode 100644 .gitattributes\n create mode 100644 asset.bin\n create mode 100644 note.txt\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "/eval/linux/repos/P02-malformed",
+      "rc": 0,
+      "seconds": 0.0015622080000241567,
+      "stdout": "b1921fda9187f7ec69787566acbec78db65fc756\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/target/debug/jj",
+        "git",
+        "init",
+        "--colocate"
+      ],
+      "cwd": "/eval/linux/repos/P02-malformed",
+      "rc": 0,
+      "seconds": 0.050990957999999864,
+      "stdout": "",
+      "stderr": "Done importing changes from the underlying Git repo.\nInitialized repo in \".\"\n"
+    },
+    {
+      "argv": [
+        "/target/debug/jj",
+        "status"
+      ],
+      "cwd": "/eval/linux/repos/P02-malformed",
+      "rc": 0,
+      "seconds": 0.021287416999996367,
+      "stdout": "The working copy has no changes.\nWorking copy  (@) : zolxyzuq 895ea771 (empty) (no description set)\nParent commit (@-): tplwkptm b1921fda main | Seed LFS fixture\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/target/debug/jj",
+        "file",
+        "show",
+        "asset.bin"
+      ],
+      "cwd": "/eval/linux/repos/P02-malformed",
+      "rc": 0,
+      "seconds": 0.019670082999994065,
+      "stdout": "version https://git-lfs.github.com/spec/v1\noid sha256:dad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f\nsize 2500\n",
+      "stderr": ""
+    }
+  ]
+}

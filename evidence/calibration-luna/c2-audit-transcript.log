@@ -1,0 +1,98 @@
+C2-only correction transcript (20260925T180504Z)
+
+[001] exit=0 elapsed=0.024s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T180504Z/C2-audit
+$ git init -q --initial-branch main
+
+[002] exit=0 elapsed=0.006s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T180504Z/C2-audit
+$ git config user.name Evaluation
+
+[003] exit=0 elapsed=0.007s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T180504Z/C2-audit
+$ git config user.email eval@example.invalid
+
+[004] exit=0 elapsed=0.007s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T180504Z/C2-audit
+$ git config commit.gpgsign false
+
+[005] exit=0 elapsed=0.011s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T180504Z/C2-audit
+$ git config tag.gpgsign false
+
+[006] exit=0 elapsed=0.137s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T180504Z/C2-audit
+$ git lfs install --local
+stdout:
+  Updated Git hooks.
+  Git LFS initialized.
+
+[007] exit=0 elapsed=0.089s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T180504Z/C2-audit
+$ git add .gitattributes nested/.gitattributes root.bin nested/child.bin
+
+[008] exit=0 elapsed=0.379s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T180504Z/C2-audit
+$ git commit -m Add attributed files
+stdout:
+  [main (root-commit) abd4bd8] Add attributed files
+   4 files changed, 6 insertions(+)
+   create mode 100644 .gitattributes
+   create mode 100644 nested/.gitattributes
+   create mode 100644 nested/child.bin
+   create mode 100644 root.bin
+
+[009] exit=0 elapsed=0.009s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T180504Z/C2-audit
+$ git show HEAD:root.bin
+stdout:
+  version https://git-lfs.github.com/spec/v1
+  oid sha256:70249be6d27609529e3a45add45332184061f8cb14e9b9bcc4527d0418b30405
+  size 24
+
+[010] exit=0 elapsed=0.007s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T180504Z/C2-audit
+$ git show HEAD:nested/child.bin
+stdout:
+  C2 nested initial raw data
+
+[011] exit=0 elapsed=0.007s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T180504Z/C2-audit
+$ git check-attr filter -- root.bin nested/child.bin
+stdout:
+  root.bin: filter: lfs
+  nested/child.bin: filter: unset
+
+[012] exit=0 elapsed=0.217s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T180504Z/C2-audit
+$ /tmp/jj-lfs-evaluation/bin/jj-pr git init --colocate
+stderr:
+  Done importing changes from the underlying Git repo.
+  Initialized repo in "."
+
+[013] exit=0 elapsed=0.135s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T180504Z/C2-audit
+$ /tmp/jj-lfs-evaluation/bin/jj-pr status
+stdout:
+  Working copy changes:
+  M nested/child.bin
+  Working copy  (@) : nzrsmouy d2b4f905 (no description set)
+  Parent commit (@-): lyznrvsq abd4bd87 main | Add attributed files
+
+[014] exit=0 elapsed=0.032s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T180504Z/C2-audit
+$ /tmp/jj-lfs-evaluation/bin/jj-pr file show -r @ root.bin
+stdout:
+  version https://git-lfs.github.com/spec/v1
+  oid sha256:70249be6d27609529e3a45add45332184061f8cb14e9b9bcc4527d0418b30405
+  size 24
+
+[015] exit=0 elapsed=0.035s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T180504Z/C2-audit
+$ /tmp/jj-lfs-evaluation/bin/jj-pr file show -r @ nested/child.bin
+stdout:
+  C2 nested changed and should be tracked
+
+[016] exit=0 elapsed=0.007s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T180504Z/C2-audit
+$ git check-attr filter -- info-only.dat
+stdout:
+  info-only.dat: filter: lfs
+
+[017] exit=0 elapsed=0.131s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T180504Z/C2-audit
+$ /tmp/jj-lfs-evaluation/bin/jj-pr status
+stdout:
+  Working copy changes:
+  A info-only.dat
+  M nested/child.bin
+  Working copy  (@) : nzrsmouy 9c31b647 (no description set)
+  Parent commit (@-): lyznrvsq abd4bd87 main | Add attributed files
+
+[018] exit=0 elapsed=0.031s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T180504Z/C2-audit
+$ /tmp/jj-lfs-evaluation/bin/jj-pr file show -r @ info-only.dat
+stdout:
+  C2 info-only local payload

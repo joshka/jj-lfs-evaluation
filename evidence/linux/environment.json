@@ -1,0 +1,10 @@
+{
+  "platform": "Linux-7.0.12-linuxkit-aarch64-with-glibc2.36",
+  "python": "3.11.2 (main, May 12 2026, 05:17:27) [GCC 12.2.0]",
+  "jj": "/target/debug/jj",
+  "binary_sha256": "6fda6f9977b269cc4ad2c32d3d0627c8608f51db6e371b7bb3f51b4c2f03decf",
+  "time_utc": "2026-09-25T17:56:57Z",
+  "jj_version": "jj 0.45.1",
+  "git_version": "git version 2.39.5",
+  "lfs_version": "git-lfs/3.3.0 (GitHub; linux arm64; go 1.19.8)"
+}

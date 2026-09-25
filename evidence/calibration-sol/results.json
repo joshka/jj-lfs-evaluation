@@ -1,0 +1,172 @@
+{
+  "C1": {
+    "initial": {
+      "stored_pointer": true,
+      "disk": {
+        "sha256": "15b4eaa5f37de66685988803789b256f621236cff5856e87152c3620f2ac9e6f",
+        "size": 35,
+        "pointer": false
+      },
+      "expected_sha": "15b4eaa5f37de66685988803789b256f621236cff5856e87152c3620f2ac9e6f"
+    },
+    "snapshot_codes": [
+      0,
+      0,
+      0
+    ],
+    "after_edit": {
+      "status_code": 0,
+      "status": "Working copy changes:\nM note.txt\nWorking copy  (@) : ssmomqst 72a3ba35 (no description set)\nParent commit (@-): yvrztmwq f075c5b2 master | Add LFS asset\n",
+      "stored_pointer": true,
+      "jj_stored_pointer": true,
+      "disk": {
+        "sha256": "15b4eaa5f37de66685988803789b256f621236cff5856e87152c3620f2ac9e6f",
+        "size": 35,
+        "pointer": false
+      }
+    },
+    "literal": {
+      "before": {
+        "sha256": "2c38dbebf7d1573adffaf63cb0514662fa4c825c4ae65c727f53ca1a3261ab7e",
+        "size": 127,
+        "pointer": true
+      },
+      "status": 0,
+      "jj_stored_pointer": true,
+      "after_checkout": {
+        "sha256": "15b4eaa5f37de66685988803789b256f621236cff5856e87152c3620f2ac9e6f",
+        "size": 35,
+        "pointer": false
+      },
+      "stored_pointer": true
+    },
+    "expected_pointer": "version https://git-lfs.github.com/spec/v1\noid sha256:15b4eaa5f37de66685988803789b256f621236cff5856e87152c3620f2ac9e6f\nsize 35\n",
+    "seconds": 1.3
+  },
+  "C2": {
+    "initial": {
+      "attrs": {
+        "root.bin": "root.bin: filter: lfs",
+        "nested/override.bin": "nested/override.bin: filter: unset"
+      },
+      "git_root_pointer": true,
+      "git_nested_plain": true,
+      "jj_status": "The working copy has no changes.\nWorking copy  (@) : uxutypnu 5afd4920 (empty) (no description set)\nParent commit (@-): nuktlvko 63127841 master | Add attribute precedence fixtures\n",
+      "jj_status_code": 0,
+      "modified_status": "Working copy changes:\nM nested/override.bin\nWorking copy  (@) : uxutypnu 31a6e914 (no description set)\nParent commit (@-): nuktlvko 63127841 master | Add attribute precedence fixtures\n",
+      "modified_status_code": 0,
+      "root_disk": {
+        "sha256": "aadcc4df5b1d27350dffd96c00b479ddaf385ea2f03fc042f47b6e5db3bbee82",
+        "size": 18,
+        "pointer": false
+      },
+      "nested_disk": {
+        "sha256": "550f221a03b2a000b667608684915b36d57bb065e4113d40cb5705971ebd8c03",
+        "size": 22,
+        "pointer": false
+      }
+    },
+    "info_attr": "info-only.dat: filter: lfs",
+    "status_code": 0,
+    "status": "Working copy changes:\nA info-only.dat\nM nested/override.bin\nWorking copy  (@) : uxutypnu f9656ac7 (no description set)\nParent commit (@-): nuktlvko 63127841 master | Add attribute precedence fixtures\n",
+    "jj_file_show_code": 0,
+    "jj_file_show_sha": "135d1ebff8f75a29d258822e8ef6fbfaeaaa13a93d581c53099348bf322c8647",
+    "disk": {
+      "sha256": "135d1ebff8f75a29d258822e8ef6fbfaeaaa13a93d581c53099348bf322c8647",
+      "size": 24,
+      "pointer": false
+    },
+    "expected_sha": "135d1ebff8f75a29d258822e8ef6fbfaeaaa13a93d581c53099348bf322c8647",
+    "seconds": 1.066
+  },
+  "C3": {
+    "lfs_push_code": 0,
+    "lfs_push_output": "Uploading LFS objects: 100% (1/1), 0 B | 0 B/s, done.\n",
+    "remote_object_existed_before_removal": true,
+    "missing": {
+      "fetch_code": 2,
+      "fetch_output": "Fetching reference refs/heads/master\nerror transferring \"96efc9e1f826ceea06e341ab65a0c50b4337c78027064196e17dfa1caf0e588e\": [0] remote missing object 96efc9e1f826ceea06e341ab65a0c50b4337c78027064196e17dfa1caf0e588e\nerror: failed to fetch some objects from 'file:///tmp/jj-lfs-evaluation/calibration-sol/c3-remote.git'\n",
+      "checkout_code": 0,
+      "checkout_output": "Checking out LFS objects: 100% (1/1), 27 B | 0 B/s, done.\nSkipped checkout for \"asset.bin\", content not local. Use fetch to download.\n",
+      "disk": {
+        "sha256": "5a9d98aaa693f85afbcafd07a593ea58a2494cd85db878c1f929fd50c4298733",
+        "size": 127,
+        "pointer": true
+      },
+      "object_exists": false,
+      "stored_pointer": true,
+      "jj_status_code": 0,
+      "jj_status": "The working copy has no changes.\nWorking copy  (@) : lmwrlymp 3aa601c2 (empty) (no description set)\nParent commit (@-): oxtwynro 5a2dff1a main@origin master | Add asset for missing object test\n"
+    },
+    "restored_checkout_code": 0,
+    "restored_checkout_output": "Checking out LFS objects: 100% (1/1), 27 B | 0 B/s, done.\n",
+    "restored_disk": {
+      "sha256": "96efc9e1f826ceea06e341ab65a0c50b4337c78027064196e17dfa1caf0e588e",
+      "size": 27,
+      "pointer": false
+    },
+    "expected_sha": "96efc9e1f826ceea06e341ab65a0c50b4337c78027064196e17dfa1caf0e588e",
+    "stored_pointer": true,
+    "seconds": 2.152
+  },
+  "C4": {
+    "pr": {
+      "edit_a_code": 0,
+      "hydration": "copied verified local LFS object",
+      "before": {
+        "sha256": "16f3e2df07e7298723f6d88b5d3d0d5fa457b96467ecabf20378e29fdf70d9d5",
+        "size": 24,
+        "pointer": false
+      },
+      "edited_sha": "4c97ef113c894f51e359026f5a19141ad8ffcfe6e89db3cdd295b76297ec5a1a",
+      "status_code": 0,
+      "status": "Working copy changes:\nA .gitattributes\nA asset.bin\nWorking copy  (@) : zwwryvnt d9aee14e Add LFS version A\nParent commit (@-): zzzzzzzz 00000000 (empty) (no description set)\n",
+      "prior_commit": "d9aee14e3268678a99ea94d761cc89f463281cc0",
+      "stored_before_switch_code": 0,
+      "stored_before_switch_sha": "9ee4b3778baf3c87a6c1fff809cf43bc31ae904c6164057a97e822b5aeadd34e",
+      "switch_code": 0,
+      "switch_output": "Working copy  (@) now at: mzlvvpuw 3cbb4de8 master | Add LFS version B\nParent commit (@-)      : zwwryvnt d9aee14e Add LFS version A\nAdded 0 files, modified 1 files, removed 0 files\n",
+      "after": {
+        "sha256": "43caa8bf48f586ea3d3152b67b680a66d456354d24d215995034c082b8ab8679",
+        "size": 127,
+        "pointer": true
+      },
+      "prior_show_code": 0,
+      "prior_show_sha": "9ee4b3778baf3c87a6c1fff809cf43bc31ae904c6164057a97e822b5aeadd34e",
+      "pointer_a": "version https://git-lfs.github.com/spec/v1\noid sha256:16f3e2df07e7298723f6d88b5d3d0d5fa457b96467ecabf20378e29fdf70d9d5\nsize 24\n",
+      "pointer_b": "version https://git-lfs.github.com/spec/v1\noid sha256:16b7695950deb70b9d53dea591e375034a55b863ca7aa6788e7203540aa1b5fa\nsize 24\n",
+      "committed_a_pointer": true,
+      "committed_b_pointer": true
+    },
+    "baseline": {
+      "edit_a_code": 0,
+      "hydration": "copied verified local LFS object",
+      "before": {
+        "sha256": "16f3e2df07e7298723f6d88b5d3d0d5fa457b96467ecabf20378e29fdf70d9d5",
+        "size": 24,
+        "pointer": false
+      },
+      "edited_sha": "4c97ef113c894f51e359026f5a19141ad8ffcfe6e89db3cdd295b76297ec5a1a",
+      "status_code": 0,
+      "status": "Working copy changes:\nA .gitattributes\nA asset.bin\nWorking copy  (@) : xsxnnstr 137a9088 Add LFS version A\nParent commit (@-): zzzzzzzz 00000000 (empty) (no description set)\nRebased 2 descendant commits onto updated working copy.\n",
+      "prior_commit": "137a90888ebdcd5dc8a251127b490c2d941639c6",
+      "stored_before_switch_code": 0,
+      "stored_before_switch_sha": "4c97ef113c894f51e359026f5a19141ad8ffcfe6e89db3cdd295b76297ec5a1a",
+      "switch_code": 0,
+      "switch_output": "Working copy  (@) now at: kyzvnoqz/1 b21078aa (divergent) Add LFS version B\nParent commit (@-)      : xsxnnstr/1 8141dcf0 (divergent) Add LFS version A\nAdded 0 files, modified 1 files, removed 0 files\n",
+      "after": {
+        "sha256": "43caa8bf48f586ea3d3152b67b680a66d456354d24d215995034c082b8ab8679",
+        "size": 127,
+        "pointer": true
+      },
+      "prior_show_code": 0,
+      "prior_show_sha": "4c97ef113c894f51e359026f5a19141ad8ffcfe6e89db3cdd295b76297ec5a1a",
+      "pointer_a": "version https://git-lfs.github.com/spec/v1\noid sha256:16f3e2df07e7298723f6d88b5d3d0d5fa457b96467ecabf20378e29fdf70d9d5\nsize 24\n",
+      "pointer_b": "version https://git-lfs.github.com/spec/v1\noid sha256:16b7695950deb70b9d53dea591e375034a55b863ca7aa6788e7203540aa1b5fa\nsize 24\n",
+      "committed_a_pointer": true,
+      "committed_b_pointer": true
+    },
+    "seconds": 2.719
+  },
+  "total_seconds": 7.24
+}

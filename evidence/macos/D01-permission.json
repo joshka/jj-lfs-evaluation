@@ -1,0 +1,156 @@
+{
+  "id": "D01-permission",
+  "purpose": "Unreadable attributes have useful error",
+  "category": "contract",
+  "status": "PASS",
+  "seconds": 1.0069576250389218,
+  "checks": [
+    {
+      "label": "Unreadable attributes fail with path context",
+      "pass": true,
+      "stderr": "Internal error: Failed to snapshot the working copy\nCaused by:\n1: Failed to open the file at /tmp/jj-lfs-evaluation/macos/repos/D01-permission/.gitattributes\n2: Permission denied (os error 13)\n"
+    }
+  ],
+  "observations": {},
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "init",
+        "-b",
+        "main"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos/repos/D01-permission",
+      "rc": 0,
+      "seconds": 0.013480625115334988,
+      "stdout": "Initialized empty Git repository in /tmp/jj-lfs-evaluation/macos/repos/D01-permission/.git/\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.name",
+        "LFS Evaluation"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos/repos/D01-permission",
+      "rc": 0,
+      "seconds": 0.007446000352501869,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.email",
+        "eval@example.invalid"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos/repos/D01-permission",
+      "rc": 0,
+      "seconds": 0.0071721249260008335,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "commit.gpgsign",
+        "false"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos/repos/D01-permission",
+      "rc": 0,
+      "seconds": 0.007437208201736212,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "core.autocrlf",
+        "false"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos/repos/D01-permission",
+      "rc": 0,
+      "seconds": 0.007138416636735201,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "lfs",
+        "install",
+        "--local"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos/repos/D01-permission",
+      "rc": 0,
+      "seconds": 0.1716766250319779,
+      "stdout": "Updated Git hooks.\nGit LFS initialized.\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "add",
+        "."
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos/repos/D01-permission",
+      "rc": 0,
+      "seconds": 0.09767266688868403,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "commit",
+        "-m",
+        "Seed LFS fixture"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos/repos/D01-permission",
+      "rc": 0,
+      "seconds": 0.40144333289936185,
+      "stdout": "[main (root-commit) 9f18995] Seed LFS fixture\n 3 files changed, 5 insertions(+)\n create mode 100644 .gitattributes\n create mode 100644 asset.bin\n create mode 100644 note.txt\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos/repos/D01-permission",
+      "rc": 0,
+      "seconds": 0.010768832638859749,
+      "stdout": "9f1899595ab0afbce584c280439cdddad391407a\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr",
+        "git",
+        "init",
+        "--colocate"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos/repos/D01-permission",
+      "rc": 0,
+      "seconds": 0.21287683304399252,
+      "stdout": "",
+      "stderr": "Done importing changes from the underlying Git repo.\nInitialized repo in \".\"\n"
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr",
+        "status"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos/repos/D01-permission",
+      "rc": 255,
+      "seconds": 0.0672685420140624,
+      "stdout": "",
+      "stderr": "Internal error: Failed to snapshot the working copy\nCaused by:\n1: Failed to open the file at /tmp/jj-lfs-evaluation/macos/repos/D01-permission/.gitattributes\n2: Permission denied (os error 13)\n"
+    }
+  ]
+}

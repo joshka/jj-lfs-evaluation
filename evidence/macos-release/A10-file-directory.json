@@ -1,0 +1,177 @@
+{
+  "id": "A10-file-directory",
+  "purpose": "File-to-directory replacement is handled",
+  "category": "contract",
+  "status": "PASS",
+  "seconds": 4.1584485420025885,
+  "checks": [
+    {
+      "label": "File-to-directory transition completes without panic",
+      "pass": true
+    }
+  ],
+  "observations": {
+    "status": {
+      "rc": 0,
+      "stderr": ""
+    },
+    "files": [
+      ".gitattributes",
+      "asset.bin/child.txt",
+      "note.txt"
+    ]
+  },
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "init",
+        "-b",
+        "main"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos-release/repos/A10-file-directory",
+      "rc": 0,
+      "seconds": 0.013060666155070066,
+      "stdout": "Initialized empty Git repository in /tmp/jj-lfs-evaluation/macos-release/repos/A10-file-directory/.git/\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.name",
+        "LFS Evaluation"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos-release/repos/A10-file-directory",
+      "rc": 0,
+      "seconds": 0.0062770419754087925,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.email",
+        "eval@example.invalid"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos-release/repos/A10-file-directory",
+      "rc": 0,
+      "seconds": 0.006061499938368797,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "commit.gpgsign",
+        "false"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos-release/repos/A10-file-directory",
+      "rc": 0,
+      "seconds": 0.005936207715421915,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "core.autocrlf",
+        "false"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos-release/repos/A10-file-directory",
+      "rc": 0,
+      "seconds": 0.006071249954402447,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "lfs",
+        "install",
+        "--local"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos-release/repos/A10-file-directory",
+      "rc": 0,
+      "seconds": 0.12600887520238757,
+      "stdout": "Updated Git hooks.\nGit LFS initialized.\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "add",
+        "."
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos-release/repos/A10-file-directory",
+      "rc": 0,
+      "seconds": 0.07449745805934072,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "commit",
+        "-m",
+        "Seed LFS fixture"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos-release/repos/A10-file-directory",
+      "rc": 0,
+      "seconds": 3.662189083173871,
+      "stdout": "[main (root-commit) 5390ef9] Seed LFS fixture\n 3 files changed, 5 insertions(+)\n create mode 100644 .gitattributes\n create mode 100644 asset.bin\n create mode 100644 note.txt\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos-release/repos/A10-file-directory",
+      "rc": 0,
+      "seconds": 0.00617420906201005,
+      "stdout": "5390ef932502fb9d61edc694d2a277088bc2ee67\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr-release",
+        "git",
+        "init",
+        "--colocate"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos-release/repos/A10-file-directory",
+      "rc": 0,
+      "seconds": 0.16663004225119948,
+      "stdout": "",
+      "stderr": "Done importing changes from the underlying Git repo.\nInitialized repo in \".\"\n"
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr-release",
+        "status"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos-release/repos/A10-file-directory",
+      "rc": 0,
+      "seconds": 0.06535666715353727,
+      "stdout": "Working copy changes:\nD asset.bin\nA asset.bin/child.txt\nWorking copy  (@) : yslmkvlw 17b5337f (no description set)\nParent commit (@-): ltssvwmy 5390ef93 main | Seed LFS fixture\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr-release",
+        "file",
+        "list"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos-release/repos/A10-file-directory",
+      "rc": 0,
+      "seconds": 0.01863820804283023,
+      "stdout": ".gitattributes\nasset.bin/child.txt\nnote.txt\n",
+      "stderr": ""
+    }
+  ]
+}

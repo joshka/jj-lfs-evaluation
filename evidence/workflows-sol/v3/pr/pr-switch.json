@@ -1,0 +1,310 @@
+{
+  "id": "pr-switch",
+  "purpose": "switch",
+  "category": "contract",
+  "status": "FAIL",
+  "seconds": 2.5717149167321622,
+  "checks": [
+    {
+      "label": "Initial hydration has expected bytes",
+      "pass": true
+    },
+    {
+      "label": "No silent loss of hydrated edit",
+      "pass": false,
+      "operation": "switch",
+      "disk_sha": "c37a06fc0ff3f76773bdc4a64413b7ce64ad21f2eb62cfe4b6ca031459b0d9ce",
+      "prior_sha": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+      "edited_sha": "79014f34a44dbd4fa5b5bea4c010d55d1c009c5ddf310a6abf24e23cc7c4832a"
+    }
+  ],
+  "observations": {
+    "edit_a": {
+      "rc": 0,
+      "out": "",
+      "err": "Working copy  (@) now at: oyttkmno 4b7ff48e Seed LFS fixture\nParent commit (@-)      : zzzzzzzz 00000000 (empty) (no description set)\nAdded 0 files, modified 1 files, removed 0 files\n"
+    },
+    "after_local_edit_status": {
+      "rc": 0,
+      "out": "Working copy changes:\nA .gitattributes\nA asset.bin\nA note.txt\nWorking copy  (@) : oyttkmno 4b7ff48e Seed LFS fixture\nParent commit (@-): zzzzzzzz 00000000 (empty) (no description set)\n",
+      "err": ""
+    },
+    "local": {
+      "edited_sha": "79014f34a44dbd4fa5b5bea4c010d55d1c009c5ddf310a6abf24e23cc7c4832a",
+      "stored_sha": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+      "stored_pointer": true,
+      "rev": "4b7ff48e33a04f704d005be6cb47b79ed3bf668d"
+    },
+    "switch": {
+      "rc": 0,
+      "out": "",
+      "err": "Working copy  (@) now at: tonzwrkr 4fbd05ab main | Second LFS version\nParent commit (@-)      : oyttkmno 4b7ff48e Seed LFS fixture\nAdded 0 files, modified 1 files, removed 0 files\n"
+    },
+    "after": {
+      "disk_sha": "c37a06fc0ff3f76773bdc4a64413b7ce64ad21f2eb62cfe4b6ca031459b0d9ce",
+      "disk_is_pointer": true,
+      "prior_rc": 0,
+      "prior_sha": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+      "edited_recoverable": false
+    }
+  },
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "init",
+        "-b",
+        "main"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v3/pr/repos/pr-switch",
+      "rc": 0,
+      "seconds": 0.017882375046610832,
+      "stdout": "Initialized empty Git repository in /tmp/jj-lfs-evaluation/workflows-sol/v3/pr/repos/pr-switch/.git/\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.name",
+        "LFS Evaluation"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v3/pr/repos/pr-switch",
+      "rc": 0,
+      "seconds": 0.009815374854952097,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.email",
+        "eval@example.invalid"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v3/pr/repos/pr-switch",
+      "rc": 0,
+      "seconds": 0.013677041977643967,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "commit.gpgsign",
+        "false"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v3/pr/repos/pr-switch",
+      "rc": 0,
+      "seconds": 0.01033704075962305,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "core.autocrlf",
+        "false"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v3/pr/repos/pr-switch",
+      "rc": 0,
+      "seconds": 0.008951333351433277,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "lfs",
+        "install",
+        "--local"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v3/pr/repos/pr-switch",
+      "rc": 0,
+      "seconds": 0.26962516689673066,
+      "stdout": "Updated Git hooks.\nGit LFS initialized.\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "add",
+        "."
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v3/pr/repos/pr-switch",
+      "rc": 0,
+      "seconds": 0.13477616617456079,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "commit",
+        "-m",
+        "Seed LFS fixture"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v3/pr/repos/pr-switch",
+      "rc": 0,
+      "seconds": 0.7878582500852644,
+      "stdout": "[main (root-commit) 4b7ff48] Seed LFS fixture\n 3 files changed, 5 insertions(+)\n create mode 100644 .gitattributes\n create mode 100644 asset.bin\n create mode 100644 note.txt\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v3/pr/repos/pr-switch",
+      "rc": 0,
+      "seconds": 0.036228499840945005,
+      "stdout": "4b7ff48e33a04f704d005be6cb47b79ed3bf668d\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr",
+        "git",
+        "init",
+        "--colocate"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v3/pr/repos/pr-switch",
+      "rc": 0,
+      "seconds": 0.21765962475910783,
+      "stdout": "",
+      "stderr": "Done importing changes from the underlying Git repo.\nInitialized repo in \".\"\n"
+    },
+    {
+      "argv": [
+        "git",
+        "add",
+        "asset.bin"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v3/pr/repos/pr-switch",
+      "rc": 0,
+      "seconds": 0.19391358317807317,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "commit",
+        "-m",
+        "Second LFS version"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v3/pr/repos/pr-switch",
+      "rc": 0,
+      "seconds": 0.40292391600087285,
+      "stdout": "[main 4fbd05a] Second LFS version\n 1 file changed, 2 insertions(+), 2 deletions(-)\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v3/pr/repos/pr-switch",
+      "rc": 0,
+      "seconds": 0.011566708330065012,
+      "stdout": "4fbd05abeae17294caf83bdc72e800711f1c03d6\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr",
+        "status"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v3/pr/repos/pr-switch",
+      "rc": 0,
+      "seconds": 0.1254428750835359,
+      "stdout": "The working copy has no changes.\nWorking copy  (@) : uomkwuvy 2b4f68cf (empty) (no description set)\nParent commit (@-): tonzwrkr 4fbd05ab main | Second LFS version\n",
+      "stderr": "Reset the working copy parent to the new Git HEAD.\nDone importing changes from the underlying Git repo.\n"
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr",
+        "edit",
+        "4b7ff48e33a04f704d005be6cb47b79ed3bf668d"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v3/pr/repos/pr-switch",
+      "rc": 0,
+      "seconds": 0.09162216586992145,
+      "stdout": "",
+      "stderr": "Working copy  (@) now at: oyttkmno 4b7ff48e Seed LFS fixture\nParent commit (@-)      : zzzzzzzz 00000000 (empty) (no description set)\nAdded 0 files, modified 1 files, removed 0 files\n"
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr",
+        "status"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v3/pr/repos/pr-switch",
+      "rc": 0,
+      "seconds": 0.04756174981594086,
+      "stdout": "Working copy changes:\nA .gitattributes\nA asset.bin\nA note.txt\nWorking copy  (@) : oyttkmno 4b7ff48e Seed LFS fixture\nParent commit (@-): zzzzzzzz 00000000 (empty) (no description set)\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr",
+        "log",
+        "-r",
+        "@",
+        "--no-graph",
+        "-T",
+        "commit_id"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v3/pr/repos/pr-switch",
+      "rc": 0,
+      "seconds": 0.047094167210161686,
+      "stdout": "4b7ff48e33a04f704d005be6cb47b79ed3bf668d",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr",
+        "file",
+        "show",
+        "-r",
+        "4b7ff48e33a04f704d005be6cb47b79ed3bf668d",
+        "asset.bin"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v3/pr/repos/pr-switch",
+      "rc": 0,
+      "seconds": 0.03684304188936949,
+      "stdout": "version https://git-lfs.github.com/spec/v1\noid sha256:dad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f\nsize 2500\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr",
+        "edit",
+        "4fbd05abeae17294caf83bdc72e800711f1c03d6"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v3/pr/repos/pr-switch",
+      "rc": 0,
+      "seconds": 0.06827091611921787,
+      "stdout": "",
+      "stderr": "Working copy  (@) now at: tonzwrkr 4fbd05ab main | Second LFS version\nParent commit (@-)      : oyttkmno 4b7ff48e Seed LFS fixture\nAdded 0 files, modified 1 files, removed 0 files\n"
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr",
+        "file",
+        "show",
+        "-r",
+        "4b7ff48e33a04f704d005be6cb47b79ed3bf668d",
+        "asset.bin"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v3/pr/repos/pr-switch",
+      "rc": 0,
+      "seconds": 0.03439925005659461,
+      "stdout": "version https://git-lfs.github.com/spec/v1\noid sha256:dad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f\nsize 2500\n",
+      "stderr": ""
+    }
+  ]
+}

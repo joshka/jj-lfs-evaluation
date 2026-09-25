@@ -1,0 +1,419 @@
+{
+  "id": "prune-abandoned",
+  "purpose": "LFS object referenced by abandoned jj commit and op history",
+  "category": "lifecycle",
+  "status": "PASS",
+  "seconds": 4.154777332674712,
+  "checks": [
+    {
+      "label": "Prune command succeeds",
+      "pass": true
+    },
+    {
+      "label": "Force prune removes op-recoverable object",
+      "pass": true
+    }
+  ],
+  "observations": {
+    "remote": "/tmp/jj-lfs-evaluation/lifecycle-sol/bare/prune-abandoned",
+    "git_refs_after_abandon": {
+      "rc": 0,
+      "stdout": "d5ee0b3fe77ec7a8f6373f3d7dad4e5caaccbb6c refs/heads/main\n8493a706d8d2a7ea5120e2f2de1ee1d289019d8a refs/jj/keep/8493a706d8d2a7ea5120e2f2de1ee1d289019d8a\n8bb7bd7229ef1cbdd3a4fa1180459e621cf8add1 refs/jj/keep/8bb7bd7229ef1cbdd3a4fa1180459e621cf8add1\n8c86878c93e797ddbf1fd6dd931eae9fd7bc777d refs/jj/keep/8c86878c93e797ddbf1fd6dd931eae9fd7bc777d\nb1627f35fc4c65785e23469262c3851d38fe1091 refs/jj/keep/b1627f35fc4c65785e23469262c3851d38fe1091\nc013bac26984a2e8c44bfd17eed3ffbd4cc8a5ba refs/jj/keep/c013bac26984a2e8c44bfd17eed3ffbd4cc8a5ba\nd5ee0b3fe77ec7a8f6373f3d7dad4e5caaccbb6c refs/jj/keep/d5ee0b3fe77ec7a8f6373f3d7dad4e5caaccbb6c\nd6e5e8c05a4a35ca43b5276124a9097b54f3fcb2 refs/jj/keep/d6e5e8c05a4a35ca43b5276124a9097b54f3fcb2\nea7a842582104f84e476a65523f650abaa0aa96f refs/jj/keep/ea7a842582104f84e476a65523f650abaa0aa96f\nfa2d952426541d950c877700db35123198001f8f refs/jj/keep/fa2d952426541d950c877700db35123198001f8f\nd5ee0b3fe77ec7a8f6373f3d7dad4e5caaccbb6c refs/remotes/origin/main\n",
+      "stderr": ""
+    },
+    "prune_dry": {
+      "rc": 0,
+      "stdout": "1 local object, 1 retained, done.\n",
+      "stderr": ""
+    },
+    "prune_recent_dry": {
+      "rc": 0,
+      "stdout": "1 local object, 1 retained, done.\n",
+      "stderr": ""
+    },
+    "prune_force_dry": {
+      "rc": 0,
+      "stdout": "1 local object, 0 retained, done.\n\n * dad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f (2.5 KB), done.\n",
+      "stderr": ""
+    },
+    "prune_verify_dry": {
+      "rc": 0,
+      "stdout": "1 local object, 1 retained, done.\n",
+      "stderr": ""
+    },
+    "object_exists": true,
+    "oid_in_prune_output": false,
+    "jj_oplog": "@  fcc255ead1a5 eval@example.invalid default@ now, lasted 29 milliseconds\n\u2502  abandon commit 8c86878c93e797ddbf1fd6dd931eae9fd7bc777d\n\u2502  args: jj abandon @-\n\u25cb  93689b6b62ba eval@example.invalid default@ 1 second ago, lasted 21 milliseconds\n\u2502  new empty commit\n\u2502  args: jj new\n\u25cb  56439b4c8f57 eval@example.invalid default@ 1 second ago, lasted 36 milliseconds\n\u2502  commit 8bb7bd7229ef1cbdd3a4fa1180459e621cf8add1\n\u2502  args: jj '--config=git.ignore-filters=[]' commit -m 'LFS asset'\n\u25cb  8b88b6fe68e6 eval@example.invalid default@ 1 second ago, lasted 33 milliseconds\n\u2502  snapshot working copy\n\u2502  args: jj '--config=git.ignore-filters=[]' status\n",
+    "force_prune_actual": {
+      "rc": 0,
+      "stdout": "1 local object, 0 retained, done.\n\ndad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f (2.5 KB), done.\nDeleting objects: 100% (1/1), done.\n",
+      "stderr": ""
+    },
+    "remote_object_exists": false,
+    "restore_before_abandon": {
+      "rc": 0,
+      "stdout": "",
+      "stderr": "Restored to operation: 93689b6b62ba (2026-09-25 11:02:00) new empty commit\nWorking copy  (@) now at: vpvyxttq b1627f35 (empty) (no description set)\nParent commit (@-)      : ykvmlyzm 8c86878c (empty) (no description set)\n"
+    },
+    "lfs_checkout_after_restore": {
+      "rc": 0,
+      "stdout": "",
+      "stderr": "Skipped checkout for \"asset.bin\", content not local. Use fetch to download.\n"
+    },
+    "restored_disk_sha": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a"
+  },
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "init",
+        "-b",
+        "main"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/lifecycle-sol/repos/prune-abandoned",
+      "rc": 0,
+      "seconds": 0.025900417007505894,
+      "stdout": "Initialized empty Git repository in /tmp/jj-lfs-evaluation/lifecycle-sol/repos/prune-abandoned/.git/\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.name",
+        "LFS Evaluation"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/lifecycle-sol/repos/prune-abandoned",
+      "rc": 0,
+      "seconds": 0.013389959000051022,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.email",
+        "eval@example.invalid"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/lifecycle-sol/repos/prune-abandoned",
+      "rc": 0,
+      "seconds": 0.011682792101055384,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "commit.gpgsign",
+        "false"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/lifecycle-sol/repos/prune-abandoned",
+      "rc": 0,
+      "seconds": 0.012730542104691267,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "core.autocrlf",
+        "false"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/lifecycle-sol/repos/prune-abandoned",
+      "rc": 0,
+      "seconds": 0.014496459160000086,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "lfs",
+        "install",
+        "--local"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/lifecycle-sol/repos/prune-abandoned",
+      "rc": 0,
+      "seconds": 0.33050225023180246,
+      "stdout": "Updated Git hooks.\nGit LFS initialized.\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "add",
+        "."
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/lifecycle-sol/repos/prune-abandoned",
+      "rc": 0,
+      "seconds": 0.04867416713386774,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "commit",
+        "-m",
+        "Seed LFS fixture"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/lifecycle-sol/repos/prune-abandoned",
+      "rc": 0,
+      "seconds": 0.5020057088695467,
+      "stdout": "[main (root-commit) d5ee0b3] Seed LFS fixture\n 2 files changed, 2 insertions(+)\n create mode 100644 .gitattributes\n create mode 100644 note.txt\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/lifecycle-sol/repos/prune-abandoned",
+      "rc": 0,
+      "seconds": 0.011583791114389896,
+      "stdout": "d5ee0b3fe77ec7a8f6373f3d7dad4e5caaccbb6c\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr",
+        "git",
+        "init",
+        "--colocate"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/lifecycle-sol/repos/prune-abandoned",
+      "rc": 0,
+      "seconds": 0.2429036246612668,
+      "stdout": "",
+      "stderr": "Done importing changes from the underlying Git repo.\nInitialized repo in \".\"\n"
+    },
+    {
+      "argv": [
+        "git",
+        "remote",
+        "add",
+        "origin",
+        "/tmp/jj-lfs-evaluation/lifecycle-sol/bare/prune-abandoned"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/lifecycle-sol/repos/prune-abandoned",
+      "rc": 0,
+      "seconds": 0.01784608419984579,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "push",
+        "-u",
+        "origin",
+        "main"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/lifecycle-sol/repos/prune-abandoned",
+      "rc": 0,
+      "seconds": 0.6526195001788437,
+      "stdout": "branch 'main' set up to track 'origin/main'.\n",
+      "stderr": "To /tmp/jj-lfs-evaluation/lifecycle-sol/bare/prune-abandoned\n * [new branch]      main -> main\n"
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr",
+        "new"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/lifecycle-sol/repos/prune-abandoned",
+      "rc": 0,
+      "seconds": 0.14862950006499887,
+      "stdout": "",
+      "stderr": "Done importing changes from the underlying Git repo.\nWorking copy  (@) now at: onqlxnuw ea7a8425 (empty) (no description set)\nParent commit (@-)      : olkznpqs d6e5e8c0 (empty) (no description set)\n"
+    },
+    {
+      "argv": [
+        "git",
+        "lfs",
+        "clean",
+        "asset.bin"
+      ],
+      "stdin_sha256": "dad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f",
+      "cwd": "/tmp/jj-lfs-evaluation/lifecycle-sol/repos/prune-abandoned",
+      "rc": 0,
+      "stdout": "version https://git-lfs.github.com/spec/v1\noid sha256:dad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f\nsize 2500\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr",
+        "--config=git.ignore-filters=[]",
+        "status"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/lifecycle-sol/repos/prune-abandoned",
+      "rc": 0,
+      "seconds": 0.13177083292976022,
+      "stdout": "Working copy changes:\nA asset.bin\nWorking copy  (@) : onqlxnuw 8bb7bd72 (no description set)\nParent commit (@-): olkznpqs d6e5e8c0 (empty) (no description set)\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr",
+        "--config=git.ignore-filters=[]",
+        "commit",
+        "-m",
+        "LFS asset"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/lifecycle-sol/repos/prune-abandoned",
+      "rc": 0,
+      "seconds": 0.13161591673269868,
+      "stdout": "",
+      "stderr": "Working copy  (@) now at: ykvmlyzm 8c86878c (empty) (no description set)\nParent commit (@-)      : onqlxnuw 8493a706 LFS asset\n"
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr",
+        "new"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/lifecycle-sol/repos/prune-abandoned",
+      "rc": 0,
+      "seconds": 0.19087479216977954,
+      "stdout": "",
+      "stderr": "Working copy  (@) now at: vpvyxttq b1627f35 (empty) (no description set)\nParent commit (@-)      : ykvmlyzm 8c86878c (empty) (no description set)\n"
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr",
+        "abandon",
+        "@-"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/lifecycle-sol/repos/prune-abandoned",
+      "rc": 0,
+      "seconds": 0.10842304164543748,
+      "stdout": "",
+      "stderr": "Abandoned 1 commits:\n  ykvmlyzm 8c86878c (empty) (no description set)\nRebased 1 descendant commits onto parents of abandoned commits.\nWorking copy  (@) now at: vpvyxttq fa2d9524 (empty) (no description set)\nParent commit (@-)      : onqlxnuw 8493a706 LFS asset\n"
+    },
+    {
+      "argv": [
+        "git",
+        "show-ref"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/lifecycle-sol/repos/prune-abandoned",
+      "rc": 0,
+      "seconds": 0.015605499967932701,
+      "stdout": "d5ee0b3fe77ec7a8f6373f3d7dad4e5caaccbb6c refs/heads/main\n8493a706d8d2a7ea5120e2f2de1ee1d289019d8a refs/jj/keep/8493a706d8d2a7ea5120e2f2de1ee1d289019d8a\n8bb7bd7229ef1cbdd3a4fa1180459e621cf8add1 refs/jj/keep/8bb7bd7229ef1cbdd3a4fa1180459e621cf8add1\n8c86878c93e797ddbf1fd6dd931eae9fd7bc777d refs/jj/keep/8c86878c93e797ddbf1fd6dd931eae9fd7bc777d\nb1627f35fc4c65785e23469262c3851d38fe1091 refs/jj/keep/b1627f35fc4c65785e23469262c3851d38fe1091\nc013bac26984a2e8c44bfd17eed3ffbd4cc8a5ba refs/jj/keep/c013bac26984a2e8c44bfd17eed3ffbd4cc8a5ba\nd5ee0b3fe77ec7a8f6373f3d7dad4e5caaccbb6c refs/jj/keep/d5ee0b3fe77ec7a8f6373f3d7dad4e5caaccbb6c\nd6e5e8c05a4a35ca43b5276124a9097b54f3fcb2 refs/jj/keep/d6e5e8c05a4a35ca43b5276124a9097b54f3fcb2\nea7a842582104f84e476a65523f650abaa0aa96f refs/jj/keep/ea7a842582104f84e476a65523f650abaa0aa96f\nfa2d952426541d950c877700db35123198001f8f refs/jj/keep/fa2d952426541d950c877700db35123198001f8f\nd5ee0b3fe77ec7a8f6373f3d7dad4e5caaccbb6c refs/remotes/origin/main\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "lfs",
+        "prune",
+        "--dry-run",
+        "--verbose"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/lifecycle-sol/repos/prune-abandoned",
+      "rc": 0,
+      "seconds": 0.2189714997075498,
+      "stdout": "1 local object, 1 retained, done.\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "lfs",
+        "prune",
+        "--recent",
+        "--dry-run",
+        "--verbose"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/lifecycle-sol/repos/prune-abandoned",
+      "rc": 0,
+      "seconds": 0.16273225005716085,
+      "stdout": "1 local object, 1 retained, done.\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "lfs",
+        "prune",
+        "--force",
+        "--dry-run",
+        "--verbose"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/lifecycle-sol/repos/prune-abandoned",
+      "rc": 0,
+      "seconds": 0.180630958173424,
+      "stdout": "1 local object, 0 retained, done.\n\n * dad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f (2.5 KB), done.\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "lfs",
+        "prune",
+        "--verify-remote",
+        "--dry-run",
+        "--verbose"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/lifecycle-sol/repos/prune-abandoned",
+      "rc": 0,
+      "seconds": 0.28531133430078626,
+      "stdout": "1 local object, 1 retained, done.\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr",
+        "op",
+        "log",
+        "--limit",
+        "4"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/lifecycle-sol/repos/prune-abandoned",
+      "rc": 0,
+      "seconds": 0.04778408259153366,
+      "stdout": "@  fcc255ead1a5 eval@example.invalid default@ now, lasted 29 milliseconds\n\u2502  abandon commit 8c86878c93e797ddbf1fd6dd931eae9fd7bc777d\n\u2502  args: jj abandon @-\n\u25cb  93689b6b62ba eval@example.invalid default@ 1 second ago, lasted 21 milliseconds\n\u2502  new empty commit\n\u2502  args: jj new\n\u25cb  56439b4c8f57 eval@example.invalid default@ 1 second ago, lasted 36 milliseconds\n\u2502  commit 8bb7bd7229ef1cbdd3a4fa1180459e621cf8add1\n\u2502  args: jj '--config=git.ignore-filters=[]' commit -m 'LFS asset'\n\u25cb  8b88b6fe68e6 eval@example.invalid default@ 1 second ago, lasted 33 milliseconds\n\u2502  snapshot working copy\n\u2502  args: jj '--config=git.ignore-filters=[]' status\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "lfs",
+        "prune",
+        "--force",
+        "--verbose"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/lifecycle-sol/repos/prune-abandoned",
+      "rc": 0,
+      "seconds": 0.15572033263742924,
+      "stdout": "1 local object, 0 retained, done.\n\ndad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f (2.5 KB), done.\nDeleting objects: 100% (1/1), done.\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr",
+        "op",
+        "restore",
+        "@-"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/lifecycle-sol/repos/prune-abandoned",
+      "rc": 0,
+      "seconds": 0.09718495933339,
+      "stdout": "",
+      "stderr": "Restored to operation: 93689b6b62ba (2026-09-25 11:02:00) new empty commit\nWorking copy  (@) now at: vpvyxttq b1627f35 (empty) (no description set)\nParent commit (@-)      : ykvmlyzm 8c86878c (empty) (no description set)\n"
+    },
+    {
+      "argv": [
+        "git",
+        "lfs",
+        "checkout"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/lifecycle-sol/repos/prune-abandoned",
+      "rc": 0,
+      "seconds": 0.19196737464517355,
+      "stdout": "",
+      "stderr": "Skipped checkout for \"asset.bin\", content not local. Use fetch to download.\n"
+    }
+  ]
+}

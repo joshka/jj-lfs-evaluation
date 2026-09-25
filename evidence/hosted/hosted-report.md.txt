@@ -1,0 +1,29 @@
+# Hosted Git LFS transport evaluation
+
+Disposable private repository: <https://github.com/joshka/jj-lfs-eval-20260925>
+Fixture branch: `joshka/lfs-eval-fixture`; CI `main` stayed at `82df288386a490be61160b7fcd0f5c46acb1dd83`.
+PR binary: `/tmp/jj-lfs-evaluation/bin/jj-pr` (`jj 0.45.1`).
+
+## Results
+
+| Scenario | Command / exit | Observed transport result |
+| --- | --- | --- |
+| Initial Git/LFS handoff | `git lfs track payload.bin`, `git add`, `git commit`, `git push -u origin joshka/lfs-eval-fixture` / 0 | Push reported `Uploading LFS objects: 100% (1/1), 4.1 KB`; commit `da0ded07...` stores a 129-byte pointer for a 4,096-byte payload. |
+| Fresh clone | `git clone --single-branch --branch joshka/lfs-eval-fixture ... fresh` / 0 | Checkout hydrated `payload.bin` to 4,096 bytes, SHA-256 `c8f5d0341d54d951a71b136e6e2afcb14d11ed8489a7ae126a8fee0df6ecf193`; `git show HEAD:payload.bin` remained a pointer. |
+| `jj` ordinary edit beside existing LFS file | `jj new @-`; `jj desc`; edit `ordinary.txt`; `jj st`; `jj bookmark set`; `jj git push` / 0 after tracking remote bookmark | `jj st` reported only `A ordinary.txt`, not the hydrated LFS file. Remote advanced to `ad4f2ecf3e8f0b2cf4ff03f99967f2dbe2a00a63`. Second fresh clone had `ordinary.txt` and still hydrated the same 4,096-byte payload with the same SHA-256. Initial `jj git push` attempt exited 1 because the existing remote bookmark was not tracked; `jj bookmark track joshka/lfs-eval-fixture@origin` resolved this setup step. |
+| Pointer before LFS object upload | New `jj` change, `.gitattributes` rule for `missing.bin`, 129-byte pointer to 3,072-byte object `f942803ce9c94a8ac8798db8970dda1b66186fe7452736d21f6ba16a5ae5ae8c`; `jj --config='git.ignore-filters=[]' st` / 0; `jj git push` / 1 | GitHub pre-receive rejected the push with `GH008: Your push referenced at least 1 unknown Git LFS object` and named the exact OID. The remote branch stayed at `ad4f2ecf...`. The local Git LFS pre-push upload hook was not invoked by `jj git push`. |
+| Upload and retry | `git lfs push --object-id origin f942803c...` / 0, then `jj git push` / 0 | Explicit upload reported `Uploading LFS objects: 100% (1/1), 3.1 KB`. Retry advanced fixture branch to `48dee535ac3768109793d5bd4991afa41d4a0647`. Third fresh clone hydrated both payloads: 4,096 bytes / `c8f5d...` and 3,072 bytes / `f9428...`. Git objects still contain pointers. |
+| GitHub source archive | Download API tarball of fixture branch / 0 | Archive includes both `*.bin` files as 129-byte pointer text, not hydrated content. Consumers of source archives need explicit LFS retrieval if they need bytes. |
+| LFS lock API | `git lfs locks`, `git lfs lock payload.bin`, `git lfs locks`, `git lfs unlock payload.bin`, `git lfs locks` / all 0 | Lock listed as `payload.bin joshka ID:52649422`, then was removed successfully. No lock remains. |
+
+## Important interpretation
+
+The missing-object *fresh clone failure* cannot be exercised against GitHub for this branch because GitHub rejects the dangling pointer before it becomes reachable. This is a protective server-side integrity check, not evidence that `jj` uploads LFS data. The successful retry required an explicit `git lfs push --object-id`; the subsequent fresh clone demonstrates recovery after that upload. Only 7,168 payload bytes were uploaded to the private GitHub LFS endpoint. No quota error occurred in these transport calls; the separate initial Windows runner unavailability is recorded elsewhere.
+
+The temporary `git.ignore-filters=[]` snapshot also picked up the already hydrated `payload.bin` as raw bytes on its first pass. Replacing that disk file with its existing committed pointer and snapshotting again removed the unintended change before push. The pushed `jj diff --stat` contained only `.gitattributes` and `missing.bin`. This demonstrates why publishing a new pointer from `jj` needs explicit verification of *all* LFS paths in the exported commit.
+
+The second `jj git push` emitted `Updated signatures of 1 commits`, so its local candidate commit ID changed during publication. The final remote SHA above is authoritative.
+
+## Limits
+
+This test did not try large objects, LFS quotas, concurrent pushes, protected branches, forks, or all Git hosting providers. The GitHub archive check covers the repository archive endpoint, not Releases asset packaging. Source and CI `main` were not changed by the fixture branch.

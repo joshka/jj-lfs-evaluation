@@ -1,0 +1,26 @@
+# Filtered path-kind transitions
+
+Six disposable fixtures compared three transitions on the pinned PR and its exact parent:
+LFS file to directory, directory to filtered file, and LFS file to symlink. Each fixture ran
+`jj status` twice, inspected the jj tree, restored the original path shape, and ran status again.
+The PR was tested with both debug and standard release binaries. The parent used explicit
+`--config=git.ignore-filters=[]` for each snapshot, matching its default behavior.
+
+| Transition | PR debug | PR release | Interpretation |
+| --- | --- | --- | --- |
+| `asset.bin` file → directory with `child.txt` | Both status calls panicked at `local_working_copy.rs:1464` with rc 101. | Both returned 0; tree contained `asset.bin/child.txt`. | **Profile-dependent assertion**, not a demonstrated release crash. The debug assertion compared file states containing both `asset.bin` and its child with a tree containing only the child. Manual restoration of the original pointer returned status to 0. |
+| `dir.bin/child.txt` directory → hydrated `dir.bin` file | Status returned 0. | Status returned 0. | Filtered new file was excluded; tree lost the previous child. Recreating the directory and child recovered the fixture. This is consistent with snapshot exclusion but means the file's bytes are outside jj history. |
+| Filtered `asset.bin` file → symlink to `note.txt` | Status returned 0. | Status returned 0. | Tree retained the committed pointer while disk held a symlink. Restoring the pointer recovered the fixture. A later checkout may replace that untracked symlink, as with other excluded changes; this probe did not trigger a checkout. |
+
+The exact parent returned 0 in all transitions and tracked path changes. Its initial jj snapshot
+already stored the hydrated file as raw bytes, so the restored baseline fixtures held those raw
+bytes instead of a valid pointer. Those are expected consequences of no LFS exclusion, not a
+release-profile crash comparison. The baseline `FAIL` labels in the machine results reflect the
+pointer-specific checks; baseline status and path recovery commands succeeded.
+
+The strongest A10 statement is therefore limited: the pinned debug binary panics during a valid
+file→directory working-tree transition, but the pinned standard release binary processes it and
+the fixture can recover. The release run took about 20 seconds; the debug run about 28 seconds.
+Machine results, binary hashes, per-case command output and exit codes are in
+`release/comparison.json`, `release/transcript.json`, `debug/comparison.json`, and
+`debug/transcript.json`. The executable harness is `run.py`. All fixtures remain on disk.

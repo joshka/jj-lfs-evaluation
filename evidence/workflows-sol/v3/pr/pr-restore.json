@@ -1,0 +1,212 @@
+{
+  "id": "pr-restore",
+  "purpose": "restore",
+  "category": "contract",
+  "status": "PASS",
+  "seconds": 1.4731302498839796,
+  "checks": [
+    {
+      "label": "Initial hydration has expected bytes",
+      "pass": true
+    },
+    {
+      "label": "Explicit restore outcome recorded",
+      "pass": true,
+      "edited_retained": true,
+      "restored_pointer": false
+    }
+  ],
+  "observations": {
+    "pre_status": {
+      "rc": 0,
+      "out": "The working copy has no changes.\nWorking copy  (@) : ztwvyxmq c9b2fe31 (empty) (no description set)\nParent commit (@-): kvroussz 88f96ac4 (empty) (no description set)\n",
+      "err": ""
+    },
+    "restore": {
+      "rc": 0,
+      "out": "",
+      "err": "Nothing changed.\n"
+    },
+    "after": {
+      "disk_sha": "79014f34a44dbd4fa5b5bea4c010d55d1c009c5ddf310a6abf24e23cc7c4832a",
+      "missing": false,
+      "edited_sha": "79014f34a44dbd4fa5b5bea4c010d55d1c009c5ddf310a6abf24e23cc7c4832a",
+      "status": "The working copy has no changes.\nWorking copy  (@) : ztwvyxmq c9b2fe31 (empty) (no description set)\nParent commit (@-): kvroussz 88f96ac4 (empty) (no description set)\n"
+    }
+  },
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "init",
+        "-b",
+        "main"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v3/pr/repos/pr-restore",
+      "rc": 0,
+      "seconds": 0.01804512506350875,
+      "stdout": "Initialized empty Git repository in /tmp/jj-lfs-evaluation/workflows-sol/v3/pr/repos/pr-restore/.git/\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.name",
+        "LFS Evaluation"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v3/pr/repos/pr-restore",
+      "rc": 0,
+      "seconds": 0.010303707793354988,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.email",
+        "eval@example.invalid"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v3/pr/repos/pr-restore",
+      "rc": 0,
+      "seconds": 0.010873083956539631,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "commit.gpgsign",
+        "false"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v3/pr/repos/pr-restore",
+      "rc": 0,
+      "seconds": 0.008828124962747097,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "core.autocrlf",
+        "false"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v3/pr/repos/pr-restore",
+      "rc": 0,
+      "seconds": 0.010135916993021965,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "lfs",
+        "install",
+        "--local"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v3/pr/repos/pr-restore",
+      "rc": 0,
+      "seconds": 0.19526762515306473,
+      "stdout": "Updated Git hooks.\nGit LFS initialized.\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "add",
+        "."
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v3/pr/repos/pr-restore",
+      "rc": 0,
+      "seconds": 0.09018108295276761,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "commit",
+        "-m",
+        "Seed LFS fixture"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v3/pr/repos/pr-restore",
+      "rc": 0,
+      "seconds": 0.4136360422708094,
+      "stdout": "[main (root-commit) 12d1533] Seed LFS fixture\n 3 files changed, 5 insertions(+)\n create mode 100644 .gitattributes\n create mode 100644 asset.bin\n create mode 100644 note.txt\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v3/pr/repos/pr-restore",
+      "rc": 0,
+      "seconds": 0.007892583031207323,
+      "stdout": "12d15330cc2e74b4ea86b70e76d1397cd028d027\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr",
+        "git",
+        "init",
+        "--colocate"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v3/pr/repos/pr-restore",
+      "rc": 0,
+      "seconds": 0.48759600007906556,
+      "stdout": "",
+      "stderr": "Done importing changes from the underlying Git repo.\nInitialized repo in \".\"\n"
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr",
+        "new"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v3/pr/repos/pr-restore",
+      "rc": 0,
+      "seconds": 0.1285644588060677,
+      "stdout": "",
+      "stderr": "Working copy  (@) now at: ztwvyxmq c9b2fe31 (empty) (no description set)\nParent commit (@-)      : kvroussz 88f96ac4 (empty) (no description set)\n"
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr",
+        "status"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v3/pr/repos/pr-restore",
+      "rc": 0,
+      "seconds": 0.02876183297485113,
+      "stdout": "The working copy has no changes.\nWorking copy  (@) : ztwvyxmq c9b2fe31 (empty) (no description set)\nParent commit (@-): kvroussz 88f96ac4 (empty) (no description set)\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr",
+        "restore",
+        "asset.bin"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v3/pr/repos/pr-restore",
+      "rc": 0,
+      "seconds": 0.03446912486106157,
+      "stdout": "",
+      "stderr": "Nothing changed.\n"
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr",
+        "status"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v3/pr/repos/pr-restore",
+      "rc": 0,
+      "seconds": 0.026154458988457918,
+      "stdout": "The working copy has no changes.\nWorking copy  (@) : ztwvyxmq c9b2fe31 (empty) (no description set)\nParent commit (@-): kvroussz 88f96ac4 (empty) (no description set)\n",
+      "stderr": ""
+    }
+  ]
+}

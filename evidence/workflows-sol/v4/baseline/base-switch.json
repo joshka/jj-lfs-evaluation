@@ -1,0 +1,310 @@
+{
+  "id": "base-switch",
+  "purpose": "switch",
+  "category": "contract",
+  "status": "PASS",
+  "seconds": 3.2614036658778787,
+  "checks": [
+    {
+      "label": "Initial hydration has expected bytes",
+      "pass": true
+    },
+    {
+      "label": "No silent loss of hydrated edit",
+      "pass": true,
+      "operation": "switch",
+      "disk_sha": "c37a06fc0ff3f76773bdc4a64413b7ce64ad21f2eb62cfe4b6ca031459b0d9ce",
+      "prior_sha": "79014f34a44dbd4fa5b5bea4c010d55d1c009c5ddf310a6abf24e23cc7c4832a",
+      "edited_sha": "79014f34a44dbd4fa5b5bea4c010d55d1c009c5ddf310a6abf24e23cc7c4832a"
+    }
+  ],
+  "observations": {
+    "edit_a": {
+      "rc": 0,
+      "out": "",
+      "err": "Working copy  (@) now at: knyouqno c60de15d Seed LFS fixture\nParent commit (@-)      : zzzzzzzz 00000000 (empty) (no description set)\nAdded 0 files, modified 1 files, removed 0 files\n"
+    },
+    "after_local_edit_status": {
+      "rc": 0,
+      "out": "Working copy changes:\nA .gitattributes\nA asset.bin\nA note.txt\nWorking copy  (@) : knyouqno e96a1cce Seed LFS fixture\nParent commit (@-): zzzzzzzz 00000000 (empty) (no description set)\n",
+      "err": "Rebased 3 descendant commits onto updated working copy.\n"
+    },
+    "local": {
+      "edited_sha": "79014f34a44dbd4fa5b5bea4c010d55d1c009c5ddf310a6abf24e23cc7c4832a",
+      "stored_sha": "79014f34a44dbd4fa5b5bea4c010d55d1c009c5ddf310a6abf24e23cc7c4832a",
+      "stored_pointer": false,
+      "rev": "e96a1cceffc271b540fe90ff6470a11f9a40b227"
+    },
+    "switch": {
+      "rc": 0,
+      "out": "",
+      "err": "Working copy  (@) now at: nwwlmvwu/1 f2dbd792 (divergent) Second LFS version\nParent commit (@-)      : knyouqno/1 c60de15d (divergent) Seed LFS fixture\nAdded 0 files, modified 1 files, removed 0 files\n"
+    },
+    "after": {
+      "disk_sha": "c37a06fc0ff3f76773bdc4a64413b7ce64ad21f2eb62cfe4b6ca031459b0d9ce",
+      "disk_is_pointer": true,
+      "prior_rc": 0,
+      "prior_sha": "79014f34a44dbd4fa5b5bea4c010d55d1c009c5ddf310a6abf24e23cc7c4832a",
+      "edited_recoverable": true
+    }
+  },
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "init",
+        "-b",
+        "main"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/baseline/repos/base-switch",
+      "rc": 0,
+      "seconds": 0.02213808288797736,
+      "stdout": "Initialized empty Git repository in /tmp/jj-lfs-evaluation/workflows-sol/v4/baseline/repos/base-switch/.git/\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.name",
+        "LFS Evaluation"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/baseline/repos/base-switch",
+      "rc": 0,
+      "seconds": 0.016915207728743553,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.email",
+        "eval@example.invalid"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/baseline/repos/base-switch",
+      "rc": 0,
+      "seconds": 0.016503165941685438,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "commit.gpgsign",
+        "false"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/baseline/repos/base-switch",
+      "rc": 0,
+      "seconds": 0.021476459223777056,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "core.autocrlf",
+        "false"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/baseline/repos/base-switch",
+      "rc": 0,
+      "seconds": 0.012562416959553957,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "lfs",
+        "install",
+        "--local"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/baseline/repos/base-switch",
+      "rc": 0,
+      "seconds": 0.2547049173153937,
+      "stdout": "Updated Git hooks.\nGit LFS initialized.\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "add",
+        "."
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/baseline/repos/base-switch",
+      "rc": 0,
+      "seconds": 0.16585416719317436,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "commit",
+        "-m",
+        "Seed LFS fixture"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/baseline/repos/base-switch",
+      "rc": 0,
+      "seconds": 0.6721427501179278,
+      "stdout": "[main (root-commit) c60de15] Seed LFS fixture\n 3 files changed, 5 insertions(+)\n create mode 100644 .gitattributes\n create mode 100644 asset.bin\n create mode 100644 note.txt\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/baseline/repos/base-switch",
+      "rc": 0,
+      "seconds": 0.015487042255699635,
+      "stdout": "c60de15d65eb23a36d4cae11f65fb8bad39ad83f\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-base",
+        "git",
+        "init",
+        "--colocate"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/baseline/repos/base-switch",
+      "rc": 0,
+      "seconds": 0.9463512497022748,
+      "stdout": "",
+      "stderr": "Done importing changes from the underlying Git repo.\nInitialized repo in \".\"\n"
+    },
+    {
+      "argv": [
+        "git",
+        "add",
+        "asset.bin"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/baseline/repos/base-switch",
+      "rc": 0,
+      "seconds": 0.17330416664481163,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "commit",
+        "-m",
+        "Second LFS version"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/baseline/repos/base-switch",
+      "rc": 0,
+      "seconds": 0.25438866624608636,
+      "stdout": "[main f2dbd79] Second LFS version\n 1 file changed, 2 insertions(+), 2 deletions(-)\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/baseline/repos/base-switch",
+      "rc": 0,
+      "seconds": 0.015122042037546635,
+      "stdout": "f2dbd7927436bf479ce0e1768b0e9128ac2b7cc3\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-base",
+        "status"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/baseline/repos/base-switch",
+      "rc": 0,
+      "seconds": 0.19552179193124175,
+      "stdout": "Working copy changes:\nM asset.bin\nWorking copy  (@) : rvntmrsl e9760ddc (no description set)\nParent commit (@-): nwwlmvwu f2dbd792 main | Second LFS version\n",
+      "stderr": "Reset the working copy parent to the new Git HEAD.\nDone importing changes from the underlying Git repo.\n"
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-base",
+        "edit",
+        "c60de15d65eb23a36d4cae11f65fb8bad39ad83f"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/baseline/repos/base-switch",
+      "rc": 0,
+      "seconds": 0.08746029110625386,
+      "stdout": "",
+      "stderr": "Working copy  (@) now at: knyouqno c60de15d Seed LFS fixture\nParent commit (@-)      : zzzzzzzz 00000000 (empty) (no description set)\nAdded 0 files, modified 1 files, removed 0 files\n"
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-base",
+        "status"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/baseline/repos/base-switch",
+      "rc": 0,
+      "seconds": 0.13886054186150432,
+      "stdout": "Working copy changes:\nA .gitattributes\nA asset.bin\nA note.txt\nWorking copy  (@) : knyouqno e96a1cce Seed LFS fixture\nParent commit (@-): zzzzzzzz 00000000 (empty) (no description set)\n",
+      "stderr": "Rebased 3 descendant commits onto updated working copy.\n"
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-base",
+        "log",
+        "-r",
+        "@",
+        "--no-graph",
+        "-T",
+        "commit_id"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/baseline/repos/base-switch",
+      "rc": 0,
+      "seconds": 0.05329816695302725,
+      "stdout": "e96a1cceffc271b540fe90ff6470a11f9a40b227",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-base",
+        "file",
+        "show",
+        "-r",
+        "e96a1cceffc271b540fe90ff6470a11f9a40b227",
+        "asset.bin"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/baseline/repos/base-switch",
+      "rc": 0,
+      "seconds": 0.053831332828849554,
+      "stdout": "local modified hydrated asset\u0000\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-base",
+        "edit",
+        "f2dbd7927436bf479ce0e1768b0e9128ac2b7cc3"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/baseline/repos/base-switch",
+      "rc": 0,
+      "seconds": 0.09132358338683844,
+      "stdout": "",
+      "stderr": "Working copy  (@) now at: nwwlmvwu/1 f2dbd792 (divergent) Second LFS version\nParent commit (@-)      : knyouqno/1 c60de15d (divergent) Seed LFS fixture\nAdded 0 files, modified 1 files, removed 0 files\n"
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-base",
+        "file",
+        "show",
+        "-r",
+        "e96a1cceffc271b540fe90ff6470a11f9a40b227",
+        "asset.bin"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/baseline/repos/base-switch",
+      "rc": 0,
+      "seconds": 0.047343708109110594,
+      "stdout": "local modified hydrated asset\u0000\n",
+      "stderr": ""
+    }
+  ]
+}

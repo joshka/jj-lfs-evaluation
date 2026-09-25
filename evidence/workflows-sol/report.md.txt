@@ -1,0 +1,29 @@
+# Additional jj/LFS workflow calibration
+
+`run.py` uses the shared evaluation fixture to exercise eight workflows against the pinned PR
+binary and `/opt/homebrew/bin/jj` 0.45.1. The baseline has default `git.ignore-filters=[]`; the PR
+binary has default LFS snapshot exclusion. Final run outputs are in `v3/comparison.json` and
+`v3/transcript.json`, with per-case command output and exit codes under `v3/pr` and `v3/baseline`.
+The final 16-case execution took about 21 seconds. Earlier exploratory fixtures remain in the
+top-level `pr`, `baseline`, and `v2` directories.
+
+| Workflow | Pinned PR observation | Baseline comparison and interpretation |
+| --- | --- | --- |
+| Revision switch | Modified hydrated bytes were unreported, absent from the A revision, then replaced on disk by B's pointer with exit 0. **Silent loss.** | Baseline stored the raw modified bytes in the A revision before switching. Recoverable, but that revision no longer contained a valid LFS pointer. |
+| Rebase | Modified hydrated bytes were unreported and unrecorded; after rebase, disk contained B's pointer. The command reported a descendant conflict, but did not identify or preserve the local asset edit. **Silent loss of that edit.** | Baseline stored the raw bytes. Its rebase produced an asset conflict, retaining the edited revision for recovery. |
+| `jj restore asset.bin` in an empty child | Returned 0 with `Nothing changed`; modified hydrated disk bytes remained. | Baseline tracked the raw modification and explicit restore replaced it with the parent pointer. This is expected for an explicit restore, so the baseline outcome is not classified as a regression. The PR command cannot discard the excluded edit because it never sees it. |
+| Squash and split of an ordinary note change | Local hydrated edit remained on disk but was unreported and absent from resulting revisions. It is vulnerable to a later checkout. | Baseline stored the raw edit and carried it into the rewritten revision, again compromising LFS pointer semantics. |
+| `jj file untrack asset.bin` | Returned 0, removed `asset.bin` from the current tree, and showed `D asset.bin`; hydrated bytes remained on disk. **The documented untrack suggestion can delete a committed LFS pointer from the revision and any eventual Git export.** | Baseline refused because the path was not ignored. |
+| Additional workspace | Pinned `jj workspace add` created a Git worktree with a `.git` file. Explicit `GIT_DIR` and `GIT_WORK_TREE` allowed `git lfs checkout` to hydrate the pointer; subsequent `jj status` remained clean. | Baseline workspace lacked `.git`; explicit Git directory/work tree also hydrated, but baseline `jj status` reported the raw payload as modified. |
+| Conflicting `.gitattributes` merge | A merge of `-filter` and `filter=custom` reported a two-sided `.gitattributes` conflict. No silent resolution was observed. | Same conflict was reported. |
+
+The strongest independent issue is the untrack behavior: the PR documentation says already tracked
+files may need `jj file untrack <path>` before snapshot exclusion takes effect. On a committed LFS
+pointer, this operation stages a deletion. The revision switch and rebase results reproduce the
+earlier C4 data-loss result in separate fixtures. The squash/split probes show why unchanged disk
+bytes alone are insufficient evidence of safety: the local edit remains outside jj history.
+
+All payloads were real Git LFS objects and pointers. When `jj edit` wrote a pointer to disk, the
+harness materialized the SHA-verified local LFS object before editing. The workspace case instead
+used `git lfs checkout` with explicit Git environment. No source code was changed. The core suite
+already covered sparse dirty deletion, so this bounded extension did not duplicate that case.

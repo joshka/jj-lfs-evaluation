@@ -1,0 +1,59 @@
+#!/usr/bin/env python3
+import importlib.util, json, os, hashlib, pathlib, shutil, subprocess, traceback, time
+P=pathlib.Path('/tmp/jj-lfs-evaluation/lifecycle-sol'); ROOT=pathlib.Path('/tmp/jj-lfs-evaluation')
+spec=importlib.util.spec_from_file_location('h',ROOT/'harness/evaluate.py'); h=importlib.util.module_from_spec(spec); spec.loader.exec_module(h)
+class Args: out=str(P); jj=str(ROOT/'bin/jj-pr'); only=None
+shutil.rmtree(P/'repos',ignore_errors=True)
+shutil.rmtree(P/'bare',ignore_errors=True)
+s=h.Suite(Args())
+def sh(b): return hashlib.sha256(b).hexdigest()
+def rec(f, label, cp): f.observations[label]={'rc':cp.returncode,'stdout':cp.stdout.decode(errors='replace'),'stderr':cp.stderr.decode(errors='replace')}
+def refs(f,label):
+ c=f.g('show-ref',ok=False); rec(f,label,c); return c.stdout.decode()
+def obj(f,data): return f.root/'.git/lfs/objects'/sh(data)[:2]/sh(data)[2:4]/sh(data)
+def base(f): f.seed(attrs='*.bin filter=lfs diff=lfs merge=lfs -text\n',files={'note.txt':b'base\n'})
+def create_jj_lfs(f,data,path='asset.bin'):
+ f.write(path,data); c=subprocess.run(['git','lfs','clean',path],input=data,cwd=f.root,env=f.env,capture_output=True); f.commands.append({'argv':['git','lfs','clean',path],'stdin_sha256':sh(data),'cwd':str(f.root),'rc':c.returncode,'stdout':c.stdout.decode(errors='replace'),'stderr':c.stderr.decode(errors='replace')}); assert c.returncode==0
+ f.write(path,c.stdout); f.jj('--config=git.ignore-filters=[]','status'); return c.stdout
+
+def local_remote(f):
+ remote=P/'bare'/f.root.name;remote.parent.mkdir(exist_ok=True,parents=True);subprocess.run(['git','init','--bare',str(remote)],check=True,capture_output=True,env=f.env); f.g('remote','add','origin',str(remote)); f.g('push','-u','origin','main'); f.observations['remote']=str(remote)
+def prune_unbookmarked(f):
+ base(f); local_remote(f); f.jj('new'); ptr=create_jj_lfs(f,h.PAYLOAD); f.jj('--config=git.ignore-filters=[]','commit','-m','Unbookmarked LFS asset'); f.jj('new'); refs(f,'git_refs_before'); f.check('LFS object exists before prune',obj(f,h.PAYLOAD).exists());
+ c=f.g('lfs','prune','--dry-run','--verbose',ok=False); rec(f,'prune_dry',c); rec(f,'prune_recent_dry',f.g('lfs','prune','--recent','--dry-run','--verbose',ok=False)); rec(f,'prune_force_dry',f.g('lfs','prune','--force','--dry-run','--verbose',ok=False)); rec(f,'prune_verify_dry',f.g('lfs','prune','--verify-remote','--dry-run','--verbose',ok=False))
+ f.check('Prune command succeeds',c.returncode==0); f.check('Unbookmarked jj asset retained in dry run',sh(h.PAYLOAD) not in (c.stdout+c.stderr).decode())
+ f.observations['lfs_object']=str(obj(f,h.PAYLOAD)); f.observations['pointer_sha']=sh(ptr)
+ rec(f,'force_prune_actual',f.g('lfs','prune','--force','--verbose',ok=False)); f.check('Force prune removes jj-only object',not obj(f,h.PAYLOAD).exists()); f.observations['remote_object_exists']=(P/'bare'/f.root.name/'lfs/objects'/sh(h.PAYLOAD)[:2]/sh(h.PAYLOAD)[2:4]/sh(h.PAYLOAD)).exists(); rec(f,'lfs_push_all_after_prune',f.g('lfs','push','origin','--all',ok=False)); f.observations['object_after_push']=obj(f,h.PAYLOAD).exists()
+
+def prune_rewrite(f):
+ base(f); local_remote(f); f.jj('new'); create_jj_lfs(f,h.PAYLOAD); f.jj('--config=git.ignore-filters=[]','commit','-m','LFS asset'); f.jj('new'); f.jj('abandon','@-'); refs(f,'git_refs_after_abandon');
+ c=f.g('lfs','prune','--dry-run','--verbose',ok=False); rec(f,'prune_dry',c); rec(f,'prune_recent_dry',f.g('lfs','prune','--recent','--dry-run','--verbose',ok=False)); rec(f,'prune_force_dry',f.g('lfs','prune','--force','--dry-run','--verbose',ok=False)); rec(f,'prune_verify_dry',f.g('lfs','prune','--verify-remote','--dry-run','--verbose',ok=False)); f.check('Prune command succeeds',c.returncode==0)
+ f.observations['object_exists']=obj(f,h.PAYLOAD).exists(); f.observations['oid_in_prune_output']=sh(h.PAYLOAD) in (c.stdout+c.stderr).decode()
+ f.observations['jj_oplog']=f.jj('op','log','--limit','4').stdout.decode()
+ rec(f,'force_prune_actual',f.g('lfs','prune','--force','--verbose',ok=False)); f.check('Force prune removes op-recoverable object',not obj(f,h.PAYLOAD).exists()); f.observations['remote_object_exists']=(P/'bare'/f.root.name/'lfs/objects'/sh(h.PAYLOAD)[:2]/sh(h.PAYLOAD)[2:4]/sh(h.PAYLOAD)).exists(); rec(f,'restore_before_abandon',f.jj('op','restore','@-',ok=False)); rec(f,'lfs_checkout_after_restore',f.g('lfs','checkout',ok=False)); f.observations['restored_disk_sha']=sh((f.root/'asset.bin').read_bytes()) if (f.root/'asset.bin').exists() else None
+
+def storage(f):
+ f.g('config','lfs.storage',str(P/'shared-store')); f.seed(); loc=P/'shared-store/objects'/sh(h.PAYLOAD)[:2]/sh(h.PAYLOAD)[2:4]/sh(h.PAYLOAD)
+ f.check('LFS object in configured shared store',loc.exists(),path=str(loc)); f.bytes_check('jj preserves pointer with custom storage',f.stored('asset.bin'),h.pointer(h.PAYLOAD)); f.jj('new'); f.bytes_check('jj checkout hydrates via configured storage',(f.root/'asset.bin').read_bytes(),h.PAYLOAD)
+
+def skip_smudge(f):
+ env=f.env.copy();env['GIT_LFS_SKIP_SMUDGE']='1'; f.write('.gitattributes','*.bin filter=lfs diff=lfs merge=lfs -text\n');f.write('asset.bin',h.PAYLOAD);f.g('add','.');f.g('commit','-m','seed'); (f.root/'asset.bin').unlink(); f.g('checkout','--','asset.bin',env=env); f.jj('git','init','--colocate',env=env); f.jj('new',env=env); raw=(f.root/'asset.bin').read_bytes(); f.observations['disk_sha']=sh(raw);f.observations['pointer_sha']=sh(h.pointer(h.PAYLOAD));f.bytes_check('skip-smudge leaves pointer on disk',raw,h.pointer(h.PAYLOAD)); f.bytes_check('jj tree remains pointer',f.stored('asset.bin'),h.pointer(h.PAYLOAD))
+
+def missing_lfs(f):
+ f.seed(); f.jj('new'); env=f.env.copy(); tool_dir=P/'no-lfs-bin';tool_dir.mkdir(exist_ok=True); (tool_dir/'git').symlink_to(shutil.which('git')) if not (tool_dir/'git').exists() else None
+ env['PATH']=str(tool_dir)+':/usr/bin:/bin'; c=f.jj('status',env=env,ok=False); rec(f,'status_without_git_lfs',c);f.check('jj status works without git-lfs',c.returncode==0)
+ c=f.jj('new','root()',env=env,ok=False);rec(f,'checkout_empty_without_git_lfs',c); c=f.jj('new','main',env=env,ok=False);rec(f,'checkout_asset_without_git_lfs',c);f.observations['disk_sha']=sh((f.root/'asset.bin').read_bytes());f.check('jj checkout succeeds without git-lfs',c.returncode==0);f.bytes_check('Missing git-lfs leaves pointer on disk',(f.root/'asset.bin').read_bytes(),h.pointer(h.PAYLOAD))
+
+def include_exclude(f):
+ f.seed(attrs='*.bin filter=lfs diff=lfs merge=lfs -text\n',files={'asset.bin':h.PAYLOAD,'other.bin':h.OTHER}); f.g('config','lfs.fetchexclude','other.bin');f.jj('new');f.observations['asset_sha']=sh((f.root/'asset.bin').read_bytes());f.observations['other_sha']=sh((f.root/'other.bin').read_bytes());f.bytes_check('jj pointer asset remains',f.stored('asset.bin'),h.pointer(h.PAYLOAD));f.bytes_check('jj pointer other remains',f.stored('other.bin'),h.pointer(h.OTHER))
+
+def migrate_before(f):
+ f.write('asset.bin',h.PAYLOAD);f.g('add','.');f.g('commit','-m','raw asset');old=f.g('rev-parse','HEAD').stdout.decode().strip();c=f.g('lfs','migrate','import','--include=*.bin','--yes',ok=False);rec(f,'migrate_import',c); assert c.returncode==0;f.jj('git','init','--colocate');f.bytes_check('jj sees imported pointer',f.stored('asset.bin'),h.pointer(h.PAYLOAD));f.observations['old_head']=old;f.observations['new_head']=f.g('rev-parse','HEAD').stdout.decode().strip()
+
+def migrate_after(f):
+ f.write('asset.bin',h.PAYLOAD);f.g('add','.');f.g('commit','-m','raw asset');f.jj('git','init','--colocate');before=f.stored('asset.bin');c=f.g('lfs','migrate','import','--include=*.bin','--yes',ok=False);rec(f,'migrate_import',c);f.observations['refs_post_import']=refs(f,'refs_post_import');d=f.jj('git','import',ok=False);rec(f,'jj_import',d);f.observations['jj_status']=f.jj('status',ok=False).stdout.decode(); f.observations['jj_stored_sha']=sh(f.stored('asset.bin')); f.check('Git migration completed',c.returncode==0);f.bytes_check('Original jj pointer remains raw before migration',before,h.PAYLOAD)
+
+def migrate_export_after(f):
+ f.seed(); before=f.stored('asset.bin'); c=f.g('lfs','migrate','export','--include=*.bin','--yes',ok=False);rec(f,'migrate_export',c);d=f.jj('git','import',ok=False);rec(f,'jj_import',d);f.check('Git LFS export completes',c.returncode==0);f.check('jj imports exported history',d.returncode==0);f.bytes_check('jj tree has raw content after export',f.stored('asset.bin'),h.PAYLOAD);f.bytes_check('Original tree was pointer',before,h.pointer(h.PAYLOAD))
+
+for name,desc,fn in [('prune-unbookmarked','LFS object referenced by jj commit without bookmark',prune_unbookmarked),('prune-abandoned','LFS object referenced by abandoned jj commit and op history',prune_rewrite),('custom-storage','custom shared lfs.storage',storage),('skip-smudge','GIT_LFS_SKIP_SMUDGE interoperability',skip_smudge),('missing-lfs','jj behavior without git-lfs executable',missing_lfs),('fetch-exclude','lfs.fetchexclude and jj tree',include_exclude),('migrate-before','Git LFS migration before jj init',migrate_before),('migrate-after','Git LFS migration after jj init',migrate_after),('migrate-export-after','Git LFS export after jj init',migrate_export_after)]: s.case(name,desc,fn,category='lifecycle')

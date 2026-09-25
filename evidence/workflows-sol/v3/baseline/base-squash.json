@@ -1,0 +1,241 @@
+{
+  "id": "base-squash",
+  "purpose": "squash",
+  "category": "contract",
+  "status": "PASS",
+  "seconds": 1.033964834176004,
+  "checks": [
+    {
+      "label": "Initial hydration has expected bytes",
+      "pass": true
+    },
+    {
+      "label": "Operation does not silently lose hydrated edit",
+      "pass": true
+    }
+  ],
+  "observations": {
+    "pre_status": {
+      "rc": 0,
+      "out": "Working copy changes:\nM asset.bin\nM note.txt\nWorking copy  (@) : mtswvxwt b4f63a27 (no description set)\nParent commit (@-): ypstuopq 594918af (no description set)\n",
+      "err": ""
+    },
+    "squash": {
+      "rc": 0,
+      "out": "",
+      "err": "Working copy  (@) now at: vtwkqzus 504f589f (empty) (no description set)\nParent commit (@-)      : ypstuopq aaa3eb9e (no description set)\n"
+    },
+    "after": {
+      "disk_sha": "b6b1d1d512a8a18b62f08c17d28aa5d158e91e02ccba185b17688688e87a0e59",
+      "edited_sha": "b6b1d1d512a8a18b62f08c17d28aa5d158e91e02ccba185b17688688e87a0e59",
+      "old_revision_sha": "b6b1d1d512a8a18b62f08c17d28aa5d158e91e02ccba185b17688688e87a0e59",
+      "edited_recoverable": true,
+      "status": "The working copy has no changes.\nWorking copy  (@) : vtwkqzus 504f589f (empty) (no description set)\nParent commit (@-): ypstuopq aaa3eb9e (no description set)\n"
+    }
+  },
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "init",
+        "-b",
+        "main"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v3/baseline/repos/base-squash",
+      "rc": 0,
+      "seconds": 0.012505207676440477,
+      "stdout": "Initialized empty Git repository in /tmp/jj-lfs-evaluation/workflows-sol/v3/baseline/repos/base-squash/.git/\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.name",
+        "LFS Evaluation"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v3/baseline/repos/base-squash",
+      "rc": 0,
+      "seconds": 0.006860166788101196,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.email",
+        "eval@example.invalid"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v3/baseline/repos/base-squash",
+      "rc": 0,
+      "seconds": 0.006257249973714352,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "commit.gpgsign",
+        "false"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v3/baseline/repos/base-squash",
+      "rc": 0,
+      "seconds": 0.006512416992336512,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "core.autocrlf",
+        "false"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v3/baseline/repos/base-squash",
+      "rc": 0,
+      "seconds": 0.0060630422085523605,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "lfs",
+        "install",
+        "--local"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v3/baseline/repos/base-squash",
+      "rc": 0,
+      "seconds": 0.14618891663849354,
+      "stdout": "Updated Git hooks.\nGit LFS initialized.\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "add",
+        "."
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v3/baseline/repos/base-squash",
+      "rc": 0,
+      "seconds": 0.08356670942157507,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "commit",
+        "-m",
+        "Seed LFS fixture"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v3/baseline/repos/base-squash",
+      "rc": 0,
+      "seconds": 0.3523215828463435,
+      "stdout": "[main (root-commit) e832473] Seed LFS fixture\n 3 files changed, 5 insertions(+)\n create mode 100644 .gitattributes\n create mode 100644 asset.bin\n create mode 100644 note.txt\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v3/baseline/repos/base-squash",
+      "rc": 0,
+      "seconds": 0.007143625058233738,
+      "stdout": "e8324731d9fb511d880f529ea03d4748e159eb9d\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/opt/homebrew/Cellar/jj/0.45.1/bin/jj",
+        "git",
+        "init",
+        "--colocate"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v3/baseline/repos/base-squash",
+      "rc": 0,
+      "seconds": 0.17597841657698154,
+      "stdout": "",
+      "stderr": "Done importing changes from the underlying Git repo.\nInitialized repo in \".\"\n"
+    },
+    {
+      "argv": [
+        "/opt/homebrew/Cellar/jj/0.45.1/bin/jj",
+        "new"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v3/baseline/repos/base-squash",
+      "rc": 0,
+      "seconds": 0.05503275012597442,
+      "stdout": "",
+      "stderr": "Working copy  (@) now at: mtswvxwt 2d9d44b1 (empty) (no description set)\nParent commit (@-)      : ypstuopq 594918af (no description set)\n"
+    },
+    {
+      "argv": [
+        "/opt/homebrew/Cellar/jj/0.45.1/bin/jj",
+        "status"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v3/baseline/repos/base-squash",
+      "rc": 0,
+      "seconds": 0.06449316628277302,
+      "stdout": "Working copy changes:\nM asset.bin\nM note.txt\nWorking copy  (@) : mtswvxwt b4f63a27 (no description set)\nParent commit (@-): ypstuopq 594918af (no description set)\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/opt/homebrew/Cellar/jj/0.45.1/bin/jj",
+        "log",
+        "-r",
+        "@",
+        "--no-graph",
+        "-T",
+        "commit_id"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v3/baseline/repos/base-squash",
+      "rc": 0,
+      "seconds": 0.020771542098373175,
+      "stdout": "b4f63a278801de2e7e467034e8835d0c29f79883",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/opt/homebrew/Cellar/jj/0.45.1/bin/jj",
+        "squash"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v3/baseline/repos/base-squash",
+      "rc": 0,
+      "seconds": 0.05613954132422805,
+      "stdout": "",
+      "stderr": "Working copy  (@) now at: vtwkqzus 504f589f (empty) (no description set)\nParent commit (@-)      : ypstuopq aaa3eb9e (no description set)\n"
+    },
+    {
+      "argv": [
+        "/opt/homebrew/Cellar/jj/0.45.1/bin/jj",
+        "file",
+        "show",
+        "-r",
+        "b4f63a278801de2e7e467034e8835d0c29f79883",
+        "asset.bin"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v3/baseline/repos/base-squash",
+      "rc": 0,
+      "seconds": 0.015935666859149933,
+      "stdout": "workflow modified hydrated asset\u0000\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/opt/homebrew/Cellar/jj/0.45.1/bin/jj",
+        "status"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v3/baseline/repos/base-squash",
+      "rc": 0,
+      "seconds": 0.01619475008919835,
+      "stdout": "The working copy has no changes.\nWorking copy  (@) : vtwkqzus 504f589f (empty) (no description set)\nParent commit (@-): ypstuopq aaa3eb9e (no description set)\n",
+      "stderr": ""
+    }
+  ]
+}

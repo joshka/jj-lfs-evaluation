@@ -1,0 +1,185 @@
+{
+  "id": "A01-nested-set",
+  "purpose": "Attribute matching agrees with Git",
+  "category": "contract",
+  "status": "PASS",
+  "seconds": 6.383438209071755,
+  "checks": [
+    {
+      "label": "Expected exclusion matches Git attribute decision",
+      "pass": true,
+      "expected_excluded": true,
+      "actual_included": false,
+      "git_check_attr": "sub/a.bin: filter: lfs\n",
+      "jj_status": "Working copy changes:\nA sub/.gitattributes\nWorking copy  (@) : lrqnokpz 7e8c3ccb (no description set)\nParent commit (@-): qnvkpzll 591c6994 main | Seed LFS fixture\n"
+    }
+  ],
+  "observations": {},
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "init",
+        "-b",
+        "main"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos-release/repos/A01-nested-set",
+      "rc": 0,
+      "seconds": 0.013174791354686022,
+      "stdout": "Initialized empty Git repository in /tmp/jj-lfs-evaluation/macos-release/repos/A01-nested-set/.git/\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.name",
+        "LFS Evaluation"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos-release/repos/A01-nested-set",
+      "rc": 0,
+      "seconds": 0.006586708128452301,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.email",
+        "eval@example.invalid"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos-release/repos/A01-nested-set",
+      "rc": 0,
+      "seconds": 0.007389874663203955,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "commit.gpgsign",
+        "false"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos-release/repos/A01-nested-set",
+      "rc": 0,
+      "seconds": 0.00659504160284996,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "core.autocrlf",
+        "false"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos-release/repos/A01-nested-set",
+      "rc": 0,
+      "seconds": 0.006213041953742504,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "lfs",
+        "install",
+        "--local"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos-release/repos/A01-nested-set",
+      "rc": 0,
+      "seconds": 0.13394270790740848,
+      "stdout": "Updated Git hooks.\nGit LFS initialized.\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "add",
+        "."
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos-release/repos/A01-nested-set",
+      "rc": 0,
+      "seconds": 0.008470125030726194,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "commit",
+        "-m",
+        "Seed LFS fixture"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos-release/repos/A01-nested-set",
+      "rc": 0,
+      "seconds": 5.85216545779258,
+      "stdout": "[main (root-commit) 591c699] Seed LFS fixture\n 2 files changed, 2 insertions(+)\n create mode 100644 .gitattributes\n create mode 100644 note.txt\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos-release/repos/A01-nested-set",
+      "rc": 0,
+      "seconds": 0.00907066697254777,
+      "stdout": "591c69942b778fb8fabc207318b9b4ef7705f239\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr-release",
+        "git",
+        "init",
+        "--colocate"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos-release/repos/A01-nested-set",
+      "rc": 0,
+      "seconds": 0.200700749643147,
+      "stdout": "",
+      "stderr": "Done importing changes from the underlying Git repo.\nInitialized repo in \".\"\n"
+    },
+    {
+      "argv": [
+        "git",
+        "check-attr",
+        "filter",
+        "--",
+        "sub/a.bin"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos-release/repos/A01-nested-set",
+      "rc": 0,
+      "seconds": 0.008609542157500982,
+      "stdout": "sub/a.bin: filter: lfs\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr-release",
+        "status"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos-release/repos/A01-nested-set",
+      "rc": 0,
+      "seconds": 0.10701958322897553,
+      "stdout": "Working copy changes:\nA sub/.gitattributes\nWorking copy  (@) : lrqnokpz 7e8c3ccb (no description set)\nParent commit (@-): qnvkpzll 591c6994 main | Seed LFS fixture\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr-release",
+        "file",
+        "list"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos-release/repos/A01-nested-set",
+      "rc": 0,
+      "seconds": 0.014579625334590673,
+      "stdout": ".gitattributes\nnote.txt\nsub/.gitattributes\n",
+      "stderr": ""
+    }
+  ]
+}

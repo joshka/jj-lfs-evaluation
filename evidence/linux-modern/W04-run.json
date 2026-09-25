@@ -1,0 +1,198 @@
+{
+  "id": "W04-run",
+  "purpose": "Temporary run snapshot preserves filtered paths",
+  "category": "contract",
+  "status": "PASS",
+  "seconds": 0.3035480830000097,
+  "checks": [
+    {
+      "label": "Run temp snapshot preserves pointer",
+      "pass": true,
+      "actual_sha256": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+      "expected_sha256": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+      "actual_size": 129,
+      "expected_size": 129
+    },
+    {
+      "label": "Run captures ordinary edits",
+      "pass": true,
+      "actual_sha256": "73185caf350ed8ed791dbe4ec5604da8d770a97b92c5797cbf988877c9d5bd80",
+      "expected_sha256": "73185caf350ed8ed791dbe4ec5604da8d770a97b92c5797cbf988877c9d5bd80",
+      "actual_size": 12,
+      "expected_size": 12
+    }
+  ],
+  "observations": {},
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "init",
+        "-b",
+        "main"
+      ],
+      "cwd": "/eval/linux-modern/repos/W04-run",
+      "rc": 0,
+      "seconds": 0.016762625000012576,
+      "stdout": "Initialized empty Git repository in /eval/linux-modern/repos/W04-run/.git/\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.name",
+        "LFS Evaluation"
+      ],
+      "cwd": "/eval/linux-modern/repos/W04-run",
+      "rc": 0,
+      "seconds": 0.0030905830000165224,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.email",
+        "eval@example.invalid"
+      ],
+      "cwd": "/eval/linux-modern/repos/W04-run",
+      "rc": 0,
+      "seconds": 0.0035870829999566922,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "commit.gpgsign",
+        "false"
+      ],
+      "cwd": "/eval/linux-modern/repos/W04-run",
+      "rc": 0,
+      "seconds": 0.001967917000001762,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "core.autocrlf",
+        "false"
+      ],
+      "cwd": "/eval/linux-modern/repos/W04-run",
+      "rc": 0,
+      "seconds": 0.0015867500000013024,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "lfs",
+        "install",
+        "--local"
+      ],
+      "cwd": "/eval/linux-modern/repos/W04-run",
+      "rc": 0,
+      "seconds": 0.030271832999972048,
+      "stdout": "Updated Git hooks.\nGit LFS initialized.\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "add",
+        "."
+      ],
+      "cwd": "/eval/linux-modern/repos/W04-run",
+      "rc": 0,
+      "seconds": 0.029440000000022337,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "commit",
+        "-m",
+        "Seed LFS fixture"
+      ],
+      "cwd": "/eval/linux-modern/repos/W04-run",
+      "rc": 0,
+      "seconds": 0.05059983299997839,
+      "stdout": "[main (root-commit) 88af5e5] Seed LFS fixture\n 3 files changed, 5 insertions(+)\n create mode 100644 .gitattributes\n create mode 100644 asset.bin\n create mode 100644 note.txt\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "/eval/linux-modern/repos/W04-run",
+      "rc": 0,
+      "seconds": 0.002367625000033513,
+      "stdout": "88af5e5b0073d420d293fc468f1963caff7692f4\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/target/debug/jj",
+        "git",
+        "init",
+        "--colocate"
+      ],
+      "cwd": "/eval/linux-modern/repos/W04-run",
+      "rc": 0,
+      "seconds": 0.054081875000008495,
+      "stdout": "",
+      "stderr": "Done importing changes from the underlying Git repo.\nInitialized repo in \".\"\n"
+    },
+    {
+      "argv": [
+        "/target/debug/jj",
+        "run",
+        "-r",
+        "@",
+        "--",
+        "/usr/bin/python3",
+        "/eval/linux-modern/repos/write-run.py"
+      ],
+      "cwd": "/eval/linux-modern/repos/W04-run",
+      "rc": 0,
+      "seconds": 0.06353833399998621,
+      "stdout": "",
+      "stderr": "Rewrote 1 commits.\nWorking copy  (@) now at: yrlquupz 6adfcc89 (no description set)\nParent commit (@-)      : xkvqtlkk 88af5e5b main | Seed LFS fixture\nAdded 0 files, modified 1 files, removed 0 files\n"
+    },
+    {
+      "argv": [
+        "/target/debug/jj",
+        "file",
+        "show",
+        "asset.bin"
+      ],
+      "cwd": "/eval/linux-modern/repos/W04-run",
+      "rc": 0,
+      "seconds": 0.021025833000010152,
+      "stdout": "version https://git-lfs.github.com/spec/v1\noid sha256:dad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f\nsize 2500\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/target/debug/jj",
+        "file",
+        "show",
+        "note.txt"
+      ],
+      "cwd": "/eval/linux-modern/repos/W04-run",
+      "rc": 0,
+      "seconds": 0.022414999999966767,
+      "stdout": "run ordinary",
+      "stderr": ""
+    }
+  ]
+}

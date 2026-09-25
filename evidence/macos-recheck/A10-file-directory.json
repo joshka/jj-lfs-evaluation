@@ -1,0 +1,160 @@
+{
+  "id": "A10-file-directory",
+  "purpose": "File-to-directory replacement is handled",
+  "category": "contract",
+  "status": "FAIL",
+  "seconds": 1.7620720826089382,
+  "checks": [
+    {
+      "label": "File-to-directory transition completes without panic",
+      "pass": false
+    }
+  ],
+  "observations": {
+    "status": {
+      "rc": 101,
+      "stderr": "\nthread 'main' (138336810) panicked at lib/src/local_working_copy.rs:1464:13:\nassertion `left == right` failed\n  left: {\"asset.bin\", \".gitattributes\", \"asset.bin/child.txt\", \"note.txt\"}\n right: {\"note.txt\", \"asset.bin/child.txt\", \".gitattributes\"}\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\n"
+    }
+  },
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "init",
+        "-b",
+        "main"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos-recheck/repos/A10-file-directory",
+      "rc": 0,
+      "seconds": 0.025881875306367874,
+      "stdout": "Initialized empty Git repository in /tmp/jj-lfs-evaluation/macos-recheck/repos/A10-file-directory/.git/\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.name",
+        "LFS Evaluation"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos-recheck/repos/A10-file-directory",
+      "rc": 0,
+      "seconds": 0.019273541867733,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.email",
+        "eval@example.invalid"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos-recheck/repos/A10-file-directory",
+      "rc": 0,
+      "seconds": 0.014012333936989307,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "commit.gpgsign",
+        "false"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos-recheck/repos/A10-file-directory",
+      "rc": 0,
+      "seconds": 0.016631708946079016,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "core.autocrlf",
+        "false"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos-recheck/repos/A10-file-directory",
+      "rc": 0,
+      "seconds": 0.01022887509316206,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "lfs",
+        "install",
+        "--local"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos-recheck/repos/A10-file-directory",
+      "rc": 0,
+      "seconds": 0.2537038750015199,
+      "stdout": "Updated Git hooks.\nGit LFS initialized.\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "add",
+        "."
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos-recheck/repos/A10-file-directory",
+      "rc": 0,
+      "seconds": 0.24733208306133747,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "commit",
+        "-m",
+        "Seed LFS fixture"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos-recheck/repos/A10-file-directory",
+      "rc": 0,
+      "seconds": 0.7908400828018785,
+      "stdout": "[main (root-commit) 58a4328] Seed LFS fixture\n 3 files changed, 5 insertions(+)\n create mode 100644 .gitattributes\n create mode 100644 asset.bin\n create mode 100644 note.txt\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos-recheck/repos/A10-file-directory",
+      "rc": 0,
+      "seconds": 0.033830625005066395,
+      "stdout": "58a43285afb236bb86e39b5c0c99fd5aee6199aa\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr",
+        "git",
+        "init",
+        "--colocate"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos-recheck/repos/A10-file-directory",
+      "rc": 0,
+      "seconds": 0.30092570930719376,
+      "stdout": "",
+      "stderr": "Done importing changes from the underlying Git repo.\nInitialized repo in \".\"\n"
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr",
+        "status"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos-recheck/repos/A10-file-directory",
+      "rc": 101,
+      "seconds": 0.04477895796298981,
+      "stdout": "",
+      "stderr": "\nthread 'main' (138336810) panicked at lib/src/local_working_copy.rs:1464:13:\nassertion `left == right` failed\n  left: {\"asset.bin\", \".gitattributes\", \"asset.bin/child.txt\", \"note.txt\"}\n right: {\"note.txt\", \"asset.bin/child.txt\", \".gitattributes\"}\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\n"
+    }
+  ]
+}

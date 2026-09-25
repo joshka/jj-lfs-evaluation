@@ -1,0 +1,175 @@
+{
+  "id": "large-64m",
+  "purpose": "64 MiB hydrated LFS asset",
+  "category": "performance-diagnostic",
+  "status": "PASS",
+  "seconds": 1.307264540810138,
+  "checks": [
+    {
+      "label": "64 MiB status succeeds",
+      "pass": true
+    },
+    {
+      "label": "Hydrated disk content unchanged",
+      "pass": true
+    },
+    {
+      "label": "jj tree remains LFS pointer",
+      "pass": true
+    }
+  ],
+  "observations": {
+    "size": 67108864,
+    "payload_sha": "08304218c78b79e8b507b692f5315a0a66baba08e5253afb7c0c6c4432836c71",
+    "disk_sha_before": "08304218c78b79e8b507b692f5315a0a66baba08e5253afb7c0c6c4432836c71",
+    "disk_sha_after": "08304218c78b79e8b507b692f5315a0a66baba08e5253afb7c0c6c4432836c71",
+    "tree_sha": "bbfda7c4b811c12319edc6017ffe1d1b5842558352e710c806757bdec3103676",
+    "tree_size": 133,
+    "status_seconds": 0.016400584019720554,
+    "status_rc": 0,
+    "status_stdout": "The working copy has no changes.\nWorking copy  (@) : rnollmln 7dacf7d9 (empty) (no description set)\nParent commit (@-): puztyxwz fd7b0b68 main | Seed 64 MiB LFS asset\n",
+    "status_stderr": ""
+  },
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "init",
+        "-b",
+        "main"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/performance-sol/repos/large-64m",
+      "rc": 0,
+      "seconds": 0.01221999991685152,
+      "stdout": "Initialized empty Git repository in /tmp/jj-lfs-evaluation/performance-sol/repos/large-64m/.git/\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.name",
+        "LFS Evaluation"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/performance-sol/repos/large-64m",
+      "rc": 0,
+      "seconds": 0.006446042098104954,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.email",
+        "eval@example.invalid"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/performance-sol/repos/large-64m",
+      "rc": 0,
+      "seconds": 0.0077888332307338715,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "commit.gpgsign",
+        "false"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/performance-sol/repos/large-64m",
+      "rc": 0,
+      "seconds": 0.00602570828050375,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "core.autocrlf",
+        "false"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/performance-sol/repos/large-64m",
+      "rc": 0,
+      "seconds": 0.006817374844104052,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "lfs",
+        "install",
+        "--local"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/performance-sol/repos/large-64m",
+      "rc": 0,
+      "seconds": 0.12683737510815263,
+      "stdout": "Updated Git hooks.\nGit LFS initialized.\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "add",
+        "."
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/performance-sol/repos/large-64m",
+      "rc": 0,
+      "seconds": 0.3130748341791332,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "commit",
+        "-m",
+        "Seed 64 MiB LFS asset"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/performance-sol/repos/large-64m",
+      "rc": 0,
+      "seconds": 0.3421677080914378,
+      "stdout": "[main (root-commit) fd7b0b6] Seed 64 MiB LFS asset\n 2 files changed, 4 insertions(+)\n create mode 100644 .gitattributes\n create mode 100644 large.bin\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr-release",
+        "git",
+        "init",
+        "--colocate"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/performance-sol/repos/large-64m",
+      "rc": 0,
+      "seconds": 0.22795616602525115,
+      "stdout": "",
+      "stderr": "Done importing changes from the underlying Git repo.\nInitialized repo in \".\"\n"
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr-release",
+        "status"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/performance-sol/repos/large-64m",
+      "rc": 0,
+      "seconds": 0.016370708122849464,
+      "stdout": "The working copy has no changes.\nWorking copy  (@) : rnollmln 7dacf7d9 (empty) (no description set)\nParent commit (@-): puztyxwz fd7b0b68 main | Seed 64 MiB LFS asset\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr-release",
+        "file",
+        "show",
+        "large.bin"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/performance-sol/repos/large-64m",
+      "rc": 0,
+      "seconds": 0.0150497080758214,
+      "stdout": "version https://git-lfs.github.com/spec/v1\noid sha256:08304218c78b79e8b507b692f5315a0a66baba08e5253afb7c0c6c4432836c71\nsize 67108864\n",
+      "stderr": ""
+    }
+  ]
+}

@@ -1,0 +1,133 @@
+[
+  {
+    "id": "base-switch",
+    "purpose": "switch",
+    "category": "contract",
+    "status": "PASS",
+    "seconds": 3.2614036658778787,
+    "checks": [
+      {
+        "label": "Initial hydration has expected bytes",
+        "pass": true
+      },
+      {
+        "label": "No silent loss of hydrated edit",
+        "pass": true,
+        "operation": "switch",
+        "disk_sha": "c37a06fc0ff3f76773bdc4a64413b7ce64ad21f2eb62cfe4b6ca031459b0d9ce",
+        "prior_sha": "79014f34a44dbd4fa5b5bea4c010d55d1c009c5ddf310a6abf24e23cc7c4832a",
+        "edited_sha": "79014f34a44dbd4fa5b5bea4c010d55d1c009c5ddf310a6abf24e23cc7c4832a"
+      }
+    ],
+    "observations": {
+      "edit_a": {
+        "rc": 0,
+        "out": "",
+        "err": "Working copy  (@) now at: knyouqno c60de15d Seed LFS fixture\nParent commit (@-)      : zzzzzzzz 00000000 (empty) (no description set)\nAdded 0 files, modified 1 files, removed 0 files\n"
+      },
+      "after_local_edit_status": {
+        "rc": 0,
+        "out": "Working copy changes:\nA .gitattributes\nA asset.bin\nA note.txt\nWorking copy  (@) : knyouqno e96a1cce Seed LFS fixture\nParent commit (@-): zzzzzzzz 00000000 (empty) (no description set)\n",
+        "err": "Rebased 3 descendant commits onto updated working copy.\n"
+      },
+      "local": {
+        "edited_sha": "79014f34a44dbd4fa5b5bea4c010d55d1c009c5ddf310a6abf24e23cc7c4832a",
+        "stored_sha": "79014f34a44dbd4fa5b5bea4c010d55d1c009c5ddf310a6abf24e23cc7c4832a",
+        "stored_pointer": false,
+        "rev": "e96a1cceffc271b540fe90ff6470a11f9a40b227"
+      },
+      "switch": {
+        "rc": 0,
+        "out": "",
+        "err": "Working copy  (@) now at: nwwlmvwu/1 f2dbd792 (divergent) Second LFS version\nParent commit (@-)      : knyouqno/1 c60de15d (divergent) Seed LFS fixture\nAdded 0 files, modified 1 files, removed 0 files\n"
+      },
+      "after": {
+        "disk_sha": "c37a06fc0ff3f76773bdc4a64413b7ce64ad21f2eb62cfe4b6ca031459b0d9ce",
+        "disk_is_pointer": true,
+        "prior_rc": 0,
+        "prior_sha": "79014f34a44dbd4fa5b5bea4c010d55d1c009c5ddf310a6abf24e23cc7c4832a",
+        "edited_recoverable": true
+      }
+    }
+  },
+  {
+    "id": "base-rebase",
+    "purpose": "rebase",
+    "category": "contract",
+    "status": "PASS",
+    "seconds": 3.0975554171018302,
+    "checks": [
+      {
+        "label": "Initial hydration has expected bytes",
+        "pass": true
+      },
+      {
+        "label": "No silent loss of hydrated edit",
+        "pass": true,
+        "operation": "rebase",
+        "disk_sha": "b8260e31ffb415064e551b59952a4dc4654453582e6cfcafda7b133addfc0711",
+        "prior_sha": "79014f34a44dbd4fa5b5bea4c010d55d1c009c5ddf310a6abf24e23cc7c4832a",
+        "edited_sha": "79014f34a44dbd4fa5b5bea4c010d55d1c009c5ddf310a6abf24e23cc7c4832a"
+      }
+    ],
+    "observations": {
+      "edit_a": {
+        "rc": 0,
+        "out": "",
+        "err": "Working copy  (@) now at: wtspxvvn a86c94ae Seed LFS fixture\nParent commit (@-)      : zzzzzzzz 00000000 (empty) (no description set)\nAdded 0 files, modified 1 files, removed 0 files\n"
+      },
+      "after_local_edit_status": {
+        "rc": 0,
+        "out": "Working copy changes:\nA .gitattributes\nA asset.bin\nA note.txt\nWorking copy  (@) : wtspxvvn add438c5 Seed LFS fixture\nParent commit (@-): zzzzzzzz 00000000 (empty) (no description set)\n",
+        "err": "Rebased 3 descendant commits onto updated working copy.\n"
+      },
+      "local": {
+        "edited_sha": "79014f34a44dbd4fa5b5bea4c010d55d1c009c5ddf310a6abf24e23cc7c4832a",
+        "stored_sha": "79014f34a44dbd4fa5b5bea4c010d55d1c009c5ddf310a6abf24e23cc7c4832a",
+        "stored_pointer": false,
+        "rev": "add438c597b430f8159bca610f9927c6dba88699"
+      },
+      "rebase": {
+        "rc": 0,
+        "out": "",
+        "err": "Rebased 1 commits to destination.\nRebased 3 descendant commits.\nWorking copy  (@) now at: wtspxvvn/0 04d6dcbe (divergent) (conflict) Seed LFS fixture\nParent commit (@-)      : tvmkpzwq/2 eab931fc (divergent) Second LFS version\nAdded 0 files, modified 1 files, removed 0 files\nWarning: There are unresolved conflicts at these paths:\nasset.bin    2-sided conflict\nNew conflicts appeared in 1 commits:\n  wtspxvvn/0 04d6dcbe (divergent) (conflict) Seed LFS fixture\nHint: To resolve the conflicts, start by creating a commit on top of\none of the first conflicted commits:\n  jj new tvmkpzwq/0\n  jj new pkpsllqy\n  jj new wtspxvvn/0\nThen use `jj resolve`, or edit the conflict markers in the file directly.\nOnce the conflicts are resolved, you can inspect the result with `jj diff`.\nThen run `jj squash` to move the resolution into the conflicted commit.\n"
+      },
+      "after": {
+        "disk_sha": "b8260e31ffb415064e551b59952a4dc4654453582e6cfcafda7b133addfc0711",
+        "disk_is_pointer": false,
+        "prior_rc": 0,
+        "prior_sha": "79014f34a44dbd4fa5b5bea4c010d55d1c009c5ddf310a6abf24e23cc7c4832a",
+        "edited_recoverable": true
+      }
+    }
+  },
+  {
+    "id": "base-untrack",
+    "purpose": "untrack",
+    "category": "contract",
+    "status": "PASS",
+    "seconds": 1.7701266249641776,
+    "checks": [
+      {
+        "label": "Committed pointer not silently removed",
+        "pass": true
+      }
+    ],
+    "observations": {
+      "untrack": {
+        "rc": 1,
+        "out": "",
+        "err": "Error: 'asset.bin' is not ignored.\nHint: Files that are not ignored will be added back by the next command.\nMake sure they're ignored, then try again.\n"
+      },
+      "effect": {
+        "before": ".gitattributes\nasset.bin\nnote.txt\n",
+        "after": ".gitattributes\nasset.bin\nnote.txt\n",
+        "original_pointer": false,
+        "show_rc": 0,
+        "show_sha": "dad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f",
+        "disk_sha": "dad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f",
+        "status": "Working copy changes:\nM asset.bin\nWorking copy  (@) : qwutvzvp e883aedf (no description set)\nParent commit (@-): yrwrlytu 571566c0 main | Seed LFS fixture\n"
+      }
+    }
+  }
+]

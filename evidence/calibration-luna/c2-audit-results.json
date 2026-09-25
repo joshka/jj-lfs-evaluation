@@ -1,0 +1,140 @@
+{
+  "binary": "/tmp/jj-lfs-evaluation/bin/jj-pr",
+  "case": {
+    "binary": "/tmp/jj-lfs-evaluation/bin/jj-pr",
+    "checks": [
+      {
+        "expected": {
+          "base64": "dmVyc2lvbiBodHRwczovL2dpdC1sZnMuZ2l0aHViLmNvbS9zcGVjL3YxCm9pZCBzaGEyNTY6NzAyNDliZTZkMjc2MDk1MjllM2E0NWFkZDQ1MzMyMTg0MDYxZjhjYjE0ZTliOWJjYzQ1MjdkMDQxOGIzMDQwNQpzaXplIDI0Cg==",
+          "lfs_pointer": {
+            "oid": "70249be6d27609529e3a45add45332184061f8cb14e9b9bcc4527d0418b30405",
+            "pointer_sha256": "92a8ffbc1bcfa8b4effbb8c97b04fbbd661b729ad3ad6fc7d89a5c11c08b4cf1",
+            "size": 24
+          },
+          "present": true,
+          "sha256": "92a8ffbc1bcfa8b4effbb8c97b04fbbd661b729ad3ad6fc7d89a5c11c08b4cf1",
+          "size": 127
+        },
+        "matches_expected": true,
+        "name": "root_commit_pointer",
+        "observed": {
+          "base64": "dmVyc2lvbiBodHRwczovL2dpdC1sZnMuZ2l0aHViLmNvbS9zcGVjL3YxCm9pZCBzaGEyNTY6NzAyNDliZTZkMjc2MDk1MjllM2E0NWFkZDQ1MzMyMTg0MDYxZjhjYjE0ZTliOWJjYzQ1MjdkMDQxOGIzMDQwNQpzaXplIDI0Cg==",
+          "lfs_pointer": {
+            "oid": "70249be6d27609529e3a45add45332184061f8cb14e9b9bcc4527d0418b30405",
+            "pointer_sha256": "92a8ffbc1bcfa8b4effbb8c97b04fbbd661b729ad3ad6fc7d89a5c11c08b4cf1",
+            "size": 24
+          },
+          "present": true,
+          "sha256": "92a8ffbc1bcfa8b4effbb8c97b04fbbd661b729ad3ad6fc7d89a5c11c08b4cf1",
+          "size": 127
+        }
+      },
+      {
+        "expected": {
+          "base64": "QzIgbmVzdGVkIGluaXRpYWwgcmF3IGRhdGEK",
+          "lfs_pointer": null,
+          "present": true,
+          "sha256": "19189f952d7131f7572699d3eb38a0f7a725f1320c22d2650be79a4c4040eda2",
+          "size": 27
+        },
+        "matches_expected": true,
+        "name": "nested_commit_raw",
+        "observed": {
+          "base64": "QzIgbmVzdGVkIGluaXRpYWwgcmF3IGRhdGEK",
+          "lfs_pointer": null,
+          "present": true,
+          "sha256": "19189f952d7131f7572699d3eb38a0f7a725f1320c22d2650be79a4c4040eda2",
+          "size": 27
+        }
+      },
+      {
+        "expected": {
+          "base64": "dmVyc2lvbiBodHRwczovL2dpdC1sZnMuZ2l0aHViLmNvbS9zcGVjL3YxCm9pZCBzaGEyNTY6NzAyNDliZTZkMjc2MDk1MjllM2E0NWFkZDQ1MzMyMTg0MDYxZjhjYjE0ZTliOWJjYzQ1MjdkMDQxOGIzMDQwNQpzaXplIDI0Cg==",
+          "lfs_pointer": {
+            "oid": "70249be6d27609529e3a45add45332184061f8cb14e9b9bcc4527d0418b30405",
+            "pointer_sha256": "92a8ffbc1bcfa8b4effbb8c97b04fbbd661b729ad3ad6fc7d89a5c11c08b4cf1",
+            "size": 24
+          },
+          "present": true,
+          "sha256": "92a8ffbc1bcfa8b4effbb8c97b04fbbd661b729ad3ad6fc7d89a5c11c08b4cf1",
+          "size": 127
+        },
+        "matches_expected": true,
+        "name": "root_after_snapshot",
+        "observed": {
+          "base64": "dmVyc2lvbiBodHRwczovL2dpdC1sZnMuZ2l0aHViLmNvbS9zcGVjL3YxCm9pZCBzaGEyNTY6NzAyNDliZTZkMjc2MDk1MjllM2E0NWFkZDQ1MzMyMTg0MDYxZjhjYjE0ZTliOWJjYzQ1MjdkMDQxOGIzMDQwNQpzaXplIDI0Cg==",
+          "lfs_pointer": {
+            "oid": "70249be6d27609529e3a45add45332184061f8cb14e9b9bcc4527d0418b30405",
+            "pointer_sha256": "92a8ffbc1bcfa8b4effbb8c97b04fbbd661b729ad3ad6fc7d89a5c11c08b4cf1",
+            "size": 24
+          },
+          "present": true,
+          "sha256": "92a8ffbc1bcfa8b4effbb8c97b04fbbd661b729ad3ad6fc7d89a5c11c08b4cf1",
+          "size": 127
+        }
+      },
+      {
+        "expected": {
+          "base64": "QzIgbmVzdGVkIGNoYW5nZWQgYW5kIHNob3VsZCBiZSB0cmFja2VkCg==",
+          "lfs_pointer": null,
+          "present": true,
+          "sha256": "c17743f4454c6f0ab57f9b55c67aafbaf62ff0774735d57fc90b4e84764a8379",
+          "size": 40
+        },
+        "matches_expected": true,
+        "name": "nested_after_snapshot",
+        "observed": {
+          "base64": "QzIgbmVzdGVkIGNoYW5nZWQgYW5kIHNob3VsZCBiZSB0cmFja2VkCg==",
+          "lfs_pointer": null,
+          "present": true,
+          "sha256": "c17743f4454c6f0ab57f9b55c67aafbaf62ff0774735d57fc90b4e84764a8379",
+          "size": 40
+        }
+      },
+      {
+        "expected": true,
+        "matches_expected": true,
+        "name": "git_info_attributes_filter_lfs",
+        "observed": true
+      },
+      {
+        "expected": true,
+        "matches_expected": false,
+        "name": "jj_info_attributes_file_excluded",
+        "observed": false
+      }
+    ],
+    "expectation": "root filter=lfs is excluded from snapshots; nested -filter overrides it and is tracked. Git check-attr and jj behavior are compared for .git/info/attributes.",
+    "git_check_attr_committed_paths": "root.bin: filter: lfs\nnested/child.bin: filter: unset\n",
+    "git_check_attr_info_only": "info-only.dat: filter: lfs\n",
+    "id": "C2",
+    "info_only_discrepancy": {
+      "classification": "possible gap: Git reports filter=lfs while jj snapshots the file; changed prose names .gitattributes only",
+      "git_reports_filter_lfs": true,
+      "jj_snapshot_excluded": false
+    },
+    "jj_info_only_tree": {
+      "base64": "QzIgaW5mby1vbmx5IGxvY2FsIHBheWxvYWQK",
+      "exit_code": 0,
+      "lfs_pointer": null,
+      "present": true,
+      "sha256": "d1268c9e9bf39be781d69c41c9704b3d19d01479e50050b6ff8a293cf9c9441d",
+      "size": 27
+    },
+    "jj_status_info_only": {
+      "exit_code": 0,
+      "stderr": "",
+      "stdout": "Working copy changes:\nA info-only.dat\nM nested/child.bin\nWorking copy  (@) : nzrsmouy 9c31b647 (no description set)\nParent commit (@-): lyznrvsq abd4bd87 main | Add attributed files\n"
+    },
+    "nested_after_snapshot_exit_code": 0,
+    "repo": "/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T180504Z/C2-audit",
+    "root_after_snapshot_exit_code": 0,
+    "setup_ok": true
+  },
+  "correction_reason": "Parent-identified harness correction: the earlier info-only.bin also matched the root *.bin rule; this rerun uses info-only.dat to isolate .git/info/attributes.",
+  "elapsed_seconds": 1.29,
+  "finished_at_utc": "2026-09-25T18:05:05.668196+00:00",
+  "run_stamp": "20260925T180504Z",
+  "task": "parent-identified C2 correction",
+  "task_started_at_utc": "2026-09-25T18:05:04.378188+00:00"
+}

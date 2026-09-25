@@ -1,0 +1,229 @@
+{
+  "id": "migrate-after",
+  "purpose": "Git LFS migration after jj init",
+  "category": "lifecycle",
+  "status": "PASS",
+  "seconds": 4.135265207849443,
+  "checks": [
+    {
+      "label": "Git migration completed",
+      "pass": true
+    },
+    {
+      "label": "Original jj pointer remains raw before migration",
+      "pass": true,
+      "actual_sha256": "dad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f",
+      "expected_sha256": "dad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f",
+      "actual_size": 2500,
+      "expected_size": 2500
+    }
+  ],
+  "observations": {
+    "migrate_import": {
+      "rc": 0,
+      "stdout": "",
+      "stderr": "Fetching remote refs: ..., done.\nSorting commits: ..., done.\nRewriting commits: 100% (1/1), done.\nUpdating refs: ..., done.\nCheckout: ..., done.\n"
+    },
+    "refs_post_import": "3fcdf0cd9a735229d759d721556da2635b58c0d5 refs/heads/main\n3fcdf0cd9a735229d759d721556da2635b58c0d5 refs/jj/keep/344b1c1307909c2cd42f27f607df14eba2fc0505\n8fbdd23ce4868d96e7a48c3b22a82934f8e24d84 refs/jj/keep/8fbdd23ce4868d96e7a48c3b22a82934f8e24d84\n949926fc556705b16512a599ee3bfd4e820c42d0 refs/jj/keep/949926fc556705b16512a599ee3bfd4e820c42d0\n",
+    "jj_import": {
+      "rc": 0,
+      "stdout": "",
+      "stderr": "Reset the working copy parent to the new Git HEAD.\nAbandoned 1 commits that are no longer reachable.\nDone importing changes from the underlying Git repo.\nNo import needed in colocated workspaces.\n"
+    },
+    "jj_status": "The working copy has no changes.\nWorking copy  (@) : nslwpryw 7cce8a81 (empty) (no description set)\nParent commit (@-): pozwypmp 3fcdf0cd main | raw asset\n",
+    "jj_stored_sha": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a"
+  },
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "init",
+        "-b",
+        "main"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/lifecycle-sol/repos/migrate-after",
+      "rc": 0,
+      "seconds": 0.34144908376038074,
+      "stdout": "Initialized empty Git repository in /tmp/jj-lfs-evaluation/lifecycle-sol/repos/migrate-after/.git/\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.name",
+        "LFS Evaluation"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/lifecycle-sol/repos/migrate-after",
+      "rc": 0,
+      "seconds": 0.03320995904505253,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.email",
+        "eval@example.invalid"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/lifecycle-sol/repos/migrate-after",
+      "rc": 0,
+      "seconds": 0.02528258366510272,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "commit.gpgsign",
+        "false"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/lifecycle-sol/repos/migrate-after",
+      "rc": 0,
+      "seconds": 0.022795709315687418,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "core.autocrlf",
+        "false"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/lifecycle-sol/repos/migrate-after",
+      "rc": 0,
+      "seconds": 0.02427533408626914,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "lfs",
+        "install",
+        "--local"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/lifecycle-sol/repos/migrate-after",
+      "rc": 0,
+      "seconds": 0.32055637519806623,
+      "stdout": "Updated Git hooks.\nGit LFS initialized.\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "add",
+        "."
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/lifecycle-sol/repos/migrate-after",
+      "rc": 0,
+      "seconds": 0.03820350021123886,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "commit",
+        "-m",
+        "raw asset"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/lifecycle-sol/repos/migrate-after",
+      "rc": 0,
+      "seconds": 0.4571250840090215,
+      "stdout": "[main (root-commit) 344b1c1] raw asset\n 1 file changed, 0 insertions(+), 0 deletions(-)\n create mode 100644 asset.bin\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr",
+        "git",
+        "init",
+        "--colocate"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/lifecycle-sol/repos/migrate-after",
+      "rc": 0,
+      "seconds": 1.1628449172712862,
+      "stdout": "",
+      "stderr": "Done importing changes from the underlying Git repo.\nInitialized repo in \".\"\n"
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr",
+        "file",
+        "show",
+        "asset.bin"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/lifecycle-sol/repos/migrate-after",
+      "rc": 0,
+      "seconds": 0.05096616689115763,
+      "stdout": "LFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "lfs",
+        "migrate",
+        "import",
+        "--include=*.bin",
+        "--yes"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/lifecycle-sol/repos/migrate-after",
+      "rc": 0,
+      "seconds": 0.9381247078999877,
+      "stdout": "",
+      "stderr": "Fetching remote refs: ..., done.\nSorting commits: ..., done.\nRewriting commits: 100% (1/1), done.\nUpdating refs: ..., done.\nCheckout: ..., done.\n"
+    },
+    {
+      "argv": [
+        "git",
+        "show-ref"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/lifecycle-sol/repos/migrate-after",
+      "rc": 0,
+      "seconds": 0.008994709234684706,
+      "stdout": "3fcdf0cd9a735229d759d721556da2635b58c0d5 refs/heads/main\n3fcdf0cd9a735229d759d721556da2635b58c0d5 refs/jj/keep/344b1c1307909c2cd42f27f607df14eba2fc0505\n8fbdd23ce4868d96e7a48c3b22a82934f8e24d84 refs/jj/keep/8fbdd23ce4868d96e7a48c3b22a82934f8e24d84\n949926fc556705b16512a599ee3bfd4e820c42d0 refs/jj/keep/949926fc556705b16512a599ee3bfd4e820c42d0\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr",
+        "git",
+        "import"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/lifecycle-sol/repos/migrate-after",
+      "rc": 0,
+      "seconds": 0.5888475840911269,
+      "stdout": "",
+      "stderr": "Reset the working copy parent to the new Git HEAD.\nAbandoned 1 commits that are no longer reachable.\nDone importing changes from the underlying Git repo.\nNo import needed in colocated workspaces.\n"
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr",
+        "status"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/lifecycle-sol/repos/migrate-after",
+      "rc": 0,
+      "seconds": 0.047928167041391134,
+      "stdout": "The working copy has no changes.\nWorking copy  (@) : nslwpryw 7cce8a81 (empty) (no description set)\nParent commit (@-): pozwypmp 3fcdf0cd main | raw asset\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr",
+        "file",
+        "show",
+        "asset.bin"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/lifecycle-sol/repos/migrate-after",
+      "rc": 0,
+      "seconds": 0.05099612521007657,
+      "stdout": "version https://git-lfs.github.com/spec/v1\noid sha256:dad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f\nsize 2500\n",
+      "stderr": ""
+    }
+  ]
+}

@@ -1,0 +1,193 @@
+{
+  "id": "A09-ignored-directory",
+  "purpose": "Ignored directory shortcut respects LFS exclusion",
+  "category": "contract",
+  "status": "PASS",
+  "seconds": 0.26325737500002333,
+  "checks": [
+    {
+      "label": "Ignored-dir fast path preserves LFS pointer",
+      "pass": true,
+      "actual_sha256": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+      "expected_sha256": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+      "actual_size": 129,
+      "expected_size": 129
+    },
+    {
+      "label": "Ignored-dir tracked ordinary edit snapshots",
+      "pass": true,
+      "actual_sha256": "11507a0e2f5e69d5dfa40a62a1bd7b6ee57e6bcd85c67c9b8431b36fff21c437",
+      "expected_sha256": "11507a0e2f5e69d5dfa40a62a1bd7b6ee57e6bcd85c67c9b8431b36fff21c437",
+      "actual_size": 3,
+      "expected_size": 3
+    }
+  ],
+  "observations": {},
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "init",
+        "-b",
+        "main"
+      ],
+      "cwd": "/eval/linux-modern/repos/A09-ignored-directory",
+      "rc": 0,
+      "seconds": 0.014240749999999025,
+      "stdout": "Initialized empty Git repository in /eval/linux-modern/repos/A09-ignored-directory/.git/\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.name",
+        "LFS Evaluation"
+      ],
+      "cwd": "/eval/linux-modern/repos/A09-ignored-directory",
+      "rc": 0,
+      "seconds": 0.003199832999996488,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.email",
+        "eval@example.invalid"
+      ],
+      "cwd": "/eval/linux-modern/repos/A09-ignored-directory",
+      "rc": 0,
+      "seconds": 0.0029765419999989717,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "commit.gpgsign",
+        "false"
+      ],
+      "cwd": "/eval/linux-modern/repos/A09-ignored-directory",
+      "rc": 0,
+      "seconds": 0.001781209000000672,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "core.autocrlf",
+        "false"
+      ],
+      "cwd": "/eval/linux-modern/repos/A09-ignored-directory",
+      "rc": 0,
+      "seconds": 0.0031774579999819252,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "lfs",
+        "install",
+        "--local"
+      ],
+      "cwd": "/eval/linux-modern/repos/A09-ignored-directory",
+      "rc": 0,
+      "seconds": 0.03211529199995766,
+      "stdout": "Updated Git hooks.\nGit LFS initialized.\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "add",
+        "."
+      ],
+      "cwd": "/eval/linux-modern/repos/A09-ignored-directory",
+      "rc": 0,
+      "seconds": 0.02085379200002535,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "commit",
+        "-m",
+        "Seed LFS fixture"
+      ],
+      "cwd": "/eval/linux-modern/repos/A09-ignored-directory",
+      "rc": 0,
+      "seconds": 0.04875591600000462,
+      "stdout": "[main (root-commit) c38efe1] Seed LFS fixture\n 3 files changed, 5 insertions(+)\n create mode 100644 .gitattributes\n create mode 100644 ignored/asset.bin\n create mode 100644 ignored/note.txt\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "/eval/linux-modern/repos/A09-ignored-directory",
+      "rc": 0,
+      "seconds": 0.0015049590000444368,
+      "stdout": "c38efe1a334aa06733c7452a44df0d1303c3d3ad\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/target/debug/jj",
+        "git",
+        "init",
+        "--colocate"
+      ],
+      "cwd": "/eval/linux-modern/repos/A09-ignored-directory",
+      "rc": 0,
+      "seconds": 0.05040850000000319,
+      "stdout": "",
+      "stderr": "Done importing changes from the underlying Git repo.\nInitialized repo in \".\"\n"
+    },
+    {
+      "argv": [
+        "/target/debug/jj",
+        "status"
+      ],
+      "cwd": "/eval/linux-modern/repos/A09-ignored-directory",
+      "rc": 0,
+      "seconds": 0.04052458299997852,
+      "stdout": "Working copy changes:\nA .gitignore\nM ignored/note.txt\nWorking copy  (@) : knlrpsmq 52c10a6c (no description set)\nParent commit (@-): ounonwnz c38efe1a main | Seed LFS fixture\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/target/debug/jj",
+        "file",
+        "show",
+        "ignored/asset.bin"
+      ],
+      "cwd": "/eval/linux-modern/repos/A09-ignored-directory",
+      "rc": 0,
+      "seconds": 0.02067183400004069,
+      "stdout": "version https://git-lfs.github.com/spec/v1\noid sha256:dad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f\nsize 2500\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/target/debug/jj",
+        "file",
+        "show",
+        "ignored/note.txt"
+      ],
+      "cwd": "/eval/linux-modern/repos/A09-ignored-directory",
+      "rc": 0,
+      "seconds": 0.020708167000009325,
+      "stdout": "new",
+      "stderr": ""
+    }
+  ]
+}

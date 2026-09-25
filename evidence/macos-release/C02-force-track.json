@@ -1,0 +1,174 @@
+{
+  "id": "C02-force-track",
+  "purpose": "Explicit tracking has actionable result",
+  "category": "diagnostics",
+  "status": "FAIL",
+  "seconds": 4.158670207951218,
+  "checks": [
+    {
+      "label": "Explicit tracking either tracks or explains exclusion",
+      "pass": false
+    }
+  ],
+  "observations": {
+    "track": {
+      "rc": 0,
+      "stderr": ""
+    }
+  },
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "init",
+        "-b",
+        "main"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos-release/repos/C02-force-track",
+      "rc": 0,
+      "seconds": 0.01399937504902482,
+      "stdout": "Initialized empty Git repository in /tmp/jj-lfs-evaluation/macos-release/repos/C02-force-track/.git/\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.name",
+        "LFS Evaluation"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos-release/repos/C02-force-track",
+      "rc": 0,
+      "seconds": 0.007934124674648046,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.email",
+        "eval@example.invalid"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos-release/repos/C02-force-track",
+      "rc": 0,
+      "seconds": 0.007011208217591047,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "commit.gpgsign",
+        "false"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos-release/repos/C02-force-track",
+      "rc": 0,
+      "seconds": 0.006843542214483023,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "core.autocrlf",
+        "false"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos-release/repos/C02-force-track",
+      "rc": 0,
+      "seconds": 0.006245667114853859,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "lfs",
+        "install",
+        "--local"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos-release/repos/C02-force-track",
+      "rc": 0,
+      "seconds": 0.12523083295673132,
+      "stdout": "Updated Git hooks.\nGit LFS initialized.\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "add",
+        "."
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos-release/repos/C02-force-track",
+      "rc": 0,
+      "seconds": 0.007830542046576738,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "commit",
+        "-m",
+        "Seed LFS fixture"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos-release/repos/C02-force-track",
+      "rc": 0,
+      "seconds": 3.7520214589312673,
+      "stdout": "[main (root-commit) 3d67b88] Seed LFS fixture\n 2 files changed, 2 insertions(+)\n create mode 100644 .gitattributes\n create mode 100644 note.txt\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos-release/repos/C02-force-track",
+      "rc": 0,
+      "seconds": 0.006196790840476751,
+      "stdout": "3d67b88335cf45406e468eeda27d8c3945dc34f0\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr-release",
+        "git",
+        "init",
+        "--colocate"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos-release/repos/C02-force-track",
+      "rc": 0,
+      "seconds": 0.1704316670075059,
+      "stdout": "",
+      "stderr": "Done importing changes from the underlying Git repo.\nInitialized repo in \".\"\n"
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr-release",
+        "file",
+        "track",
+        "new.bin"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos-release/repos/C02-force-track",
+      "rc": 0,
+      "seconds": 0.03842145809903741,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr-release",
+        "file",
+        "list"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos-release/repos/C02-force-track",
+      "rc": 0,
+      "seconds": 0.0153202498331666,
+      "stdout": ".gitattributes\nnote.txt\n",
+      "stderr": ""
+    }
+  ]
+}

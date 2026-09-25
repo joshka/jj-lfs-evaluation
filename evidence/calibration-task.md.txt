@@ -1,0 +1,42 @@
+# Calibration task
+
+Evaluate four scenarios against the pinned PR binary at
+`/tmp/jj-lfs-evaluation/bin/jj-pr` once it exists. While the binary builds, prepare
+scripts and inspect help/source as necessary. Source is in `source/` beside this file.
+Use only your assigned output directory, with independent fixture repos there.
+Do not read the other evaluator's files. No fixes to PR source, no external actions.
+
+Use real Git LFS objects and pointers, small deterministic payloads. Use Git where
+needed to exercise Git/LFS interoperability; use jj for jj operations. Version-control
+commands within each repository must be sequential. No personal/global config mutations.
+Isolate JJ_CONFIG and GIT_CONFIG_GLOBAL, disable signing and system Git configuration.
+User identity can be Evaluation <eval@example.invalid>. Avoid overriding HOME.
+
+## Cases
+
+1. C1: Git LFS repository with a committed .bin file and hydrated payload. Initialize
+   colocated jj, snapshot repeatedly, edit an ordinary file, and verify that the stored
+   .bin blob remains the original valid LFS pointer and disk payload remains identical.
+   Repeat with a literal pointer on disk and hydrate again. Verify content hashes.
+2. C2: Attributes precedence: root *.bin filter=lfs and nested override -filter.
+   Check root file excluded and nested file tracked; then put filter=lfs solely in
+   .git/info/attributes for a new file and compare Git check-attr to jj snapshot result.
+   Record whether any discrepancy is expected/documented or a gap, without presuming a pass.
+3. C3: Missing-object recovery: create a pointer whose corresponding payload is absent
+   from local storage and a disposable local remote, attempt LFS hydration, run jj status,
+   then restore the object and hydrate successfully. Verify stored pointer and disk bytes
+   throughout; distinguish a failed fetch from a successful no-op checkout.
+4. C4: Modified hydrated asset followed by a revision switch between two committed LFS
+   pointer versions. Check whether local edits survive, are reported, are stored, or are
+   overwritten. Diagnose using output and actual bytes, then compare with the baseline
+   /opt/homebrew/bin/jj in a separate equivalent repository. Do not call a silent loss safe
+   merely because the snapshot-exclusion implementation is intentional.
+
+## Deliverable
+
+Write a runnable Python script (standard library preferred), machine-readable results,
+command transcript with exit codes, and concise report.md. State expectations, observations,
+content evidence, interpretations, baseline limitations, and any uncertainty. Record elapsed
+execution and total task times if possible. Never mark setup errors as product passes.
+Do not spend more than necessary polishing; bounded four-case comparison. Tell parent when
+ready to execute if binary is still unavailable, then await notification.

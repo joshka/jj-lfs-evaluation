@@ -1,0 +1,219 @@
+{
+  "id": "missing-lfs",
+  "purpose": "jj behavior without git-lfs executable",
+  "category": "lifecycle",
+  "status": "PASS",
+  "seconds": 5.666406000033021,
+  "checks": [
+    {
+      "label": "jj status works without git-lfs",
+      "pass": true
+    },
+    {
+      "label": "jj checkout succeeds without git-lfs",
+      "pass": true
+    },
+    {
+      "label": "Missing git-lfs leaves pointer on disk",
+      "pass": true,
+      "actual_sha256": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+      "expected_sha256": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+      "actual_size": 129,
+      "expected_size": 129
+    }
+  ],
+  "observations": {
+    "status_without_git_lfs": {
+      "rc": 0,
+      "stdout": "The working copy has no changes.\nWorking copy  (@) : mzywpotv 8d46d2bd (empty) (no description set)\nParent commit (@-): uxstqtoo 549c1c5f (empty) (no description set)\n",
+      "stderr": ""
+    },
+    "checkout_empty_without_git_lfs": {
+      "rc": 0,
+      "stdout": "",
+      "stderr": "Working copy  (@) now at: qyussvpz 763f2457 (empty) (no description set)\nParent commit (@-)      : zzzzzzzz 00000000 (empty) (no description set)\nAdded 0 files, modified 0 files, removed 3 files\n"
+    },
+    "checkout_asset_without_git_lfs": {
+      "rc": 0,
+      "stdout": "",
+      "stderr": "Working copy  (@) now at: sxrktuss dbcbabe9 (empty) (no description set)\nParent commit (@-)      : vtskuwvu 896dc751 main | Seed LFS fixture\nAdded 3 files, modified 0 files, removed 0 files\n"
+    },
+    "disk_sha": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a"
+  },
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "init",
+        "-b",
+        "main"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/lifecycle-sol/repos/missing-lfs",
+      "rc": 0,
+      "seconds": 0.018117709085345268,
+      "stdout": "Initialized empty Git repository in /tmp/jj-lfs-evaluation/lifecycle-sol/repos/missing-lfs/.git/\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.name",
+        "LFS Evaluation"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/lifecycle-sol/repos/missing-lfs",
+      "rc": 0,
+      "seconds": 0.008817625232040882,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.email",
+        "eval@example.invalid"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/lifecycle-sol/repos/missing-lfs",
+      "rc": 0,
+      "seconds": 0.00824391609057784,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "commit.gpgsign",
+        "false"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/lifecycle-sol/repos/missing-lfs",
+      "rc": 0,
+      "seconds": 0.008885374758392572,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "core.autocrlf",
+        "false"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/lifecycle-sol/repos/missing-lfs",
+      "rc": 0,
+      "seconds": 0.00873233424499631,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "lfs",
+        "install",
+        "--local"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/lifecycle-sol/repos/missing-lfs",
+      "rc": 0,
+      "seconds": 0.14061466604471207,
+      "stdout": "Updated Git hooks.\nGit LFS initialized.\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "add",
+        "."
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/lifecycle-sol/repos/missing-lfs",
+      "rc": 0,
+      "seconds": 0.10730895772576332,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "commit",
+        "-m",
+        "Seed LFS fixture"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/lifecycle-sol/repos/missing-lfs",
+      "rc": 0,
+      "seconds": 4.588203874882311,
+      "stdout": "[main (root-commit) 896dc75] Seed LFS fixture\n 3 files changed, 5 insertions(+)\n create mode 100644 .gitattributes\n create mode 100644 asset.bin\n create mode 100644 note.txt\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/lifecycle-sol/repos/missing-lfs",
+      "rc": 0,
+      "seconds": 0.017332792282104492,
+      "stdout": "896dc75184ba4abf0c5faacb9dfe35f4a2cafe62\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr",
+        "git",
+        "init",
+        "--colocate"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/lifecycle-sol/repos/missing-lfs",
+      "rc": 0,
+      "seconds": 0.3645854163914919,
+      "stdout": "",
+      "stderr": "Done importing changes from the underlying Git repo.\nInitialized repo in \".\"\n"
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr",
+        "new"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/lifecycle-sol/repos/missing-lfs",
+      "rc": 0,
+      "seconds": 0.10210970928892493,
+      "stdout": "",
+      "stderr": "Working copy  (@) now at: mzywpotv 8d46d2bd (empty) (no description set)\nParent commit (@-)      : uxstqtoo 549c1c5f (empty) (no description set)\n"
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr",
+        "status"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/lifecycle-sol/repos/missing-lfs",
+      "rc": 0,
+      "seconds": 0.046564167365431786,
+      "stdout": "The working copy has no changes.\nWorking copy  (@) : mzywpotv 8d46d2bd (empty) (no description set)\nParent commit (@-): uxstqtoo 549c1c5f (empty) (no description set)\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr",
+        "new",
+        "root()"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/lifecycle-sol/repos/missing-lfs",
+      "rc": 0,
+      "seconds": 0.11992666590958834,
+      "stdout": "",
+      "stderr": "Working copy  (@) now at: qyussvpz 763f2457 (empty) (no description set)\nParent commit (@-)      : zzzzzzzz 00000000 (empty) (no description set)\nAdded 0 files, modified 0 files, removed 3 files\n"
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr",
+        "new",
+        "main"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/lifecycle-sol/repos/missing-lfs",
+      "rc": 0,
+      "seconds": 0.1253351247869432,
+      "stdout": "",
+      "stderr": "Working copy  (@) now at: sxrktuss dbcbabe9 (empty) (no description set)\nParent commit (@-)      : vtskuwvu 896dc751 main | Seed LFS fixture\nAdded 3 files, modified 0 files, removed 0 files\n"
+    }
+  ]
+}

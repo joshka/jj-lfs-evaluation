@@ -1,0 +1,174 @@
+{
+  "id": "C02-force-track",
+  "purpose": "Explicit tracking has actionable result",
+  "category": "diagnostics",
+  "status": "PASS",
+  "seconds": 1.727837999816984,
+  "checks": [
+    {
+      "label": "Explicit tracking either tracks or explains exclusion",
+      "pass": true
+    }
+  ],
+  "observations": {
+    "track": {
+      "rc": 0,
+      "stderr": ""
+    }
+  },
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "init",
+        "-b",
+        "main"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/base-comparison/repos/C02-force-track",
+      "rc": 0,
+      "seconds": 0.02426266623660922,
+      "stdout": "Initialized empty Git repository in /tmp/jj-lfs-evaluation/base-comparison/repos/C02-force-track/.git/\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.name",
+        "LFS Evaluation"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/base-comparison/repos/C02-force-track",
+      "rc": 0,
+      "seconds": 0.010892500169575214,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.email",
+        "eval@example.invalid"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/base-comparison/repos/C02-force-track",
+      "rc": 0,
+      "seconds": 0.01220316719263792,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "commit.gpgsign",
+        "false"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/base-comparison/repos/C02-force-track",
+      "rc": 0,
+      "seconds": 0.011110625229775906,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "core.autocrlf",
+        "false"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/base-comparison/repos/C02-force-track",
+      "rc": 0,
+      "seconds": 0.010991625022143126,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "lfs",
+        "install",
+        "--local"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/base-comparison/repos/C02-force-track",
+      "rc": 0,
+      "seconds": 0.22646249970421195,
+      "stdout": "Updated Git hooks.\nGit LFS initialized.\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "add",
+        "."
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/base-comparison/repos/C02-force-track",
+      "rc": 0,
+      "seconds": 0.016104791779071093,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "commit",
+        "-m",
+        "Seed LFS fixture"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/base-comparison/repos/C02-force-track",
+      "rc": 0,
+      "seconds": 0.9731716252863407,
+      "stdout": "[main (root-commit) d502ae4] Seed LFS fixture\n 2 files changed, 2 insertions(+)\n create mode 100644 .gitattributes\n create mode 100644 note.txt\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/base-comparison/repos/C02-force-track",
+      "rc": 0,
+      "seconds": 0.011941500008106232,
+      "stdout": "d502ae4478f8c34df9d524443f724dccc883d034\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-base",
+        "git",
+        "init",
+        "--colocate"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/base-comparison/repos/C02-force-track",
+      "rc": 0,
+      "seconds": 0.25154962530359626,
+      "stdout": "",
+      "stderr": "Done importing changes from the underlying Git repo.\nInitialized repo in \".\"\n"
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-base",
+        "file",
+        "track",
+        "new.bin"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/base-comparison/repos/C02-force-track",
+      "rc": 0,
+      "seconds": 0.13452733401209116,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-base",
+        "file",
+        "list"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/base-comparison/repos/C02-force-track",
+      "rc": 0,
+      "seconds": 0.04353250004351139,
+      "stdout": ".gitattributes\nnew.bin\nnote.txt\n",
+      "stderr": ""
+    }
+  ]
+}

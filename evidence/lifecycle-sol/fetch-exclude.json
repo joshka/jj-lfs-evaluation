@@ -1,0 +1,209 @@
+{
+  "id": "fetch-exclude",
+  "purpose": "lfs.fetchexclude and jj tree",
+  "category": "lifecycle",
+  "status": "PASS",
+  "seconds": 4.190224749967456,
+  "checks": [
+    {
+      "label": "jj pointer asset remains",
+      "pass": true,
+      "actual_sha256": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+      "expected_sha256": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+      "actual_size": 129,
+      "expected_size": 129
+    },
+    {
+      "label": "jj pointer other remains",
+      "pass": true,
+      "actual_sha256": "c37a06fc0ff3f76773bdc4a64413b7ce64ad21f2eb62cfe4b6ca031459b0d9ce",
+      "expected_sha256": "c37a06fc0ff3f76773bdc4a64413b7ce64ad21f2eb62cfe4b6ca031459b0d9ce",
+      "actual_size": 129,
+      "expected_size": 129
+    }
+  ],
+  "observations": {
+    "asset_sha": "dad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f",
+    "other_sha": "f373b3bf36856f8fd4d1045d39a945690f960207ffaadc274305d5f90619a816"
+  },
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "init",
+        "-b",
+        "main"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/lifecycle-sol/repos/fetch-exclude",
+      "rc": 0,
+      "seconds": 0.049064042046666145,
+      "stdout": "Initialized empty Git repository in /tmp/jj-lfs-evaluation/lifecycle-sol/repos/fetch-exclude/.git/\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.name",
+        "LFS Evaluation"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/lifecycle-sol/repos/fetch-exclude",
+      "rc": 0,
+      "seconds": 0.015363707672804594,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.email",
+        "eval@example.invalid"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/lifecycle-sol/repos/fetch-exclude",
+      "rc": 0,
+      "seconds": 0.01922354195266962,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "commit.gpgsign",
+        "false"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/lifecycle-sol/repos/fetch-exclude",
+      "rc": 0,
+      "seconds": 0.015615750104188919,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "core.autocrlf",
+        "false"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/lifecycle-sol/repos/fetch-exclude",
+      "rc": 0,
+      "seconds": 0.02133662486448884,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "lfs",
+        "install",
+        "--local"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/lifecycle-sol/repos/fetch-exclude",
+      "rc": 0,
+      "seconds": 0.31298650009557605,
+      "stdout": "Updated Git hooks.\nGit LFS initialized.\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "add",
+        "."
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/lifecycle-sol/repos/fetch-exclude",
+      "rc": 0,
+      "seconds": 0.12689366657286882,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "commit",
+        "-m",
+        "Seed LFS fixture"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/lifecycle-sol/repos/fetch-exclude",
+      "rc": 0,
+      "seconds": 1.565466667059809,
+      "stdout": "[main (root-commit) 75db466] Seed LFS fixture\n 3 files changed, 7 insertions(+)\n create mode 100644 .gitattributes\n create mode 100644 asset.bin\n create mode 100644 other.bin\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/lifecycle-sol/repos/fetch-exclude",
+      "rc": 0,
+      "seconds": 0.007310959044843912,
+      "stdout": "75db466b405935cba2a93268787298c871e124f0\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr",
+        "git",
+        "init",
+        "--colocate"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/lifecycle-sol/repos/fetch-exclude",
+      "rc": 0,
+      "seconds": 1.4229287500493228,
+      "stdout": "",
+      "stderr": "Done importing changes from the underlying Git repo.\nInitialized repo in \".\"\n"
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "lfs.fetchexclude",
+        "other.bin"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/lifecycle-sol/repos/fetch-exclude",
+      "rc": 0,
+      "seconds": 0.03156804107129574,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr",
+        "new"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/lifecycle-sol/repos/fetch-exclude",
+      "rc": 0,
+      "seconds": 0.48754754196852446,
+      "stdout": "",
+      "stderr": "Working copy  (@) now at: ururnlvt 50a03f0f (empty) (no description set)\nParent commit (@-)      : rouzxkqz 556fb1ad (empty) (no description set)\n"
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr",
+        "file",
+        "show",
+        "asset.bin"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/lifecycle-sol/repos/fetch-exclude",
+      "rc": 0,
+      "seconds": 0.04871600028127432,
+      "stdout": "version https://git-lfs.github.com/spec/v1\noid sha256:dad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f\nsize 2500\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr",
+        "file",
+        "show",
+        "other.bin"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/lifecycle-sol/repos/fetch-exclude",
+      "rc": 0,
+      "seconds": 0.06417962489649653,
+      "stdout": "version https://git-lfs.github.com/spec/v1\noid sha256:f373b3bf36856f8fd4d1045d39a945690f960207ffaadc274305d5f90619a816\nsize 3200\n",
+      "stderr": ""
+    }
+  ]
+}

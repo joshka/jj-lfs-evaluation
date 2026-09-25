@@ -1,0 +1,185 @@
+{
+  "id": "A01-nested-set",
+  "purpose": "Attribute matching agrees with Git",
+  "category": "contract",
+  "status": "PASS",
+  "seconds": 1.2543145408853889,
+  "checks": [
+    {
+      "label": "Expected exclusion matches Git attribute decision",
+      "pass": true,
+      "expected_excluded": true,
+      "actual_included": false,
+      "git_check_attr": "sub/a.bin: filter: lfs\n",
+      "jj_status": "Working copy changes:\nA sub/.gitattributes\nWorking copy  (@) : pynkxtvz 12338451 (no description set)\nParent commit (@-): stoynylm d744db09 main | Seed LFS fixture\n"
+    }
+  ],
+  "observations": {},
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "init",
+        "-b",
+        "main"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/luna-mechanical/repos/A01-nested-set",
+      "rc": 0,
+      "seconds": 0.023658957798033953,
+      "stdout": "Initialized empty Git repository in /tmp/jj-lfs-evaluation/luna-mechanical/repos/A01-nested-set/.git/\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.name",
+        "LFS Evaluation"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/luna-mechanical/repos/A01-nested-set",
+      "rc": 0,
+      "seconds": 0.01253995904698968,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.email",
+        "eval@example.invalid"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/luna-mechanical/repos/A01-nested-set",
+      "rc": 0,
+      "seconds": 0.013656666968017817,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "commit.gpgsign",
+        "false"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/luna-mechanical/repos/A01-nested-set",
+      "rc": 0,
+      "seconds": 0.012381582986563444,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "core.autocrlf",
+        "false"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/luna-mechanical/repos/A01-nested-set",
+      "rc": 0,
+      "seconds": 0.013045374769717455,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "lfs",
+        "install",
+        "--local"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/luna-mechanical/repos/A01-nested-set",
+      "rc": 0,
+      "seconds": 0.2526558330282569,
+      "stdout": "Updated Git hooks.\nGit LFS initialized.\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "add",
+        "."
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/luna-mechanical/repos/A01-nested-set",
+      "rc": 0,
+      "seconds": 0.025459374766796827,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "commit",
+        "-m",
+        "Seed LFS fixture"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/luna-mechanical/repos/A01-nested-set",
+      "rc": 0,
+      "seconds": 0.48884258419275284,
+      "stdout": "[main (root-commit) d744db0] Seed LFS fixture\n 2 files changed, 2 insertions(+)\n create mode 100644 .gitattributes\n create mode 100644 note.txt\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/luna-mechanical/repos/A01-nested-set",
+      "rc": 0,
+      "seconds": 0.011610916815698147,
+      "stdout": "d744db09f9b624ef4ae9d7534cb81048b7838d6e\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr-release",
+        "git",
+        "init",
+        "--colocate"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/luna-mechanical/repos/A01-nested-set",
+      "rc": 0,
+      "seconds": 0.24938866589218378,
+      "stdout": "",
+      "stderr": "Done importing changes from the underlying Git repo.\nInitialized repo in \".\"\n"
+    },
+    {
+      "argv": [
+        "git",
+        "check-attr",
+        "filter",
+        "--",
+        "sub/a.bin"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/luna-mechanical/repos/A01-nested-set",
+      "rc": 0,
+      "seconds": 0.013259874656796455,
+      "stdout": "sub/a.bin: filter: lfs\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr-release",
+        "status"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/luna-mechanical/repos/A01-nested-set",
+      "rc": 0,
+      "seconds": 0.11337129212915897,
+      "stdout": "Working copy changes:\nA sub/.gitattributes\nWorking copy  (@) : pynkxtvz 12338451 (no description set)\nParent commit (@-): stoynylm d744db09 main | Seed LFS fixture\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr-release",
+        "file",
+        "list"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/luna-mechanical/repos/A01-nested-set",
+      "rc": 0,
+      "seconds": 0.02233654074370861,
+      "stdout": ".gitattributes\nnote.txt\nsub/.gitattributes\n",
+      "stderr": ""
+    }
+  ]
+}

@@ -1,0 +1,198 @@
+{
+  "id": "W04-run",
+  "purpose": "Temporary run snapshot preserves filtered paths",
+  "category": "contract",
+  "status": "PASS",
+  "seconds": 0.9554680003784597,
+  "checks": [
+    {
+      "label": "Run temp snapshot preserves pointer",
+      "pass": true,
+      "actual_sha256": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+      "expected_sha256": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+      "actual_size": 129,
+      "expected_size": 129
+    },
+    {
+      "label": "Run captures ordinary edits",
+      "pass": true,
+      "actual_sha256": "73185caf350ed8ed791dbe4ec5604da8d770a97b92c5797cbf988877c9d5bd80",
+      "expected_sha256": "73185caf350ed8ed791dbe4ec5604da8d770a97b92c5797cbf988877c9d5bd80",
+      "actual_size": 12,
+      "expected_size": 12
+    }
+  ],
+  "observations": {},
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "init",
+        "-b",
+        "main"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos/repos/W04-run",
+      "rc": 0,
+      "seconds": 0.011688875034451485,
+      "stdout": "Initialized empty Git repository in /tmp/jj-lfs-evaluation/macos/repos/W04-run/.git/\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.name",
+        "LFS Evaluation"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos/repos/W04-run",
+      "rc": 0,
+      "seconds": 0.0065307910554111,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.email",
+        "eval@example.invalid"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos/repos/W04-run",
+      "rc": 0,
+      "seconds": 0.006425291765481234,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "commit.gpgsign",
+        "false"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos/repos/W04-run",
+      "rc": 0,
+      "seconds": 0.006617333274334669,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "core.autocrlf",
+        "false"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos/repos/W04-run",
+      "rc": 0,
+      "seconds": 0.006389291025698185,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "lfs",
+        "install",
+        "--local"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos/repos/W04-run",
+      "rc": 0,
+      "seconds": 0.1429607500322163,
+      "stdout": "Updated Git hooks.\nGit LFS initialized.\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "add",
+        "."
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos/repos/W04-run",
+      "rc": 0,
+      "seconds": 0.08109066588804126,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "commit",
+        "-m",
+        "Seed LFS fixture"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos/repos/W04-run",
+      "rc": 0,
+      "seconds": 0.3853606660850346,
+      "stdout": "[main (root-commit) 14178e2] Seed LFS fixture\n 3 files changed, 5 insertions(+)\n create mode 100644 .gitattributes\n create mode 100644 asset.bin\n create mode 100644 note.txt\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos/repos/W04-run",
+      "rc": 0,
+      "seconds": 0.006919625215232372,
+      "stdout": "14178e2b4acdf937901fd7e724525d6fc9639648\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr",
+        "git",
+        "init",
+        "--colocate"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos/repos/W04-run",
+      "rc": 0,
+      "seconds": 0.15118937520310283,
+      "stdout": "",
+      "stderr": "Done importing changes from the underlying Git repo.\nInitialized repo in \".\"\n"
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr",
+        "run",
+        "-r",
+        "@",
+        "--",
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "/tmp/jj-lfs-evaluation/macos/repos/write-run.py"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos/repos/W04-run",
+      "rc": 0,
+      "seconds": 0.0997425839304924,
+      "stdout": "",
+      "stderr": "Rewrote 1 commits.\nWorking copy  (@) now at: rwxmlwkt 85071389 (no description set)\nParent commit (@-)      : yxtqntqw 14178e2b main | Seed LFS fixture\nAdded 0 files, modified 1 files, removed 0 files\n"
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr",
+        "file",
+        "show",
+        "asset.bin"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos/repos/W04-run",
+      "rc": 0,
+      "seconds": 0.025495958048850298,
+      "stdout": "version https://git-lfs.github.com/spec/v1\noid sha256:dad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f\nsize 2500\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr",
+        "file",
+        "show",
+        "note.txt"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos/repos/W04-run",
+      "rc": 0,
+      "seconds": 0.023891707882285118,
+      "stdout": "run ordinary",
+      "stderr": ""
+    }
+  ]
+}

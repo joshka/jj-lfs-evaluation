@@ -1,0 +1,185 @@
+{
+  "id": "A01-subdir-relative",
+  "purpose": "Attribute matching agrees with Git",
+  "category": "contract",
+  "status": "PASS",
+  "seconds": 0.36877466700002515,
+  "checks": [
+    {
+      "label": "Expected exclusion matches Git attribute decision",
+      "pass": true,
+      "expected_excluded": true,
+      "actual_included": false,
+      "git_check_attr": "sub/a.bin: filter: lfs\n",
+      "jj_status": "Working copy changes:\nA sub/.gitattributes\nWorking copy  (@) : wpqllnuk 8a6739e1 (no description set)\nParent commit (@-): ruxxxyxn bdfe55a3 main | Seed LFS fixture\n"
+    }
+  ],
+  "observations": {},
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "init",
+        "-b",
+        "main"
+      ],
+      "cwd": "/eval/linux-modern/repos/A01-subdir-relative",
+      "rc": 0,
+      "seconds": 0.015385042000048088,
+      "stdout": "Initialized empty Git repository in /eval/linux-modern/repos/A01-subdir-relative/.git/\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.name",
+        "LFS Evaluation"
+      ],
+      "cwd": "/eval/linux-modern/repos/A01-subdir-relative",
+      "rc": 0,
+      "seconds": 0.0030473339999730342,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.email",
+        "eval@example.invalid"
+      ],
+      "cwd": "/eval/linux-modern/repos/A01-subdir-relative",
+      "rc": 0,
+      "seconds": 0.0030064590000051794,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "commit.gpgsign",
+        "false"
+      ],
+      "cwd": "/eval/linux-modern/repos/A01-subdir-relative",
+      "rc": 0,
+      "seconds": 0.0032430829999725574,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "core.autocrlf",
+        "false"
+      ],
+      "cwd": "/eval/linux-modern/repos/A01-subdir-relative",
+      "rc": 0,
+      "seconds": 0.00352866600002244,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "lfs",
+        "install",
+        "--local"
+      ],
+      "cwd": "/eval/linux-modern/repos/A01-subdir-relative",
+      "rc": 0,
+      "seconds": 0.030122042000016336,
+      "stdout": "Updated Git hooks.\nGit LFS initialized.\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "add",
+        "."
+      ],
+      "cwd": "/eval/linux-modern/repos/A01-subdir-relative",
+      "rc": 0,
+      "seconds": 0.0060892500000022665,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "commit",
+        "-m",
+        "Seed LFS fixture"
+      ],
+      "cwd": "/eval/linux-modern/repos/A01-subdir-relative",
+      "rc": 0,
+      "seconds": 0.03135137499998564,
+      "stdout": "[main (root-commit) bdfe55a] Seed LFS fixture\n 2 files changed, 1 insertion(+)\n create mode 100644 .gitattributes\n create mode 100644 note.txt\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "/eval/linux-modern/repos/A01-subdir-relative",
+      "rc": 0,
+      "seconds": 0.0014877080000132992,
+      "stdout": "bdfe55a3fb6cf40e06b201b27af18d46348444a1\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/target/debug/jj",
+        "git",
+        "init",
+        "--colocate"
+      ],
+      "cwd": "/eval/linux-modern/repos/A01-subdir-relative",
+      "rc": 0,
+      "seconds": 0.1640522910000186,
+      "stdout": "",
+      "stderr": "Done importing changes from the underlying Git repo.\nInitialized repo in \".\"\n"
+    },
+    {
+      "argv": [
+        "git",
+        "check-attr",
+        "filter",
+        "--",
+        "sub/a.bin"
+      ],
+      "cwd": "/eval/linux-modern/repos/A01-subdir-relative",
+      "rc": 0,
+      "seconds": 0.00639904199999819,
+      "stdout": "sub/a.bin: filter: lfs\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/target/debug/jj",
+        "status"
+      ],
+      "cwd": "/eval/linux-modern/repos/A01-subdir-relative",
+      "rc": 0,
+      "seconds": 0.07327112500001931,
+      "stdout": "Working copy changes:\nA sub/.gitattributes\nWorking copy  (@) : wpqllnuk 8a6739e1 (no description set)\nParent commit (@-): ruxxxyxn bdfe55a3 main | Seed LFS fixture\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/target/debug/jj",
+        "file",
+        "list"
+      ],
+      "cwd": "/eval/linux-modern/repos/A01-subdir-relative",
+      "rc": 0,
+      "seconds": 0.0258218749999628,
+      "stdout": ".gitattributes\nnote.txt\nsub/.gitattributes\n",
+      "stderr": ""
+    }
+  ]
+}

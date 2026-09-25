@@ -1,0 +1,186 @@
+{
+  "id": "custom-filter",
+  "purpose": "configured crypt filter exclusion",
+  "category": "performance-diagnostic",
+  "status": "PASS",
+  "seconds": 0.9242430827580392,
+  "checks": [
+    {
+      "label": "custom filter status succeeds",
+      "pass": true
+    },
+    {
+      "label": "crypt path excluded",
+      "pass": true
+    },
+    {
+      "label": "lfs path included when not configured for exclusion",
+      "pass": true
+    }
+  ],
+  "observations": {
+    "status": "Working copy changes:\nA asset.bin\nWorking copy  (@) : pyyowutq 3a2d58ae (no description set)\nParent commit (@-): pkkzzvlk 389aa405 main | Seed LFS fixture\n",
+    "stderr": "",
+    "files": [
+      ".gitattributes",
+      "asset.bin",
+      "note.txt"
+    ]
+  },
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "init",
+        "-b",
+        "main"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/performance-sol/repos/custom-filter",
+      "rc": 0,
+      "seconds": 0.01867145812138915,
+      "stdout": "Initialized empty Git repository in /tmp/jj-lfs-evaluation/performance-sol/repos/custom-filter/.git/\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.name",
+        "LFS Evaluation"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/performance-sol/repos/custom-filter",
+      "rc": 0,
+      "seconds": 0.010198208037763834,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.email",
+        "eval@example.invalid"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/performance-sol/repos/custom-filter",
+      "rc": 0,
+      "seconds": 0.010286415927112103,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "commit.gpgsign",
+        "false"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/performance-sol/repos/custom-filter",
+      "rc": 0,
+      "seconds": 0.00990875018760562,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "core.autocrlf",
+        "false"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/performance-sol/repos/custom-filter",
+      "rc": 0,
+      "seconds": 0.009273458272218704,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "lfs",
+        "install",
+        "--local"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/performance-sol/repos/custom-filter",
+      "rc": 0,
+      "seconds": 0.21119841700419784,
+      "stdout": "Updated Git hooks.\nGit LFS initialized.\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "add",
+        "."
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/performance-sol/repos/custom-filter",
+      "rc": 0,
+      "seconds": 0.012991624884307384,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "commit",
+        "-m",
+        "Seed LFS fixture"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/performance-sol/repos/custom-filter",
+      "rc": 0,
+      "seconds": 0.3765024999156594,
+      "stdout": "[main (root-commit) 389aa40] Seed LFS fixture\n 2 files changed, 3 insertions(+)\n create mode 100644 .gitattributes\n create mode 100644 note.txt\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/performance-sol/repos/custom-filter",
+      "rc": 0,
+      "seconds": 0.009190000128000975,
+      "stdout": "389aa405e9f786250bba7b5889335db0f7200ff5\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr-release",
+        "git",
+        "init",
+        "--colocate"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/performance-sol/repos/custom-filter",
+      "rc": 0,
+      "seconds": 0.16808816697448492,
+      "stdout": "",
+      "stderr": "Done importing changes from the underlying Git repo.\nInitialized repo in \".\"\n"
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr-release",
+        "--config=git.ignore-filters=[\"crypt\"]",
+        "status"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/performance-sol/repos/custom-filter",
+      "rc": 0,
+      "seconds": 0.06826216587796807,
+      "stdout": "Working copy changes:\nA asset.bin\nWorking copy  (@) : pyyowutq 3a2d58ae (no description set)\nParent commit (@-): pkkzzvlk 389aa405 main | Seed LFS fixture\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr-release",
+        "--config=git.ignore-filters=[\"crypt\"]",
+        "--ignore-working-copy",
+        "file",
+        "list"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/performance-sol/repos/custom-filter",
+      "rc": 0,
+      "seconds": 0.018000749871134758,
+      "stdout": ".gitattributes\nasset.bin\nnote.txt\n",
+      "stderr": ""
+    }
+  ]
+}

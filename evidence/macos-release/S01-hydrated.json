@@ -1,0 +1,255 @@
+{
+  "id": "S01-hydrated",
+  "purpose": "Ordinary edits and repeated snapshots preserve LFS pointers",
+  "category": "contract",
+  "status": "PASS",
+  "seconds": 1.6980575420893729,
+  "checks": [
+    {
+      "label": "Hydrated payload remains on disk",
+      "pass": true,
+      "actual_sha256": "dad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f",
+      "expected_sha256": "dad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f",
+      "actual_size": 2500,
+      "expected_size": 2500
+    },
+    {
+      "label": "Snapshot preserves pointer",
+      "pass": true,
+      "actual_sha256": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+      "expected_sha256": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+      "actual_size": 129,
+      "expected_size": 129
+    },
+    {
+      "label": "Ordinary edits snapshot",
+      "pass": true,
+      "actual_sha256": "7f8b1dfc466b6249f06cbe55c9174df2578e7754da793fded244ef5cba2a38f1",
+      "expected_sha256": "7f8b1dfc466b6249f06cbe55c9174df2578e7754da793fded244ef5cba2a38f1",
+      "actual_size": 8,
+      "expected_size": 8
+    },
+    {
+      "label": "Unrelated edit preserves pointer",
+      "pass": true,
+      "actual_sha256": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+      "expected_sha256": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+      "actual_size": 129,
+      "expected_size": 129
+    }
+  ],
+  "observations": {},
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "init",
+        "-b",
+        "main"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos-release/repos/S01-hydrated",
+      "rc": 0,
+      "seconds": 0.1087712082080543,
+      "stdout": "Initialized empty Git repository in /tmp/jj-lfs-evaluation/macos-release/repos/S01-hydrated/.git/\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.name",
+        "LFS Evaluation"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos-release/repos/S01-hydrated",
+      "rc": 0,
+      "seconds": 0.022518542129546404,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.email",
+        "eval@example.invalid"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos-release/repos/S01-hydrated",
+      "rc": 0,
+      "seconds": 0.018418582621961832,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "commit.gpgsign",
+        "false"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos-release/repos/S01-hydrated",
+      "rc": 0,
+      "seconds": 0.020041916985064745,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "core.autocrlf",
+        "false"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos-release/repos/S01-hydrated",
+      "rc": 0,
+      "seconds": 0.017767082899808884,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "lfs",
+        "install",
+        "--local"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos-release/repos/S01-hydrated",
+      "rc": 0,
+      "seconds": 0.31153658404946327,
+      "stdout": "Updated Git hooks.\nGit LFS initialized.\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "add",
+        "."
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos-release/repos/S01-hydrated",
+      "rc": 0,
+      "seconds": 0.18987770937383175,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "commit",
+        "-m",
+        "Seed LFS fixture"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos-release/repos/S01-hydrated",
+      "rc": 0,
+      "seconds": 0.5243208343163133,
+      "stdout": "[main (root-commit) a46c7cf] Seed LFS fixture\n 3 files changed, 5 insertions(+)\n create mode 100644 .gitattributes\n create mode 100644 asset.bin\n create mode 100644 note.txt\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos-release/repos/S01-hydrated",
+      "rc": 0,
+      "seconds": 0.00804175017401576,
+      "stdout": "a46c7cfae146b652febca42ecb234660daa732d6\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr-release",
+        "git",
+        "init",
+        "--colocate"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos-release/repos/S01-hydrated",
+      "rc": 0,
+      "seconds": 0.2080270410515368,
+      "stdout": "",
+      "stderr": "Done importing changes from the underlying Git repo.\nInitialized repo in \".\"\n"
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr-release",
+        "status"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos-release/repos/S01-hydrated",
+      "rc": 0,
+      "seconds": 0.04071733262389898,
+      "stdout": "The working copy has no changes.\nWorking copy  (@) : zonpkzyt 2ce1245b (empty) (no description set)\nParent commit (@-): tovnluuo a46c7cfa main | Seed LFS fixture\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr-release",
+        "status"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos-release/repos/S01-hydrated",
+      "rc": 0,
+      "seconds": 0.035147333052009344,
+      "stdout": "The working copy has no changes.\nWorking copy  (@) : zonpkzyt 2ce1245b (empty) (no description set)\nParent commit (@-): tovnluuo a46c7cfa main | Seed LFS fixture\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr-release",
+        "status"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos-release/repos/S01-hydrated",
+      "rc": 0,
+      "seconds": 0.022867165971547365,
+      "stdout": "The working copy has no changes.\nWorking copy  (@) : zonpkzyt 2ce1245b (empty) (no description set)\nParent commit (@-): tovnluuo a46c7cfa main | Seed LFS fixture\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr-release",
+        "file",
+        "show",
+        "asset.bin"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos-release/repos/S01-hydrated",
+      "rc": 0,
+      "seconds": 0.0256440001539886,
+      "stdout": "version https://git-lfs.github.com/spec/v1\noid sha256:dad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f\nsize 2500\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr-release",
+        "status"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos-release/repos/S01-hydrated",
+      "rc": 0,
+      "seconds": 0.08344166679307818,
+      "stdout": "Working copy changes:\nM note.txt\nWorking copy  (@) : zonpkzyt 28679a3f (no description set)\nParent commit (@-): tovnluuo a46c7cfa main | Seed LFS fixture\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr-release",
+        "file",
+        "show",
+        "note.txt"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos-release/repos/S01-hydrated",
+      "rc": 0,
+      "seconds": 0.02271650033071637,
+      "stdout": "changed\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr-release",
+        "file",
+        "show",
+        "asset.bin"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos-release/repos/S01-hydrated",
+      "rc": 0,
+      "seconds": 0.019769875332713127,
+      "stdout": "version https://git-lfs.github.com/spec/v1\noid sha256:dad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f\nsize 2500\n",
+      "stderr": ""
+    }
+  ]
+}

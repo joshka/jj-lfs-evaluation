@@ -1,0 +1,165 @@
+{
+  "id": "W02-sparse-dirty",
+  "purpose": "Sparse removal must not silently lose local edits",
+  "category": "data-integrity",
+  "status": "FAIL",
+  "seconds": 0.21378091700000823,
+  "checks": [
+    {
+      "label": "Sparse exclusion preserves or rejects unsnapshotted local edits",
+      "pass": false
+    }
+  ],
+  "observations": {
+    "sparse": {
+      "rc": 0,
+      "stderr": "Added 0 files, modified 0 files, removed 2 files\n",
+      "asset_exists": false
+    }
+  },
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "init",
+        "-b",
+        "main"
+      ],
+      "cwd": "/eval/linux-modern/repos/W02-sparse-dirty",
+      "rc": 0,
+      "seconds": 0.014670707999982824,
+      "stdout": "Initialized empty Git repository in /eval/linux-modern/repos/W02-sparse-dirty/.git/\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.name",
+        "LFS Evaluation"
+      ],
+      "cwd": "/eval/linux-modern/repos/W02-sparse-dirty",
+      "rc": 0,
+      "seconds": 0.0030070409999893855,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.email",
+        "eval@example.invalid"
+      ],
+      "cwd": "/eval/linux-modern/repos/W02-sparse-dirty",
+      "rc": 0,
+      "seconds": 0.0032200840000200515,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "commit.gpgsign",
+        "false"
+      ],
+      "cwd": "/eval/linux-modern/repos/W02-sparse-dirty",
+      "rc": 0,
+      "seconds": 0.003451624999968317,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "core.autocrlf",
+        "false"
+      ],
+      "cwd": "/eval/linux-modern/repos/W02-sparse-dirty",
+      "rc": 0,
+      "seconds": 0.0031173749999879874,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "lfs",
+        "install",
+        "--local"
+      ],
+      "cwd": "/eval/linux-modern/repos/W02-sparse-dirty",
+      "rc": 0,
+      "seconds": 0.030410415999995166,
+      "stdout": "Updated Git hooks.\nGit LFS initialized.\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "add",
+        "."
+      ],
+      "cwd": "/eval/linux-modern/repos/W02-sparse-dirty",
+      "rc": 0,
+      "seconds": 0.02160695900005294,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "commit",
+        "-m",
+        "Seed LFS fixture"
+      ],
+      "cwd": "/eval/linux-modern/repos/W02-sparse-dirty",
+      "rc": 0,
+      "seconds": 0.05225695799998675,
+      "stdout": "[main (root-commit) 171956e] Seed LFS fixture\n 3 files changed, 5 insertions(+)\n create mode 100644 .gitattributes\n create mode 100644 assets/asset.bin\n create mode 100644 note.txt\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "/eval/linux-modern/repos/W02-sparse-dirty",
+      "rc": 0,
+      "seconds": 0.0018612910000115335,
+      "stdout": "171956e882b9d87f3572888b5993fd62bd0e23da\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/target/debug/jj",
+        "git",
+        "init",
+        "--colocate"
+      ],
+      "cwd": "/eval/linux-modern/repos/W02-sparse-dirty",
+      "rc": 0,
+      "seconds": 0.05382991599998377,
+      "stdout": "",
+      "stderr": "Done importing changes from the underlying Git repo.\nInitialized repo in \".\"\n"
+    },
+    {
+      "argv": [
+        "/target/debug/jj",
+        "sparse",
+        "set",
+        "--clear",
+        "--add",
+        "note.txt"
+      ],
+      "cwd": "/eval/linux-modern/repos/W02-sparse-dirty",
+      "rc": 0,
+      "seconds": 0.02421337499998799,
+      "stdout": "",
+      "stderr": "Added 0 files, modified 0 files, removed 2 files\n"
+    }
+  ]
+}

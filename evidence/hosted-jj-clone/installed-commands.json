@@ -1,0 +1,32 @@
+[
+  {
+    "argv": [
+      "git",
+      "lfs",
+      "install",
+      "--local"
+    ],
+    "rc": 0,
+    "stdout": "Updated Git hooks.\nGit LFS initialized.\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "git",
+      "lfs",
+      "pull"
+    ],
+    "rc": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "/tmp/jj-lfs-evaluation/bin/jj-pr-release",
+      "status"
+    ],
+    "rc": 0,
+    "stdout": "The working copy has no changes.\nWorking copy  (@) : spqqurrr dd85e0af (empty) (no description set)\nParent commit (@-): nysuymrl 48dee535 joshka/lfs-eval-fixture@origin | Publish pointer before LFS object upload\n",
+    "stderr": ""
+  }
+]

@@ -1,0 +1,208 @@
+{
+  "id": "pr-workspace",
+  "purpose": "workspace",
+  "category": "contract",
+  "status": "PASS",
+  "seconds": 3.415045917034149,
+  "checks": [
+    {
+      "label": "Explicit hydration yields payload or actionable failure",
+      "pass": true
+    }
+  ],
+  "observations": {
+    "add_workspace": {
+      "rc": 0,
+      "out": "",
+      "err": "Created Git worktree for the new workspace.\nCreated workspace in \"../pr-workspace-secondary\"\nWorking copy  (@) now at: pompqnkv 74c0df52 (empty) (no description set)\nParent commit (@-)      : vypmuyqm 195d6389 main | Seed LFS fixture\nAdded 3 files, modified 0 files, removed 0 files\n"
+    },
+    "initial": {
+      "disk_sha": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+      "pointer": true,
+      "has_git": true
+    },
+    "explicit_git_lfs_checkout": {
+      "rc": 0,
+      "out": "Checking out LFS objects: 100% (1/1), 2.5 KB | 0 B/s, done.\n",
+      "err": ""
+    },
+    "after_checkout": {
+      "disk_sha": "dad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f",
+      "hydrated": true
+    },
+    "secondary_jj_status": {
+      "rc": 0,
+      "out": "The working copy has no changes.\nWorking copy  (@) : pompqnkv 74c0df52 (empty) (no description set)\nParent commit (@-): vypmuyqm 195d6389 main | Seed LFS fixture\n",
+      "err": ""
+    }
+  },
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "init",
+        "-b",
+        "main"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/pr/repos/pr-workspace",
+      "rc": 0,
+      "seconds": 0.05604829080402851,
+      "stdout": "Initialized empty Git repository in /tmp/jj-lfs-evaluation/workflows-sol/pr/repos/pr-workspace/.git/\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.name",
+        "LFS Evaluation"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/pr/repos/pr-workspace",
+      "rc": 0,
+      "seconds": 0.01428466709330678,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.email",
+        "eval@example.invalid"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/pr/repos/pr-workspace",
+      "rc": 0,
+      "seconds": 0.01693366700783372,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "commit.gpgsign",
+        "false"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/pr/repos/pr-workspace",
+      "rc": 0,
+      "seconds": 0.01793529186397791,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "core.autocrlf",
+        "false"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/pr/repos/pr-workspace",
+      "rc": 0,
+      "seconds": 0.024038624949753284,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "lfs",
+        "install",
+        "--local"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/pr/repos/pr-workspace",
+      "rc": 0,
+      "seconds": 0.32242800015956163,
+      "stdout": "Updated Git hooks.\nGit LFS initialized.\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "add",
+        "."
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/pr/repos/pr-workspace",
+      "rc": 0,
+      "seconds": 0.20495291706174612,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "commit",
+        "-m",
+        "Seed LFS fixture"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/pr/repos/pr-workspace",
+      "rc": 0,
+      "seconds": 1.5214300407096744,
+      "stdout": "[main (root-commit) 195d638] Seed LFS fixture\n 3 files changed, 5 insertions(+)\n create mode 100644 .gitattributes\n create mode 100644 asset.bin\n create mode 100644 note.txt\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/pr/repos/pr-workspace",
+      "rc": 0,
+      "seconds": 0.01789212506264448,
+      "stdout": "195d6389e10d5e8e0f3a3a55d743ef6cb98ab582\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr",
+        "git",
+        "init",
+        "--colocate"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/pr/repos/pr-workspace",
+      "rc": 0,
+      "seconds": 0.334693290758878,
+      "stdout": "",
+      "stderr": "Done importing changes from the underlying Git repo.\nInitialized repo in \".\"\n"
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr",
+        "workspace",
+        "add",
+        "/tmp/jj-lfs-evaluation/workflows-sol/pr/repos/pr-workspace-secondary",
+        "--name",
+        "secondary"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/pr/repos/pr-workspace",
+      "rc": 0,
+      "seconds": 0.24364383285865188,
+      "stdout": "",
+      "stderr": "Created Git worktree for the new workspace.\nCreated workspace in \"../pr-workspace-secondary\"\nWorking copy  (@) now at: pompqnkv 74c0df52 (empty) (no description set)\nParent commit (@-)      : vypmuyqm 195d6389 main | Seed LFS fixture\nAdded 3 files, modified 0 files, removed 0 files\n"
+    },
+    {
+      "argv": [
+        "git",
+        "lfs",
+        "checkout",
+        "asset.bin"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/pr/repos/pr-workspace-secondary",
+      "rc": 0,
+      "seconds": 0.5633261669427156,
+      "stdout": "Checking out LFS objects: 100% (1/1), 2.5 KB | 0 B/s, done.\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr",
+        "status"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/pr/repos/pr-workspace-secondary",
+      "rc": 0,
+      "seconds": 0.07360683288425207,
+      "stdout": "The working copy has no changes.\nWorking copy  (@) : pompqnkv 74c0df52 (empty) (no description set)\nParent commit (@-): vypmuyqm 195d6389 main | Seed LFS fixture\n",
+      "stderr": ""
+    }
+  ]
+}

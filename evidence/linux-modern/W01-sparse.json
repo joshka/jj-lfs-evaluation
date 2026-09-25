@@ -1,0 +1,193 @@
+{
+  "id": "W01-sparse",
+  "purpose": "Sparse reset then external hydration",
+  "category": "contract",
+  "status": "PASS",
+  "seconds": 0.2534452920000376,
+  "checks": [
+    {
+      "label": "Sparse reset and hydration restore content",
+      "pass": true,
+      "actual_sha256": "dad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f",
+      "expected_sha256": "dad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f",
+      "actual_size": 2500,
+      "expected_size": 2500
+    }
+  ],
+  "observations": {
+    "sparse": {
+      "rc": 0,
+      "stderr": "Added 0 files, modified 0 files, removed 2 files\n",
+      "asset_exists": false
+    }
+  },
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "init",
+        "-b",
+        "main"
+      ],
+      "cwd": "/eval/linux-modern/repos/W01-sparse",
+      "rc": 0,
+      "seconds": 0.013979999999946813,
+      "stdout": "Initialized empty Git repository in /eval/linux-modern/repos/W01-sparse/.git/\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.name",
+        "LFS Evaluation"
+      ],
+      "cwd": "/eval/linux-modern/repos/W01-sparse",
+      "rc": 0,
+      "seconds": 0.0030031669999743826,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.email",
+        "eval@example.invalid"
+      ],
+      "cwd": "/eval/linux-modern/repos/W01-sparse",
+      "rc": 0,
+      "seconds": 0.002770292000036534,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "commit.gpgsign",
+        "false"
+      ],
+      "cwd": "/eval/linux-modern/repos/W01-sparse",
+      "rc": 0,
+      "seconds": 0.0033533339999962664,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "core.autocrlf",
+        "false"
+      ],
+      "cwd": "/eval/linux-modern/repos/W01-sparse",
+      "rc": 0,
+      "seconds": 0.003074583000000075,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "lfs",
+        "install",
+        "--local"
+      ],
+      "cwd": "/eval/linux-modern/repos/W01-sparse",
+      "rc": 0,
+      "seconds": 0.027269750000016302,
+      "stdout": "Updated Git hooks.\nGit LFS initialized.\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "add",
+        "."
+      ],
+      "cwd": "/eval/linux-modern/repos/W01-sparse",
+      "rc": 0,
+      "seconds": 0.018978957999991053,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "commit",
+        "-m",
+        "Seed LFS fixture"
+      ],
+      "cwd": "/eval/linux-modern/repos/W01-sparse",
+      "rc": 0,
+      "seconds": 0.04488370900003247,
+      "stdout": "[main (root-commit) 171956e] Seed LFS fixture\n 3 files changed, 5 insertions(+)\n create mode 100644 .gitattributes\n create mode 100644 assets/asset.bin\n create mode 100644 note.txt\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "/eval/linux-modern/repos/W01-sparse",
+      "rc": 0,
+      "seconds": 0.0016892909999910444,
+      "stdout": "171956e882b9d87f3572888b5993fd62bd0e23da\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/target/debug/jj",
+        "git",
+        "init",
+        "--colocate"
+      ],
+      "cwd": "/eval/linux-modern/repos/W01-sparse",
+      "rc": 0,
+      "seconds": 0.047280250000028445,
+      "stdout": "",
+      "stderr": "Done importing changes from the underlying Git repo.\nInitialized repo in \".\"\n"
+    },
+    {
+      "argv": [
+        "/target/debug/jj",
+        "sparse",
+        "set",
+        "--clear",
+        "--add",
+        "note.txt"
+      ],
+      "cwd": "/eval/linux-modern/repos/W01-sparse",
+      "rc": 0,
+      "seconds": 0.022307374999968488,
+      "stdout": "",
+      "stderr": "Added 0 files, modified 0 files, removed 2 files\n"
+    },
+    {
+      "argv": [
+        "/target/debug/jj",
+        "sparse",
+        "reset"
+      ],
+      "cwd": "/eval/linux-modern/repos/W01-sparse",
+      "rc": 0,
+      "seconds": 0.02414412499996388,
+      "stdout": "",
+      "stderr": "Added 2 files, modified 0 files, removed 0 files\n"
+    },
+    {
+      "argv": [
+        "git",
+        "lfs",
+        "checkout"
+      ],
+      "cwd": "/eval/linux-modern/repos/W01-sparse",
+      "rc": 0,
+      "seconds": 0.03905708299998878,
+      "stdout": "Checking out LFS objects: 100% (1/1), 2.5 KB | 0 B/s, done.\n",
+      "stderr": ""
+    }
+  ]
+}

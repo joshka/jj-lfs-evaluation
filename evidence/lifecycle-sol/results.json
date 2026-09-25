@@ -1,0 +1,373 @@
+[
+  {
+    "id": "prune-unbookmarked",
+    "purpose": "LFS object referenced by jj commit without bookmark",
+    "category": "lifecycle",
+    "status": "PASS",
+    "seconds": 3.8966215001419187,
+    "checks": [
+      {
+        "label": "LFS object exists before prune",
+        "pass": true
+      },
+      {
+        "label": "Prune command succeeds",
+        "pass": true
+      },
+      {
+        "label": "Unbookmarked jj asset retained in dry run",
+        "pass": true
+      },
+      {
+        "label": "Force prune removes jj-only object",
+        "pass": true
+      }
+    ],
+    "observations": {
+      "remote": "/tmp/jj-lfs-evaluation/lifecycle-sol/bare/prune-unbookmarked",
+      "git_refs_before": {
+        "rc": 0,
+        "stdout": "6b8e1cf91178be3589850b0639846c1149588110 refs/heads/main\n66fe5118a7378b56a049bc6e0a59c6bbfcf803f0 refs/jj/keep/66fe5118a7378b56a049bc6e0a59c6bbfcf803f0\n6b8e1cf91178be3589850b0639846c1149588110 refs/jj/keep/6b8e1cf91178be3589850b0639846c1149588110\n6c25d9a8a38767a98ca4b0f859ec42aacd7025f1 refs/jj/keep/6c25d9a8a38767a98ca4b0f859ec42aacd7025f1\n9496a3019a520fe5d0f2165093ff56505f186372 refs/jj/keep/9496a3019a520fe5d0f2165093ff56505f186372\n99e33c509790901d2a0990289de2342f1b654503 refs/jj/keep/99e33c509790901d2a0990289de2342f1b654503\nbcf6d3b594c3c45a812f2371a9daf8543e02441a refs/jj/keep/bcf6d3b594c3c45a812f2371a9daf8543e02441a\nc815eac6e8d0127f0e69775d4015daf5f7ced09f refs/jj/keep/c815eac6e8d0127f0e69775d4015daf5f7ced09f\ndd618f77ab82dc0c2208040c484d38108818318b refs/jj/keep/dd618f77ab82dc0c2208040c484d38108818318b\n6b8e1cf91178be3589850b0639846c1149588110 refs/remotes/origin/main\n",
+        "stderr": ""
+      },
+      "prune_dry": {
+        "rc": 0,
+        "stdout": "1 local object, 1 retained, done.\n",
+        "stderr": ""
+      },
+      "prune_recent_dry": {
+        "rc": 0,
+        "stdout": "1 local object, 1 retained, done.\n",
+        "stderr": ""
+      },
+      "prune_force_dry": {
+        "rc": 0,
+        "stdout": "1 local object, 0 retained, done.\n\n * dad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f (2.5 KB), done.\n",
+        "stderr": ""
+      },
+      "prune_verify_dry": {
+        "rc": 0,
+        "stdout": "1 local object, 1 retained, done.\n",
+        "stderr": ""
+      },
+      "lfs_object": "/tmp/jj-lfs-evaluation/lifecycle-sol/repos/prune-unbookmarked/.git/lfs/objects/da/d4/dad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f",
+      "pointer_sha": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+      "force_prune_actual": {
+        "rc": 0,
+        "stdout": "1 local object, 0 retained, done.\n\ndad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f (2.5 KB), done.\nDeleting objects: 100% (1/1), done.\n",
+        "stderr": ""
+      },
+      "remote_object_exists": false,
+      "lfs_push_all_after_prune": {
+        "rc": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      "object_after_push": false
+    }
+  },
+  {
+    "id": "prune-abandoned",
+    "purpose": "LFS object referenced by abandoned jj commit and op history",
+    "category": "lifecycle",
+    "status": "PASS",
+    "seconds": 4.154777332674712,
+    "checks": [
+      {
+        "label": "Prune command succeeds",
+        "pass": true
+      },
+      {
+        "label": "Force prune removes op-recoverable object",
+        "pass": true
+      }
+    ],
+    "observations": {
+      "remote": "/tmp/jj-lfs-evaluation/lifecycle-sol/bare/prune-abandoned",
+      "git_refs_after_abandon": {
+        "rc": 0,
+        "stdout": "d5ee0b3fe77ec7a8f6373f3d7dad4e5caaccbb6c refs/heads/main\n8493a706d8d2a7ea5120e2f2de1ee1d289019d8a refs/jj/keep/8493a706d8d2a7ea5120e2f2de1ee1d289019d8a\n8bb7bd7229ef1cbdd3a4fa1180459e621cf8add1 refs/jj/keep/8bb7bd7229ef1cbdd3a4fa1180459e621cf8add1\n8c86878c93e797ddbf1fd6dd931eae9fd7bc777d refs/jj/keep/8c86878c93e797ddbf1fd6dd931eae9fd7bc777d\nb1627f35fc4c65785e23469262c3851d38fe1091 refs/jj/keep/b1627f35fc4c65785e23469262c3851d38fe1091\nc013bac26984a2e8c44bfd17eed3ffbd4cc8a5ba refs/jj/keep/c013bac26984a2e8c44bfd17eed3ffbd4cc8a5ba\nd5ee0b3fe77ec7a8f6373f3d7dad4e5caaccbb6c refs/jj/keep/d5ee0b3fe77ec7a8f6373f3d7dad4e5caaccbb6c\nd6e5e8c05a4a35ca43b5276124a9097b54f3fcb2 refs/jj/keep/d6e5e8c05a4a35ca43b5276124a9097b54f3fcb2\nea7a842582104f84e476a65523f650abaa0aa96f refs/jj/keep/ea7a842582104f84e476a65523f650abaa0aa96f\nfa2d952426541d950c877700db35123198001f8f refs/jj/keep/fa2d952426541d950c877700db35123198001f8f\nd5ee0b3fe77ec7a8f6373f3d7dad4e5caaccbb6c refs/remotes/origin/main\n",
+        "stderr": ""
+      },
+      "prune_dry": {
+        "rc": 0,
+        "stdout": "1 local object, 1 retained, done.\n",
+        "stderr": ""
+      },
+      "prune_recent_dry": {
+        "rc": 0,
+        "stdout": "1 local object, 1 retained, done.\n",
+        "stderr": ""
+      },
+      "prune_force_dry": {
+        "rc": 0,
+        "stdout": "1 local object, 0 retained, done.\n\n * dad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f (2.5 KB), done.\n",
+        "stderr": ""
+      },
+      "prune_verify_dry": {
+        "rc": 0,
+        "stdout": "1 local object, 1 retained, done.\n",
+        "stderr": ""
+      },
+      "object_exists": true,
+      "oid_in_prune_output": false,
+      "jj_oplog": "@  fcc255ead1a5 eval@example.invalid default@ now, lasted 29 milliseconds\n\u2502  abandon commit 8c86878c93e797ddbf1fd6dd931eae9fd7bc777d\n\u2502  args: jj abandon @-\n\u25cb  93689b6b62ba eval@example.invalid default@ 1 second ago, lasted 21 milliseconds\n\u2502  new empty commit\n\u2502  args: jj new\n\u25cb  56439b4c8f57 eval@example.invalid default@ 1 second ago, lasted 36 milliseconds\n\u2502  commit 8bb7bd7229ef1cbdd3a4fa1180459e621cf8add1\n\u2502  args: jj '--config=git.ignore-filters=[]' commit -m 'LFS asset'\n\u25cb  8b88b6fe68e6 eval@example.invalid default@ 1 second ago, lasted 33 milliseconds\n\u2502  snapshot working copy\n\u2502  args: jj '--config=git.ignore-filters=[]' status\n",
+      "force_prune_actual": {
+        "rc": 0,
+        "stdout": "1 local object, 0 retained, done.\n\ndad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f (2.5 KB), done.\nDeleting objects: 100% (1/1), done.\n",
+        "stderr": ""
+      },
+      "remote_object_exists": false,
+      "restore_before_abandon": {
+        "rc": 0,
+        "stdout": "",
+        "stderr": "Restored to operation: 93689b6b62ba (2026-09-25 11:02:00) new empty commit\nWorking copy  (@) now at: vpvyxttq b1627f35 (empty) (no description set)\nParent commit (@-)      : ykvmlyzm 8c86878c (empty) (no description set)\n"
+      },
+      "lfs_checkout_after_restore": {
+        "rc": 0,
+        "stdout": "",
+        "stderr": "Skipped checkout for \"asset.bin\", content not local. Use fetch to download.\n"
+      },
+      "restored_disk_sha": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a"
+    }
+  },
+  {
+    "id": "custom-storage",
+    "purpose": "custom shared lfs.storage",
+    "category": "lifecycle",
+    "status": "PASS",
+    "seconds": 1.6543179587461054,
+    "checks": [
+      {
+        "label": "LFS object in configured shared store",
+        "pass": true,
+        "path": "/tmp/jj-lfs-evaluation/lifecycle-sol/shared-store/objects/da/d4/dad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f"
+      },
+      {
+        "label": "jj preserves pointer with custom storage",
+        "pass": true,
+        "actual_sha256": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+        "expected_sha256": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+        "actual_size": 129,
+        "expected_size": 129
+      },
+      {
+        "label": "jj checkout hydrates via configured storage",
+        "pass": true,
+        "actual_sha256": "dad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f",
+        "expected_sha256": "dad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f",
+        "actual_size": 2500,
+        "expected_size": 2500
+      }
+    ],
+    "observations": {}
+  },
+  {
+    "id": "skip-smudge",
+    "purpose": "GIT_LFS_SKIP_SMUDGE interoperability",
+    "category": "lifecycle",
+    "status": "PASS",
+    "seconds": 1.8907222501002252,
+    "checks": [
+      {
+        "label": "skip-smudge leaves pointer on disk",
+        "pass": true,
+        "actual_sha256": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+        "expected_sha256": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+        "actual_size": 129,
+        "expected_size": 129
+      },
+      {
+        "label": "jj tree remains pointer",
+        "pass": true,
+        "actual_sha256": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+        "expected_sha256": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+        "actual_size": 129,
+        "expected_size": 129
+      }
+    ],
+    "observations": {
+      "disk_sha": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+      "pointer_sha": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a"
+    }
+  },
+  {
+    "id": "missing-lfs",
+    "purpose": "jj behavior without git-lfs executable",
+    "category": "lifecycle",
+    "status": "PASS",
+    "seconds": 5.666406000033021,
+    "checks": [
+      {
+        "label": "jj status works without git-lfs",
+        "pass": true
+      },
+      {
+        "label": "jj checkout succeeds without git-lfs",
+        "pass": true
+      },
+      {
+        "label": "Missing git-lfs leaves pointer on disk",
+        "pass": true,
+        "actual_sha256": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+        "expected_sha256": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+        "actual_size": 129,
+        "expected_size": 129
+      }
+    ],
+    "observations": {
+      "status_without_git_lfs": {
+        "rc": 0,
+        "stdout": "The working copy has no changes.\nWorking copy  (@) : mzywpotv 8d46d2bd (empty) (no description set)\nParent commit (@-): uxstqtoo 549c1c5f (empty) (no description set)\n",
+        "stderr": ""
+      },
+      "checkout_empty_without_git_lfs": {
+        "rc": 0,
+        "stdout": "",
+        "stderr": "Working copy  (@) now at: qyussvpz 763f2457 (empty) (no description set)\nParent commit (@-)      : zzzzzzzz 00000000 (empty) (no description set)\nAdded 0 files, modified 0 files, removed 3 files\n"
+      },
+      "checkout_asset_without_git_lfs": {
+        "rc": 0,
+        "stdout": "",
+        "stderr": "Working copy  (@) now at: sxrktuss dbcbabe9 (empty) (no description set)\nParent commit (@-)      : vtskuwvu 896dc751 main | Seed LFS fixture\nAdded 3 files, modified 0 files, removed 0 files\n"
+      },
+      "disk_sha": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a"
+    }
+  },
+  {
+    "id": "fetch-exclude",
+    "purpose": "lfs.fetchexclude and jj tree",
+    "category": "lifecycle",
+    "status": "PASS",
+    "seconds": 4.190224749967456,
+    "checks": [
+      {
+        "label": "jj pointer asset remains",
+        "pass": true,
+        "actual_sha256": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+        "expected_sha256": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+        "actual_size": 129,
+        "expected_size": 129
+      },
+      {
+        "label": "jj pointer other remains",
+        "pass": true,
+        "actual_sha256": "c37a06fc0ff3f76773bdc4a64413b7ce64ad21f2eb62cfe4b6ca031459b0d9ce",
+        "expected_sha256": "c37a06fc0ff3f76773bdc4a64413b7ce64ad21f2eb62cfe4b6ca031459b0d9ce",
+        "actual_size": 129,
+        "expected_size": 129
+      }
+    ],
+    "observations": {
+      "asset_sha": "dad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f",
+      "other_sha": "f373b3bf36856f8fd4d1045d39a945690f960207ffaadc274305d5f90619a816"
+    }
+  },
+  {
+    "id": "migrate-before",
+    "purpose": "Git LFS migration before jj init",
+    "category": "lifecycle",
+    "status": "PASS",
+    "seconds": 3.410505791194737,
+    "checks": [
+      {
+        "label": "jj sees imported pointer",
+        "pass": true,
+        "actual_sha256": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+        "expected_sha256": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+        "actual_size": 129,
+        "expected_size": 129
+      }
+    ],
+    "observations": {
+      "migrate_import": {
+        "rc": 0,
+        "stdout": "",
+        "stderr": "Fetching remote refs: ..., done.\nSorting commits: ..., done.\nRewriting commits: 100% (1/1), done.\nUpdating refs: ..., done.\nCheckout: ..., done.\n"
+      },
+      "old_head": "0a7a16af402595843ddbd4c4f1eb638b117f4ab8",
+      "new_head": "be7672d629958a33d53284a2269eea3d982e76bd"
+    }
+  },
+  {
+    "id": "migrate-after",
+    "purpose": "Git LFS migration after jj init",
+    "category": "lifecycle",
+    "status": "PASS",
+    "seconds": 4.135265207849443,
+    "checks": [
+      {
+        "label": "Git migration completed",
+        "pass": true
+      },
+      {
+        "label": "Original jj pointer remains raw before migration",
+        "pass": true,
+        "actual_sha256": "dad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f",
+        "expected_sha256": "dad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f",
+        "actual_size": 2500,
+        "expected_size": 2500
+      }
+    ],
+    "observations": {
+      "migrate_import": {
+        "rc": 0,
+        "stdout": "",
+        "stderr": "Fetching remote refs: ..., done.\nSorting commits: ..., done.\nRewriting commits: 100% (1/1), done.\nUpdating refs: ..., done.\nCheckout: ..., done.\n"
+      },
+      "refs_post_import": "3fcdf0cd9a735229d759d721556da2635b58c0d5 refs/heads/main\n3fcdf0cd9a735229d759d721556da2635b58c0d5 refs/jj/keep/344b1c1307909c2cd42f27f607df14eba2fc0505\n8fbdd23ce4868d96e7a48c3b22a82934f8e24d84 refs/jj/keep/8fbdd23ce4868d96e7a48c3b22a82934f8e24d84\n949926fc556705b16512a599ee3bfd4e820c42d0 refs/jj/keep/949926fc556705b16512a599ee3bfd4e820c42d0\n",
+      "jj_import": {
+        "rc": 0,
+        "stdout": "",
+        "stderr": "Reset the working copy parent to the new Git HEAD.\nAbandoned 1 commits that are no longer reachable.\nDone importing changes from the underlying Git repo.\nNo import needed in colocated workspaces.\n"
+      },
+      "jj_status": "The working copy has no changes.\nWorking copy  (@) : nslwpryw 7cce8a81 (empty) (no description set)\nParent commit (@-): pozwypmp 3fcdf0cd main | raw asset\n",
+      "jj_stored_sha": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a"
+    }
+  },
+  {
+    "id": "migrate-export-after",
+    "purpose": "Git LFS export after jj init",
+    "category": "lifecycle",
+    "status": "PASS",
+    "seconds": 3.095552499871701,
+    "checks": [
+      {
+        "label": "Git LFS export completes",
+        "pass": true
+      },
+      {
+        "label": "jj imports exported history",
+        "pass": true
+      },
+      {
+        "label": "jj tree has raw content after export",
+        "pass": true,
+        "actual_sha256": "dad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f",
+        "expected_sha256": "dad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f",
+        "actual_size": 2500,
+        "expected_size": 2500
+      },
+      {
+        "label": "Original tree was pointer",
+        "pass": true,
+        "actual_sha256": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+        "expected_sha256": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+        "actual_size": 129,
+        "expected_size": 129
+      }
+    ],
+    "observations": {
+      "migrate_export": {
+        "rc": 0,
+        "stdout": "1 local object, 0 retained, done.\n\ndad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f (2.5 KB), done.\nDeleting objects: 100% (1/1), done.\n",
+        "stderr": "Fetching remote refs: ..., done.\nSorting commits: ..., done.\nRewriting commits: 100% (1/1), done.\nUpdating refs: ..., done.\nCheckout: ..., done.\n"
+      },
+      "jj_import": {
+        "rc": 0,
+        "stdout": "",
+        "stderr": "Reset the working copy parent to the new Git HEAD.\nAbandoned 1 commits that are no longer reachable.\nDone importing changes from the underlying Git repo.\nNo import needed in colocated workspaces.\n"
+      }
+    }
+  }
+]

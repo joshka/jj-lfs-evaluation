@@ -1,0 +1,6 @@
+A04-removed PASS
+A08-symlink-asset PASS
+A10-file-directory PASS
+C02-force-track PASS
+W02-sparse-dirty FAIL
+{"PASS": 4, "FAIL": 1, "ERROR": 0, "OBSERVED": 0}

@@ -1,0 +1,13 @@
+pub struct TreeStateSettings {
+    /// Conflict marker style to use when materializing files or when checking
+    /// changed files.
+    pub conflict_marker_style: ConflictMarkerStyle,
+    /// Configuring auto-converting CRLF line endings into LF when you add a
+    /// file to the backend, and vice versa when it checks out code onto your
+    /// filesystem.
+    pub eol_conversion_mode: EolConversionMode,
+    /// Whether to ignore changes to the executable bit for files on Unix.
+    pub exec_change_setting: ExecChangeSetting,
+    /// The fsmonitor (e.g. Watchman) to use, if any.
+    pub fsmonitor_settings: FsmonitorSettings,
+}

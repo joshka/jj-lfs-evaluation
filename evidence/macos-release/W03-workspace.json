@@ -1,0 +1,216 @@
+{
+  "id": "W03-workspace",
+  "purpose": "Additional workspace and missing Git context",
+  "category": "contract",
+  "status": "PASS",
+  "seconds": 1.0708563746884465,
+  "checks": [
+    {
+      "label": "Additional workspace initially contains pointer",
+      "pass": true,
+      "actual_sha256": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+      "expected_sha256": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+      "actual_size": 129,
+      "expected_size": 129
+    },
+    {
+      "label": "Colocated additional workspace supports external hydration",
+      "pass": true,
+      "status": "The working copy has no changes.\nWorking copy  (@) : umvtuqru 92782dc3 (empty) (no description set)\nParent commit (@-): vrsumrkq b1c84929 main | Seed LFS fixture\n"
+    },
+    {
+      "label": "Hydrated additional workspace retains stored pointer",
+      "pass": true,
+      "actual_sha256": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+      "expected_sha256": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+      "actual_size": 129,
+      "expected_size": 129
+    }
+  ],
+  "observations": {
+    "plain_git_lfs": {
+      "rc": 0,
+      "stderr": ""
+    },
+    "git_context": "gitdir: ../W03-workspace/.git/worktrees/W03-workspace-workspace\n"
+  },
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "init",
+        "-b",
+        "main"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos-release/repos/W03-workspace",
+      "rc": 0,
+      "seconds": 0.011961457785218954,
+      "stdout": "Initialized empty Git repository in /tmp/jj-lfs-evaluation/macos-release/repos/W03-workspace/.git/\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.name",
+        "LFS Evaluation"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos-release/repos/W03-workspace",
+      "rc": 0,
+      "seconds": 0.006901249755173922,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.email",
+        "eval@example.invalid"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos-release/repos/W03-workspace",
+      "rc": 0,
+      "seconds": 0.0062166666612029076,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "commit.gpgsign",
+        "false"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos-release/repos/W03-workspace",
+      "rc": 0,
+      "seconds": 0.007118875160813332,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "core.autocrlf",
+        "false"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos-release/repos/W03-workspace",
+      "rc": 0,
+      "seconds": 0.006435000337660313,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "lfs",
+        "install",
+        "--local"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos-release/repos/W03-workspace",
+      "rc": 0,
+      "seconds": 0.13264024956151843,
+      "stdout": "Updated Git hooks.\nGit LFS initialized.\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "add",
+        "."
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos-release/repos/W03-workspace",
+      "rc": 0,
+      "seconds": 0.07732312474399805,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "commit",
+        "-m",
+        "Seed LFS fixture"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos-release/repos/W03-workspace",
+      "rc": 0,
+      "seconds": 0.35528399981558323,
+      "stdout": "[main (root-commit) b1c8492] Seed LFS fixture\n 3 files changed, 5 insertions(+)\n create mode 100644 .gitattributes\n create mode 100644 asset.bin\n create mode 100644 note.txt\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos-release/repos/W03-workspace",
+      "rc": 0,
+      "seconds": 0.0057494156062603,
+      "stdout": "b1c84929d95c8e3ed109f66f37a164599f1bae12\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr-release",
+        "git",
+        "init",
+        "--colocate"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos-release/repos/W03-workspace",
+      "rc": 0,
+      "seconds": 0.14695583330467343,
+      "stdout": "",
+      "stderr": "Done importing changes from the underlying Git repo.\nInitialized repo in \".\"\n"
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr-release",
+        "workspace",
+        "add",
+        "/tmp/jj-lfs-evaluation/macos-release/repos/W03-workspace-workspace"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos-release/repos/W03-workspace",
+      "rc": 0,
+      "seconds": 0.12702075019478798,
+      "stdout": "",
+      "stderr": "Created Git worktree for the new workspace.\nCreated workspace in \"../W03-workspace-workspace\"\nWorking copy  (@) now at: umvtuqru 92782dc3 (empty) (no description set)\nParent commit (@-)      : vrsumrkq b1c84929 main | Seed LFS fixture\nAdded 3 files, modified 0 files, removed 0 files\n"
+    },
+    {
+      "argv": [
+        "git",
+        "lfs",
+        "checkout"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos-release/repos/W03-workspace-workspace",
+      "rc": 0,
+      "seconds": 0.15796604193747044,
+      "stdout": "Checking out LFS objects: 100% (1/1), 2.5 KB | 0 B/s, done.\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr-release",
+        "status"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos-release/repos/W03-workspace-workspace",
+      "rc": 0,
+      "seconds": 0.014707750175148249,
+      "stdout": "The working copy has no changes.\nWorking copy  (@) : umvtuqru 92782dc3 (empty) (no description set)\nParent commit (@-): vrsumrkq b1c84929 main | Seed LFS fixture\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr-release",
+        "file",
+        "show",
+        "asset.bin"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos-release/repos/W03-workspace-workspace",
+      "rc": 0,
+      "seconds": 0.013149625156074762,
+      "stdout": "version https://git-lfs.github.com/spec/v1\noid sha256:dad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f\nsize 2500\n",
+      "stderr": ""
+    }
+  ]
+}

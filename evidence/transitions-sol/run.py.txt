@@ -1,0 +1,129 @@
+#!/usr/bin/env python3
+"""Six bounded path-kind transitions in disposable jj/LFS fixtures."""
+import argparse
+import hashlib
+import importlib.util
+import json
+import os
+from pathlib import Path
+import shutil
+import sys
+
+H=Path('/tmp/jj-lfs-evaluation/harness/evaluate.py')
+spec=importlib.util.spec_from_file_location('shared_harness',H)
+mod=importlib.util.module_from_spec(spec)
+spec.loader.exec_module(mod)
+OUT=Path(sys.argv[1]).resolve() if len(sys.argv)>1 else Path(__file__).resolve().parent
+PR=sys.argv[2] if len(sys.argv)>2 else '/tmp/jj-lfs-evaluation/bin/jj-pr-release'
+BASE=sys.argv[3] if len(sys.argv)>3 else '/tmp/jj-lfs-evaluation/bin/jj-base'
+PAY=mod.PAYLOAD
+
+def snap(f,label,baseline=False):
+    args=['--config=git.ignore-filters=[]','status'] if baseline else ['status']
+    cp=f.jj(*args,ok=False)
+    f.observations[label]=dict(rc=cp.returncode,out=cp.stdout.decode('utf-8','replace'),
+                                err=cp.stderr.decode('utf-8','replace'))
+    return cp
+
+def path_state(p):
+    if p.is_symlink(): return {'type':'symlink','target':os.readlink(p)}
+    if p.is_file():
+        data=p.read_bytes()
+        return {'type':'file','sha256':mod.sha(data),'size':len(data),
+                'pointer':data==mod.pointer(PAY)}
+    if p.is_dir(): return {'type':'directory','children':sorted(x.name for x in p.iterdir())}
+    return {'type':'absent'}
+
+def tree_state(f,label):
+    files=f.jj('--ignore-working-copy','file','list',ok=False)
+    f.observations[label+'_tree']=dict(rc=files.returncode,
+                                        files=files.stdout.decode('utf-8','replace'),
+                                        err=files.stderr.decode('utf-8','replace'))
+
+def file_to_dir(f,baseline):
+    f.seed()
+    initial=f.stored('asset.bin')
+    f.check('Initial committed blob is valid LFS pointer',initial==mod.pointer(PAY))
+    target=f.root/'asset.bin'
+    target.unlink()
+    target.mkdir()
+    (target/'child.txt').write_text('child under former filtered file\n')
+    f.observations['before']=path_state(target)
+    first=snap(f,'first_status',baseline)
+    snap(f,'second_status',baseline)
+    tree_state(f,'after_transition')
+    f.observations['after_transition']=path_state(target)
+    # Recovery: restore former pointer through the path transition without relying on jj.
+    if target.is_dir(): shutil.rmtree(target)
+    target.write_bytes(initial)
+    snap(f,'recovery_status',baseline)
+    tree_state(f,'after_recovery')
+    f.observations['after_recovery']=path_state(target)
+    f.check('Recovery leaves usable path',target.is_file() and target.read_bytes()==initial,
+            first_status_rc=first.returncode)
+
+def dir_to_file(f,baseline):
+    f.seed(files={'dir.bin/child.txt':b'original directory child\n',
+                  'note.txt':b'ordinary\n'})
+    target=f.root/'dir.bin'
+    assert target.is_dir()
+    f.observations['before']=path_state(target)
+    shutil.rmtree(target)
+    target.write_bytes(PAY)
+    first=snap(f,'first_status',baseline)
+    snap(f,'second_status',baseline)
+    tree_state(f,'after_transition')
+    f.observations['after_transition']=path_state(target)
+    target.unlink()
+    target.mkdir()
+    (target/'child.txt').write_bytes(b'original directory child\n')
+    snap(f,'recovery_status',baseline)
+    tree_state(f,'after_recovery')
+    f.observations['after_recovery']=path_state(target)
+    f.check('Recovery leaves usable path',target.is_dir() and
+            (target/'child.txt').read_bytes()==b'original directory child\n',
+            first_status_rc=first.returncode)
+
+def file_to_symlink(f,baseline):
+    f.seed()
+    target=f.root/'asset.bin'
+    original=f.stored('asset.bin')
+    f.check('Initial committed blob is valid LFS pointer',original==mod.pointer(PAY))
+    target.unlink()
+    target.symlink_to('note.txt')
+    f.observations['before']=path_state(target)
+    first=snap(f,'first_status',baseline)
+    snap(f,'second_status',baseline)
+    tree_state(f,'after_transition')
+    f.observations['after_transition']=path_state(target)
+    target.unlink()
+    target.write_bytes(original)
+    snap(f,'recovery_status',baseline)
+    tree_state(f,'after_recovery')
+    f.observations['after_recovery']=path_state(target)
+    f.check('Recovery leaves valid pointer',target.is_file() and
+            target.read_bytes()==original,first_status_rc=first.returncode)
+
+def suite(out,binary,prefix,baseline):
+    args=argparse.Namespace(out=str(out),jj=binary,only=None)
+    s=mod.Suite(args)
+    for name,fn in [('file_to_dir',file_to_dir),('dir_to_file',dir_to_file),
+                    ('file_to_symlink',file_to_symlink)]:
+        s.case(prefix+'-'+name,name,lambda f,fn=fn:fn(f,baseline))
+    return s.results
+
+if __name__=='__main__':
+    pr=suite(OUT/'pr',PR,'pr',False)
+    base=suite(OUT/'baseline',BASE,'base',True)
+    provenance={}
+    for label,path in [('pr',PR),('baseline',BASE)]:
+        provenance[label]={'path':path,'sha256':hashlib.sha256(Path(path).read_bytes()).hexdigest()}
+    (OUT/'comparison.json').write_text(json.dumps({'pr':pr,'baseline':base,
+        'binaries':provenance},indent=2))
+    transcript=[]
+    for group in ('pr','baseline'):
+        for p in sorted((OUT/group).glob('*.json')):
+            if p.name=='results.json': continue
+            record=json.loads(p.read_text())
+            transcript.append({'case':record['id'],'commands':record['commands']})
+    (OUT/'transcript.json').write_text(json.dumps(transcript,indent=2))

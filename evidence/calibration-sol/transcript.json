@@ -1,0 +1,1088 @@
+[
+  {
+    "cwd": "/tmp/jj-lfs-evaluation/calibration-sol/c1",
+    "argv": [
+      "git",
+      "init",
+      "-q"
+    ],
+    "code": 0,
+    "stdout": "",
+    "stderr": "",
+    "seconds": 0.012
+  },
+  {
+    "cwd": "/tmp/jj-lfs-evaluation/calibration-sol/c1",
+    "argv": [
+      "git",
+      "lfs",
+      "install",
+      "--local"
+    ],
+    "code": 0,
+    "stdout": "Updated Git hooks.\nGit LFS initialized.\n",
+    "stderr": "",
+    "seconds": 0.128
+  },
+  {
+    "cwd": "/tmp/jj-lfs-evaluation/calibration-sol/c1",
+    "argv": [
+      "git",
+      "lfs",
+      "track",
+      "*.bin"
+    ],
+    "code": 0,
+    "stdout": "Tracking \"*.bin\"\n",
+    "stderr": "",
+    "seconds": 0.107
+  },
+  {
+    "cwd": "/tmp/jj-lfs-evaluation/calibration-sol/c1",
+    "argv": [
+      "git",
+      "add",
+      "-A"
+    ],
+    "code": 0,
+    "stdout": "",
+    "stderr": "",
+    "seconds": 0.087
+  },
+  {
+    "cwd": "/tmp/jj-lfs-evaluation/calibration-sol/c1",
+    "argv": [
+      "git",
+      "commit",
+      "-qm",
+      "Add LFS asset"
+    ],
+    "code": 0,
+    "stdout": "",
+    "stderr": "",
+    "seconds": 0.373
+  },
+  {
+    "cwd": "/tmp/jj-lfs-evaluation/calibration-sol/c1",
+    "argv": [
+      "git",
+      "rev-parse",
+      "HEAD"
+    ],
+    "code": 0,
+    "stdout": "f075c5b28295a149065f66b6209d95d59cb60128\n",
+    "stderr": "",
+    "seconds": 0.006
+  },
+  {
+    "cwd": "/tmp/jj-lfs-evaluation/calibration-sol/c1",
+    "argv": [
+      "git",
+      "show",
+      "f075c5b28295a149065f66b6209d95d59cb60128:asset.bin"
+    ],
+    "code": 0,
+    "stdout": "version https://git-lfs.github.com/spec/v1\noid sha256:15b4eaa5f37de66685988803789b256f621236cff5856e87152c3620f2ac9e6f\nsize 35\n",
+    "stderr": "",
+    "seconds": 0.007
+  },
+  {
+    "cwd": "/tmp/jj-lfs-evaluation/calibration-sol/c1",
+    "argv": [
+      "/tmp/jj-lfs-evaluation/bin/jj-pr",
+      "git",
+      "init",
+      "--colocate"
+    ],
+    "code": 0,
+    "stdout": "",
+    "stderr": "Done importing changes from the underlying Git repo.\nInitialized repo in \".\"\n",
+    "seconds": 0.174
+  },
+  {
+    "cwd": "/tmp/jj-lfs-evaluation/calibration-sol/c1",
+    "argv": [
+      "/tmp/jj-lfs-evaluation/bin/jj-pr",
+      "status"
+    ],
+    "code": 0,
+    "stdout": "The working copy has no changes.\nWorking copy  (@) : ssmomqst 2e465735 (empty) (no description set)\nParent commit (@-): yvrztmwq f075c5b2 master | Add LFS asset\n",
+    "stderr": "",
+    "seconds": 0.029
+  },
+  {
+    "cwd": "/tmp/jj-lfs-evaluation/calibration-sol/c1",
+    "argv": [
+      "/tmp/jj-lfs-evaluation/bin/jj-pr",
+      "status"
+    ],
+    "code": 0,
+    "stdout": "The working copy has no changes.\nWorking copy  (@) : ssmomqst 2e465735 (empty) (no description set)\nParent commit (@-): yvrztmwq f075c5b2 master | Add LFS asset\n",
+    "stderr": "",
+    "seconds": 0.024
+  },
+  {
+    "cwd": "/tmp/jj-lfs-evaluation/calibration-sol/c1",
+    "argv": [
+      "/tmp/jj-lfs-evaluation/bin/jj-pr",
+      "status"
+    ],
+    "code": 0,
+    "stdout": "The working copy has no changes.\nWorking copy  (@) : ssmomqst 2e465735 (empty) (no description set)\nParent commit (@-): yvrztmwq f075c5b2 master | Add LFS asset\n",
+    "stderr": "",
+    "seconds": 0.024
+  },
+  {
+    "cwd": "/tmp/jj-lfs-evaluation/calibration-sol/c1",
+    "argv": [
+      "/tmp/jj-lfs-evaluation/bin/jj-pr",
+      "status"
+    ],
+    "code": 0,
+    "stdout": "Working copy changes:\nM note.txt\nWorking copy  (@) : ssmomqst 72a3ba35 (no description set)\nParent commit (@-): yvrztmwq f075c5b2 master | Add LFS asset\n",
+    "stderr": "",
+    "seconds": 0.069
+  },
+  {
+    "cwd": "/tmp/jj-lfs-evaluation/calibration-sol/c1",
+    "argv": [
+      "/tmp/jj-lfs-evaluation/bin/jj-pr",
+      "file",
+      "show",
+      "-r",
+      "@",
+      "asset.bin"
+    ],
+    "code": 0,
+    "stdout": "version https://git-lfs.github.com/spec/v1\noid sha256:15b4eaa5f37de66685988803789b256f621236cff5856e87152c3620f2ac9e6f\nsize 35\n",
+    "stderr": "",
+    "seconds": 0.025
+  },
+  {
+    "cwd": "/tmp/jj-lfs-evaluation/calibration-sol/c1",
+    "argv": [
+      "git",
+      "show",
+      "f075c5b28295a149065f66b6209d95d59cb60128:asset.bin"
+    ],
+    "code": 0,
+    "stdout": "version https://git-lfs.github.com/spec/v1\noid sha256:15b4eaa5f37de66685988803789b256f621236cff5856e87152c3620f2ac9e6f\nsize 35\n",
+    "stderr": "",
+    "seconds": 0.007
+  },
+  {
+    "cwd": "/tmp/jj-lfs-evaluation/calibration-sol/c1",
+    "argv": [
+      "/tmp/jj-lfs-evaluation/bin/jj-pr",
+      "status"
+    ],
+    "code": 0,
+    "stdout": "Working copy changes:\nM note.txt\nWorking copy  (@) : ssmomqst 72a3ba35 (no description set)\nParent commit (@-): yvrztmwq f075c5b2 master | Add LFS asset\n",
+    "stderr": "",
+    "seconds": 0.026
+  },
+  {
+    "cwd": "/tmp/jj-lfs-evaluation/calibration-sol/c1",
+    "argv": [
+      "/tmp/jj-lfs-evaluation/bin/jj-pr",
+      "file",
+      "show",
+      "-r",
+      "@",
+      "asset.bin"
+    ],
+    "code": 0,
+    "stdout": "version https://git-lfs.github.com/spec/v1\noid sha256:15b4eaa5f37de66685988803789b256f621236cff5856e87152c3620f2ac9e6f\nsize 35\n",
+    "stderr": "",
+    "seconds": 0.023
+  },
+  {
+    "cwd": "/tmp/jj-lfs-evaluation/calibration-sol/c1",
+    "argv": [
+      "git",
+      "lfs",
+      "checkout",
+      "asset.bin"
+    ],
+    "code": 0,
+    "stdout": "Checking out LFS objects: 100% (1/1), 35 B | 0 B/s, done.\n",
+    "stderr": "",
+    "seconds": 0.163
+  },
+  {
+    "cwd": "/tmp/jj-lfs-evaluation/calibration-sol/c1",
+    "argv": [
+      "git",
+      "show",
+      "f075c5b28295a149065f66b6209d95d59cb60128:asset.bin"
+    ],
+    "code": 0,
+    "stdout": "version https://git-lfs.github.com/spec/v1\noid sha256:15b4eaa5f37de66685988803789b256f621236cff5856e87152c3620f2ac9e6f\nsize 35\n",
+    "stderr": "",
+    "seconds": 0.007
+  },
+  {
+    "cwd": "/tmp/jj-lfs-evaluation/calibration-sol/c2",
+    "argv": [
+      "git",
+      "init",
+      "-q"
+    ],
+    "code": 0,
+    "stdout": "",
+    "stderr": "",
+    "seconds": 0.011
+  },
+  {
+    "cwd": "/tmp/jj-lfs-evaluation/calibration-sol/c2",
+    "argv": [
+      "git",
+      "lfs",
+      "install",
+      "--local"
+    ],
+    "code": 0,
+    "stdout": "Updated Git hooks.\nGit LFS initialized.\n",
+    "stderr": "",
+    "seconds": 0.129
+  },
+  {
+    "cwd": "/tmp/jj-lfs-evaluation/calibration-sol/c2",
+    "argv": [
+      "git",
+      "add",
+      "-A"
+    ],
+    "code": 0,
+    "stdout": "",
+    "stderr": "",
+    "seconds": 0.081
+  },
+  {
+    "cwd": "/tmp/jj-lfs-evaluation/calibration-sol/c2",
+    "argv": [
+      "git",
+      "commit",
+      "-qm",
+      "Add attribute precedence fixtures"
+    ],
+    "code": 0,
+    "stdout": "",
+    "stderr": "",
+    "seconds": 0.351
+  },
+  {
+    "cwd": "/tmp/jj-lfs-evaluation/calibration-sol/c2",
+    "argv": [
+      "git",
+      "rev-parse",
+      "HEAD"
+    ],
+    "code": 0,
+    "stdout": "6312784153ec23d328235be9beb85ac0df276fa3\n",
+    "stderr": "",
+    "seconds": 0.007
+  },
+  {
+    "cwd": "/tmp/jj-lfs-evaluation/calibration-sol/c2",
+    "argv": [
+      "git",
+      "check-attr",
+      "filter",
+      "--",
+      "root.bin"
+    ],
+    "code": 0,
+    "stdout": "root.bin: filter: lfs\n",
+    "stderr": "",
+    "seconds": 0.008
+  },
+  {
+    "cwd": "/tmp/jj-lfs-evaluation/calibration-sol/c2",
+    "argv": [
+      "git",
+      "check-attr",
+      "filter",
+      "--",
+      "nested/override.bin"
+    ],
+    "code": 0,
+    "stdout": "nested/override.bin: filter: unset\n",
+    "stderr": "",
+    "seconds": 0.007
+  },
+  {
+    "cwd": "/tmp/jj-lfs-evaluation/calibration-sol/c2",
+    "argv": [
+      "git",
+      "show",
+      "6312784153ec23d328235be9beb85ac0df276fa3:root.bin"
+    ],
+    "code": 0,
+    "stdout": "version https://git-lfs.github.com/spec/v1\noid sha256:fb9d8c87590d01870dae1bfa7a250852274bb8a7a9ab4307fcacec2d333a07ca\nsize 9\n",
+    "stderr": "",
+    "seconds": 0.008
+  },
+  {
+    "cwd": "/tmp/jj-lfs-evaluation/calibration-sol/c2",
+    "argv": [
+      "git",
+      "show",
+      "6312784153ec23d328235be9beb85ac0df276fa3:nested/override.bin"
+    ],
+    "code": 0,
+    "stdout": "nested-plain\n",
+    "stderr": "",
+    "seconds": 0.008
+  },
+  {
+    "cwd": "/tmp/jj-lfs-evaluation/calibration-sol/c2",
+    "argv": [
+      "/tmp/jj-lfs-evaluation/bin/jj-pr",
+      "git",
+      "init",
+      "--colocate"
+    ],
+    "code": 0,
+    "stdout": "",
+    "stderr": "Done importing changes from the underlying Git repo.\nInitialized repo in \".\"\n",
+    "seconds": 0.161
+  },
+  {
+    "cwd": "/tmp/jj-lfs-evaluation/calibration-sol/c2",
+    "argv": [
+      "/tmp/jj-lfs-evaluation/bin/jj-pr",
+      "status"
+    ],
+    "code": 0,
+    "stdout": "The working copy has no changes.\nWorking copy  (@) : uxutypnu 5afd4920 (empty) (no description set)\nParent commit (@-): nuktlvko 63127841 master | Add attribute precedence fixtures\n",
+    "stderr": "",
+    "seconds": 0.03
+  },
+  {
+    "cwd": "/tmp/jj-lfs-evaluation/calibration-sol/c2",
+    "argv": [
+      "/tmp/jj-lfs-evaluation/bin/jj-pr",
+      "status"
+    ],
+    "code": 0,
+    "stdout": "Working copy changes:\nM nested/override.bin\nWorking copy  (@) : uxutypnu 31a6e914 (no description set)\nParent commit (@-): nuktlvko 63127841 master | Add attribute precedence fixtures\n",
+    "stderr": "",
+    "seconds": 0.088
+  },
+  {
+    "cwd": "/tmp/jj-lfs-evaluation/calibration-sol/c2",
+    "argv": [
+      "git",
+      "check-attr",
+      "filter",
+      "--",
+      "info-only.dat"
+    ],
+    "code": 0,
+    "stdout": "info-only.dat: filter: lfs\n",
+    "stderr": "",
+    "seconds": 0.018
+  },
+  {
+    "cwd": "/tmp/jj-lfs-evaluation/calibration-sol/c2",
+    "argv": [
+      "/tmp/jj-lfs-evaluation/bin/jj-pr",
+      "status"
+    ],
+    "code": 0,
+    "stdout": "Working copy changes:\nA info-only.dat\nM nested/override.bin\nWorking copy  (@) : uxutypnu f9656ac7 (no description set)\nParent commit (@-): nuktlvko 63127841 master | Add attribute precedence fixtures\n",
+    "stderr": "",
+    "seconds": 0.108
+  },
+  {
+    "cwd": "/tmp/jj-lfs-evaluation/calibration-sol/c2",
+    "argv": [
+      "/tmp/jj-lfs-evaluation/bin/jj-pr",
+      "file",
+      "show",
+      "info-only.dat"
+    ],
+    "code": 0,
+    "stdout": "info-attributes-payload\n",
+    "stderr": "",
+    "seconds": 0.042
+  },
+  {
+    "cwd": "/tmp/jj-lfs-evaluation/calibration-sol/c3",
+    "argv": [
+      "git",
+      "init",
+      "-q"
+    ],
+    "code": 0,
+    "stdout": "",
+    "stderr": "",
+    "seconds": 0.013
+  },
+  {
+    "cwd": "/tmp/jj-lfs-evaluation/calibration-sol/c3",
+    "argv": [
+      "git",
+      "lfs",
+      "install",
+      "--local"
+    ],
+    "code": 0,
+    "stdout": "Updated Git hooks.\nGit LFS initialized.\n",
+    "stderr": "",
+    "seconds": 0.141
+  },
+  {
+    "cwd": "/tmp/jj-lfs-evaluation/calibration-sol/c3",
+    "argv": [
+      "git",
+      "lfs",
+      "track",
+      "*.bin"
+    ],
+    "code": 0,
+    "stdout": "Tracking \"*.bin\"\n",
+    "stderr": "",
+    "seconds": 0.108
+  },
+  {
+    "cwd": "/tmp/jj-lfs-evaluation/calibration-sol/c3",
+    "argv": [
+      "git",
+      "add",
+      "-A"
+    ],
+    "code": 0,
+    "stdout": "",
+    "stderr": "",
+    "seconds": 0.075
+  },
+  {
+    "cwd": "/tmp/jj-lfs-evaluation/calibration-sol/c3",
+    "argv": [
+      "git",
+      "commit",
+      "-qm",
+      "Add asset for missing object test"
+    ],
+    "code": 0,
+    "stdout": "",
+    "stderr": "",
+    "seconds": 0.36
+  },
+  {
+    "cwd": "/tmp/jj-lfs-evaluation/calibration-sol/c3",
+    "argv": [
+      "git",
+      "rev-parse",
+      "HEAD"
+    ],
+    "code": 0,
+    "stdout": "5a2dff1a7d6cdb568e389cd8c9f7e040d138c64d\n",
+    "stderr": "",
+    "seconds": 0.007
+  },
+  {
+    "cwd": "/tmp/jj-lfs-evaluation/calibration-sol",
+    "argv": [
+      "git",
+      "init",
+      "--bare",
+      "-q",
+      "/tmp/jj-lfs-evaluation/calibration-sol/c3-remote.git"
+    ],
+    "code": 0,
+    "stdout": "",
+    "stderr": "",
+    "seconds": 0.012
+  },
+  {
+    "cwd": "/tmp/jj-lfs-evaluation/calibration-sol/c3",
+    "argv": [
+      "git",
+      "remote",
+      "add",
+      "origin",
+      "/tmp/jj-lfs-evaluation/calibration-sol/c3-remote.git"
+    ],
+    "code": 0,
+    "stdout": "",
+    "stderr": "",
+    "seconds": 0.008
+  },
+  {
+    "cwd": "/tmp/jj-lfs-evaluation/calibration-sol/c3",
+    "argv": [
+      "git",
+      "push",
+      "origin",
+      "HEAD:refs/heads/main"
+    ],
+    "code": 0,
+    "stdout": "Uploading LFS objects: 100% (1/1), 0 B | 0 B/s, done.\n",
+    "stderr": "To /tmp/jj-lfs-evaluation/calibration-sol/c3-remote.git\n * [new branch]      HEAD -> main\n",
+    "seconds": 0.509
+  },
+  {
+    "cwd": "/tmp/jj-lfs-evaluation/calibration-sol/c3",
+    "argv": [
+      "git",
+      "lfs",
+      "push",
+      "origin",
+      "--all"
+    ],
+    "code": 0,
+    "stdout": "Uploading LFS objects: 100% (1/1), 0 B | 0 B/s, done.\n",
+    "stderr": "",
+    "seconds": 0.226
+  },
+  {
+    "cwd": "/tmp/jj-lfs-evaluation/calibration-sol/c3",
+    "argv": [
+      "/tmp/jj-lfs-evaluation/bin/jj-pr",
+      "git",
+      "init",
+      "--colocate"
+    ],
+    "code": 0,
+    "stdout": "",
+    "stderr": "Done importing changes from the underlying Git repo.\nInitialized repo in \".\"\n",
+    "seconds": 0.164
+  },
+  {
+    "cwd": "/tmp/jj-lfs-evaluation/calibration-sol/c3",
+    "argv": [
+      "git",
+      "lfs",
+      "fetch",
+      "origin"
+    ],
+    "code": 2,
+    "stdout": "",
+    "stderr": "Fetching reference refs/heads/master\nerror transferring \"96efc9e1f826ceea06e341ab65a0c50b4337c78027064196e17dfa1caf0e588e\": [0] remote missing object 96efc9e1f826ceea06e341ab65a0c50b4337c78027064196e17dfa1caf0e588e\nerror: failed to fetch some objects from 'file:///tmp/jj-lfs-evaluation/calibration-sol/c3-remote.git'\n",
+    "seconds": 0.21
+  },
+  {
+    "cwd": "/tmp/jj-lfs-evaluation/calibration-sol/c3",
+    "argv": [
+      "git",
+      "lfs",
+      "checkout",
+      "asset.bin"
+    ],
+    "code": 0,
+    "stdout": "Checking out LFS objects: 100% (1/1), 27 B | 0 B/s, done.\n",
+    "stderr": "Skipped checkout for \"asset.bin\", content not local. Use fetch to download.\n",
+    "seconds": 0.108
+  },
+  {
+    "cwd": "/tmp/jj-lfs-evaluation/calibration-sol/c3",
+    "argv": [
+      "git",
+      "show",
+      "5a2dff1a7d6cdb568e389cd8c9f7e040d138c64d:asset.bin"
+    ],
+    "code": 0,
+    "stdout": "version https://git-lfs.github.com/spec/v1\noid sha256:96efc9e1f826ceea06e341ab65a0c50b4337c78027064196e17dfa1caf0e588e\nsize 27\n",
+    "stderr": "",
+    "seconds": 0.007
+  },
+  {
+    "cwd": "/tmp/jj-lfs-evaluation/calibration-sol/c3",
+    "argv": [
+      "/tmp/jj-lfs-evaluation/bin/jj-pr",
+      "status"
+    ],
+    "code": 0,
+    "stdout": "The working copy has no changes.\nWorking copy  (@) : lmwrlymp 3aa601c2 (empty) (no description set)\nParent commit (@-): oxtwynro 5a2dff1a main@origin master | Add asset for missing object test\n",
+    "stderr": "",
+    "seconds": 0.026
+  },
+  {
+    "cwd": "/tmp/jj-lfs-evaluation/calibration-sol/c3",
+    "argv": [
+      "git",
+      "lfs",
+      "checkout",
+      "asset.bin"
+    ],
+    "code": 0,
+    "stdout": "Checking out LFS objects: 100% (1/1), 27 B | 0 B/s, done.\n",
+    "stderr": "",
+    "seconds": 0.16
+  },
+  {
+    "cwd": "/tmp/jj-lfs-evaluation/calibration-sol/c3",
+    "argv": [
+      "git",
+      "show",
+      "5a2dff1a7d6cdb568e389cd8c9f7e040d138c64d:asset.bin"
+    ],
+    "code": 0,
+    "stdout": "version https://git-lfs.github.com/spec/v1\noid sha256:96efc9e1f826ceea06e341ab65a0c50b4337c78027064196e17dfa1caf0e588e\nsize 27\n",
+    "stderr": "",
+    "seconds": 0.008
+  },
+  {
+    "cwd": "/tmp/jj-lfs-evaluation/calibration-sol/c4-pr",
+    "argv": [
+      "git",
+      "init",
+      "-q"
+    ],
+    "code": 0,
+    "stdout": "",
+    "stderr": "",
+    "seconds": 0.011
+  },
+  {
+    "cwd": "/tmp/jj-lfs-evaluation/calibration-sol/c4-pr",
+    "argv": [
+      "git",
+      "lfs",
+      "install",
+      "--local"
+    ],
+    "code": 0,
+    "stdout": "Updated Git hooks.\nGit LFS initialized.\n",
+    "stderr": "",
+    "seconds": 0.128
+  },
+  {
+    "cwd": "/tmp/jj-lfs-evaluation/calibration-sol/c4-pr",
+    "argv": [
+      "git",
+      "lfs",
+      "track",
+      "*.bin"
+    ],
+    "code": 0,
+    "stdout": "Tracking \"*.bin\"\n",
+    "stderr": "",
+    "seconds": 0.109
+  },
+  {
+    "cwd": "/tmp/jj-lfs-evaluation/calibration-sol/c4-pr",
+    "argv": [
+      "git",
+      "add",
+      "-A"
+    ],
+    "code": 0,
+    "stdout": "",
+    "stderr": "",
+    "seconds": 0.092
+  },
+  {
+    "cwd": "/tmp/jj-lfs-evaluation/calibration-sol/c4-pr",
+    "argv": [
+      "git",
+      "commit",
+      "-qm",
+      "Add LFS version A"
+    ],
+    "code": 0,
+    "stdout": "",
+    "stderr": "",
+    "seconds": 0.338
+  },
+  {
+    "cwd": "/tmp/jj-lfs-evaluation/calibration-sol/c4-pr",
+    "argv": [
+      "git",
+      "rev-parse",
+      "HEAD"
+    ],
+    "code": 0,
+    "stdout": "d9aee14e3268678a99ea94d761cc89f463281cc0\n",
+    "stderr": "",
+    "seconds": 0.006
+  },
+  {
+    "cwd": "/tmp/jj-lfs-evaluation/calibration-sol/c4-pr",
+    "argv": [
+      "git",
+      "add",
+      "-A"
+    ],
+    "code": 0,
+    "stdout": "",
+    "stderr": "",
+    "seconds": 0.076
+  },
+  {
+    "cwd": "/tmp/jj-lfs-evaluation/calibration-sol/c4-pr",
+    "argv": [
+      "git",
+      "commit",
+      "-qm",
+      "Add LFS version B"
+    ],
+    "code": 0,
+    "stdout": "",
+    "stderr": "",
+    "seconds": 0.183
+  },
+  {
+    "cwd": "/tmp/jj-lfs-evaluation/calibration-sol/c4-pr",
+    "argv": [
+      "git",
+      "rev-parse",
+      "HEAD"
+    ],
+    "code": 0,
+    "stdout": "3cbb4de8a1091b67299badc6abfb7434ca52270b\n",
+    "stderr": "",
+    "seconds": 0.007
+  },
+  {
+    "cwd": "/tmp/jj-lfs-evaluation/calibration-sol/c4-pr",
+    "argv": [
+      "/tmp/jj-lfs-evaluation/bin/jj-pr",
+      "git",
+      "init",
+      "--colocate"
+    ],
+    "code": 0,
+    "stdout": "",
+    "stderr": "Done importing changes from the underlying Git repo.\nInitialized repo in \".\"\n",
+    "seconds": 0.153
+  },
+  {
+    "cwd": "/tmp/jj-lfs-evaluation/calibration-sol/c4-pr",
+    "argv": [
+      "/tmp/jj-lfs-evaluation/bin/jj-pr",
+      "edit",
+      "d9aee14e3268678a99ea94d761cc89f463281cc0"
+    ],
+    "code": 0,
+    "stdout": "",
+    "stderr": "Working copy  (@) now at: zwwryvnt d9aee14e Add LFS version A\nParent commit (@-)      : zzzzzzzz 00000000 (empty) (no description set)\nAdded 0 files, modified 1 files, removed 0 files\n",
+    "seconds": 0.06
+  },
+  {
+    "cwd": "/tmp/jj-lfs-evaluation/calibration-sol/c4-pr",
+    "argv": [
+      "/tmp/jj-lfs-evaluation/bin/jj-pr",
+      "status"
+    ],
+    "code": 0,
+    "stdout": "Working copy changes:\nA .gitattributes\nA asset.bin\nWorking copy  (@) : zwwryvnt d9aee14e Add LFS version A\nParent commit (@-): zzzzzzzz 00000000 (empty) (no description set)\n",
+    "stderr": "",
+    "seconds": 0.031
+  },
+  {
+    "cwd": "/tmp/jj-lfs-evaluation/calibration-sol/c4-pr",
+    "argv": [
+      "/tmp/jj-lfs-evaluation/bin/jj-pr",
+      "log",
+      "-r",
+      "@",
+      "--no-graph",
+      "-T",
+      "commit_id"
+    ],
+    "code": 0,
+    "stdout": "d9aee14e3268678a99ea94d761cc89f463281cc0",
+    "stderr": "",
+    "seconds": 0.029
+  },
+  {
+    "cwd": "/tmp/jj-lfs-evaluation/calibration-sol/c4-pr",
+    "argv": [
+      "/tmp/jj-lfs-evaluation/bin/jj-pr",
+      "file",
+      "show",
+      "-r",
+      "@",
+      "asset.bin"
+    ],
+    "code": 0,
+    "stdout": "version https://git-lfs.github.com/spec/v1\noid sha256:16f3e2df07e7298723f6d88b5d3d0d5fa457b96467ecabf20378e29fdf70d9d5\nsize 24\n",
+    "stderr": "",
+    "seconds": 0.023
+  },
+  {
+    "cwd": "/tmp/jj-lfs-evaluation/calibration-sol/c4-pr",
+    "argv": [
+      "/tmp/jj-lfs-evaluation/bin/jj-pr",
+      "edit",
+      "3cbb4de8a1091b67299badc6abfb7434ca52270b"
+    ],
+    "code": 0,
+    "stdout": "",
+    "stderr": "Working copy  (@) now at: mzlvvpuw 3cbb4de8 master | Add LFS version B\nParent commit (@-)      : zwwryvnt d9aee14e Add LFS version A\nAdded 0 files, modified 1 files, removed 0 files\n",
+    "seconds": 0.054
+  },
+  {
+    "cwd": "/tmp/jj-lfs-evaluation/calibration-sol/c4-pr",
+    "argv": [
+      "/tmp/jj-lfs-evaluation/bin/jj-pr",
+      "file",
+      "show",
+      "-r",
+      "d9aee14e3268678a99ea94d761cc89f463281cc0",
+      "asset.bin"
+    ],
+    "code": 0,
+    "stdout": "version https://git-lfs.github.com/spec/v1\noid sha256:16f3e2df07e7298723f6d88b5d3d0d5fa457b96467ecabf20378e29fdf70d9d5\nsize 24\n",
+    "stderr": "",
+    "seconds": 0.024
+  },
+  {
+    "cwd": "/tmp/jj-lfs-evaluation/calibration-sol/c4-pr",
+    "argv": [
+      "git",
+      "show",
+      "d9aee14e3268678a99ea94d761cc89f463281cc0:asset.bin"
+    ],
+    "code": 0,
+    "stdout": "version https://git-lfs.github.com/spec/v1\noid sha256:16f3e2df07e7298723f6d88b5d3d0d5fa457b96467ecabf20378e29fdf70d9d5\nsize 24\n",
+    "stderr": "",
+    "seconds": 0.008
+  },
+  {
+    "cwd": "/tmp/jj-lfs-evaluation/calibration-sol/c4-pr",
+    "argv": [
+      "git",
+      "show",
+      "3cbb4de8a1091b67299badc6abfb7434ca52270b:asset.bin"
+    ],
+    "code": 0,
+    "stdout": "version https://git-lfs.github.com/spec/v1\noid sha256:16b7695950deb70b9d53dea591e375034a55b863ca7aa6788e7203540aa1b5fa\nsize 24\n",
+    "stderr": "",
+    "seconds": 0.007
+  },
+  {
+    "cwd": "/tmp/jj-lfs-evaluation/calibration-sol/c4-baseline",
+    "argv": [
+      "git",
+      "init",
+      "-q"
+    ],
+    "code": 0,
+    "stdout": "",
+    "stderr": "",
+    "seconds": 0.011
+  },
+  {
+    "cwd": "/tmp/jj-lfs-evaluation/calibration-sol/c4-baseline",
+    "argv": [
+      "git",
+      "lfs",
+      "install",
+      "--local"
+    ],
+    "code": 0,
+    "stdout": "Updated Git hooks.\nGit LFS initialized.\n",
+    "stderr": "",
+    "seconds": 0.137
+  },
+  {
+    "cwd": "/tmp/jj-lfs-evaluation/calibration-sol/c4-baseline",
+    "argv": [
+      "git",
+      "lfs",
+      "track",
+      "*.bin"
+    ],
+    "code": 0,
+    "stdout": "Tracking \"*.bin\"\n",
+    "stderr": "",
+    "seconds": 0.104
+  },
+  {
+    "cwd": "/tmp/jj-lfs-evaluation/calibration-sol/c4-baseline",
+    "argv": [
+      "git",
+      "add",
+      "-A"
+    ],
+    "code": 0,
+    "stdout": "",
+    "stderr": "",
+    "seconds": 0.074
+  },
+  {
+    "cwd": "/tmp/jj-lfs-evaluation/calibration-sol/c4-baseline",
+    "argv": [
+      "git",
+      "commit",
+      "-qm",
+      "Add LFS version A"
+    ],
+    "code": 0,
+    "stdout": "",
+    "stderr": "",
+    "seconds": 0.337
+  },
+  {
+    "cwd": "/tmp/jj-lfs-evaluation/calibration-sol/c4-baseline",
+    "argv": [
+      "git",
+      "rev-parse",
+      "HEAD"
+    ],
+    "code": 0,
+    "stdout": "8141dcf00413a3b37eddb58349fa3c3c16e334e4\n",
+    "stderr": "",
+    "seconds": 0.007
+  },
+  {
+    "cwd": "/tmp/jj-lfs-evaluation/calibration-sol/c4-baseline",
+    "argv": [
+      "git",
+      "add",
+      "-A"
+    ],
+    "code": 0,
+    "stdout": "",
+    "stderr": "",
+    "seconds": 0.082
+  },
+  {
+    "cwd": "/tmp/jj-lfs-evaluation/calibration-sol/c4-baseline",
+    "argv": [
+      "git",
+      "commit",
+      "-qm",
+      "Add LFS version B"
+    ],
+    "code": 0,
+    "stdout": "",
+    "stderr": "",
+    "seconds": 0.19
+  },
+  {
+    "cwd": "/tmp/jj-lfs-evaluation/calibration-sol/c4-baseline",
+    "argv": [
+      "git",
+      "rev-parse",
+      "HEAD"
+    ],
+    "code": 0,
+    "stdout": "b21078aa531f7b991980f953d1abda0b09d3208f\n",
+    "stderr": "",
+    "seconds": 0.006
+  },
+  {
+    "cwd": "/tmp/jj-lfs-evaluation/calibration-sol/c4-baseline",
+    "argv": [
+      "/opt/homebrew/bin/jj",
+      "git",
+      "init",
+      "--colocate"
+    ],
+    "code": 0,
+    "stdout": "",
+    "stderr": "Done importing changes from the underlying Git repo.\nInitialized repo in \".\"\n",
+    "seconds": 0.175
+  },
+  {
+    "cwd": "/tmp/jj-lfs-evaluation/calibration-sol/c4-baseline",
+    "argv": [
+      "/opt/homebrew/bin/jj",
+      "edit",
+      "8141dcf00413a3b37eddb58349fa3c3c16e334e4"
+    ],
+    "code": 0,
+    "stdout": "",
+    "stderr": "Working copy  (@) now at: xsxnnstr 8141dcf0 Add LFS version A\nParent commit (@-)      : zzzzzzzz 00000000 (empty) (no description set)\nAdded 0 files, modified 1 files, removed 0 files\n",
+    "seconds": 0.052
+  },
+  {
+    "cwd": "/tmp/jj-lfs-evaluation/calibration-sol/c4-baseline",
+    "argv": [
+      "/opt/homebrew/bin/jj",
+      "status"
+    ],
+    "code": 0,
+    "stdout": "Working copy changes:\nA .gitattributes\nA asset.bin\nWorking copy  (@) : xsxnnstr 137a9088 Add LFS version A\nParent commit (@-): zzzzzzzz 00000000 (empty) (no description set)\n",
+    "stderr": "Rebased 2 descendant commits onto updated working copy.\n",
+    "seconds": 0.075
+  },
+  {
+    "cwd": "/tmp/jj-lfs-evaluation/calibration-sol/c4-baseline",
+    "argv": [
+      "/opt/homebrew/bin/jj",
+      "log",
+      "-r",
+      "@",
+      "--no-graph",
+      "-T",
+      "commit_id"
+    ],
+    "code": 0,
+    "stdout": "137a90888ebdcd5dc8a251127b490c2d941639c6",
+    "stderr": "",
+    "seconds": 0.022
+  },
+  {
+    "cwd": "/tmp/jj-lfs-evaluation/calibration-sol/c4-baseline",
+    "argv": [
+      "/opt/homebrew/bin/jj",
+      "file",
+      "show",
+      "-r",
+      "@",
+      "asset.bin"
+    ],
+    "code": 0,
+    "stdout": "C4 local modified hydrated bytes\u0000\n",
+    "stderr": "",
+    "seconds": 0.015
+  },
+  {
+    "cwd": "/tmp/jj-lfs-evaluation/calibration-sol/c4-baseline",
+    "argv": [
+      "/opt/homebrew/bin/jj",
+      "edit",
+      "b21078aa531f7b991980f953d1abda0b09d3208f"
+    ],
+    "code": 0,
+    "stdout": "",
+    "stderr": "Working copy  (@) now at: kyzvnoqz/1 b21078aa (divergent) Add LFS version B\nParent commit (@-)      : xsxnnstr/1 8141dcf0 (divergent) Add LFS version A\nAdded 0 files, modified 1 files, removed 0 files\n",
+    "seconds": 0.041
+  },
+  {
+    "cwd": "/tmp/jj-lfs-evaluation/calibration-sol/c4-baseline",
+    "argv": [
+      "/opt/homebrew/bin/jj",
+      "file",
+      "show",
+      "-r",
+      "137a90888ebdcd5dc8a251127b490c2d941639c6",
+      "asset.bin"
+    ],
+    "code": 0,
+    "stdout": "C4 local modified hydrated bytes\u0000\n",
+    "stderr": "",
+    "seconds": 0.016
+  },
+  {
+    "cwd": "/tmp/jj-lfs-evaluation/calibration-sol/c4-baseline",
+    "argv": [
+      "git",
+      "show",
+      "8141dcf00413a3b37eddb58349fa3c3c16e334e4:asset.bin"
+    ],
+    "code": 0,
+    "stdout": "version https://git-lfs.github.com/spec/v1\noid sha256:16f3e2df07e7298723f6d88b5d3d0d5fa457b96467ecabf20378e29fdf70d9d5\nsize 24\n",
+    "stderr": "",
+    "seconds": 0.008
+  },
+  {
+    "cwd": "/tmp/jj-lfs-evaluation/calibration-sol/c4-baseline",
+    "argv": [
+      "git",
+      "show",
+      "b21078aa531f7b991980f953d1abda0b09d3208f:asset.bin"
+    ],
+    "code": 0,
+    "stdout": "version https://git-lfs.github.com/spec/v1\noid sha256:16b7695950deb70b9d53dea591e375034a55b863ca7aa6788e7203540aa1b5fa\nsize 24\n",
+    "stderr": "",
+    "seconds": 0.007
+  }
+]

@@ -1,0 +1,45 @@
+
+running 40 tests
+test test_run_command::test_run_ignore_changes_conflicts_with_restore_descendants ... ok
+test test_run_command::test_run_failure_shows_output ... ok
+test test_run_command::test_run_ignore_errors_all_fail ... ok
+test test_run_command::test_run_gitattributes_filter_in_temp_snapshot ... ok
+test test_run_command::test_run_ignore_changes_works_on_immutable ... ok
+test test_run_command::test_run_ignore_changes_does_not_leak_between_invocations ... ok
+test test_run_command::test_run_failure_rewrites_nothing ... ok
+test test_run_command::test_run_multi_commit_partial_diff ... ok
+test test_run_command::test_run_ignore_changes_does_not_rewrite ... ok
+test test_run_command::test_run_from_subdir_skips_commits_without_it ... ok
+test test_run_command::test_run_ignore_errors_rewrites_successes ... ok
+test test_run_command::test_run_noop ... ok
+test test_run_command::test_run_passthrough_rejects_multi_job ... ok
+test test_run_command::test_run_on_immutable ... ok
+test test_run_command::test_run_passthrough ... ok
+test test_run_command::test_run_passthrough_failure_rewrites_nothing ... ok
+test test_run_command::test_run_order ... ok
+test test_run_command::test_run_pool_failed_command_does_not_poison_slot ... ok
+test test_run_command::test_run_on_conflicted_commit ... ok
+test test_run_command::test_run_pool_persists_between_runs ... ok
+test test_run_command::test_run_pool_recovers_from_missing_tree_state ... ok
+test test_run_command::test_run_parallel_changes_propagate_to_descendants ... ok
+test test_run_command::test_run_pool_preserves_untracked_artifacts ... ok
+test test_run_command::test_run_passthrough_stops_after_first_failure ... ok
+test test_run_command::test_run_pool_removes_file_absent_in_next_commit ... ok
+test test_run_command::test_run_pool_reuses_slot_after_failure ... ok
+test test_run_command::test_run_pool_removes_previously_ignored_files ... ok
+test test_run_command::test_run_root_flag ... ok
+test test_run_command::test_run_sets_env_vars ... ok
+test test_run_command::test_run_sets_workspace_root_env_var ... ok
+test test_run_command::test_run_recovers_after_failure ... ok
+test test_run_command::test_run_pool_size_from_jobs_flag ... ok
+test test_run_command::test_run_pool_size_from_config ... ok
+test test_run_command::test_run_shell_command ... ok
+test test_run_command::test_run_restore_descendants_preserves_content ... ok
+test test_run_command::test_run_simple ... ok
+test test_run_command::test_run_touches_file_without_diff ... ok
+test test_run_command::test_run_stops_after_first_failure ... ok
+test test_run_command::test_run_sparse ... ok
+test test_run_command::test_run_uses_revsets_run_as_default ... ok
+
+test result: ok. 40 passed; 0 failed; 0 ignored; 0 measured; 1076 filtered out; finished in 14.01s
+

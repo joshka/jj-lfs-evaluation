@@ -1,0 +1,154 @@
+{
+  "id": "W03-workspace",
+  "purpose": "Additional workspace and missing Git context",
+  "category": "contract",
+  "status": "ERROR",
+  "error": "{\"argv\": [\"/target/debug/jj\", \"workspace\", \"add\", \"/eval/linux/repos/W03-workspace-workspace\"], \"cwd\": \"/eval/linux/repos/W03-workspace\", \"rc\": 1, \"seconds\": 0.02667166699998802, \"stdout\": \"\", \"stderr\": \"Error: Git does not recognize required option: orphan (note: Jujutsu requires git >= 2.42.0)\\n\"}",
+  "traceback": "Traceback (most recent call last):\n  File \"/eval/harness/evaluate.py\", line 121, in case\n    fn(f)\n  File \"/eval/harness/evaluate.py\", line 325, in workspace\n    f.jj(\"workspace\", \"add\", str(other))\n  File \"/eval/harness/evaluate.py\", line 62, in jj\n    return self.run([self.suite.jj, *args], **kw)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/eval/harness/evaluate.py\", line 55, in run\n    raise RuntimeError(json.dumps(rec))\nRuntimeError: {\"argv\": [\"/target/debug/jj\", \"workspace\", \"add\", \"/eval/linux/repos/W03-workspace-workspace\"], \"cwd\": \"/eval/linux/repos/W03-workspace\", \"rc\": 1, \"seconds\": 0.02667166699998802, \"stdout\": \"\", \"stderr\": \"Error: Git does not recognize required option: orphan (note: Jujutsu requires git >= 2.42.0)\\n\"}\n",
+  "seconds": 0.21996108299998696,
+  "checks": [],
+  "observations": {},
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "init",
+        "-b",
+        "main"
+      ],
+      "cwd": "/eval/linux/repos/W03-workspace",
+      "rc": 0,
+      "seconds": 0.016797209000003477,
+      "stdout": "Initialized empty Git repository in /eval/linux/repos/W03-workspace/.git/\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.name",
+        "LFS Evaluation"
+      ],
+      "cwd": "/eval/linux/repos/W03-workspace",
+      "rc": 0,
+      "seconds": 0.006760791999994353,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.email",
+        "eval@example.invalid"
+      ],
+      "cwd": "/eval/linux/repos/W03-workspace",
+      "rc": 0,
+      "seconds": 0.0036316249999970296,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "commit.gpgsign",
+        "false"
+      ],
+      "cwd": "/eval/linux/repos/W03-workspace",
+      "rc": 0,
+      "seconds": 0.0029843339999899854,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "core.autocrlf",
+        "false"
+      ],
+      "cwd": "/eval/linux/repos/W03-workspace",
+      "rc": 0,
+      "seconds": 0.002823833999997305,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "lfs",
+        "install",
+        "--local"
+      ],
+      "cwd": "/eval/linux/repos/W03-workspace",
+      "rc": 0,
+      "seconds": 0.027721374999998716,
+      "stdout": "Updated Git hooks.\nGit LFS initialized.\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "add",
+        "."
+      ],
+      "cwd": "/eval/linux/repos/W03-workspace",
+      "rc": 0,
+      "seconds": 0.02006633299998839,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "commit",
+        "-m",
+        "Seed LFS fixture"
+      ],
+      "cwd": "/eval/linux/repos/W03-workspace",
+      "rc": 0,
+      "seconds": 0.04193970800000102,
+      "stdout": "[main (root-commit) 47f5674] Seed LFS fixture\n 3 files changed, 5 insertions(+)\n create mode 100644 .gitattributes\n create mode 100644 asset.bin\n create mode 100644 note.txt\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "/eval/linux/repos/W03-workspace",
+      "rc": 0,
+      "seconds": 0.0016084580000210735,
+      "stdout": "47f56743da27f31062430dfe731e77b9d577eb55\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/target/debug/jj",
+        "git",
+        "init",
+        "--colocate"
+      ],
+      "cwd": "/eval/linux/repos/W03-workspace",
+      "rc": 0,
+      "seconds": 0.06465916599998422,
+      "stdout": "",
+      "stderr": "Done importing changes from the underlying Git repo.\nInitialized repo in \".\"\n"
+    },
+    {
+      "argv": [
+        "/target/debug/jj",
+        "workspace",
+        "add",
+        "/eval/linux/repos/W03-workspace-workspace"
+      ],
+      "cwd": "/eval/linux/repos/W03-workspace",
+      "rc": 1,
+      "seconds": 0.02667166699998802,
+      "stdout": "",
+      "stderr": "Error: Git does not recognize required option: orphan (note: Jujutsu requires git >= 2.42.0)\n"
+    }
+  ]
+}

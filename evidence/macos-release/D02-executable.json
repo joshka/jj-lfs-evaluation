@@ -1,0 +1,183 @@
+{
+  "id": "D02-executable",
+  "purpose": "Executable bit-only edits characterized",
+  "category": "contract",
+  "status": "PASS",
+  "seconds": 0.8312296252697706,
+  "checks": [
+    {
+      "label": "Pointer survives executable-bit-only edit",
+      "pass": true
+    }
+  ],
+  "observations": {
+    "status": "The working copy has no changes.\nWorking copy  (@) : untrpllq d6b2930b (empty) (no description set)\nParent commit (@-): ynnlovpn c2d9b13e main | Seed LFS fixture\n",
+    "git_diff": " mode change 100644 => 100755 asset.bin\n"
+  },
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "init",
+        "-b",
+        "main"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos-release/repos/D02-executable",
+      "rc": 0,
+      "seconds": 0.012346166651695967,
+      "stdout": "Initialized empty Git repository in /tmp/jj-lfs-evaluation/macos-release/repos/D02-executable/.git/\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.name",
+        "LFS Evaluation"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos-release/repos/D02-executable",
+      "rc": 0,
+      "seconds": 0.006367709022015333,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.email",
+        "eval@example.invalid"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos-release/repos/D02-executable",
+      "rc": 0,
+      "seconds": 0.005960959009826183,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "commit.gpgsign",
+        "false"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos-release/repos/D02-executable",
+      "rc": 0,
+      "seconds": 0.0058158328756690025,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "core.autocrlf",
+        "false"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos-release/repos/D02-executable",
+      "rc": 0,
+      "seconds": 0.005637708120048046,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "lfs",
+        "install",
+        "--local"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos-release/repos/D02-executable",
+      "rc": 0,
+      "seconds": 0.13383533293381333,
+      "stdout": "Updated Git hooks.\nGit LFS initialized.\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "add",
+        "."
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos-release/repos/D02-executable",
+      "rc": 0,
+      "seconds": 0.07311829179525375,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "commit",
+        "-m",
+        "Seed LFS fixture"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos-release/repos/D02-executable",
+      "rc": 0,
+      "seconds": 0.3882722919806838,
+      "stdout": "[main (root-commit) c2d9b13] Seed LFS fixture\n 3 files changed, 5 insertions(+)\n create mode 100644 .gitattributes\n create mode 100644 asset.bin\n create mode 100644 note.txt\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos-release/repos/D02-executable",
+      "rc": 0,
+      "seconds": 0.005701125133782625,
+      "stdout": "c2d9b13ee4fdb973878016b95d30bebd352d7338\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr-release",
+        "git",
+        "init",
+        "--colocate"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos-release/repos/D02-executable",
+      "rc": 0,
+      "seconds": 0.14721516612917185,
+      "stdout": "",
+      "stderr": "Done importing changes from the underlying Git repo.\nInitialized repo in \".\"\n"
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr-release",
+        "status"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos-release/repos/D02-executable",
+      "rc": 0,
+      "seconds": 0.020963124930858612,
+      "stdout": "The working copy has no changes.\nWorking copy  (@) : untrpllq d6b2930b (empty) (no description set)\nParent commit (@-): ynnlovpn c2d9b13e main | Seed LFS fixture\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "diff",
+        "--summary"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos-release/repos/D02-executable",
+      "rc": 0,
+      "seconds": 0.009151792153716087,
+      "stdout": " mode change 100644 => 100755 asset.bin\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr-release",
+        "file",
+        "show",
+        "asset.bin"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos-release/repos/D02-executable",
+      "rc": 0,
+      "seconds": 0.01565791666507721,
+      "stdout": "version https://git-lfs.github.com/spec/v1\noid sha256:dad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f\nsize 2500\n",
+      "stderr": ""
+    }
+  ]
+}

@@ -1,0 +1,241 @@
+{
+  "id": "pr-squash",
+  "purpose": "squash",
+  "category": "contract",
+  "status": "PASS",
+  "seconds": 3.3374997079372406,
+  "checks": [
+    {
+      "label": "Initial hydration has expected bytes",
+      "pass": true
+    },
+    {
+      "label": "Operation does not silently lose hydrated edit",
+      "pass": true
+    }
+  ],
+  "observations": {
+    "pre_status": {
+      "rc": 0,
+      "out": "Working copy changes:\nM note.txt\nWorking copy  (@) : rosvkrwl e2eca995 (no description set)\nParent commit (@-): pwzouxvq 24a05178 (empty) (no description set)\n",
+      "err": ""
+    },
+    "squash": {
+      "rc": 0,
+      "out": "",
+      "err": "Working copy  (@) now at: rrluovpk 4991ca8a (empty) (no description set)\nParent commit (@-)      : pwzouxvq d51ff432 (no description set)\n"
+    },
+    "after": {
+      "disk_sha": "b6b1d1d512a8a18b62f08c17d28aa5d158e91e02ccba185b17688688e87a0e59",
+      "edited_sha": "b6b1d1d512a8a18b62f08c17d28aa5d158e91e02ccba185b17688688e87a0e59",
+      "old_revision_sha": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+      "edited_recoverable": false,
+      "status": "The working copy has no changes.\nWorking copy  (@) : rrluovpk 4991ca8a (empty) (no description set)\nParent commit (@-): pwzouxvq d51ff432 (no description set)\n"
+    }
+  },
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "init",
+        "-b",
+        "main"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/pr/repos/pr-squash",
+      "rc": 0,
+      "seconds": 0.037372959312051535,
+      "stdout": "Initialized empty Git repository in /tmp/jj-lfs-evaluation/workflows-sol/pr/repos/pr-squash/.git/\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.name",
+        "LFS Evaluation"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/pr/repos/pr-squash",
+      "rc": 0,
+      "seconds": 0.020462083164602518,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.email",
+        "eval@example.invalid"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/pr/repos/pr-squash",
+      "rc": 0,
+      "seconds": 0.029180999845266342,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "commit.gpgsign",
+        "false"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/pr/repos/pr-squash",
+      "rc": 0,
+      "seconds": 0.03229958424344659,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "core.autocrlf",
+        "false"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/pr/repos/pr-squash",
+      "rc": 0,
+      "seconds": 0.02902125008404255,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "lfs",
+        "install",
+        "--local"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/pr/repos/pr-squash",
+      "rc": 0,
+      "seconds": 0.7302863327786326,
+      "stdout": "Updated Git hooks.\nGit LFS initialized.\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "add",
+        "."
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/pr/repos/pr-squash",
+      "rc": 0,
+      "seconds": 0.29764537513256073,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "commit",
+        "-m",
+        "Seed LFS fixture"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/pr/repos/pr-squash",
+      "rc": 0,
+      "seconds": 0.8348318748176098,
+      "stdout": "[main (root-commit) bf762b0] Seed LFS fixture\n 3 files changed, 5 insertions(+)\n create mode 100644 .gitattributes\n create mode 100644 asset.bin\n create mode 100644 note.txt\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/pr/repos/pr-squash",
+      "rc": 0,
+      "seconds": 0.021617582999169827,
+      "stdout": "bf762b0ec0e823f8d3bc9896142536b0135c4b80\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr",
+        "git",
+        "init",
+        "--colocate"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/pr/repos/pr-squash",
+      "rc": 0,
+      "seconds": 0.3368570003658533,
+      "stdout": "",
+      "stderr": "Done importing changes from the underlying Git repo.\nInitialized repo in \".\"\n"
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr",
+        "new"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/pr/repos/pr-squash",
+      "rc": 0,
+      "seconds": 0.388052084017545,
+      "stdout": "",
+      "stderr": "Working copy  (@) now at: rosvkrwl b6f6312e (empty) (no description set)\nParent commit (@-)      : pwzouxvq 24a05178 (empty) (no description set)\n"
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr",
+        "status"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/pr/repos/pr-squash",
+      "rc": 0,
+      "seconds": 0.2091935002245009,
+      "stdout": "Working copy changes:\nM note.txt\nWorking copy  (@) : rosvkrwl e2eca995 (no description set)\nParent commit (@-): pwzouxvq 24a05178 (empty) (no description set)\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr",
+        "log",
+        "-r",
+        "@",
+        "--no-graph",
+        "-T",
+        "commit_id"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/pr/repos/pr-squash",
+      "rc": 0,
+      "seconds": 0.09547600010409951,
+      "stdout": "e2eca99521101d64a92b26e2faa34336505a3b0b",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr",
+        "squash"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/pr/repos/pr-squash",
+      "rc": 0,
+      "seconds": 0.13428716734051704,
+      "stdout": "",
+      "stderr": "Working copy  (@) now at: rrluovpk 4991ca8a (empty) (no description set)\nParent commit (@-)      : pwzouxvq d51ff432 (no description set)\n"
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr",
+        "file",
+        "show",
+        "-r",
+        "e2eca99521101d64a92b26e2faa34336505a3b0b",
+        "asset.bin"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/pr/repos/pr-squash",
+      "rc": 0,
+      "seconds": 0.0584529172629118,
+      "stdout": "version https://git-lfs.github.com/spec/v1\noid sha256:dad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f\nsize 2500\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr",
+        "status"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/pr/repos/pr-squash",
+      "rc": 0,
+      "seconds": 0.07851370796561241,
+      "stdout": "The working copy has no changes.\nWorking copy  (@) : rrluovpk 4991ca8a (empty) (no description set)\nParent commit (@-): pwzouxvq d51ff432 (no description set)\n",
+      "stderr": ""
+    }
+  ]
+}

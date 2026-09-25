@@ -1,0 +1,27 @@
+# Exact-parent workflow comparison
+
+The targeted switch, rebase, and untrack cases were rerun against the pinned PR binary and a
+binary built from its exact parent. Source commits and binary SHA-256 values are recorded in
+`binary-provenance.json`; commands and exit codes are in `transcript.json`; per-case results are
+in `comparison.json`. The six-case execution took about 15 seconds.
+
+The PR intentionally excludes `filter=lfs` paths from snapshots. That design explains why a
+modified hydrated asset is not reported by `jj status` or stored in the current revision. The
+**destructive part is the subsequent successful checkout operation**: `jj edit` to B and `jj
+rebase` both replace those unrecorded working-tree bytes with B's pointer. The local edit SHA-256
+was `79014f34a44dbd4fa5b5bea4c010d55d1c009c5ddf310a6abf24e23cc7c4832a`; after each
+operation, the PR working tree had pointer SHA-256
+`c37a06fc0ff3f76773bdc4a64413b7ce64ad21f2eb62cfe4b6ca031459b0d9ce`. The previous
+jj revision still held A's pointer, not the edited bytes. This is demonstrable loss of local data,
+regardless of whether snapshot exclusion is intentional.
+
+The exact parent stored the modified raw bytes in the prior jj revision. Its switch also wrote
+B's pointer to disk, and its rebase produced a conflict, but the edited bytes remained
+recoverable from the prior revision. This is not good LFS handling: the parent stores a raw blob
+where Git LFS expects a pointer. It does establish that the PR changes the loss behavior.
+
+The PR's `jj file untrack asset.bin` returned 0 and removed an already committed pointer from
+the current tree, leaving `D asset.bin` in status. The exact parent rejected the command because
+the path was not ignored. The PR documentation's suggestion to untrack already tracked LFS files
+therefore risks committing a deletion of a valid pointer. That is a separate issue from the
+unreported local edit.

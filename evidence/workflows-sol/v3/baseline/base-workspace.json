@@ -1,0 +1,208 @@
+{
+  "id": "base-workspace",
+  "purpose": "workspace",
+  "category": "contract",
+  "status": "PASS",
+  "seconds": 1.2164875003509223,
+  "checks": [
+    {
+      "label": "Explicit hydration yields payload or actionable failure",
+      "pass": true
+    }
+  ],
+  "observations": {
+    "add_workspace": {
+      "rc": 0,
+      "out": "",
+      "err": "Created workspace in \"../base-workspace-secondary\"\nWorking copy  (@) now at: qxknpzsz 3020fb2d (empty) (no description set)\nParent commit (@-)      : mmuxlzks a1aa2002 main | Seed LFS fixture\nAdded 3 files, modified 0 files, removed 0 files\n"
+    },
+    "initial": {
+      "disk_sha": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+      "pointer": true,
+      "has_git": false
+    },
+    "explicit_git_lfs_checkout": {
+      "rc": 0,
+      "out": "Checking out LFS objects: 100% (1/1), 2.5 KB | 0 B/s, done.\n",
+      "err": ""
+    },
+    "after_checkout": {
+      "disk_sha": "dad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f",
+      "hydrated": true
+    },
+    "secondary_jj_status": {
+      "rc": 0,
+      "out": "Working copy changes:\nM asset.bin\nWorking copy  (@) : qxknpzsz 845c9785 (no description set)\nParent commit (@-): mmuxlzks a1aa2002 main | Seed LFS fixture\n",
+      "err": ""
+    }
+  },
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "init",
+        "-b",
+        "main"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v3/baseline/repos/base-workspace",
+      "rc": 0,
+      "seconds": 0.01350229186937213,
+      "stdout": "Initialized empty Git repository in /tmp/jj-lfs-evaluation/workflows-sol/v3/baseline/repos/base-workspace/.git/\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.name",
+        "LFS Evaluation"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v3/baseline/repos/base-workspace",
+      "rc": 0,
+      "seconds": 0.007391541264951229,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.email",
+        "eval@example.invalid"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v3/baseline/repos/base-workspace",
+      "rc": 0,
+      "seconds": 0.006253458093851805,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "commit.gpgsign",
+        "false"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v3/baseline/repos/base-workspace",
+      "rc": 0,
+      "seconds": 0.006788416765630245,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "core.autocrlf",
+        "false"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v3/baseline/repos/base-workspace",
+      "rc": 0,
+      "seconds": 0.0066148750483989716,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "lfs",
+        "install",
+        "--local"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v3/baseline/repos/base-workspace",
+      "rc": 0,
+      "seconds": 0.13988258317112923,
+      "stdout": "Updated Git hooks.\nGit LFS initialized.\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "add",
+        "."
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v3/baseline/repos/base-workspace",
+      "rc": 0,
+      "seconds": 0.08652629191055894,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "commit",
+        "-m",
+        "Seed LFS fixture"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v3/baseline/repos/base-workspace",
+      "rc": 0,
+      "seconds": 0.3793082907795906,
+      "stdout": "[main (root-commit) a1aa200] Seed LFS fixture\n 3 files changed, 5 insertions(+)\n create mode 100644 .gitattributes\n create mode 100644 asset.bin\n create mode 100644 note.txt\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v3/baseline/repos/base-workspace",
+      "rc": 0,
+      "seconds": 0.006666000001132488,
+      "stdout": "a1aa20028bc3bcea7fba41f81166df6aef074abb\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/opt/homebrew/Cellar/jj/0.45.1/bin/jj",
+        "git",
+        "init",
+        "--colocate"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v3/baseline/repos/base-workspace",
+      "rc": 0,
+      "seconds": 0.17348870914429426,
+      "stdout": "",
+      "stderr": "Done importing changes from the underlying Git repo.\nInitialized repo in \".\"\n"
+    },
+    {
+      "argv": [
+        "/opt/homebrew/Cellar/jj/0.45.1/bin/jj",
+        "workspace",
+        "add",
+        "/tmp/jj-lfs-evaluation/workflows-sol/v3/baseline/repos/base-workspace-secondary",
+        "--name",
+        "secondary"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v3/baseline/repos/base-workspace",
+      "rc": 0,
+      "seconds": 0.10536287492141128,
+      "stdout": "",
+      "stderr": "Created workspace in \"../base-workspace-secondary\"\nWorking copy  (@) now at: qxknpzsz 3020fb2d (empty) (no description set)\nParent commit (@-)      : mmuxlzks a1aa2002 main | Seed LFS fixture\nAdded 3 files, modified 0 files, removed 0 files\n"
+    },
+    {
+      "argv": [
+        "git",
+        "lfs",
+        "checkout",
+        "asset.bin"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v3/baseline/repos/base-workspace-secondary",
+      "rc": 0,
+      "seconds": 0.20251250034198165,
+      "stdout": "Checking out LFS objects: 100% (1/1), 2.5 KB | 0 B/s, done.\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/opt/homebrew/Cellar/jj/0.45.1/bin/jj",
+        "status"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v3/baseline/repos/base-workspace-secondary",
+      "rc": 0,
+      "seconds": 0.08031412493437529,
+      "stdout": "Working copy changes:\nM asset.bin\nWorking copy  (@) : qxknpzsz 845c9785 (no description set)\nParent commit (@-): mmuxlzks a1aa2002 main | Seed LFS fixture\n",
+      "stderr": ""
+    }
+  ]
+}

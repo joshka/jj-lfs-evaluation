@@ -1,0 +1,183 @@
+[
+  {
+    "id": "base-file_to_dir",
+    "purpose": "file_to_dir",
+    "category": "contract",
+    "status": "FAIL",
+    "seconds": 5.7407527500763535,
+    "checks": [
+      {
+        "label": "Initial committed blob is valid LFS pointer",
+        "pass": false
+      },
+      {
+        "label": "Recovery leaves usable path",
+        "pass": true,
+        "first_status_rc": 0
+      }
+    ],
+    "observations": {
+      "before": {
+        "type": "directory",
+        "children": [
+          "child.txt"
+        ]
+      },
+      "first_status": {
+        "rc": 0,
+        "out": "Working copy changes:\nD asset.bin\nA asset.bin/child.txt\nWorking copy  (@) : xwkrnkoo ee042b06 (no description set)\nParent commit (@-): psymwrlp b8c44837 main | Seed LFS fixture\n",
+        "err": ""
+      },
+      "second_status": {
+        "rc": 0,
+        "out": "Working copy changes:\nD asset.bin\nA asset.bin/child.txt\nWorking copy  (@) : xwkrnkoo ee042b06 (no description set)\nParent commit (@-): psymwrlp b8c44837 main | Seed LFS fixture\n",
+        "err": ""
+      },
+      "after_transition_tree": {
+        "rc": 0,
+        "files": ".gitattributes\nasset.bin/child.txt\nnote.txt\n",
+        "err": ""
+      },
+      "after_transition": {
+        "type": "directory",
+        "children": [
+          "child.txt"
+        ]
+      },
+      "recovery_status": {
+        "rc": 0,
+        "out": "Working copy changes:\nM asset.bin\nWorking copy  (@) : xwkrnkoo 1fa42649 (no description set)\nParent commit (@-): psymwrlp b8c44837 main | Seed LFS fixture\n",
+        "err": ""
+      },
+      "after_recovery_tree": {
+        "rc": 0,
+        "files": ".gitattributes\nasset.bin\nnote.txt\n",
+        "err": ""
+      },
+      "after_recovery": {
+        "type": "file",
+        "sha256": "dad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f",
+        "size": 2500,
+        "pointer": false
+      }
+    }
+  },
+  {
+    "id": "base-dir_to_file",
+    "purpose": "dir_to_file",
+    "category": "contract",
+    "status": "PASS",
+    "seconds": 0.8305967920459807,
+    "checks": [
+      {
+        "label": "Recovery leaves usable path",
+        "pass": true,
+        "first_status_rc": 0
+      }
+    ],
+    "observations": {
+      "before": {
+        "type": "directory",
+        "children": [
+          "child.txt"
+        ]
+      },
+      "first_status": {
+        "rc": 0,
+        "out": "Working copy changes:\nA dir.bin\nD dir.bin/child.txt\nWorking copy  (@) : qyqprzkt 209b3efa (no description set)\nParent commit (@-): plmsstso 0b9aea95 main | Seed LFS fixture\n",
+        "err": ""
+      },
+      "second_status": {
+        "rc": 0,
+        "out": "Working copy changes:\nA dir.bin\nD dir.bin/child.txt\nWorking copy  (@) : qyqprzkt 209b3efa (no description set)\nParent commit (@-): plmsstso 0b9aea95 main | Seed LFS fixture\n",
+        "err": ""
+      },
+      "after_transition_tree": {
+        "rc": 0,
+        "files": ".gitattributes\ndir.bin\nnote.txt\n",
+        "err": ""
+      },
+      "after_transition": {
+        "type": "file",
+        "sha256": "dad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f",
+        "size": 2500,
+        "pointer": false
+      },
+      "recovery_status": {
+        "rc": 0,
+        "out": "The working copy has no changes.\nWorking copy  (@) : qyqprzkt 2d0fba86 (empty) (no description set)\nParent commit (@-): plmsstso 0b9aea95 main | Seed LFS fixture\n",
+        "err": ""
+      },
+      "after_recovery_tree": {
+        "rc": 0,
+        "files": ".gitattributes\ndir.bin/child.txt\nnote.txt\n",
+        "err": ""
+      },
+      "after_recovery": {
+        "type": "directory",
+        "children": [
+          "child.txt"
+        ]
+      }
+    }
+  },
+  {
+    "id": "base-file_to_symlink",
+    "purpose": "file_to_symlink",
+    "category": "contract",
+    "status": "FAIL",
+    "seconds": 1.2308293329551816,
+    "checks": [
+      {
+        "label": "Initial committed blob is valid LFS pointer",
+        "pass": false
+      },
+      {
+        "label": "Recovery leaves valid pointer",
+        "pass": true,
+        "first_status_rc": 0
+      }
+    ],
+    "observations": {
+      "before": {
+        "type": "symlink",
+        "target": "note.txt"
+      },
+      "first_status": {
+        "rc": 0,
+        "out": "Working copy changes:\nM asset.bin\nWorking copy  (@) : srvkmkxw df70c5ad (no description set)\nParent commit (@-): wrynotwx 020eb9a6 main | Seed LFS fixture\n",
+        "err": ""
+      },
+      "second_status": {
+        "rc": 0,
+        "out": "Working copy changes:\nM asset.bin\nWorking copy  (@) : srvkmkxw df70c5ad (no description set)\nParent commit (@-): wrynotwx 020eb9a6 main | Seed LFS fixture\n",
+        "err": ""
+      },
+      "after_transition_tree": {
+        "rc": 0,
+        "files": ".gitattributes\nasset.bin\nnote.txt\n",
+        "err": ""
+      },
+      "after_transition": {
+        "type": "symlink",
+        "target": "note.txt"
+      },
+      "recovery_status": {
+        "rc": 0,
+        "out": "Working copy changes:\nM asset.bin\nWorking copy  (@) : srvkmkxw 77738904 (no description set)\nParent commit (@-): wrynotwx 020eb9a6 main | Seed LFS fixture\n",
+        "err": ""
+      },
+      "after_recovery_tree": {
+        "rc": 0,
+        "files": ".gitattributes\nasset.bin\nnote.txt\n",
+        "err": ""
+      },
+      "after_recovery": {
+        "type": "file",
+        "sha256": "dad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f",
+        "size": 2500,
+        "pointer": false
+      }
+    }
+  }
+]

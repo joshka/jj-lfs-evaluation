@@ -1,0 +1,185 @@
+{
+  "id": "A01-macro",
+  "purpose": "Attribute matching agrees with Git",
+  "category": "contract",
+  "status": "PASS",
+  "seconds": 0.4612268340000014,
+  "checks": [
+    {
+      "label": "Expected exclusion matches Git attribute decision",
+      "pass": true,
+      "expected_excluded": true,
+      "actual_included": false,
+      "git_check_attr": "a.bin: filter: lfs\n",
+      "jj_status": "The working copy has no changes.\nWorking copy  (@) : vlonlmoy 816eccb0 (empty) (no description set)\nParent commit (@-): ltnmwmny d7a782ac main | Seed LFS fixture\n"
+    }
+  ],
+  "observations": {},
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "init",
+        "-b",
+        "main"
+      ],
+      "cwd": "/eval/linux/repos/A01-macro",
+      "rc": 0,
+      "seconds": 0.04874616700001866,
+      "stdout": "Initialized empty Git repository in /eval/linux/repos/A01-macro/.git/\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.name",
+        "LFS Evaluation"
+      ],
+      "cwd": "/eval/linux/repos/A01-macro",
+      "rc": 0,
+      "seconds": 0.01151133299998719,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.email",
+        "eval@example.invalid"
+      ],
+      "cwd": "/eval/linux/repos/A01-macro",
+      "rc": 0,
+      "seconds": 0.00731183299998861,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "commit.gpgsign",
+        "false"
+      ],
+      "cwd": "/eval/linux/repos/A01-macro",
+      "rc": 0,
+      "seconds": 0.004321916000009196,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "core.autocrlf",
+        "false"
+      ],
+      "cwd": "/eval/linux/repos/A01-macro",
+      "rc": 0,
+      "seconds": 0.005272083999983579,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "lfs",
+        "install",
+        "--local"
+      ],
+      "cwd": "/eval/linux/repos/A01-macro",
+      "rc": 0,
+      "seconds": 0.05831833400000619,
+      "stdout": "Updated Git hooks.\nGit LFS initialized.\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "add",
+        "."
+      ],
+      "cwd": "/eval/linux/repos/A01-macro",
+      "rc": 0,
+      "seconds": 0.009709084000007806,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "commit",
+        "-m",
+        "Seed LFS fixture"
+      ],
+      "cwd": "/eval/linux/repos/A01-macro",
+      "rc": 0,
+      "seconds": 0.07739929100000609,
+      "stdout": "[main (root-commit) d7a782a] Seed LFS fixture\n 2 files changed, 3 insertions(+)\n create mode 100644 .gitattributes\n create mode 100644 note.txt\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "/eval/linux/repos/A01-macro",
+      "rc": 0,
+      "seconds": 0.006736040999982151,
+      "stdout": "d7a782ac74dc3c3c40ebb38bf32f1fc183bcb367\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/target/debug/jj",
+        "git",
+        "init",
+        "--colocate"
+      ],
+      "cwd": "/eval/linux/repos/A01-macro",
+      "rc": 0,
+      "seconds": 0.15135845800000425,
+      "stdout": "",
+      "stderr": "Done importing changes from the underlying Git repo.\nInitialized repo in \".\"\n"
+    },
+    {
+      "argv": [
+        "git",
+        "check-attr",
+        "filter",
+        "--",
+        "a.bin"
+      ],
+      "cwd": "/eval/linux/repos/A01-macro",
+      "rc": 0,
+      "seconds": 0.004490083999996841,
+      "stdout": "a.bin: filter: lfs\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/target/debug/jj",
+        "status"
+      ],
+      "cwd": "/eval/linux/repos/A01-macro",
+      "rc": 0,
+      "seconds": 0.03122941700002002,
+      "stdout": "The working copy has no changes.\nWorking copy  (@) : vlonlmoy 816eccb0 (empty) (no description set)\nParent commit (@-): ltnmwmny d7a782ac main | Seed LFS fixture\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/target/debug/jj",
+        "file",
+        "list"
+      ],
+      "cwd": "/eval/linux/repos/A01-macro",
+      "rc": 0,
+      "seconds": 0.03968374999999469,
+      "stdout": ".gitattributes\nnote.txt\n",
+      "stderr": ""
+    }
+  ]
+}

@@ -1,0 +1,110 @@
+[
+  {
+    "id": "A04-removed",
+    "purpose": "Attribute removal reaches stable snapshot in one command",
+    "category": "compatibility",
+    "status": "PASS",
+    "seconds": 3.1571173327974975,
+    "checks": [
+      {
+        "label": "Repeated status without disk changes is stable",
+        "pass": true
+      }
+    ],
+    "observations": {
+      "1": {
+        "status": "Working copy changes:\nD .gitattributes\nM asset.bin\nWorking copy  (@) : wyvkryrl 525022bf (no description set)\nParent commit (@-): ypkuswuo 1fd23f36 main | Seed LFS fixture\n",
+        "stored_hash": "dad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f",
+        "is_pointer": false
+      },
+      "2": {
+        "status": "Working copy changes:\nD .gitattributes\nM asset.bin\nWorking copy  (@) : wyvkryrl 525022bf (no description set)\nParent commit (@-): ypkuswuo 1fd23f36 main | Seed LFS fixture\n",
+        "stored_hash": "dad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f",
+        "is_pointer": false
+      },
+      "3": {
+        "status": "Working copy changes:\nD .gitattributes\nM asset.bin\nWorking copy  (@) : wyvkryrl 525022bf (no description set)\nParent commit (@-): ypkuswuo 1fd23f36 main | Seed LFS fixture\n",
+        "stored_hash": "dad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f",
+        "is_pointer": false
+      }
+    }
+  },
+  {
+    "id": "A08-symlink-asset",
+    "purpose": "LFS patterns do not suppress symlink versioning",
+    "category": "compatibility",
+    "status": "PASS",
+    "seconds": 1.338400417007506,
+    "checks": [
+      {
+        "label": "LFS pattern does not hide a Git symlink",
+        "pass": true,
+        "git_entry": "120000 97922aee98474ad751b77adb4aa5e4f3dce681fe 0\tlink.bin\n"
+      }
+    ],
+    "observations": {}
+  },
+  {
+    "id": "A10-file-directory",
+    "purpose": "File-to-directory replacement is handled",
+    "category": "contract",
+    "status": "PASS",
+    "seconds": 1.619156625121832,
+    "checks": [
+      {
+        "label": "File-to-directory transition completes without panic",
+        "pass": true
+      }
+    ],
+    "observations": {
+      "status": {
+        "rc": 0,
+        "stderr": ""
+      },
+      "files": [
+        ".gitattributes",
+        "asset.bin/child.txt",
+        "note.txt"
+      ]
+    }
+  },
+  {
+    "id": "C02-force-track",
+    "purpose": "Explicit tracking has actionable result",
+    "category": "diagnostics",
+    "status": "PASS",
+    "seconds": 1.727837999816984,
+    "checks": [
+      {
+        "label": "Explicit tracking either tracks or explains exclusion",
+        "pass": true
+      }
+    ],
+    "observations": {
+      "track": {
+        "rc": 0,
+        "stderr": ""
+      }
+    }
+  },
+  {
+    "id": "W02-sparse-dirty",
+    "purpose": "Sparse removal must not silently lose local edits",
+    "category": "data-integrity",
+    "status": "FAIL",
+    "seconds": 1.7036997503601015,
+    "checks": [
+      {
+        "label": "Sparse exclusion preserves or rejects unsnapshotted local edits",
+        "pass": false
+      }
+    ],
+    "observations": {
+      "sparse": {
+        "rc": 0,
+        "stderr": "Added 0 files, modified 0 files, removed 2 files\n",
+        "asset_exists": false
+      }
+    }
+  }
+]

@@ -1,0 +1,624 @@
+{
+  "pr": [
+    {
+      "id": "pr-switch",
+      "purpose": "switch",
+      "category": "contract",
+      "status": "FAIL",
+      "seconds": 2.5717149167321622,
+      "checks": [
+        {
+          "label": "Initial hydration has expected bytes",
+          "pass": true
+        },
+        {
+          "label": "No silent loss of hydrated edit",
+          "pass": false,
+          "operation": "switch",
+          "disk_sha": "c37a06fc0ff3f76773bdc4a64413b7ce64ad21f2eb62cfe4b6ca031459b0d9ce",
+          "prior_sha": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+          "edited_sha": "79014f34a44dbd4fa5b5bea4c010d55d1c009c5ddf310a6abf24e23cc7c4832a"
+        }
+      ],
+      "observations": {
+        "edit_a": {
+          "rc": 0,
+          "out": "",
+          "err": "Working copy  (@) now at: oyttkmno 4b7ff48e Seed LFS fixture\nParent commit (@-)      : zzzzzzzz 00000000 (empty) (no description set)\nAdded 0 files, modified 1 files, removed 0 files\n"
+        },
+        "after_local_edit_status": {
+          "rc": 0,
+          "out": "Working copy changes:\nA .gitattributes\nA asset.bin\nA note.txt\nWorking copy  (@) : oyttkmno 4b7ff48e Seed LFS fixture\nParent commit (@-): zzzzzzzz 00000000 (empty) (no description set)\n",
+          "err": ""
+        },
+        "local": {
+          "edited_sha": "79014f34a44dbd4fa5b5bea4c010d55d1c009c5ddf310a6abf24e23cc7c4832a",
+          "stored_sha": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+          "stored_pointer": true,
+          "rev": "4b7ff48e33a04f704d005be6cb47b79ed3bf668d"
+        },
+        "switch": {
+          "rc": 0,
+          "out": "",
+          "err": "Working copy  (@) now at: tonzwrkr 4fbd05ab main | Second LFS version\nParent commit (@-)      : oyttkmno 4b7ff48e Seed LFS fixture\nAdded 0 files, modified 1 files, removed 0 files\n"
+        },
+        "after": {
+          "disk_sha": "c37a06fc0ff3f76773bdc4a64413b7ce64ad21f2eb62cfe4b6ca031459b0d9ce",
+          "disk_is_pointer": true,
+          "prior_rc": 0,
+          "prior_sha": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+          "edited_recoverable": false
+        }
+      }
+    },
+    {
+      "id": "pr-restore",
+      "purpose": "restore",
+      "category": "contract",
+      "status": "PASS",
+      "seconds": 1.4731302498839796,
+      "checks": [
+        {
+          "label": "Initial hydration has expected bytes",
+          "pass": true
+        },
+        {
+          "label": "Explicit restore outcome recorded",
+          "pass": true,
+          "edited_retained": true,
+          "restored_pointer": false
+        }
+      ],
+      "observations": {
+        "pre_status": {
+          "rc": 0,
+          "out": "The working copy has no changes.\nWorking copy  (@) : ztwvyxmq c9b2fe31 (empty) (no description set)\nParent commit (@-): kvroussz 88f96ac4 (empty) (no description set)\n",
+          "err": ""
+        },
+        "restore": {
+          "rc": 0,
+          "out": "",
+          "err": "Nothing changed.\n"
+        },
+        "after": {
+          "disk_sha": "79014f34a44dbd4fa5b5bea4c010d55d1c009c5ddf310a6abf24e23cc7c4832a",
+          "missing": false,
+          "edited_sha": "79014f34a44dbd4fa5b5bea4c010d55d1c009c5ddf310a6abf24e23cc7c4832a",
+          "status": "The working copy has no changes.\nWorking copy  (@) : ztwvyxmq c9b2fe31 (empty) (no description set)\nParent commit (@-): kvroussz 88f96ac4 (empty) (no description set)\n"
+        }
+      }
+    },
+    {
+      "id": "pr-rebase",
+      "purpose": "rebase",
+      "category": "contract",
+      "status": "FAIL",
+      "seconds": 1.714701416902244,
+      "checks": [
+        {
+          "label": "Initial hydration has expected bytes",
+          "pass": true
+        },
+        {
+          "label": "No silent loss of hydrated edit",
+          "pass": false,
+          "operation": "rebase",
+          "disk_sha": "c37a06fc0ff3f76773bdc4a64413b7ce64ad21f2eb62cfe4b6ca031459b0d9ce",
+          "prior_sha": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+          "edited_sha": "79014f34a44dbd4fa5b5bea4c010d55d1c009c5ddf310a6abf24e23cc7c4832a"
+        }
+      ],
+      "observations": {
+        "edit_a": {
+          "rc": 0,
+          "out": "",
+          "err": "Working copy  (@) now at: ovnmntxp 8b538860 Seed LFS fixture\nParent commit (@-)      : zzzzzzzz 00000000 (empty) (no description set)\nAdded 0 files, modified 1 files, removed 0 files\n"
+        },
+        "after_local_edit_status": {
+          "rc": 0,
+          "out": "Working copy changes:\nA .gitattributes\nA asset.bin\nA note.txt\nWorking copy  (@) : ovnmntxp 8b538860 Seed LFS fixture\nParent commit (@-): zzzzzzzz 00000000 (empty) (no description set)\n",
+          "err": ""
+        },
+        "local": {
+          "edited_sha": "79014f34a44dbd4fa5b5bea4c010d55d1c009c5ddf310a6abf24e23cc7c4832a",
+          "stored_sha": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+          "stored_pointer": true,
+          "rev": "8b5388608689781a4c448c9b6ed0dd6c5463b32d"
+        },
+        "rebase": {
+          "rc": 0,
+          "out": "",
+          "err": "Rebased 1 commits to destination.\nRebased 1 descendant commits.\nWorking copy  (@) now at: ovnmntxp ea98bbfa Seed LFS fixture\nParent commit (@-)      : oxyzovwy 0071b0b0 main | (conflict) Second LFS version\nAdded 0 files, modified 1 files, removed 0 files\nNew conflicts appeared in 1 commits:\n  oxyzovwy 0071b0b0 main | (conflict) Second LFS version\nHint: To resolve the conflicts, start by creating a commit on top of\nthe conflicted commit:\n  jj new oxyzovwy\nThen use `jj resolve`, or edit the conflict markers in the file directly.\nOnce the conflicts are resolved, you can inspect the result with `jj diff`.\nThen run `jj squash` to move the resolution into the conflicted commit.\n"
+        },
+        "after": {
+          "disk_sha": "c37a06fc0ff3f76773bdc4a64413b7ce64ad21f2eb62cfe4b6ca031459b0d9ce",
+          "disk_is_pointer": true,
+          "prior_rc": 0,
+          "prior_sha": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+          "edited_recoverable": false
+        }
+      }
+    },
+    {
+      "id": "pr-squash",
+      "purpose": "squash",
+      "category": "contract",
+      "status": "PASS",
+      "seconds": 1.1028033751063049,
+      "checks": [
+        {
+          "label": "Initial hydration has expected bytes",
+          "pass": true
+        },
+        {
+          "label": "Operation does not silently lose hydrated edit",
+          "pass": true
+        }
+      ],
+      "observations": {
+        "pre_status": {
+          "rc": 0,
+          "out": "Working copy changes:\nM note.txt\nWorking copy  (@) : kmunumlu f439e5f1 (no description set)\nParent commit (@-): lqkovoou 3ee17d8f (empty) (no description set)\n",
+          "err": ""
+        },
+        "squash": {
+          "rc": 0,
+          "out": "",
+          "err": "Working copy  (@) now at: mvtzywky 62604bcb (empty) (no description set)\nParent commit (@-)      : lqkovoou aebe891c (no description set)\n"
+        },
+        "after": {
+          "disk_sha": "b6b1d1d512a8a18b62f08c17d28aa5d158e91e02ccba185b17688688e87a0e59",
+          "edited_sha": "b6b1d1d512a8a18b62f08c17d28aa5d158e91e02ccba185b17688688e87a0e59",
+          "old_revision_sha": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+          "edited_recoverable": false,
+          "status": "The working copy has no changes.\nWorking copy  (@) : mvtzywky 62604bcb (empty) (no description set)\nParent commit (@-): lqkovoou aebe891c (no description set)\n"
+        }
+      }
+    },
+    {
+      "id": "pr-split",
+      "purpose": "split",
+      "category": "contract",
+      "status": "PASS",
+      "seconds": 1.0980794159695506,
+      "checks": [
+        {
+          "label": "Initial hydration has expected bytes",
+          "pass": true
+        },
+        {
+          "label": "Operation does not silently lose hydrated edit",
+          "pass": true
+        }
+      ],
+      "observations": {
+        "pre_status": {
+          "rc": 0,
+          "out": "Working copy changes:\nM note.txt\nWorking copy  (@) : mxlzxvmm c4eb2581 (no description set)\nParent commit (@-): yuxwonss 068614e3 (empty) (no description set)\n",
+          "err": ""
+        },
+        "split": {
+          "rc": 0,
+          "out": "",
+          "err": "Warning: All changes have been selected, so the original revision will become empty.\nSelected changes : mxlzxvmm 9da0e2f5 Split ordinary note\nRemaining changes: uxtzrwxu 048a891e (empty) (no description set)\nWorking copy  (@) now at: roomuuox 91549c8c (empty) (no description set)\nParent commit (@-)      : mxlzxvmm 9da0e2f5 Split ordinary note\n"
+        },
+        "after": {
+          "disk_sha": "b6b1d1d512a8a18b62f08c17d28aa5d158e91e02ccba185b17688688e87a0e59",
+          "edited_sha": "b6b1d1d512a8a18b62f08c17d28aa5d158e91e02ccba185b17688688e87a0e59",
+          "old_revision_sha": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+          "edited_recoverable": false,
+          "status": "The working copy has no changes.\nWorking copy  (@) : roomuuox 91549c8c (empty) (no description set)\nParent commit (@-): mxlzxvmm 9da0e2f5 Split ordinary note\n"
+        }
+      }
+    },
+    {
+      "id": "pr-untrack",
+      "purpose": "untrack",
+      "category": "contract",
+      "status": "FAIL",
+      "seconds": 0.9965717503800988,
+      "checks": [
+        {
+          "label": "Committed pointer not silently removed",
+          "pass": false
+        }
+      ],
+      "observations": {
+        "untrack": {
+          "rc": 0,
+          "out": "",
+          "err": ""
+        },
+        "effect": {
+          "before": ".gitattributes\nasset.bin\nnote.txt\n",
+          "after": ".gitattributes\nnote.txt\n",
+          "original_pointer": true,
+          "show_rc": 1,
+          "show_sha": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "disk_sha": "dad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f",
+          "status": "Working copy changes:\nD asset.bin\nWorking copy  (@) : mvxkporo 2eb28d20 (no description set)\nParent commit (@-): lqmwwzzw 15097d9c main | Seed LFS fixture\n"
+        }
+      }
+    },
+    {
+      "id": "pr-workspace",
+      "purpose": "workspace",
+      "category": "contract",
+      "status": "PASS",
+      "seconds": 1.1368490001186728,
+      "checks": [
+        {
+          "label": "Explicit hydration yields payload or actionable failure",
+          "pass": true
+        }
+      ],
+      "observations": {
+        "add_workspace": {
+          "rc": 0,
+          "out": "",
+          "err": "Created Git worktree for the new workspace.\nCreated workspace in \"../pr-workspace-secondary\"\nWorking copy  (@) now at: slyxosvr a1859c0a (empty) (no description set)\nParent commit (@-)      : qospwrut 5fd7dff9 main | Seed LFS fixture\nAdded 3 files, modified 0 files, removed 0 files\n"
+        },
+        "initial": {
+          "disk_sha": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+          "pointer": true,
+          "has_git": true
+        },
+        "explicit_git_lfs_checkout": {
+          "rc": 0,
+          "out": "Checking out LFS objects: 100% (1/1), 2.5 KB | 0 B/s, done.\n",
+          "err": ""
+        },
+        "after_checkout": {
+          "disk_sha": "dad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f",
+          "hydrated": true
+        },
+        "secondary_jj_status": {
+          "rc": 0,
+          "out": "The working copy has no changes.\nWorking copy  (@) : slyxosvr a1859c0a (empty) (no description set)\nParent commit (@-): qospwrut 5fd7dff9 main | Seed LFS fixture\n",
+          "err": ""
+        }
+      }
+    },
+    {
+      "id": "pr-attrs_conflict",
+      "purpose": "attrs_conflict",
+      "category": "contract",
+      "status": "PASS",
+      "seconds": 1.2058238331228495,
+      "checks": [
+        {
+          "label": "Conflict is reported",
+          "pass": true
+        }
+      ],
+      "observations": {
+        "merge_conflicting_attributes": {
+          "rc": 0,
+          "out": "",
+          "err": "Working copy  (@) now at: wtktvppx f8871b18 (conflict) (empty) (no description set)\nParent commit (@-)      : zvwtrwoy 2dc2f6b7 (no description set)\nParent commit (@-)      : wvkrtnpn 73708a27 (no description set)\nAdded 0 files, modified 2 files, removed 0 files\nWarning: There are unresolved conflicts at these paths:\n.gitattributes    2-sided conflict\n"
+        },
+        "merge_status": {
+          "rc": 0,
+          "out": "The working copy has no changes.\nWorking copy  (@) : wtktvppx f8871b18 (conflict) (empty) (no description set)\nParent commit (@-): zvwtrwoy 2dc2f6b7 (no description set)\nParent commit (@-): wvkrtnpn 73708a27 (no description set)\nWarning: There are unresolved conflicts at these paths:\n.gitattributes    2-sided conflict\n",
+          "err": ""
+        },
+        "after": {
+          "attr": "<<<<<<< conflict 1 of 1\n%%%%%%% diff from: wkkurqls 79662b97 \"Seed LFS fixture\"\n\\\\\\\\\\\\\\        to: zvwtrwoy 2dc2f6b7\n-*.bin filter=lfs diff=lfs merge=lfs -text\n+*.bin -filter\n+++++++ wvkrtnpn 73708a27\n*.bin filter=custom\n>>>>>>> conflict 1 of 1 ends\n",
+          "disk_sha": "dad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f",
+          "disk_pointer": false
+        }
+      }
+    }
+  ],
+  "baseline": [
+    {
+      "id": "base-switch",
+      "purpose": "switch",
+      "category": "contract",
+      "status": "PASS",
+      "seconds": 1.5004097921773791,
+      "checks": [
+        {
+          "label": "Initial hydration has expected bytes",
+          "pass": true
+        },
+        {
+          "label": "No silent loss of hydrated edit",
+          "pass": true,
+          "operation": "switch",
+          "disk_sha": "c37a06fc0ff3f76773bdc4a64413b7ce64ad21f2eb62cfe4b6ca031459b0d9ce",
+          "prior_sha": "79014f34a44dbd4fa5b5bea4c010d55d1c009c5ddf310a6abf24e23cc7c4832a",
+          "edited_sha": "79014f34a44dbd4fa5b5bea4c010d55d1c009c5ddf310a6abf24e23cc7c4832a"
+        }
+      ],
+      "observations": {
+        "edit_a": {
+          "rc": 0,
+          "out": "",
+          "err": "Working copy  (@) now at: vrkvupws a96706ac Seed LFS fixture\nParent commit (@-)      : zzzzzzzz 00000000 (empty) (no description set)\nAdded 0 files, modified 1 files, removed 0 files\n"
+        },
+        "after_local_edit_status": {
+          "rc": 0,
+          "out": "Working copy changes:\nA .gitattributes\nA asset.bin\nA note.txt\nWorking copy  (@) : vrkvupws e4c171ef Seed LFS fixture\nParent commit (@-): zzzzzzzz 00000000 (empty) (no description set)\n",
+          "err": "Rebased 3 descendant commits onto updated working copy.\n"
+        },
+        "local": {
+          "edited_sha": "79014f34a44dbd4fa5b5bea4c010d55d1c009c5ddf310a6abf24e23cc7c4832a",
+          "stored_sha": "79014f34a44dbd4fa5b5bea4c010d55d1c009c5ddf310a6abf24e23cc7c4832a",
+          "stored_pointer": false,
+          "rev": "e4c171ef999bb03e0ed2909ba4a6862c79dc8065"
+        },
+        "switch": {
+          "rc": 0,
+          "out": "",
+          "err": "Working copy  (@) now at: owyzxyvz/1 976d2922 (divergent) Second LFS version\nParent commit (@-)      : vrkvupws/1 a96706ac (divergent) Seed LFS fixture\nAdded 0 files, modified 1 files, removed 0 files\n"
+        },
+        "after": {
+          "disk_sha": "c37a06fc0ff3f76773bdc4a64413b7ce64ad21f2eb62cfe4b6ca031459b0d9ce",
+          "disk_is_pointer": true,
+          "prior_rc": 0,
+          "prior_sha": "79014f34a44dbd4fa5b5bea4c010d55d1c009c5ddf310a6abf24e23cc7c4832a",
+          "edited_recoverable": true
+        }
+      }
+    },
+    {
+      "id": "base-restore",
+      "purpose": "restore",
+      "category": "contract",
+      "status": "PASS",
+      "seconds": 1.031446082983166,
+      "checks": [
+        {
+          "label": "Initial hydration has expected bytes",
+          "pass": true
+        },
+        {
+          "label": "Explicit restore outcome recorded",
+          "pass": true,
+          "edited_retained": false,
+          "restored_pointer": false
+        }
+      ],
+      "observations": {
+        "pre_status": {
+          "rc": 0,
+          "out": "Working copy changes:\nM asset.bin\nWorking copy  (@) : zvkxvsvt 4683f7d5 (no description set)\nParent commit (@-): utmsulvw ee50835f (no description set)\n",
+          "err": ""
+        },
+        "restore": {
+          "rc": 0,
+          "out": "",
+          "err": "Working copy  (@) now at: zvkxvsvt e6f6fd76 (empty) (no description set)\nParent commit (@-)      : utmsulvw ee50835f (no description set)\nAdded 0 files, modified 1 files, removed 0 files\n"
+        },
+        "after": {
+          "disk_sha": "dad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f",
+          "missing": false,
+          "edited_sha": "79014f34a44dbd4fa5b5bea4c010d55d1c009c5ddf310a6abf24e23cc7c4832a",
+          "status": "The working copy has no changes.\nWorking copy  (@) : zvkxvsvt e6f6fd76 (empty) (no description set)\nParent commit (@-): utmsulvw ee50835f (no description set)\n"
+        }
+      }
+    },
+    {
+      "id": "base-rebase",
+      "purpose": "rebase",
+      "category": "contract",
+      "status": "PASS",
+      "seconds": 1.5174087919294834,
+      "checks": [
+        {
+          "label": "Initial hydration has expected bytes",
+          "pass": true
+        },
+        {
+          "label": "No silent loss of hydrated edit",
+          "pass": true,
+          "operation": "rebase",
+          "disk_sha": "7e8c58952aa9645faada87522961709d5c2988616a44f312e10d5f1907e5f64b",
+          "prior_sha": "79014f34a44dbd4fa5b5bea4c010d55d1c009c5ddf310a6abf24e23cc7c4832a",
+          "edited_sha": "79014f34a44dbd4fa5b5bea4c010d55d1c009c5ddf310a6abf24e23cc7c4832a"
+        }
+      ],
+      "observations": {
+        "edit_a": {
+          "rc": 0,
+          "out": "",
+          "err": "Working copy  (@) now at: lvxpvwsq 79351ae7 Seed LFS fixture\nParent commit (@-)      : zzzzzzzz 00000000 (empty) (no description set)\nAdded 0 files, modified 1 files, removed 0 files\n"
+        },
+        "after_local_edit_status": {
+          "rc": 0,
+          "out": "Working copy changes:\nA .gitattributes\nA asset.bin\nA note.txt\nWorking copy  (@) : lvxpvwsq cd8c6dde Seed LFS fixture\nParent commit (@-): zzzzzzzz 00000000 (empty) (no description set)\n",
+          "err": "Rebased 3 descendant commits onto updated working copy.\n"
+        },
+        "local": {
+          "edited_sha": "79014f34a44dbd4fa5b5bea4c010d55d1c009c5ddf310a6abf24e23cc7c4832a",
+          "stored_sha": "79014f34a44dbd4fa5b5bea4c010d55d1c009c5ddf310a6abf24e23cc7c4832a",
+          "stored_pointer": false,
+          "rev": "cd8c6ddef41ecd66ef0da5ff314c5de9fcb549a9"
+        },
+        "rebase": {
+          "rc": 0,
+          "out": "",
+          "err": "Rebased 1 commits to destination.\nRebased 3 descendant commits.\nWorking copy  (@) now at: lvxpvwsq/0 0159f501 (divergent) (conflict) Seed LFS fixture\nParent commit (@-)      : ovsyuqus/2 fa2140e4 (divergent) Second LFS version\nAdded 0 files, modified 1 files, removed 0 files\nWarning: There are unresolved conflicts at these paths:\nasset.bin    2-sided conflict\nNew conflicts appeared in 1 commits:\n  lvxpvwsq/0 0159f501 (divergent) (conflict) Seed LFS fixture\nHint: To resolve the conflicts, start by creating a commit on top of\none of the first conflicted commits:\n  jj new ovsyuqus/0\n  jj new qpuzmsnr\n  jj new lvxpvwsq/0\nThen use `jj resolve`, or edit the conflict markers in the file directly.\nOnce the conflicts are resolved, you can inspect the result with `jj diff`.\nThen run `jj squash` to move the resolution into the conflicted commit.\n"
+        },
+        "after": {
+          "disk_sha": "7e8c58952aa9645faada87522961709d5c2988616a44f312e10d5f1907e5f64b",
+          "disk_is_pointer": false,
+          "prior_rc": 0,
+          "prior_sha": "79014f34a44dbd4fa5b5bea4c010d55d1c009c5ddf310a6abf24e23cc7c4832a",
+          "edited_recoverable": true
+        }
+      }
+    },
+    {
+      "id": "base-squash",
+      "purpose": "squash",
+      "category": "contract",
+      "status": "PASS",
+      "seconds": 1.033964834176004,
+      "checks": [
+        {
+          "label": "Initial hydration has expected bytes",
+          "pass": true
+        },
+        {
+          "label": "Operation does not silently lose hydrated edit",
+          "pass": true
+        }
+      ],
+      "observations": {
+        "pre_status": {
+          "rc": 0,
+          "out": "Working copy changes:\nM asset.bin\nM note.txt\nWorking copy  (@) : mtswvxwt b4f63a27 (no description set)\nParent commit (@-): ypstuopq 594918af (no description set)\n",
+          "err": ""
+        },
+        "squash": {
+          "rc": 0,
+          "out": "",
+          "err": "Working copy  (@) now at: vtwkqzus 504f589f (empty) (no description set)\nParent commit (@-)      : ypstuopq aaa3eb9e (no description set)\n"
+        },
+        "after": {
+          "disk_sha": "b6b1d1d512a8a18b62f08c17d28aa5d158e91e02ccba185b17688688e87a0e59",
+          "edited_sha": "b6b1d1d512a8a18b62f08c17d28aa5d158e91e02ccba185b17688688e87a0e59",
+          "old_revision_sha": "b6b1d1d512a8a18b62f08c17d28aa5d158e91e02ccba185b17688688e87a0e59",
+          "edited_recoverable": true,
+          "status": "The working copy has no changes.\nWorking copy  (@) : vtwkqzus 504f589f (empty) (no description set)\nParent commit (@-): ypstuopq aaa3eb9e (no description set)\n"
+        }
+      }
+    },
+    {
+      "id": "base-split",
+      "purpose": "split",
+      "category": "contract",
+      "status": "PASS",
+      "seconds": 1.2002122080884874,
+      "checks": [
+        {
+          "label": "Initial hydration has expected bytes",
+          "pass": true
+        },
+        {
+          "label": "Operation does not silently lose hydrated edit",
+          "pass": true
+        }
+      ],
+      "observations": {
+        "pre_status": {
+          "rc": 0,
+          "out": "Working copy changes:\nM asset.bin\nM note.txt\nWorking copy  (@) : tlqrytqy 9772780e (no description set)\nParent commit (@-): rwwqlnqz 6e96dc13 (no description set)\n",
+          "err": ""
+        },
+        "split": {
+          "rc": 0,
+          "out": "",
+          "err": "Selected changes : tlqrytqy bc6c72ba Split ordinary note\nRemaining changes: suslowln 3367fe0b (no description set)\nWorking copy  (@) now at: suslowln 3367fe0b (no description set)\nParent commit (@-)      : tlqrytqy bc6c72ba Split ordinary note\n"
+        },
+        "after": {
+          "disk_sha": "b6b1d1d512a8a18b62f08c17d28aa5d158e91e02ccba185b17688688e87a0e59",
+          "edited_sha": "b6b1d1d512a8a18b62f08c17d28aa5d158e91e02ccba185b17688688e87a0e59",
+          "old_revision_sha": "b6b1d1d512a8a18b62f08c17d28aa5d158e91e02ccba185b17688688e87a0e59",
+          "edited_recoverable": true,
+          "status": "Working copy changes:\nM asset.bin\nWorking copy  (@) : suslowln 3367fe0b (no description set)\nParent commit (@-): tlqrytqy bc6c72ba Split ordinary note\n"
+        }
+      }
+    },
+    {
+      "id": "base-untrack",
+      "purpose": "untrack",
+      "category": "contract",
+      "status": "PASS",
+      "seconds": 1.0110585829243064,
+      "checks": [
+        {
+          "label": "Committed pointer not silently removed",
+          "pass": true
+        }
+      ],
+      "observations": {
+        "untrack": {
+          "rc": 1,
+          "out": "",
+          "err": "Error: 'asset.bin' is not ignored.\nHint: Files that are not ignored will be added back by the next command.\nMake sure they're ignored, then try again.\n"
+        },
+        "effect": {
+          "before": ".gitattributes\nasset.bin\nnote.txt\n",
+          "after": ".gitattributes\nasset.bin\nnote.txt\n",
+          "original_pointer": false,
+          "show_rc": 0,
+          "show_sha": "dad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f",
+          "disk_sha": "dad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f",
+          "status": "Working copy changes:\nM asset.bin\nWorking copy  (@) : zwxukmsz 23638bd9 (no description set)\nParent commit (@-): tvmxqqsz 4345d8e5 main | Seed LFS fixture\n"
+        }
+      }
+    },
+    {
+      "id": "base-workspace",
+      "purpose": "workspace",
+      "category": "contract",
+      "status": "PASS",
+      "seconds": 1.2164875003509223,
+      "checks": [
+        {
+          "label": "Explicit hydration yields payload or actionable failure",
+          "pass": true
+        }
+      ],
+      "observations": {
+        "add_workspace": {
+          "rc": 0,
+          "out": "",
+          "err": "Created workspace in \"../base-workspace-secondary\"\nWorking copy  (@) now at: qxknpzsz 3020fb2d (empty) (no description set)\nParent commit (@-)      : mmuxlzks a1aa2002 main | Seed LFS fixture\nAdded 3 files, modified 0 files, removed 0 files\n"
+        },
+        "initial": {
+          "disk_sha": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+          "pointer": true,
+          "has_git": false
+        },
+        "explicit_git_lfs_checkout": {
+          "rc": 0,
+          "out": "Checking out LFS objects: 100% (1/1), 2.5 KB | 0 B/s, done.\n",
+          "err": ""
+        },
+        "after_checkout": {
+          "disk_sha": "dad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f",
+          "hydrated": true
+        },
+        "secondary_jj_status": {
+          "rc": 0,
+          "out": "Working copy changes:\nM asset.bin\nWorking copy  (@) : qxknpzsz 845c9785 (no description set)\nParent commit (@-): mmuxlzks a1aa2002 main | Seed LFS fixture\n",
+          "err": ""
+        }
+      }
+    },
+    {
+      "id": "base-attrs_conflict",
+      "purpose": "attrs_conflict",
+      "category": "contract",
+      "status": "PASS",
+      "seconds": 1.222489624749869,
+      "checks": [
+        {
+          "label": "Conflict is reported",
+          "pass": true
+        }
+      ],
+      "observations": {
+        "merge_conflicting_attributes": {
+          "rc": 0,
+          "out": "",
+          "err": "Working copy  (@) now at: ykqpltvo 18f88334 (conflict) (empty) (no description set)\nParent commit (@-)      : nrkyouku 4532fd4d (no description set)\nParent commit (@-)      : krzvwows 35cb1716 (no description set)\nAdded 0 files, modified 1 files, removed 0 files\nWarning: There are unresolved conflicts at these paths:\n.gitattributes    2-sided conflict\n"
+        },
+        "merge_status": {
+          "rc": 0,
+          "out": "The working copy has no changes.\nWorking copy  (@) : ykqpltvo 18f88334 (conflict) (empty) (no description set)\nParent commit (@-): nrkyouku 4532fd4d (no description set)\nParent commit (@-): krzvwows 35cb1716 (no description set)\nWarning: There are unresolved conflicts at these paths:\n.gitattributes    2-sided conflict\n",
+          "err": ""
+        },
+        "after": {
+          "attr": "<<<<<<< conflict 1 of 1\n%%%%%%% diff from: qvowpyvv d31839a1 \"Seed LFS fixture\"\n\\\\\\\\\\\\\\        to: nrkyouku 4532fd4d\n-*.bin filter=lfs diff=lfs merge=lfs -text\n+*.bin -filter\n+++++++ krzvwows 35cb1716\n*.bin filter=custom\n>>>>>>> conflict 1 of 1 ends\n",
+          "disk_sha": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+          "disk_pointer": true
+        }
+      }
+    }
+  ]
+}

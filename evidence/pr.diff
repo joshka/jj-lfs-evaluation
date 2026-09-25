@@ -1,0 +1,2364 @@
+diff --git a/.github/workflows/ci.yml b/.github/workflows/ci.yml
+index f75c0972627..82611210db0 100644
+--- a/.github/workflows/ci.yml
++++ b/.github/workflows/ci.yml
+@@ -332,7 +332,7 @@ jobs:
+           fi
+         env:
+           # This limit *can* be raised, we just want to be aware if we exceed it
+-          TOTAL_DEP_LIMIT: 550
++          TOTAL_DEP_LIMIT: 555
+ 
+   # Block the merge if required checks fail, but only in the merge
+   # queue. See also `required-checks-hack.yml`.
+diff --git a/CHANGELOG.md b/CHANGELOG.md
+index 896706a6739..41ab88ea349 100644
+--- a/CHANGELOG.md
++++ b/CHANGELOG.md
+@@ -49,6 +49,8 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+   Use the `--sparse-patterns` option to control this behavior (evaluated
+   per each `jj run` invocation).
+ 
++* Added `git.ignore-filters` setting to specify what filtered files in
++  `.gitattributes` are ignored by `jj`. Defaults to `["lfs"]`.
+ ### Fixed bugs
+ 
+ ## [0.45.1] - 2026-09-03
+diff --git a/Cargo.lock b/Cargo.lock
+index 5de1a8c44d1..a75a07d231d 100644
+--- a/Cargo.lock
++++ b/Cargo.lock
+@@ -177,7 +177,7 @@ checksum = "82f6aeea286b8eb4dd3431a1be1b59d290ace00f5bfd8e2a159bc2a05e2c1667"
+ dependencies = [
+  "proc-macro2",
+  "quote",
+- "syn 3.0.4",
++ "syn 3.0.5",
+ ]
+ 
+ [[package]]
+@@ -506,7 +506,7 @@ dependencies = [
+  "heck",
+  "proc-macro2",
+  "quote",
+- "syn 3.0.4",
++ "syn 3.0.5",
+ ]
+ 
+ [[package]]
+@@ -586,6 +586,12 @@ version = "0.8.7"
+ source = "registry+https://github.com/rust-lang/crates.io-index"
+ checksum = "773648b94d0e5d620f64f280777445740e61fe701025087ec8b57f45c791888b"
+ 
++[[package]]
++name = "core_detect"
++version = "1.0.0"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "7f8f80099a98041a3d1622845c271458a2d73e688351bf3cb999266764b81d48"
++
+ [[package]]
+ name = "cpufeatures"
+ version = "0.2.17"
+@@ -656,18 +662,18 @@ checksum = "790eea4361631c5e7d22598ecd5723ff611904e3344ce8720784c93e3d83d40b"
+ 
+ [[package]]
+ name = "crossbeam-channel"
+-version = "0.5.16"
++version = "0.5.17"
+ source = "registry+https://github.com/rust-lang/crates.io-index"
+-checksum = "d85363c37faeca707aef026efa9f3b34d077bce547e48f770770625c6013679e"
++checksum = "98b0cc327b5bc766e7fda9c9260cc0fa81b43a8e240440422dff70788e3f9ef1"
+ dependencies = [
+  "crossbeam-utils",
+ ]
+ 
+ [[package]]
+ name = "crossbeam-deque"
+-version = "0.8.7"
++version = "0.8.8"
+ source = "registry+https://github.com/rust-lang/crates.io-index"
+-checksum = "5181e0de7b61eb03a81e347d6dd8797bae9da5146707b51077e2d71a54ec0ceb"
++checksum = "622f3fc73690be383c7214310406f28a90e6edeadc3cea882f9d71e495b9711a"
+ dependencies = [
+  "crossbeam-epoch",
+  "crossbeam-utils",
+@@ -675,18 +681,18 @@ dependencies = [
+ 
+ [[package]]
+ name = "crossbeam-epoch"
+-version = "0.9.20"
++version = "0.9.21"
+ source = "registry+https://github.com/rust-lang/crates.io-index"
+-checksum = "2d6914041f254d6e9176c01941b21115dcfb7089e55135a35411081bd106ef3f"
++checksum = "dc74980687109a3b14c72fd458107bf0baa1da1a1a805e178d15501ba9b86d9d"
+ dependencies = [
+  "crossbeam-utils",
+ ]
+ 
+ [[package]]
+ name = "crossbeam-utils"
+-version = "0.8.22"
++version = "0.8.23"
+ source = "registry+https://github.com/rust-lang/crates.io-index"
+-checksum = "61803da095bee82a81bb1a452ecc25d3b2f1416d1897eb86430c6159ef717c17"
++checksum = "a31eee39dddec8330830986fcd7625edb5a24ec90ea038215273bbc3adb08ac6"
+ 
+ [[package]]
+ name = "crossterm"
+@@ -790,7 +796,7 @@ dependencies = [
+  "proc-macro2",
+  "quote",
+  "strsim",
+- "syn 3.0.4",
++ "syn 3.0.5",
+ ]
+ 
+ [[package]]
+@@ -801,7 +807,7 @@ checksum = "2ac7135c3ef02b2f7833bbeb1be5ba7f966dcde8a87c6b87f65a778d71a02785"
+ dependencies = [
+  "darling_core",
+  "quote",
+- "syn 3.0.4",
++ "syn 3.0.5",
+ ]
+ 
+ [[package]]
+@@ -1005,11 +1011,17 @@ checksum = "34aa73646ffb006b8f5147f3dc182bd4bcb190227ce861fc4a4844bf8e3cb2c0"
+ 
+ [[package]]
+ name = "encoding_rs"
+-version = "0.8.35"
++version = "0.8.40"
+ source = "registry+https://github.com/rust-lang/crates.io-index"
+-checksum = "75030f3c4f45dafd7586dd6780965a8c7e8e285a5ecb86713e63a79c5b2766f3"
++checksum = "2a7a45518d2863d18aa47f4a0cf9faec2aa4304cc09df5e41299f276b3ad135e"
+ dependencies = [
+  "cfg-if",
++ "core_detect",
++ "multiversion",
++ "multiversion_no_op",
++ "rustversion",
++ "scopeguard",
++ "simdutf8",
+ ]
+ 
+ [[package]]
+@@ -1110,9 +1122,9 @@ dependencies = [
+ 
+ [[package]]
+ name = "fancy-regex"
+-version = "0.19.0"
++version = "0.19.1"
+ source = "registry+https://github.com/rust-lang/crates.io-index"
+-checksum = "476de73bddf2ef8490aa4ee8f1cf40b430bf1d56c48c22080e5186952cd580e6"
++checksum = "52e0387578e845beb7a1acff126228499f26cb18edf12919cc513bb863266464"
+ dependencies = [
+  "bit-set 0.8.0",
+  "regex-automata",
+@@ -1281,7 +1293,7 @@ checksum = "9fb9654ba8355388abeb8dcb4fc62f511300867002afc858860463bdd9fe0c44"
+ dependencies = [
+  "proc-macro2",
+  "quote",
+- "syn 3.0.4",
++ "syn 3.0.5",
+ ]
+ 
+ [[package]]
+@@ -2344,9 +2356,9 @@ checksum = "964de6e86d545b246d84badc0fef527924ace5134f30641c203ef52ba83f58d5"
+ 
+ [[package]]
+ name = "indexmap"
+-version = "2.14.1"
++version = "2.14.2"
+ source = "registry+https://github.com/rust-lang/crates.io-index"
+-checksum = "07aa2048142242915a31d35844fb311e0e53fcca590c3a0a40dcf1b841fa09eb"
++checksum = "cc4e190f5d26ca7051642629da2c52fc03bde85a03197c99408dcd291734c855"
+ dependencies = [
+  "equivalent",
+  "hashbrown 0.17.1",
+@@ -2387,7 +2399,7 @@ dependencies = [
+  "indoc",
+  "proc-macro2",
+  "quote",
+- "syn 3.0.4",
++ "syn 3.0.5",
+ ]
+ 
+ [[package]]
+@@ -2623,7 +2635,7 @@ version = "0.45.1"
+ dependencies = [
+  "proc-macro2",
+  "quote",
+- "syn 3.0.4",
++ "syn 3.0.5",
+ ]
+ 
+ [[package]]
+@@ -2684,9 +2696,9 @@ dependencies = [
+ 
+ [[package]]
+ name = "js-sys"
+-version = "0.3.104"
++version = "0.3.105"
+ source = "registry+https://github.com/rust-lang/crates.io-index"
+-checksum = "0e0c1080212aad755ea003d18543e8768dd432c48819efd73a7bf1e39b7a5a3a"
++checksum = "ce57d20d1ea864ce2ac172ab472d409214f4fd359f0b2a2775abdf522e2af99e"
+ dependencies = [
+  "cfg-if",
+  "futures-util",
+@@ -2703,7 +2715,7 @@ dependencies = [
+  "bytecount",
+  "data-encoding",
+  "email_address",
+- "fancy-regex 0.19.0",
++ "fancy-regex 0.19.1",
+  "fraction",
+  "getrandom 0.3.4",
+  "itoa",
+@@ -2989,6 +3001,34 @@ version = "0.10.1"
+ source = "registry+https://github.com/rust-lang/crates.io-index"
+ checksum = "1d87ecb2933e8aeadb3e3a02b828fed80a7528047e68b4f424523a0981a3a084"
+ 
++[[package]]
++name = "multiversion"
++version = "0.8.0"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "7edb7f0ff51249dfda9ab96b5823695e15a052dc15074c9dbf3d118afaf2c201"
++dependencies = [
++ "multiversion-macros",
++ "target-features",
++]
++
++[[package]]
++name = "multiversion-macros"
++version = "0.8.0"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "b093064383341eb3271f42e381cb8f10a01459478446953953c75d24bd339fc0"
++dependencies = [
++ "proc-macro2",
++ "quote",
++ "syn 2.0.119",
++ "target-features",
++]
++
++[[package]]
++name = "multiversion_no_op"
++version = "1.0.0"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "743fb55ba31b18fb1ecef6bdc9aa2743314978ac084044301a7eee33fb99a20d"
++
+ [[package]]
+ name = "nix"
+ version = "0.29.0"
+@@ -3308,9 +3348,9 @@ checksum = "9b4f627cb1b25917193a259e49bdad08f671f8d9708acfd5fe0a8c1455d87220"
+ 
+ [[package]]
+ name = "pest"
+-version = "2.9.0"
++version = "2.9.1"
+ source = "registry+https://github.com/rust-lang/crates.io-index"
+-checksum = "5a07a60cc7a4d00c91f95c685609d1d2f79050e6804b70ebedd7650f0b839bcf"
++checksum = "6d45aeb61b4bf818e12d4205f2466f8c4748f85f4fce0146d1c03d69d753f0ad"
+ dependencies = [
+  "memchr",
+  "ucd-trie",
+@@ -3318,9 +3358,9 @@ dependencies = [
+ 
+ [[package]]
+ name = "pest_derive"
+-version = "2.9.0"
++version = "2.9.1"
+ source = "registry+https://github.com/rust-lang/crates.io-index"
+-checksum = "b3a83744a5c8455b8b3e0dc5031362780a347c878bdd11584d1a8984228cc88d"
++checksum = "89cc5a242e25ed4e7704d0be240f2cfbe20a8c27e7e252d94835be93d92dc39f"
+ dependencies = [
+  "pest",
+  "pest_generator",
+@@ -3328,9 +3368,9 @@ dependencies = [
+ 
+ [[package]]
+ name = "pest_generator"
+-version = "2.9.0"
++version = "2.9.1"
+ source = "registry+https://github.com/rust-lang/crates.io-index"
+-checksum = "e0cd3451aa3de60d4b9a1e736885e4dea6b31617598026f12256ad566d63304a"
++checksum = "7abf21475cc3820fe4b2ca2dc2142902f67a02189f3b5b3a229f4febc01a43e5"
+ dependencies = [
+  "pest",
+  "pest_meta",
+@@ -3341,9 +3381,9 @@ dependencies = [
+ 
+ [[package]]
+ name = "pest_meta"
+-version = "2.9.0"
++version = "2.9.1"
+ source = "registry+https://github.com/rust-lang/crates.io-index"
+-checksum = "e04d3a0849e241d7dfce834c83b1c5edc8622009e8dd51a12ba1927c32f05496"
++checksum = "adba4db388f687393c18c51348d44a41d870ca9df71a2c98172ea3035dc6936e"
+ dependencies = [
+  "pest",
+ ]
+@@ -3459,9 +3499,9 @@ checksum = "05c8b63e8d9609db387f0324918f81d68fe27748f084ef092fb35954d0539a85"
+ 
+ [[package]]
+ name = "portable-atomic-util"
+-version = "0.2.7"
++version = "0.2.8"
+ source = "registry+https://github.com/rust-lang/crates.io-index"
+-checksum = "c2a106d1259c23fac8e543272398ae0e3c0b8d33c88ed73d0cc71b0f1d902618"
++checksum = "10ab3eb7f3becc3a1cbc4f2c6f20267996cfc1a6467a873763411b136a122715"
+ dependencies = [
+  "portable-atomic",
+ ]
+@@ -3901,7 +3941,7 @@ checksum = "92ecd8964f8453721699a1ed72037b0db49ce2f5a5138486ee89bed6f67cdf3a"
+ dependencies = [
+  "proc-macro2",
+  "quote",
+- "syn 3.0.4",
++ "syn 3.0.5",
+ ]
+ 
+ [[package]]
+@@ -4143,7 +4183,7 @@ checksum = "e7a5d71263a5a7d47b41f6b3f06ba276f10cc18b0931f1799f710578e2309348"
+ dependencies = [
+  "proc-macro2",
+  "quote",
+- "syn 3.0.4",
++ "syn 3.0.5",
+ ]
+ 
+ [[package]]
+@@ -4378,15 +4418,21 @@ dependencies = [
+ 
+ [[package]]
+ name = "syn"
+-version = "3.0.4"
++version = "3.0.5"
+ source = "registry+https://github.com/rust-lang/crates.io-index"
+-checksum = "e6275cddf4610d1775e6d1fe9469b2e77d0f39fd98fb7450901b821e0c53649f"
++checksum = "12df2e0110f65b775f769bb17ef989067a1d931b2eb822bd4346631eeada89f9"
+ dependencies = [
+  "proc-macro2",
+  "quote",
+  "unicode-ident",
+ ]
+ 
++[[package]]
++name = "target-features"
++version = "0.1.6"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "c1bbb9f3c5c463a01705937a24fdabc5047929ac764b2d5b9cf681c1f5041ed5"
++
+ [[package]]
+ name = "tempfile"
+ version = "3.27.0"
+@@ -4594,7 +4640,7 @@ checksum = "bc04cd3e1236dd4a98afca4569f2deb3f120e5422a4023be2cb683f8486292af"
+ dependencies = [
+  "proc-macro2",
+  "quote",
+- "syn 3.0.4",
++ "syn 3.0.5",
+ ]
+ 
+ [[package]]
+@@ -4683,7 +4729,7 @@ checksum = "78773a2a397f451582ce068015985c33193cf6dea8b74d2a639fe457b2f07b0e"
+ dependencies = [
+  "proc-macro2",
+  "quote",
+- "syn 3.0.4",
++ "syn 3.0.5",
+ ]
+ 
+ [[package]]
+@@ -5047,9 +5093,9 @@ dependencies = [
+ 
+ [[package]]
+ name = "wasm-bindgen"
+-version = "0.2.127"
++version = "0.2.128"
+ source = "registry+https://github.com/rust-lang/crates.io-index"
+-checksum = "1b70935747edd64d89de3efa29d73789b806c15798f8e7dca4d8ac356b50ce70"
++checksum = "aecb87a33d3b0c5e3b7aa46336eaf486cffafbd281b195e4c8b80d50df2351bf"
+ dependencies = [
+  "cfg-if",
+  "once_cell",
+@@ -5060,9 +5106,9 @@ dependencies = [
+ 
+ [[package]]
+ name = "wasm-bindgen-macro"
+-version = "0.2.127"
++version = "0.2.128"
+ source = "registry+https://github.com/rust-lang/crates.io-index"
+-checksum = "77775f8f3f7217702089053b94958f8f54061a3f663417df76e19cbdcca29bc1"
++checksum = "a690d511e3c1a8b3a55e33511e3c2c00c78415cd23650f32b808627f5696b9ed"
+ dependencies = [
+  "quote",
+  "wasm-bindgen-macro-support",
+@@ -5070,22 +5116,22 @@ dependencies = [
+ 
+ [[package]]
+ name = "wasm-bindgen-macro-support"
+-version = "0.2.127"
++version = "0.2.128"
+ source = "registry+https://github.com/rust-lang/crates.io-index"
+-checksum = "e11d33f857dc2fb11b8bc75aee111aa9cbeb12cd9f25efd3d4c2a3dd4e235284"
++checksum = "411e4887f0071ef2d2164a9d5fdf2d20efbef78fccd3a78b0c10a1dc5295e48a"
+ dependencies = [
+  "bumpalo",
+  "proc-macro2",
+  "quote",
+- "syn 2.0.119",
++ "syn 3.0.5",
+  "wasm-bindgen-shared",
+ ]
+ 
+ [[package]]
+ name = "wasm-bindgen-shared"
+-version = "0.2.127"
++version = "0.2.128"
+ source = "registry+https://github.com/rust-lang/crates.io-index"
+-checksum = "7ef64dbcc55df09c7e5a46182d181c2cfa3e925f3da937ea764728b4bbb9dcbf"
++checksum = "81941cd78d0c92026c33e5e01312845a4cb1e9af3407f9134b100dd03144103e"
+ dependencies = [
+  "unicode-ident",
+ ]
+@@ -5110,9 +5156,9 @@ dependencies = [
+ 
+ [[package]]
+ name = "web-sys"
+-version = "0.3.104"
++version = "0.3.105"
+ source = "registry+https://github.com/rust-lang/crates.io-index"
+-checksum = "c435338968042f4f59a557f690a253676d47ce13ceb55d70100e7facf6620a30"
++checksum = "9fbddc4a036f00ec4f18c83445bd3115cb306a91da554919a099d9222fe4a7f8"
+ dependencies = [
+  "js-sys",
+  "wasm-bindgen",
+diff --git a/cli/src/command_error.rs b/cli/src/command_error.rs
+index e7c410aa33b..7157756ccde 100644
+--- a/cli/src/command_error.rs
++++ b/cli/src/command_error.rs
+@@ -35,6 +35,8 @@ use jj_lib::fileset::FilePatternParseError;
+ use jj_lib::fileset::FilesetParseError;
+ use jj_lib::fileset::FilesetParseErrorKind;
+ use jj_lib::fix::FixError;
++#[cfg(feature = "git")]
++use jj_lib::gitattributes::GitAttributesError;
+ use jj_lib::gitignore::GitIgnoreError;
+ use jj_lib::index::IndexError;
+ use jj_lib::op_heads_store::OpHeadsStoreError;
+@@ -742,6 +744,13 @@ impl From<GitIgnoreError> for CommandError {
+     }
+ }
+ 
++#[cfg(feature = "git")]
++impl From<GitAttributesError> for CommandError {
++    fn from(err: GitAttributesError) -> Self {
++        user_error_with_message("Failed to process .gitattributes.", err)
++    }
++}
++
+ impl From<ParseBulkEditMessageError> for CommandError {
+     fn from(err: ParseBulkEditMessageError) -> Self {
+         user_error(err)
+diff --git a/cli/src/commands/run.rs b/cli/src/commands/run.rs
+index 340d3eb3999..0d9fe31fddf 100644
+--- a/cli/src/commands/run.rs
++++ b/cli/src/commands/run.rs
+@@ -16,6 +16,7 @@
+ 
+ use std::cmp::min;
+ use std::collections::HashMap;
++use std::collections::HashSet;
+ use std::fmt;
+ use std::fs;
+ use std::io;
+@@ -101,12 +102,13 @@ impl From<RunError> for CommandError {
+     }
+ }
+ 
+-fn default_tree_state_settings() -> TreeStateSettings {
++fn default_tree_state_settings(ignore_filters: &HashSet<String>) -> TreeStateSettings {
+     TreeStateSettings {
+         conflict_marker_style: ConflictMarkerStyle::Snapshot,
+         eol_conversion_mode: EolConversionMode::None,
+         exec_change_setting: ExecChangeSetting::Auto,
+         fsmonitor_settings: FsmonitorSettings::None,
++        ignore_filters: ignore_filters.clone(),
+     }
+ }
+ 
+@@ -171,6 +173,7 @@ struct WorkspacePool {
+     /// Sparse patterns that influence what parts of the tree are materialized
+     /// when running the command. If None, whole tree is materialized.
+     sparsity: Option<Vec<RepoPathBuf>>,
++    ignore_filters: HashSet<String>,
+ }
+ 
+ impl WorkspacePool {
+@@ -180,6 +183,7 @@ impl WorkspacePool {
+         auto_tracking_matcher: Box<dyn Matcher>,
+         clean: bool,
+         sparsity: Option<Vec<RepoPathBuf>>,
++        ignore_filters: HashSet<String>,
+     ) -> Result<Self, RunError> {
+         // The parent() call is needed to not write under `.jj/repo/`.
+         let base_path = repo_path.parent().unwrap().join("run").join("default");
+@@ -190,6 +194,7 @@ impl WorkspacePool {
+             auto_tracking_matcher,
+             clean,
+             sparsity,
++            ignore_filters,
+         })
+     }
+ 
+@@ -216,7 +221,7 @@ impl WorkspacePool {
+         let tree_state_path = state_dir.join("tree_state");
+ 
+         let is_reused_workspace = tree_state_path.exists();
+-        let settings = default_tree_state_settings();
++        let settings = default_tree_state_settings(&self.ignore_filters);
+         let mut tree_state = if !self.clean && is_reused_workspace {
+             // Load the persisted tree state so `check_out` below can diff
+             // against it, only touching files that changed and removing files
+@@ -463,7 +468,6 @@ async fn rewrite_commit(
+     let working_copy_dir = workspace.working_copy_dir.clone();
+     let old_id = commit.id().clone();
+     let old_tree = commit.tree();
+-
+     // Resolve where the command should run. If the subdir doesn't exist in this
+     // commit's checked-out tree, skip the commit entirely.
+     let exec_dir = if let Some(subdir) = &spec.subdir {
+@@ -782,7 +786,6 @@ pub async fn cmd_run(
+ 
+     let store = workspace_command.repo().store().clone();
+     let auto_tracking_matcher = workspace_command.auto_tracking_matcher(ui)?;
+-
+     let sparsity = match args.sparse_patterns {
+         SparseInheritance::Full => None,
+         SparseInheritance::Empty => Some(vec![]),
+@@ -792,6 +795,20 @@ pub async fn cmd_run(
+         }
+     };
+ 
++    let ignore_filters = {
++        #[cfg(feature = "git")]
++        {
++            use jj_lib::git::GitSettings;
++            GitSettings::from_settings(workspace_command.settings())?
++                .ignore_filters
++                .into_iter()
++                .collect()
++        }
++        #[cfg(not(feature = "git"))]
++        {
++            HashSet::new()
++        }
++    };
+     let mut tx = workspace_command.start_transaction();
+ 
+     let rt = {
+@@ -808,6 +825,7 @@ pub async fn cmd_run(
+         auto_tracking_matcher,
+         args.clean,
+         sparsity,
++        ignore_filters,
+     )?);
+ 
+     let spec = Arc::new(CommandSpec {
+diff --git a/cli/src/config-schema.json b/cli/src/config-schema.json
+index 199464639e8..377ac5015b1 100644
+--- a/cli/src/config-schema.json
++++ b/cli/src/config-schema.json
+@@ -569,6 +569,14 @@
+                     "enum": ["sha1", "sha256"],
+                     "description": "Object hash algorithm used when initializing a new Git repository",
+                     "default": "sha1"
++                },
++                "ignore-filters": {
++                    "type": "array",
++                    "items": {
++                        "type": "string"
++                    },
++                    "description": "Names of `.gitattributes` filter attributes whose matching files should be excluded from snapshots in Git-backed repositories",
++                    "default": ["lfs"]
+                 }
+             }
+         },
+diff --git a/cli/src/config/misc.toml b/cli/src/config/misc.toml
+index 70ed210c17e..cd5d01c701a 100644
+--- a/cli/src/config/misc.toml
++++ b/cli/src/config/misc.toml
+@@ -26,6 +26,7 @@ disabled-branches = []
+ 
+ [git]
+ colocate = true
++ignore-filters = ["lfs"]
+ object-hash = "sha1"
+ private-commits = "none()"
+ sign-on-push = false
+diff --git a/cli/src/merge_tools/diff_working_copies.rs b/cli/src/merge_tools/diff_working_copies.rs
+index 7b5cb000b85..5113cd8dc5f 100644
+--- a/cli/src/merge_tools/diff_working_copies.rs
++++ b/cli/src/merge_tools/diff_working_copies.rs
+@@ -1,4 +1,5 @@
+ use std::collections::HashMap;
++use std::collections::HashSet;
+ use std::fs::File;
+ use std::io;
+ use std::io::Write as _;
+@@ -156,6 +157,7 @@ pub(crate) async fn check_out_trees(
+     matcher: &dyn Matcher,
+     diff_type: DiffType,
+     conflict_marker_style: ConflictMarkerStyle,
++    ignore_filters: HashSet<String>,
+ ) -> Result<DiffWorkingCopies, DiffCheckoutError> {
+     let store = trees.before.store();
+     let changed_files: Vec<_> = trees
+@@ -179,6 +181,7 @@ pub(crate) async fn check_out_trees(
+             eol_conversion_mode: EolConversionMode::None,
+             exec_change_setting: ExecChangeSetting::Auto,
+             fsmonitor_settings: FsmonitorSettings::None,
++            ignore_filters: ignore_filters.clone(),
+         };
+         let mut state = TreeState::init(store.clone(), wc_path, state_dir, &tree_state_settings)?;
+         state.set_sparse_patterns(changed_files.clone())?;
+@@ -214,9 +217,16 @@ impl DiffEditWorkingCopies {
+         diff_type: DiffType,
+         instructions: Option<&str>,
+         conflict_marker_style: ConflictMarkerStyle,
++        ignore_filters: HashSet<String>,
+     ) -> Result<Self, DiffEditError> {
+-        let working_copies =
+-            check_out_trees(trees, matcher, diff_type, conflict_marker_style).await?;
++        let working_copies = check_out_trees(
++            trees,
++            matcher,
++            diff_type,
++            conflict_marker_style,
++            ignore_filters,
++        )
++        .await?;
+         working_copies.set_left_readonly()?;
+         if diff_type == DiffType::ThreeWay {
+             working_copies.set_right_readonly()?;
+diff --git a/cli/src/merge_tools/external.rs b/cli/src/merge_tools/external.rs
+index 94659152163..994ed836bf7 100644
+--- a/cli/src/merge_tools/external.rs
++++ b/cli/src/merge_tools/external.rs
+@@ -1,4 +1,5 @@
+ use std::collections::HashMap;
++use std::collections::HashSet;
+ use std::io;
+ use std::io::Write;
+ use std::path::Path;
+@@ -388,6 +389,7 @@ pub async fn edit_diff_external(
+     instructions: Option<&str>,
+     base_ignores: Arc<GitIgnoreFile>,
+     default_conflict_marker_style: ConflictMarkerStyle,
++    ignore_filters: HashSet<String>,
+ ) -> Result<MergedTree, DiffEditError> {
+     let conflict_marker_style = editor
+         .conflict_marker_style
+@@ -405,6 +407,7 @@ pub async fn edit_diff_external(
+         diff_type,
+         instructions,
+         conflict_marker_style,
++        ignore_filters,
+     )
+     .await?;
+ 
+@@ -456,7 +459,14 @@ pub async fn generate_diff(
+     let conflict_marker_style = tool
+         .conflict_marker_style
+         .unwrap_or(default_conflict_marker_style);
+-    let diff_wc = check_out_trees(trees, matcher, DiffType::TwoWay, conflict_marker_style).await?;
++    let diff_wc = check_out_trees(
++        trees,
++        matcher,
++        DiffType::TwoWay,
++        conflict_marker_style,
++        HashSet::new(),
++    )
++    .await?;
+     diff_wc.set_left_readonly()?;
+     diff_wc.set_right_readonly()?;
+     let mut patterns = diff_wc.to_command_variables(true);
+diff --git a/cli/src/merge_tools/mod.rs b/cli/src/merge_tools/mod.rs
+index 17f952105bc..f7a89584c88 100644
+--- a/cli/src/merge_tools/mod.rs
++++ b/cli/src/merge_tools/mod.rs
+@@ -16,6 +16,7 @@ mod builtin;
+ mod diff_working_copies;
+ mod external;
+ 
++use std::collections::HashSet;
+ use std::sync::Arc;
+ 
+ use futures::future::try_join_all;
+@@ -235,6 +236,7 @@ pub fn get_external_tool_config(
+ pub struct DiffEditor {
+     tool: DiffEditTool,
+     base_ignores: Arc<GitIgnoreFile>,
++    ignore_filters: HashSet<String>,
+     use_instructions: bool,
+     conflict_marker_style: ConflictMarkerStyle,
+ }
+@@ -284,9 +286,24 @@ impl DiffEditor {
+                 tool_name: name.to_string(),
+             });
+         }
++        let ignore_filters = {
++            #[cfg(feature = "git")]
++            {
++                use jj_lib::git::GitSettings;
++                GitSettings::from_settings(settings)?
++                    .ignore_filters
++                    .into_iter()
++                    .collect()
++            }
++            #[cfg(not(feature = "git"))]
++            {
++                HashSet::new()
++            }
++        };
+         Ok(Self {
+             tool,
+             base_ignores,
++            ignore_filters,
+             use_instructions: settings.get_bool("ui.diff-instructions")?,
+             conflict_marker_style,
+         })
+@@ -316,6 +333,7 @@ impl DiffEditor {
+                     instructions.as_deref(),
+                     self.base_ignores.clone(),
+                     self.conflict_marker_style,
++                    self.ignore_filters.clone(),
+                 )
+                 .await
+             }
+diff --git a/cli/tests/test_diffedit_command.rs b/cli/tests/test_diffedit_command.rs
+index e54c63953f1..fe074bbdc93 100644
+--- a/cli/tests/test_diffedit_command.rs
++++ b/cli/tests/test_diffedit_command.rs
+@@ -18,6 +18,48 @@ use testutils::TestResult;
+ 
+ use crate::common::TestEnvironment;
+ 
++#[test]
++fn test_diffedit_gitattributes_filter_in_temp_snapshot() -> TestResult {
++    let mut test_env = TestEnvironment::default();
++    let edit_script = test_env.set_up_fake_diff_editor();
++    test_env.run_jj_in(".", ["git", "init", "repo"]).success();
++    let work_dir = test_env.work_dir("repo");
++
++    work_dir.write_file(".gitattributes", "*.bin filter=lfs\n");
++    work_dir.write_file("file.bin", "original\n");
++    work_dir
++        .run_jj(["--config=git.ignore-filters=[]", "commit", "-m", "base"])
++        .success();
++    work_dir.write_file("file.bin", "after\n");
++    work_dir
++        .run_jj(["--config=git.ignore-filters=[]", "debug", "snapshot"])
++        .success();
++
++    std::fs::write(
++        &edit_script,
++        "files-before file.bin\0files-after JJ-INSTRUCTIONS file.bin\0write file.bin\nedited\n",
++    )?;
++    work_dir.run_jj(["diffedit"]).success();
++
++    // Regression test for a bug found during development.
++    //
++    // This creates a tracked LFS-filtered modification by disabling filter
++    // ignores only for setup. `diffedit` then operates with normal settings.
++    // Its external editor writes into a temporary output working copy, and
++    // snapshotting that output must use the configured .gitattributes filters.
++    // Otherwise the editor can rewrite a tracked LFS-filtered file even though
++    // normal snapshots would ignore it.
++    insta::assert_snapshot!(
++        work_dir.run_jj(["file", "show", "file.bin"]).success().stdout,
++        @r"
++    after
++    [EOF]
++    "
++    );
++
++    Ok(())
++}
++
+ #[test]
+ fn test_diffedit() -> TestResult {
+     let mut test_env = TestEnvironment::default();
+diff --git a/cli/tests/test_run_command.rs b/cli/tests/test_run_command.rs
+index 8d3d9901c46..f41a73d9025 100644
+--- a/cli/tests/test_run_command.rs
++++ b/cli/tests/test_run_command.rs
+@@ -67,6 +67,48 @@ fn test_run_simple() {
+     insta::assert_snapshot!(stdout, @"xxxx[EOF]");
+ }
+ 
++#[test]
++fn test_run_gitattributes_filter_in_temp_snapshot() {
++    let test_env = TestEnvironment::default();
++    test_env.run_jj_in(".", ["git", "init", "repo"]).success();
++    let fake_formatter = assert_cmd::cargo::cargo_bin("fake-formatter");
++    assert!(fake_formatter.is_file());
++    let fake_formatter_path = fake_formatter.to_string_lossy().into_owned();
++    let work_dir = test_env.work_dir("repo");
++
++    work_dir.write_file(".gitattributes", "*.bin filter=lfs\n");
++    work_dir.write_file("file.bin", "original");
++    work_dir
++        .run_jj(["--config=git.ignore-filters=[]", "commit", "-m", "base"])
++        .success();
++
++    work_dir
++        .run_jj([
++            "run",
++            "-r",
++            "@-",
++            "--",
++            &fake_formatter_path,
++            "--stdout",
++            "modified",
++            "--tee",
++            "file.bin",
++        ])
++        .success();
++
++    // Regression test for a bug found during development.
++    //
++    // This creates a legitimately tracked file by disabling filter ignores only
++    // for setup. `jj run` then operates with normal settings. Its temporary
++    // working copy is snapshotted after the command runs, and that snapshot must
++    // use the configured .gitattributes filters. Otherwise a command can rewrite
++    // a tracked LFS-filtered file even though normal snapshots would ignore it.
++    insta::assert_snapshot!(
++        work_dir.run_jj(["file", "show", "-r", "@-", "file.bin"]).success().stdout,
++        @"original[EOF]"
++    );
++}
++
+ #[test]
+ fn test_run_on_immutable() {
+     let test_env = TestEnvironment::default();
+diff --git a/docs/config.md b/docs/config.md
+index bceb9dee503..aa1b54c8eca 100644
+--- a/docs/config.md
++++ b/docs/config.md
+@@ -1998,6 +1998,23 @@ you can:
+ executable-path = "/path/to/git"
+ ```
+ 
++### Ignoring files by `.gitattributes` filter
++
++In Git-backed repositories, `jj` can skip files during snapshot based on the
++`filter` attribute in `.gitattributes`. The `git.ignore-filters` setting lists
++the filter values to skip, and defaults to `["lfs"]`.
++
++```toml
++[git]
++ignore-filters = ["lfs", "git-crypt"]
++```
++
++This only affects snapshotting from disk to the store. Checkout still writes
++the files from the tree, so external tools such as `git lfs pull` or
++`git lfs checkout` can hydrate them afterward. Files already tracked by `jj` may
++need to be removed with `jj file untrack <path>` before this setting affects
++future snapshots.
++
+ ## Gerrit settings
+ 
+ ### Default remote
+diff --git a/docs/git-compatibility.md b/docs/git-compatibility.md
+index c9726fe82dd..430acc39a43 100644
+--- a/docs/git-compatibility.md
++++ b/docs/git-compatibility.md
+@@ -35,8 +35,13 @@ a comparison with Git, including how workflows are different, see the
+   working-copy commit. It's recommended to set up the ignore patterns earlier.
+   The `.gitignore` support uses a native implementation, so please report a bug
+   if you notice any difference compared to `git`.
+-* **.gitattributes: No.** There's [#53](https://github.com/jj-vcs/jj/issues/53)
+-  about adding support for at least the `eol` attribute.
++* **.gitattributes: Partial.** In Git-backed repositories, `jj` reads
++  `.gitattributes` `filter` attributes during snapshot and skips files whose
++  filter is listed in `git.ignore-filters`, which defaults to `["lfs"]`. This
++  is snapshot-only; checkout still writes files from the tree. Other attributes
++  such as `eol`, `text`, `diff`, and `merge` are not otherwise supported.
++  There's [#53](https://github.com/jj-vcs/jj/issues/53) about adding support for
++  at least the `eol` attribute.
+ * **Hooks: No.** There's [#405](https://github.com/jj-vcs/jj/issues/405)
+   specifically for providing the checks from <https://pre-commit.com>.
+ * **Merge commits: Yes.** Octopus merges (i.e. with more than 2 parents) are
+@@ -69,7 +74,14 @@ a comparison with Git, including how workflows are different, see the
+ * **Signed commits: Yes.**
+   You can sign commits automatically [by configuration](config.md#commit-signing),
+   or use the `jj sign` command.
+-* **Git LFS: No.** ([#80](https://github.com/jj-vcs/jj/issues/80))
++* **Git LFS: Partial.** In Git-backed repositories, files with `filter=lfs` are
++  ignored during snapshot by default. `jj` does not fetch, clean, smudge, or
++  hydrate LFS contents; use Git LFS commands such as `git lfs pull` or
++  `git lfs checkout` for those steps. Existing tracked files may need
++  `jj file untrack <path>` before the snapshot ignore takes effect
++  ([#80](https://github.com/jj-vcs/jj/issues/80)). Note that `git` commands
++  will not work in workspaces created by `jj workspace` as they do not have a
++  `.git` directory (see also: [#4436](https://github.com/jj-vcs/jj/issues/4436)).
+ 
+ ## Creating an empty repo
+ 
+diff --git a/lib/src/git.rs b/lib/src/git.rs
+index 55081a8f80e..de972ba493b 100644
+--- a/lib/src/git.rs
++++ b/lib/src/git.rs
+@@ -43,6 +43,7 @@ use crate::backend::CommitId;
+ use crate::backend::TreeValue;
+ use crate::commit::Commit;
+ use crate::config::ConfigGetError;
++use crate::config::ConfigGetResultExt as _;
+ use crate::file_util::IoResultExt as _;
+ use crate::file_util::PathError;
+ use crate::file_util::is_empty_dir;
+@@ -110,6 +111,7 @@ pub struct GitSettings {
+     pub executable_path: PathBuf,
+     pub record_synthetic_predecessors: bool,
+     pub write_change_id_header: bool,
++    pub ignore_filters: Vec<String>,
+ }
+ 
+ impl GitSettings {
+@@ -120,6 +122,10 @@ impl GitSettings {
+             record_synthetic_predecessors: settings
+                 .get_bool("git.record-synthetic-predecessors")?,
+             write_change_id_header: settings.get("git.write-change-id-header")?,
++            ignore_filters: settings
++                .get("git.ignore-filters")
++                .optional()?
++                .unwrap_or_else(|| vec!["lfs".to_string()]),
+         })
+     }
+ 
+diff --git a/lib/src/gitattributes.rs b/lib/src/gitattributes.rs
+new file mode 100644
+index 00000000000..8a12782d9a6
+--- /dev/null
++++ b/lib/src/gitattributes.rs
+@@ -0,0 +1,974 @@
++// Copyright 2026 The Jujutsu Authors
++//
++// Licensed under the Apache License, Version 2.0 (the "License");
++// you may not use this file except in compliance with the License.
++// You may obtain a copy of the License at
++//
++// https://www.apache.org/licenses/LICENSE-2.0
++//
++// Unless required by applicable law or agreed to in writing, software
++// distributed under the License is distributed on an "AS IS" BASIS,
++// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++// See the License for the specific language governing permissions and
++// limitations under the License.
++
++//! Git attributes parsing and evaluation.
++//!
++//! This module provides the `GitAttributes` struct for parsing and evaluating
++//! `.gitattributes` files. To support reading attributes both from the working
++//! copy (disk) and from the repository's tree (store), the loading mechanism is
++//! abstracted using the `FileLoader` trait.
++//!
++//! Depending on the context, we may choose which loader acts as the "primary"
++//! source for the `.gitattributes` file via `SearchPriority`:
++//!
++//! - `SearchPriority::Disk`: Used when operating on the working copy. The
++//!   `DiskFileLoader` is checked first to ensure uncommitted changes to
++//!   `.gitattributes` are respected.
++//! - `SearchPriority::Store`: Useful when the working copy is not a concern
++//!   (e.g., historical gitattributes). The `TreeFileLoader` is checked first.
++//!   Ignores any working-copy changes on the "primary" read.
++//!
++//! In either mode, if the `.gitattributes` file is not found by the "primary"
++//! loader for a given directory, we fall back to checking the "secondary"
++//! loader.
++//!
++//! Attribute rules are loaded lazily on a per-directory basis. When evaluating
++//! a path like `a/b/file.txt`, the system recursively evaluates rules from the
++//! repository root down to `a/b/`. Child directories inherit and can override
++//! parent rules. Git macros are restricted to the root directory. Parsed rules
++//! for each directory are cached. This implementation attempts to follow Git
++//! handles attributes.
++
++use std::collections::HashMap;
++use std::collections::HashSet;
++use std::fs::File;
++use std::io::ErrorKind;
++use std::path::PathBuf;
++use std::sync::Arc;
++use std::sync::Mutex;
++
++use futures::AsyncRead;
++use futures::AsyncReadExt as _;
++use futures::io::AllowStdIo;
++use gix::attrs::Search;
++use gix::attrs::State;
++use gix::attrs::glob::pattern::Case;
++use gix::attrs::search::MetadataCollection;
++use gix::attrs::search::Outcome;
++
++use crate::backend::MergedTreeValueExt as _;
++use crate::backend::TreeValue;
++use crate::merge::SameChange;
++use crate::merged_tree::MergedTree;
++use crate::repo_path::RepoPath;
++use crate::repo_path::RepoPathBuf;
++use crate::repo_path::RepoPathComponent;
++
++/// Git Attributes instance
++///
++/// This struct handles accessing .gitattributes files
++/// and maintains a cache to prevent loading the same file twice.
++///
++/// It's lazy loaded so .gitattributes files are only accessed
++/// if you search for attributes for a given path.
++pub(crate) struct GitAttributes {
++    disk_file_loader: Arc<dyn FileLoader>,
++    store_file_loader: Arc<dyn FileLoader>,
++    node_cache: Mutex<HashMap<RepoPathBuf, Arc<GitAttributesNode>>>,
++}
++
++#[async_trait::async_trait]
++pub(crate) trait FileLoader: Send + Sync {
++    /// Loads a file in a given `path`
++    ///
++    /// Returns Some(..) if the file was found and None if not
++    async fn load(
++        &self,
++        path: &RepoPath,
++    ) -> Result<Option<Box<dyn AsyncRead + Send + Unpin>>, GitAttributesError>;
++}
++
++pub(crate) struct TreeFileLoader {
++    tree: MergedTree,
++}
++impl TreeFileLoader {
++    pub fn new(tree: MergedTree) -> Self {
++        Self { tree }
++    }
++}
++
++#[async_trait::async_trait]
++impl FileLoader for TreeFileLoader {
++    async fn load(
++        &self,
++        path: &RepoPath,
++    ) -> Result<Option<Box<dyn AsyncRead + Send + Unpin>>, GitAttributesError> {
++        let merged_tree_value =
++            self.tree
++                .path_value(path)
++                .await
++                .map_err(|err| GitAttributesError {
++                    message: "Could not retrieve the value from path".to_string(),
++                    source: err.into(),
++                })?;
++        let maybe_file_merge = merged_tree_value.to_file_merge();
++        // try to resolve the file
++        let id = match maybe_file_merge
++            .as_ref()
++            .and_then(|files| files.resolve_trivial(SameChange::Accept))
++        {
++            Some(Some(id)) => id,
++            Some(None) => return Ok(None),
++            None => {
++                // conflict path
++                let Some(id) = merged_tree_value.iter().find_map(|tree_value| {
++                    let Some(TreeValue::File { id, .. }) = tree_value else {
++                        return None;
++                    };
++                    Some(id)
++                }) else {
++                    return Ok(None);
++                };
++                id
++            }
++        };
++
++        let result =
++            self.tree
++                .store()
++                .read_file(path, id)
++                .await
++                .map_err(|err| GitAttributesError {
++                    message: "Could not retrieve the value from path".to_string(),
++                    source: err.into(),
++                })?;
++        Ok(Some(Box::new(result)))
++    }
++}
++
++pub(crate) struct DiskFileLoader {
++    repo_root: PathBuf,
++}
++
++impl DiskFileLoader {
++    pub fn new(repo_root: PathBuf) -> Self {
++        Self { repo_root }
++    }
++}
++
++#[async_trait::async_trait]
++impl FileLoader for DiskFileLoader {
++    async fn load(
++        &self,
++        path: &RepoPath,
++    ) -> Result<Option<Box<dyn AsyncRead + Send + Unpin>>, GitAttributesError> {
++        let path = path
++            .to_fs_path(&self.repo_root)
++            .map_err(|err| GitAttributesError {
++                message: "Could not convert path into fs path".to_string(),
++                source: err.into(),
++            })?;
++
++        // we use symlink_metadata to not follow symlinks to follow Git's behavior.
++        let metadata = match path.symlink_metadata() {
++            Ok(metadata) => metadata,
++            Err(err) if matches!(err.kind(), ErrorKind::NotFound | ErrorKind::NotADirectory) => {
++                return Ok(None);
++            }
++            Err(err) => {
++                return Err(GitAttributesError {
++                    message: format!("Failed to obtain the file metadata of {}", path.display()),
++                    source: err.into(),
++                });
++            }
++        };
++        if !metadata.is_file() {
++            return Ok(None);
++        }
++
++        let file = match File::open(&path) {
++            Ok(file) => file,
++            Err(error)
++                if matches!(error.kind(), ErrorKind::NotFound | ErrorKind::NotADirectory) =>
++            {
++                return Ok(None);
++            }
++            Err(err) => {
++                return Err(GitAttributesError {
++                    message: format!("Failed to open the file at {}", path.display()),
++                    source: err.into(),
++                });
++            }
++        };
++        Ok(Some(Box::new(AllowStdIo::new(file))))
++    }
++}
++
++struct SearchAndCollection {
++    search: Search,
++    collection: MetadataCollection,
++}
++
++struct GitAttributesNode {
++    disk_first: futures::lock::Mutex<Option<Arc<SearchAndCollection>>>,
++    store_first: futures::lock::Mutex<Option<Arc<SearchAndCollection>>>,
++    disk_file_loader: Arc<dyn FileLoader>,
++    store_file_loader: Arc<dyn FileLoader>,
++    parent: Option<Arc<Self>>,
++    path: RepoPathBuf,
++}
++
++impl GitAttributesNode {
++    async fn get_disk_first(&self) -> Result<Arc<SearchAndCollection>, GitAttributesError> {
++        self.primary_then_secondary(SearchPriority::Disk).await
++    }
++    async fn get_store_first(&self) -> Result<Arc<SearchAndCollection>, GitAttributesError> {
++        self.primary_then_secondary(SearchPriority::Store).await
++    }
++
++    fn store(
++        &self,
++        priority: SearchPriority,
++    ) -> &futures::lock::Mutex<Option<Arc<SearchAndCollection>>> {
++        match priority {
++            SearchPriority::Store => &self.store_first,
++            SearchPriority::Disk => &self.disk_first,
++        }
++    }
++
++    fn primary_loader(&self, priority: SearchPriority) -> &Arc<dyn FileLoader> {
++        match priority {
++            SearchPriority::Store => &self.store_file_loader,
++            SearchPriority::Disk => &self.disk_file_loader,
++        }
++    }
++
++    fn secondary_loader(&self, priority: SearchPriority) -> &Arc<dyn FileLoader> {
++        match priority {
++            SearchPriority::Store => &self.disk_file_loader,
++            SearchPriority::Disk => &self.store_file_loader,
++        }
++    }
++
++    async fn primary_then_secondary(
++        &self,
++        priority: SearchPriority,
++    ) -> Result<Arc<SearchAndCollection>, GitAttributesError> {
++        let store = self.store(priority);
++        let mut guard = store.lock().await;
++        if let Some(res) = guard.as_ref() {
++            return Ok(res.clone());
++        }
++
++        let parent_metadata = match &self.parent {
++            // we use pin because this is a recursive call
++            Some(parent) => Box::pin(parent.primary_then_secondary(priority)).await?,
++            None => {
++                let mut search = Search::default();
++                let mut collection = MetadataCollection::default();
++                // initialize search
++                search.add_patterns_buffer(
++                    b"[attr]binary -diff -merge -text",
++                    "[builtin]".into(),
++                    None,
++                    &mut collection,
++                    true, /* allow macros */
++                );
++                Arc::new(SearchAndCollection { search, collection })
++            }
++        };
++        let git_attributes_path =
++            self.path
++                .join(RepoPathComponent::new(".gitattributes").map_err(|err| {
++                    GitAttributesError {
++                        message: "Could not join path with .gitattributes".to_string(),
++                        source: err.into(),
++                    }
++                })?);
++        let mut async_reader = match self
++            .primary_loader(priority)
++            .load(&git_attributes_path)
++            .await?
++        {
++            Some(reader) => reader,
++            None => {
++                // fallback to the secondary loader
++                match self
++                    .secondary_loader(priority)
++                    .load(&git_attributes_path)
++                    .await?
++                {
++                    Some(reader) => reader,
++                    None => {
++                        *guard = Some(parent_metadata.clone());
++                        return Ok(parent_metadata);
++                    }
++                }
++            }
++        };
++        let mut bytes = Vec::new();
++        async_reader
++            .read_to_end(&mut bytes)
++            .await
++            .map_err(|err| GitAttributesError {
++                source: err.into(),
++                message: "Could not read .gitattributes file".into(),
++            })?;
++        let mut search = parent_metadata.search.clone();
++        let mut collection = parent_metadata.collection.clone();
++
++        search.add_patterns_buffer(
++            &bytes,
++            git_attributes_path
++                .to_fs_path(&PathBuf::new())
++                .map_err(|err| GitAttributesError {
++                    message: "Could not convert gitattributes path into PathBuf".to_string(),
++                    source: err.into(),
++                })?,
++            Some(&PathBuf::new()),
++            &mut collection,
++            // Macros can only be defined in top-level gitattributes:
++            // https://git-scm.com/docs/gitattributes#_defining_macro_attributes
++            self.parent.is_none(), /* allow macros */
++        );
++
++        let res = Arc::new(SearchAndCollection { search, collection });
++        *guard = Some(res.clone());
++        Ok(res)
++    }
++}
++
++#[derive(Clone, Copy)]
++pub(crate) enum SearchPriority {
++    Store,
++    Disk,
++}
++
++impl GitAttributes {
++    /// Creates a new instance with store and disk file loaders.
++    pub fn new(
++        store_file_loader: impl FileLoader + 'static,
++        disk_file_loader: impl FileLoader + 'static,
++    ) -> Self {
++        Self {
++            store_file_loader: Arc::new(store_file_loader),
++            disk_file_loader: Arc::new(disk_file_loader),
++            node_cache: Default::default(),
++        }
++    }
++
++    pub(crate) async fn search(
++        &self,
++        path: &RepoPath,
++        attribute_names: impl AsRef<[&str]>,
++        priority: SearchPriority,
++    ) -> Result<HashMap<String, State>, GitAttributesError> {
++        let attributes = self.get_git_attributes_node(path);
++        let store = match priority {
++            SearchPriority::Store => attributes.get_store_first().await?,
++            SearchPriority::Disk => attributes.get_disk_first().await?,
++        };
++        let SearchAndCollection { search, collection } = &*store;
++
++        let mut out = Outcome::default();
++        out.initialize_with_selection(
++            collection,
++            // From<&str> is implemented for KStringRef
++            attribute_names.as_ref().iter().copied(),
++        );
++        search.pattern_matching_relative_path(
++            path.as_internal_file_string().into(),
++            Case::Sensitive,
++            None,
++            &mut out,
++        );
++
++        let mut map = out
++            .iter_selected()
++            .map(|attr| {
++                let val = attr.assignment.to_owned();
++                (val.name.as_str().to_string(), val.state)
++            })
++            .collect::<HashMap<String, State>>();
++
++        // go over attributes and mark as unspecified if not set
++        for attribute_name in attribute_names.as_ref() {
++            map.entry(attribute_name.to_string())
++                .or_insert(State::Unspecified);
++        }
++
++        Ok(map)
++    }
++
++    fn get_git_attributes_node(&self, path: &RepoPath) -> Arc<GitAttributesNode> {
++        let path = path.parent().unwrap_or(RepoPath::root());
++        let mut val = self.node_cache.lock().expect("Not be poisoned");
++        self.inner(&mut val, path)
++    }
++
++    fn inner(
++        &self,
++        map: &mut HashMap<RepoPathBuf, Arc<GitAttributesNode>>,
++        path: &RepoPath,
++    ) -> Arc<GitAttributesNode> {
++        if let Some(node) = map.get(path) {
++            return node.clone();
++        }
++        let parent = path.parent().map(|parent| self.inner(map, parent));
++        let new_node = Arc::new(GitAttributesNode {
++            disk_first: futures::lock::Mutex::new(None),
++            store_first: futures::lock::Mutex::new(None),
++            disk_file_loader: self.disk_file_loader.clone(),
++            store_file_loader: self.store_file_loader.clone(),
++            parent,
++            path: path.to_owned(),
++        });
++        map.insert(path.to_owned(), new_node.clone());
++        new_node
++    }
++}
++
++impl GitAttributes {
++    /// Returns whether the given `path` has a `filter` attribute in
++    /// .gitattributes whose value is contained in `ignore_filters`.
++    pub(crate) async fn filter_matches(
++        &self,
++        path: &RepoPath,
++        ignore_filters: &HashSet<String>,
++        priority: SearchPriority,
++    ) -> Result<bool, GitAttributesError> {
++        if ignore_filters.is_empty() {
++            return Ok(false);
++        }
++        let result = self.search(path, ["filter"], priority).await?;
++
++        let Some(State::Value(value)) = result.get("filter") else {
++            return Ok(false);
++        };
++        let value = value.as_ref().as_bstr();
++        Ok(ignore_filters.iter().any(|state| value == state.as_str()))
++    }
++}
++
++/// Errors for GitAttributes
++#[derive(Debug, thiserror::Error)]
++#[error("{message}")]
++pub struct GitAttributesError {
++    message: String,
++    #[source]
++    source: Box<dyn std::error::Error + Send + Sync>,
++}
++
++#[cfg(test)]
++mod tests {
++
++    use futures::io::Cursor;
++    use gix::attrs::state::Value;
++    use indoc::indoc;
++    use pollster::FutureExt as _;
++
++    use super::*;
++    use crate::tests::new_temp_dir;
++
++    type TestStore = HashMap<RepoPathBuf, Result<String, String>>;
++
++    #[async_trait::async_trait]
++    impl FileLoader for TestStore {
++        async fn load(
++            &self,
++            path: &RepoPath,
++        ) -> Result<Option<Box<dyn AsyncRead + Send + Unpin>>, GitAttributesError> {
++            let Some(mocked_result) = self.get(path) else {
++                return Ok(None);
++            };
++            let data = mocked_result.clone();
++            match data {
++                Ok(data) => Ok(Some(Box::new(Cursor::new(Vec::from(data))))),
++                Err(message) => Err(GitAttributesError {
++                    message: message.clone(),
++                    source: message.into(),
++                }),
++            }
++        }
++    }
++
++    fn repo_path(path: &str) -> &RepoPath {
++        RepoPath::from_internal_string(path).unwrap()
++    }
++
++    fn create_git_attributes(files: &[(&'static str, &'static str)]) -> GitAttributes {
++        let data: TestStore = files
++            .iter()
++            .map(|(key, value)| (repo_path(key).to_owned(), Ok(value.to_string())))
++            .collect();
++
++        GitAttributes::new(HashMap::new(), data)
++    }
++
++    fn assert_search_output(
++        git_attributes: &GitAttributes,
++        file: &str,
++        attribute: &str,
++        expected: State,
++    ) {
++        assert_search_output_with_priority(
++            git_attributes,
++            file,
++            attribute,
++            expected,
++            SearchPriority::Disk,
++        );
++    }
++
++    fn assert_search_output_with_priority(
++        git_attributes: &GitAttributes,
++        file: &str,
++        attribute: &str,
++        expected: State,
++        search: SearchPriority,
++    ) {
++        let map = git_attributes
++            .search(repo_path(file), &[attribute], search)
++            .block_on()
++            .unwrap();
++        assert_eq!(map.len(), 1);
++        assert_eq!(*map.get(attribute).unwrap(), expected);
++    }
++
++    fn assert_attribute_output(
++        git_attributes_content: &'static str,
++        file: &str,
++        attribute: &str,
++        expected: State,
++    ) {
++        let git_attributes = create_git_attributes(&[(".gitattributes", git_attributes_content)]);
++        assert_search_output(&git_attributes, file, attribute, expected);
++    }
++
++    #[test]
++    fn test_search_state_set() {
++        assert_attribute_output("abc foo", "abc", "foo", State::Set);
++    }
++
++    #[test]
++    fn test_search_state_eol_lf() {
++        assert_attribute_output("foo eol=lf", "foo", "eol", State::Value(Value::from("lf")));
++    }
++
++    #[test]
++    fn test_search_unset() {
++        assert_attribute_output("foo -text", "foo", "text", State::Unset);
++    }
++
++    #[test]
++    fn test_search_unspecified() {
++        assert_attribute_output("foo !text", "foo", "text", State::Unspecified);
++    }
++
++    #[test]
++    fn test_search_unspecified_no_pattern() {
++        assert_attribute_output("foo elo=lf", "bar", "text", State::Unspecified);
++        assert_attribute_output("foo elo=lf", "bar", "elo", State::Unspecified);
++    }
++
++    #[test]
++    fn test_path_and_pattern_matching() {
++        // Using https://git-scm.com/docs/gitattributes#_examples as example
++        // It's not 1:1 because we don't support $GIT_DIR/info/.gitattributes
++        // that would override in-tree settings.
++        let git_attributes = create_git_attributes(&[
++            (".gitattributes", "abc	foo bar baz"),
++            (
++                "t/.gitattributes",
++                indoc! {"
++                    ab*	merge=filfre
++                    abc	-foo -bar
++                    *.c	frotz
++                "},
++            ),
++        ]);
++
++        assert_search_output(&git_attributes, "t/abc", "foo", State::Unset);
++        assert_search_output(&git_attributes, "t/abc", "bar", State::Unset);
++        assert_search_output(&git_attributes, "t/abc", "baz", State::Set);
++        assert_search_output(
++            &git_attributes,
++            "t/abc",
++            "merge",
++            State::Value(Value::from("filfre")),
++        );
++        assert_search_output(&git_attributes, "t/abc", "frotz", State::Unspecified);
++    }
++
++    #[test]
++    fn test_glob_matching() {
++        assert_attribute_output("*.txt text", "bar.txt", "text", State::Set);
++        assert_attribute_output("foo/ text", "foo/bar.txt", "text", State::Unspecified);
++        assert_attribute_output("**/bar.rs text", "baz/bar.rs", "text", State::Set);
++    }
++
++    #[test]
++    fn test_case_sensitive_attr() {
++        assert_attribute_output(
++            indoc! {"
++                foo text
++                FOO -text
++            "},
++            "foo",
++            "text",
++            State::Set,
++        );
++        assert_attribute_output(
++            indoc! {"
++                foo text
++                FOO -text
++            "},
++            "FOO",
++            "text",
++            State::Unset,
++        );
++    }
++
++    #[test]
++    fn test_subdirectory_override() {
++        let git_attributes = create_git_attributes(&[
++            (".gitattributes", "abc	!baz"),
++            ("t/.gitattributes", "abc baz"),
++        ]);
++        assert_search_output(&git_attributes, "t/abc", "baz", State::Set);
++    }
++
++    #[test]
++    fn test_subdirectory_root_match() {
++        assert_attribute_output("baz/foo text", "baz/foo", "text", State::Set);
++    }
++
++    #[test]
++    fn test_directory_shouldnt_match() {
++        assert_attribute_output("foo text", "foo/bar.txt", "text", State::Unspecified);
++    }
++
++    #[test]
++    fn test_subdirectory_attribute() {
++        let git_attributes = create_git_attributes(&[("foo/.gitattributes", "bar.txt text")]);
++        assert_search_output(&git_attributes, "foo/bar.txt", "text", State::Set);
++    }
++
++    #[test]
++    fn test_macro_definition() {
++        let git_attributes = create_git_attributes(&[
++            (
++                ".gitattributes",
++                indoc! {"
++                    [attr]base_macro a
++                    [attr]override_macro b
++                "},
++            ),
++            (
++                "foo1/.gitattributes",
++                indoc! {"
++                    # this macro definition shouldn't take effect.
++                    [attr]override_macro c
++                    # this macro definition shouldn't take effect.
++                    [attr]new_macro e
++                    bar base_macro override_macro new_macro
++                "},
++            ),
++            (
++                "foo2/.gitattributes",
++                indoc! {"
++                    # this macro definition shouldn't take effect.
++                    [attr]override_macro d
++                    # this macro definition shouldn't take effect.
++                    [attr]new_macro e
++                    bar base_macro override_macro new_macro
++                "},
++            ),
++        ]);
++        assert_search_output(&git_attributes, "foo1/bar", "a", State::Set);
++        assert_search_output(&git_attributes, "foo1/bar", "b", State::Set);
++        assert_search_output(&git_attributes, "foo1/bar", "c", State::Unspecified);
++        assert_search_output(&git_attributes, "foo1/bar", "d", State::Unspecified);
++        assert_search_output(&git_attributes, "foo1/bar", "e", State::Unspecified);
++        assert_search_output(&git_attributes, "foo1/bar", "new_macro", State::Set);
++
++        assert_search_output(&git_attributes, "foo2/bar", "a", State::Set);
++        assert_search_output(&git_attributes, "foo2/bar", "b", State::Set);
++        assert_search_output(&git_attributes, "foo2/bar", "c", State::Unspecified);
++        assert_search_output(&git_attributes, "foo2/bar", "d", State::Unspecified);
++        assert_search_output(&git_attributes, "foo2/bar", "e", State::Unspecified);
++        assert_search_output(&git_attributes, "foo2/bar", "new_macro", State::Set);
++    }
++
++    #[test]
++    fn test_search_priority_and_fallback() {
++        let disk = TestStore::from([(
++            repo_path("foo/.gitattributes").to_owned(),
++            Ok("*.txt text".to_string()),
++        )]);
++
++        let store = TestStore::from([(
++            repo_path("bar/.gitattributes").to_owned(),
++            Ok("*.txt text".to_string()),
++        )]);
++
++        let git_attributes = GitAttributes::new(store, disk);
++        assert_search_output_with_priority(
++            &git_attributes,
++            "foo/bar.txt",
++            "text",
++            State::Set,
++            SearchPriority::Disk,
++        );
++        assert_search_output_with_priority(
++            &git_attributes,
++            "foo/bar.txt",
++            "text",
++            State::Set,
++            SearchPriority::Store,
++        );
++        assert_search_output_with_priority(
++            &git_attributes,
++            "bar/bar.txt",
++            "text",
++            State::Set,
++            SearchPriority::Store,
++        );
++        assert_search_output_with_priority(
++            &git_attributes,
++            "bar/bar.txt",
++            "text",
++            State::Set,
++            SearchPriority::Disk,
++        );
++    }
++
++    #[test]
++    fn test_file_loader_io_error() {
++        let store: TestStore = TestStore::from([(
++            repo_path(".gitattributes").to_owned(),
++            Err("There was an IO error".to_string()),
++        )]);
++
++        let git_attributes = GitAttributes::new(store, HashMap::new());
++        let result = &git_attributes
++            .search(repo_path("foo/bar.txt"), &["text"], SearchPriority::Disk)
++            .block_on();
++        assert!(result.is_err());
++        assert_eq!(
++            &result.as_ref().unwrap_err().message,
++            "There was an IO error",
++        );
++    }
++
++    fn matches(input: &str, path: &str) -> bool {
++        let data = TestStore::from([(
++            RepoPathBuf::from_internal_string(".gitattributes").unwrap(),
++            Ok(input.to_string()),
++        )]);
++        let attributes = GitAttributes::new(HashMap::new(), data);
++
++        attributes
++            .filter_matches(
++                repo_path(path),
++                &HashSet::from(["lfs".to_string()]),
++                SearchPriority::Disk,
++            )
++            .block_on()
++            .unwrap()
++    }
++
++    // Regression test for a bug found during development.
++    //
++    // `filter_matches()` is used by snapshot to decide whether a matching file
++    // should be omitted. If loading .gitattributes fails, returning false would
++    // silently snapshot a file that may be intentionally excluded. Preserve the
++    // error so snapshot fails visibly instead.
++    #[test]
++    fn test_filter_matches_propagates_error() {
++        let store: TestStore = TestStore::from([(
++            repo_path(".gitattributes").to_owned(),
++            Err("There was an IO error".to_string()),
++        )]);
++        let attributes = GitAttributes::new(store, HashMap::new());
++
++        let error = attributes
++            .filter_matches(
++                repo_path("file.bin"),
++                &HashSet::from(["lfs".to_string()]),
++                SearchPriority::Disk,
++            )
++            .block_on()
++            .unwrap_err();
++
++        assert_eq!(error.message, "There was an IO error");
++    }
++
++    // Regression test for a bug found during development.
++    //
++    // This is distinct from `test_filter_matches_propagates_error()`: probing
++    // for optional `.gitattributes` files below a path component that is
++    // actually a file means no attributes file exists at that path. Treating
++    // `NotADirectory` as fatal caused unrelated snapshot operations, such as
++    // rename detection, to fail when they evaluated attributes for paths like
++    // `file/.gitattributes`.
++    #[test]
++    fn test_disk_file_loader_ignores_file_in_attributes_path() {
++        let temp_dir = new_temp_dir();
++        std::fs::write(temp_dir.path().join("file"), "contents").unwrap();
++        let loader = DiskFileLoader::new(temp_dir.path().to_owned());
++
++        let loaded = loader
++            .load(repo_path("file/.gitattributes"))
++            .block_on()
++            .unwrap();
++
++        assert!(loaded.is_none());
++    }
++
++    #[test]
++    fn test_gitattributes_empty_file() {
++        assert!(!matches("", "foo"));
++    }
++
++    #[test]
++    fn test_gitattributes_simple_match() {
++        assert!(matches("*.bin filter=lfs\n", "file.bin"));
++        assert!(!matches("*.bin filter=lfs\n", "file.txt"));
++        assert!(!matches("*.bin filter=other\n", "file.bin"));
++        assert!(!matches("*.bin filter=other\n", "path/to/file.bin"));
++    }
++
++    #[test]
++    fn test_gitattributes_directory_match() {
++        // patterns that match a directory do not recursively match paths inside that
++        // directory (so using the trailing-slash path/ syntax is pointless in
++        // an attributes file; use path/** instead)
++        // https://git-scm.com/docs/gitattributes#_description
++        assert!(!matches("dir/ filter=lfs\n", "dir/file.txt"));
++        assert!(!matches("dir/ filter=lfs\n", "other/file.txt"));
++        assert!(!matches("dir/ filter=lfs\n", "dir"));
++    }
++
++    #[test]
++    fn test_gitattributes_path_match() {
++        assert!(matches("path/to/file.bin filter=lfs\n", "path/to/file.bin"));
++        assert!(!matches("path/to/file.bin filter=lfs\n", "path/file.bin"));
++    }
++
++    #[test]
++    fn test_gitattributes_wildcard_match() {
++        assert!(matches("*.bin filter=lfs\n", "file.bin"));
++        assert!(matches("file.* filter=lfs\n", "file.bin"));
++        assert!(matches("**/file.bin filter=lfs\n", "path/to/file.bin"));
++    }
++
++    #[test]
++    fn test_gitattributes_multiple_attributes() {
++        let input = "*.bin filter=lfs diff=binary\n";
++        assert!(matches(input, "file.bin"));
++        assert!(!matches("*.bin diff=binary\n", "file.bin")); // Only testing filter=lfs
++    }
++
++    #[test]
++    fn test_gitattributes_chained_files() {
++        let data = TestStore::from([
++            (
++                repo_path(".gitattributes").to_owned(),
++                Ok("*.bin filter=lfs\n".to_string()),
++            ),
++            (
++                repo_path("subdir/.gitattributes").to_owned(),
++                Ok("*.txt filter=text\n".to_string()),
++            ),
++        ]);
++        let attributes = GitAttributes::new(HashMap::new(), data);
++
++        let filters = &HashSet::from(["lfs".to_string(), "text".to_string()]);
++        assert!(
++            attributes
++                .filter_matches(repo_path("file.bin"), filters, SearchPriority::Disk)
++                .block_on()
++                .unwrap()
++        );
++        assert!(
++            attributes
++                .filter_matches(repo_path("subdir/file.txt"), filters, SearchPriority::Disk)
++                .block_on()
++                .unwrap()
++        );
++        assert!(
++            !attributes
++                .filter_matches(repo_path("file.txt"), filters, SearchPriority::Disk)
++                .block_on()
++                .unwrap()
++        ); // Not in subdir
++    }
++
++    #[test]
++    fn test_gitattributes_negated_pattern() {
++        let input = "*.bin filter=lfs\n!important.bin filter=lfs\n";
++        assert!(matches(input, "file.bin"));
++        // negative patterns are forbidden
++        // https://git-scm.com/docs/gitattributes#_description
++        assert!(matches(input, "important.bin"));
++    }
++
++    #[test]
++    fn test_gitattributes_multiple_filters() {
++        let data = TestStore::from([
++            (
++                repo_path(".gitattributes").to_owned(),
++                Ok(indoc! {"
++                    *.bin filter=lfs
++                    *.secret filter=git-crypt
++                    *.txt filter=other
++                "}
++                .to_string()),
++            ),
++            (
++                repo_path("subdir/.gitattributes").to_owned(),
++                Ok("*.txt filter=text\n".to_string()),
++            ),
++        ]);
++
++        // Create a GitAttributesFile with both "lfs" and "git-crypt" as ignore filters
++        let attributes = GitAttributes::new(HashMap::new(), data);
++
++        let filters = &HashSet::from(["lfs".to_string(), "git-crypt".to_string()]);
++
++        // Test with lfs filter
++        assert!(
++            attributes
++                .filter_matches(repo_path("file.bin"), filters, SearchPriority::Disk)
++                .block_on()
++                .unwrap()
++        );
++        // Test with git-crypt filter
++        assert!(
++            attributes
++                .filter_matches(
++                    repo_path("credentials.secret"),
++                    filters,
++                    SearchPriority::Disk
++                )
++                .block_on()
++                .unwrap()
++        );
++        // Not In the filter
++        assert!(
++            !attributes
++                .filter_matches(repo_path("file.bin2"), filters, SearchPriority::Disk)
++                .block_on()
++                .unwrap()
++        );
++        // Test that other filters don't match
++        assert!(
++            !attributes
++                .filter_matches(repo_path("file.txt"), filters, SearchPriority::Disk)
++                .block_on()
++                .unwrap()
++        );
++    }
++}
+diff --git a/lib/src/lib.rs b/lib/src/lib.rs
+index 7cb81601818..c990b628cfb 100644
+--- a/lib/src/lib.rs
++++ b/lib/src/lib.rs
+@@ -55,6 +55,8 @@ pub mod git;
+ pub mod git_backend;
+ #[cfg(feature = "git")]
+ mod git_subprocess;
++#[cfg(feature = "git")]
++pub mod gitattributes;
+ pub mod gitignore;
+ pub mod gpg_signing;
+ pub use jj_core::graph;
+diff --git a/lib/src/local_working_copy.rs b/lib/src/local_working_copy.rs
+index 33950f00560..31d2295beff 100644
+--- a/lib/src/local_working_copy.rs
++++ b/lib/src/local_working_copy.rs
+@@ -93,6 +93,16 @@ use crate::fsmonitor::FsmonitorSettings;
+ use crate::fsmonitor::WatchmanConfig;
+ #[cfg(feature = "watchman")]
+ use crate::fsmonitor::watchman;
++#[cfg(feature = "git")]
++use crate::git::GitSettings;
++#[cfg(feature = "git")]
++use crate::gitattributes::DiskFileLoader;
++#[cfg(feature = "git")]
++use crate::gitattributes::GitAttributes;
++#[cfg(feature = "git")]
++use crate::gitattributes::SearchPriority;
++#[cfg(feature = "git")]
++use crate::gitattributes::TreeFileLoader;
+ use crate::gitignore::GitIgnoreFile;
+ use crate::lock::FileLock;
+ use crate::matchers::DifferenceMatcher;
+@@ -976,6 +986,10 @@ pub struct TreeStateSettings {
+     pub exec_change_setting: ExecChangeSetting,
+     /// The fsmonitor (e.g. Watchman) to use, if any.
+     pub fsmonitor_settings: FsmonitorSettings,
++
++    /// Names of .gitattributes filters whose matching files should be ignored
++    /// in the working copy.
++    pub ignore_filters: HashSet<String>,
+ }
+ 
+ impl TreeStateSettings {
+@@ -986,6 +1000,19 @@ impl TreeStateSettings {
+             eol_conversion_mode: EolConversionMode::try_from_settings(user_settings)?,
+             exec_change_setting: user_settings.get("working-copy.exec-bit-change")?,
+             fsmonitor_settings: FsmonitorSettings::from_settings(user_settings)?,
++            ignore_filters: {
++                #[cfg(feature = "git")]
++                {
++                    GitSettings::from_settings(user_settings)?
++                        .ignore_filters
++                        .into_iter()
++                        .collect()
++                }
++                #[cfg(not(feature = "git"))]
++                {
++                    HashSet::new()
++                }
++            },
+         })
+     }
+ }
+@@ -1010,6 +1037,9 @@ pub struct TreeState {
+     exec_policy: ExecChangePolicy,
+     fsmonitor_settings: FsmonitorSettings,
+     target_eol_strategy: TargetEolStrategy,
++
++    #[cfg_attr(not(feature = "git"), allow(dead_code))]
++    ignore_filters: HashSet<String>,
+ }
+ 
+ #[derive(Debug, Error)]
+@@ -1083,9 +1113,18 @@ impl TreeState {
+             eol_conversion_mode,
+             exec_change_setting,
+             fsmonitor_settings,
++            ignore_filters: settings_ignore_filters,
+         }: &TreeStateSettings,
+     ) -> Self {
+         let exec_policy = ExecChangePolicy::new(*exec_change_setting, &state_path);
++
++        // Only enable ignore filters when using Git.
++        let ignore_filters = if store.backend().name() == "git" {
++            settings_ignore_filters.clone()
++        } else {
++            HashSet::new()
++        };
++
+         Self {
+             store: store.clone(),
+             working_copy_path,
+@@ -1100,6 +1139,7 @@ impl TreeState {
+             exec_policy,
+             fsmonitor_settings: fsmonitor_settings.clone(),
+             target_eol_strategy: TargetEolStrategy::new(*eol_conversion_mode),
++            ignore_filters,
+         }
+     }
+ 
+@@ -1336,6 +1376,11 @@ impl TreeState {
+         let (untracked_paths_tx, untracked_paths_rx) = channel();
+         let (invalid_utf8_paths_tx, invalid_utf8_paths_rx) = channel();
+         let (deleted_files_tx, deleted_files_rx) = channel();
++        #[cfg(feature = "git")]
++        let git_attributes = Arc::new(GitAttributes::new(
++            TreeFileLoader::new(self.tree.clone()),
++            DiskFileLoader::new(self.working_copy_path.clone()),
++        ));
+ 
+         trace_span!("traverse filesystem").in_scope(|| -> Result<(), SnapshotError> {
+             let snapshotter = FileSnapshotter {
+@@ -1353,6 +1398,10 @@ impl TreeState {
+                 error: OnceLock::new(),
+                 progress: *progress,
+                 max_new_file_size: *max_new_file_size,
++                #[cfg(feature = "git")]
++                git_attributes,
++                #[cfg(feature = "git")]
++                ignore_filters: self.ignore_filters.clone(),
+             };
+             let directory_to_visit = DirectoryToVisit {
+                 dir: RepoPathBuf::root(),
+@@ -1541,6 +1590,11 @@ struct FileSnapshotter<'a> {
+     error: OnceLock<SnapshotError>,
+     progress: Option<&'a SnapshotProgress<'a>>,
+     max_new_file_size: u64,
++
++    #[cfg(feature = "git")]
++    git_attributes: Arc<GitAttributes>,
++    #[cfg(feature = "git")]
++    ignore_filters: HashSet<String>,
+ }
+ 
+ impl FileSnapshotter<'_> {
+@@ -1606,7 +1660,7 @@ impl FileSnapshotter<'_> {
+             })
+             .collect::<Result<_, _>>()?;
+         let present_entries = PresentDirEntries { dirs, files };
+-        self.emit_deleted_files(&dir, file_states, &present_entries);
++        self.emit_deleted_files(&dir, file_states, &present_entries)?;
+         Ok(())
+     }
+ 
+@@ -1688,8 +1742,20 @@ impl FileSnapshotter<'_> {
+             if let Some(progress) = self.progress {
+                 progress(&path);
+             }
++            #[cfg(feature = "git")]
++            if self
++                .git_attributes
++                .filter_matches(&path, &self.ignore_filters, SearchPriority::Disk)
++                .block_on()?
++            {
++                // Skip gitattributes files that we want to ignore - this
++                // would result in them showing up as deleted, but we also
++                // omit them in `emit_deleted_files` to avoid that.
++                return Ok(None);
++            }
+             if maybe_current_file_state.is_none()
+-                && (git_ignore.matches_file(&path) && !self.force_tracking_matcher.matches(&path))
++                && (git_ignore.matches_file(path.as_ref())
++                    && !self.force_tracking_matcher.matches(&path))
+             {
+                 // If it wasn't already tracked and it matches
+                 // the ignored paths, then ignore it.
+@@ -1748,6 +1814,14 @@ impl FileSnapshotter<'_> {
+             if !self.matcher.matches(tracked_path) {
+                 continue;
+             }
++            #[cfg(feature = "git")]
++            if self
++                .git_attributes
++                .filter_matches(tracked_path, &self.ignore_filters, SearchPriority::Disk)
++                .await?
++            {
++                continue;
++            }
+             let disk_path = tracked_path.to_fs_path(&self.tree_state.working_copy_path)?;
+             let metadata = match disk_path.symlink_metadata() {
+                 Ok(metadata) => Some(metadata),
+@@ -1809,7 +1883,7 @@ impl FileSnapshotter<'_> {
+         dir: &RepoPath,
+         file_states: FileStates<'_>,
+         present_entries: &PresentDirEntries,
+-    ) {
++    ) -> Result<(), SnapshotError> {
+         let file_state_chunks = file_states.iter().chunk_by(|(path, _state)| {
+             // Extract <name> from <dir>, <dir>/<name>, or <dir>/<name>/**.
+             // (file_states may contain <dir> file on file->dir transition.)
+@@ -1822,18 +1896,34 @@ impl FileSnapshotter<'_> {
+                 None => (PresentDirEntryKind::File, tail),
+             }
+         });
+-        file_state_chunks
++        for (_, chunk) in file_state_chunks
+             .into_iter()
+             .filter(|&((kind, name), _)| match kind {
+                 PresentDirEntryKind::Dir => !present_entries.dirs.contains(name),
+                 PresentDirEntryKind::File => !present_entries.files.contains(name),
+             })
+-            .flat_map(|(_, chunk)| chunk)
+-            // Whether or not the entry exists, submodule should be ignored
+-            .filter(|(_, state)| state.file_type != FileType::GitSubmodule)
+-            .filter(|(path, _)| self.matcher.matches(path))
+-            .try_for_each(|(path, _)| self.deleted_files_tx.send(path.to_owned()))
+-            .ok();
++        {
++            for (path, state) in chunk {
++                // Whether or not the entry exists, submodule should be ignored.
++                if state.file_type == FileType::GitSubmodule {
++                    continue;
++                }
++                #[cfg(feature = "git")]
++                if self
++                    .git_attributes
++                    .filter_matches(path, &self.ignore_filters, SearchPriority::Disk)
++                    .block_on()?
++                {
++                    // Whether or not the entry exists, ignored gitattributes
++                    // files should be omitted.
++                    continue;
++                }
++                if self.matcher.matches(path) {
++                    self.deleted_files_tx.send(path.to_owned()).ok();
++                }
++            }
++        }
++        Ok(())
+     }
+ 
+     async fn get_updated_tree_value(
+diff --git a/lib/src/working_copy.rs b/lib/src/working_copy.rs
+index 0d4317c19d2..6b3950a04d4 100644
+--- a/lib/src/working_copy.rs
++++ b/lib/src/working_copy.rs
+@@ -28,6 +28,8 @@ use tracing::instrument;
+ 
+ use crate::backend::BackendError;
+ use crate::commit::Commit;
++#[cfg(feature = "git")]
++use crate::gitattributes::GitAttributesError;
+ use crate::gitignore::GitIgnoreError;
+ use crate::gitignore::GitIgnoreFile;
+ use crate::matchers::Matcher;
+@@ -186,6 +188,10 @@ pub enum SnapshotError {
+     /// Checking path with ignore patterns failed.
+     #[error(transparent)]
+     GitIgnoreError(#[from] GitIgnoreError),
++    /// Checking path with gitattributes patterns failed.
++    #[cfg(feature = "git")]
++    #[error(transparent)]
++    GitAttributesError(#[from] GitAttributesError),
+     /// Failed to load the working copy state.
+     #[error(transparent)]
+     WorkingCopyStateError(#[from] WorkingCopyStateError),
+diff --git a/lib/tests/test_local_working_copy.rs b/lib/tests/test_local_working_copy.rs
+index eeed359a3ba..717ed3904b5 100644
+--- a/lib/tests/test_local_working_copy.rs
++++ b/lib/tests/test_local_working_copy.rs
+@@ -3192,3 +3192,181 @@ fn test_always_store_empty_tree() -> TestResult {
+     assert!(empty_tree.data.is_empty());
+     Ok(())
+ }
++
++#[test_case(TestRepoBackend::Simple ; "simple backend")]
++#[test_case(TestRepoBackend::Git ; "git backend")]
++fn test_gitattributes_ignore_only_on_git_backend(backend: TestRepoBackend) -> TestResult {
++    let mut test_workspace = TestWorkspace::init_with_backend(backend);
++    let workspace_root = test_workspace.workspace.workspace_root().to_owned();
++
++    // Write .gitattributes with LFS filter.
++    std::fs::write(workspace_root.join(".gitattributes"), "*.txt filter=lfs\n").unwrap();
++    // Write a matching file.
++    std::fs::write(workspace_root.join("file.txt"), "some content").unwrap();
++    // Write a non-matching file.
++    std::fs::write(workspace_root.join("file.dat"), "some other content").unwrap();
++
++    let new_tree = test_workspace.snapshot()?;
++
++    // "file.dat" should always be present
++    assert!(
++        new_tree
++            .path_value(repo_path("file.dat"))
++            .block_on()?
++            .is_present()
++    );
++
++    // ".gitattributes" should always be present
++    assert!(
++        new_tree
++            .path_value(repo_path(".gitattributes"))
++            .block_on()?
++            .is_present()
++    );
++
++    match backend {
++        TestRepoBackend::Git => {
++            // Under Git backend, "file.txt" should be ignored
++            assert!(
++                new_tree
++                    .path_value(repo_path("file.txt"))
++                    .block_on()?
++                    .is_absent()
++            );
++        }
++        TestRepoBackend::Simple | TestRepoBackend::Test => {
++            // Under non-Git backends, "file.txt" should NOT be ignored
++            assert!(
++                new_tree
++                    .path_value(repo_path("file.txt"))
++                    .block_on()?
++                    .is_present()
++            );
++        }
++    }
++
++    Ok(())
++}
++
++// Regression test for a bug found during development.
++//
++// Snapshot prefers .gitattributes from disk but falls back to the current tree
++// when the disk file is missing. TreeState starts with an empty tree before
++// checkout, so caching GitAttributes there can leave the fallback pointed at
++// the empty tree even after checkout updates TreeState::tree. Removing the disk
++// .gitattributes file exercises that fallback; the tracked LFS file must keep
++// the tree contents instead of snapshotting the modified disk contents.
++#[test]
++fn test_gitattributes_use_store_fallback_after_checkout() -> TestResult {
++    let mut test_workspace = TestWorkspace::init_with_backend(TestRepoBackend::Git);
++    let repo = &test_workspace.repo;
++    let workspace_root = test_workspace.workspace.workspace_root().to_owned();
++
++    let tree = create_tree(
++        repo,
++        &[
++            (repo_path(".gitattributes"), "*.txt filter=lfs\n"),
++            (repo_path("file.txt"), "original\n"),
++        ],
++    );
++    let commit = commit_with_tree(repo.store(), tree.clone());
++    test_workspace
++        .workspace
++        .check_out(repo.op_id().clone(), None, &commit)
++        .block_on()?;
++
++    std::fs::remove_file(workspace_root.join(".gitattributes"))?;
++    std::fs::write(workspace_root.join("file.txt"), "modified\n")?;
++
++    let new_tree = test_workspace.snapshot()?;
++    assert_eq!(
++        new_tree.path_value(repo_path("file.txt")).block_on()?,
++        tree.path_value(repo_path("file.txt")).block_on()?,
++    );
++
++    Ok(())
++}
++
++// Regression test for a bug found during development.
++//
++// Snapshot handles files that are present on disk and files that were deleted
++// from disk through separate paths. If deletion emission does not apply the
++// .gitattributes filter check, removing a tracked LFS-filtered file from disk
++// records a deletion even though normal snapshots would ignore changes to that
++// file. The tree should keep the tracked contents instead.
++#[test]
++fn test_gitattributes_ignore_deleted_tracked_file() -> TestResult {
++    let mut test_workspace = TestWorkspace::init_with_backend(TestRepoBackend::Git);
++    let repo = test_workspace.repo.clone();
++    let workspace_root = test_workspace.workspace.workspace_root().to_owned();
++
++    let tracked_path = repo_path("file.bin");
++    let tree = create_tree(
++        &repo,
++        &[
++            (repo_path(".gitattributes"), "*.bin filter=lfs\n"),
++            (tracked_path, "original\n"),
++        ],
++    );
++    let commit = commit_with_tree(repo.store(), tree.clone());
++    test_workspace
++        .workspace
++        .check_out(repo.op_id().clone(), None, &commit)
++        .block_on()?;
++
++    std::fs::remove_file(tracked_path.to_fs_path_unchecked(&workspace_root))?;
++
++    let new_tree = test_workspace.snapshot()?;
++    assert_eq!(
++        new_tree.path_value(tracked_path).block_on()?,
++        tree.path_value(tracked_path).block_on()?,
++    );
++
++    Ok(())
++}
++
++// Regression test for a bug found during development.
++//
++// The normal snapshot path checks .gitattributes before updating or deleting a
++// file. When .gitignore ignores an entire directory, snapshot uses a shortcut
++// that scans only already-tracked files in that directory. This test puts a
++// tracked file under that shortcut and marks it with filter=lfs. Modifying the
++// disk file must not update the tree: the .gitattributes filter should still
++// apply even though traversal used the ignored-directory path.
++#[test]
++fn test_gitattributes_ignore_tracked_file_in_gitignored_dir() -> TestResult {
++    let mut test_workspace = TestWorkspace::init_with_backend(TestRepoBackend::Git);
++    let repo = test_workspace.repo.clone();
++    let workspace_root = test_workspace.workspace.workspace_root().to_owned();
++
++    let tracked_path = repo_path("ignored/file.bin");
++    let tree = create_tree(
++        &repo,
++        &[
++            (repo_path(".gitignore"), "/ignored/\n"),
++            (repo_path(".gitattributes"), "ignored/file.bin filter=lfs\n"),
++            (tracked_path, "original\n"),
++        ],
++    );
++    let commit = commit_with_tree(repo.store(), tree.clone());
++    test_workspace
++        .workspace
++        .check_out(repo.op_id().clone(), None, &commit)
++        .block_on()?;
++
++    std::fs::write(
++        tracked_path.to_fs_path_unchecked(&workspace_root),
++        "modified\n",
++    )?;
++
++    let new_tree = test_workspace.snapshot()?;
++
++    // The .gitattributes filter should still apply when .gitignore sends
++    // tracked files through the ignored-directory shortcut.
++    assert_eq!(
++        new_tree.path_value(tracked_path).block_on()?,
++        tree.path_value(tracked_path).block_on()?,
++    );
++
++    Ok(())
++}

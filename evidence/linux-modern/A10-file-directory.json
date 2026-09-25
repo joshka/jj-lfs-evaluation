@@ -1,0 +1,160 @@
+{
+  "id": "A10-file-directory",
+  "purpose": "File-to-directory replacement is handled",
+  "category": "contract",
+  "status": "FAIL",
+  "seconds": 0.2514967079999906,
+  "checks": [
+    {
+      "label": "File-to-directory transition completes without panic",
+      "pass": false
+    }
+  ],
+  "observations": {
+    "status": {
+      "rc": 101,
+      "stderr": "\nthread 'main' (6474) panicked at lib/src/local_working_copy.rs:1464:13:\nassertion `left == right` failed\n  left: {\"asset.bin\", \"asset.bin/child.txt\", \".gitattributes\", \"note.txt\"}\n right: {\".gitattributes\", \"note.txt\", \"asset.bin/child.txt\"}\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\n"
+    }
+  },
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "init",
+        "-b",
+        "main"
+      ],
+      "cwd": "/eval/linux-modern/repos/A10-file-directory",
+      "rc": 0,
+      "seconds": 0.014717541999971218,
+      "stdout": "Initialized empty Git repository in /eval/linux-modern/repos/A10-file-directory/.git/\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.name",
+        "LFS Evaluation"
+      ],
+      "cwd": "/eval/linux-modern/repos/A10-file-directory",
+      "rc": 0,
+      "seconds": 0.0029799170000046615,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.email",
+        "eval@example.invalid"
+      ],
+      "cwd": "/eval/linux-modern/repos/A10-file-directory",
+      "rc": 0,
+      "seconds": 0.0027412499999854845,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "commit.gpgsign",
+        "false"
+      ],
+      "cwd": "/eval/linux-modern/repos/A10-file-directory",
+      "rc": 0,
+      "seconds": 0.0031936660000155825,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "core.autocrlf",
+        "false"
+      ],
+      "cwd": "/eval/linux-modern/repos/A10-file-directory",
+      "rc": 0,
+      "seconds": 0.0026676250000150503,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "lfs",
+        "install",
+        "--local"
+      ],
+      "cwd": "/eval/linux-modern/repos/A10-file-directory",
+      "rc": 0,
+      "seconds": 0.04008454099999881,
+      "stdout": "Updated Git hooks.\nGit LFS initialized.\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "add",
+        "."
+      ],
+      "cwd": "/eval/linux-modern/repos/A10-file-directory",
+      "rc": 0,
+      "seconds": 0.02929816599998958,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "commit",
+        "-m",
+        "Seed LFS fixture"
+      ],
+      "cwd": "/eval/linux-modern/repos/A10-file-directory",
+      "rc": 0,
+      "seconds": 0.061180499999977656,
+      "stdout": "[main (root-commit) 30bd9b0] Seed LFS fixture\n 3 files changed, 5 insertions(+)\n create mode 100644 .gitattributes\n create mode 100644 asset.bin\n create mode 100644 note.txt\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "/eval/linux-modern/repos/A10-file-directory",
+      "rc": 0,
+      "seconds": 0.0017897500000003674,
+      "stdout": "30bd9b00aba62a6b61695bab8897d0d68808aea3\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/target/debug/jj",
+        "git",
+        "init",
+        "--colocate"
+      ],
+      "cwd": "/eval/linux-modern/repos/A10-file-directory",
+      "rc": 0,
+      "seconds": 0.06461829200003422,
+      "stdout": "",
+      "stderr": "Done importing changes from the underlying Git repo.\nInitialized repo in \".\"\n"
+    },
+    {
+      "argv": [
+        "/target/debug/jj",
+        "status"
+      ],
+      "cwd": "/eval/linux-modern/repos/A10-file-directory",
+      "rc": 101,
+      "seconds": 0.025709209000012834,
+      "stdout": "",
+      "stderr": "\nthread 'main' (6474) panicked at lib/src/local_working_copy.rs:1464:13:\nassertion `left == right` failed\n  left: {\"asset.bin\", \"asset.bin/child.txt\", \".gitattributes\", \"note.txt\"}\n right: {\".gitattributes\", \"note.txt\", \"asset.bin/child.txt\"}\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\n"
+    }
+  ]
+}

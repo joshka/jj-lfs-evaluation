@@ -1,0 +1,181 @@
+{
+  "id": "W02-sparse-dirty",
+  "purpose": "Sparse removal must not silently lose local edits",
+  "category": "data-integrity",
+  "status": "FAIL",
+  "seconds": 1.5823747087270021,
+  "checks": [
+    {
+      "label": "Sparse exclusion preserves, snapshots, or rejects local edits",
+      "pass": false,
+      "stored_sha256": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+      "edited_sha256": "f373b3bf36856f8fd4d1045d39a945690f960207ffaadc274305d5f90619a816"
+    }
+  ],
+  "observations": {
+    "sparse": {
+      "rc": 0,
+      "stderr": "Added 0 files, modified 0 files, removed 2 files\n",
+      "asset_exists": false
+    }
+  },
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "init",
+        "-b",
+        "main"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/pr-sparse-recheck/repos/W02-sparse-dirty",
+      "rc": 0,
+      "seconds": 0.022971833124756813,
+      "stdout": "Initialized empty Git repository in /tmp/jj-lfs-evaluation/pr-sparse-recheck/repos/W02-sparse-dirty/.git/\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.name",
+        "LFS Evaluation"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/pr-sparse-recheck/repos/W02-sparse-dirty",
+      "rc": 0,
+      "seconds": 0.015090167056769133,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.email",
+        "eval@example.invalid"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/pr-sparse-recheck/repos/W02-sparse-dirty",
+      "rc": 0,
+      "seconds": 0.014417166821658611,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "commit.gpgsign",
+        "false"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/pr-sparse-recheck/repos/W02-sparse-dirty",
+      "rc": 0,
+      "seconds": 0.015024959109723568,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "core.autocrlf",
+        "false"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/pr-sparse-recheck/repos/W02-sparse-dirty",
+      "rc": 0,
+      "seconds": 0.014245958998799324,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "lfs",
+        "install",
+        "--local"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/pr-sparse-recheck/repos/W02-sparse-dirty",
+      "rc": 0,
+      "seconds": 0.3194443751126528,
+      "stdout": "Updated Git hooks.\nGit LFS initialized.\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "add",
+        "."
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/pr-sparse-recheck/repos/W02-sparse-dirty",
+      "rc": 0,
+      "seconds": 0.17230441607534885,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "commit",
+        "-m",
+        "Seed LFS fixture"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/pr-sparse-recheck/repos/W02-sparse-dirty",
+      "rc": 0,
+      "seconds": 0.607225083746016,
+      "stdout": "[main (root-commit) f0b5e91] Seed LFS fixture\n 3 files changed, 5 insertions(+)\n create mode 100644 .gitattributes\n create mode 100644 assets/asset.bin\n create mode 100644 note.txt\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/pr-sparse-recheck/repos/W02-sparse-dirty",
+      "rc": 0,
+      "seconds": 0.014041832648217678,
+      "stdout": "f0b5e911949fb8d19547c734c517ccd8e1a3682f\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr",
+        "git",
+        "init",
+        "--colocate"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/pr-sparse-recheck/repos/W02-sparse-dirty",
+      "rc": 0,
+      "seconds": 0.21395754162222147,
+      "stdout": "",
+      "stderr": "Done importing changes from the underlying Git repo.\nInitialized repo in \".\"\n"
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr",
+        "sparse",
+        "set",
+        "--clear",
+        "--add",
+        "note.txt"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/pr-sparse-recheck/repos/W02-sparse-dirty",
+      "rc": 0,
+      "seconds": 0.04929466685280204,
+      "stdout": "",
+      "stderr": "Added 0 files, modified 0 files, removed 2 files\n"
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr",
+        "--ignore-working-copy",
+        "file",
+        "show",
+        "assets/asset.bin"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/pr-sparse-recheck/repos/W02-sparse-dirty",
+      "rc": 0,
+      "seconds": 0.12033275002613664,
+      "stdout": "version https://git-lfs.github.com/spec/v1\noid sha256:dad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f\nsize 2500\n",
+      "stderr": ""
+    }
+  ]
+}

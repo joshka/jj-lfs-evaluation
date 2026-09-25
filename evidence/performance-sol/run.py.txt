@@ -1,0 +1,39 @@
+#!/usr/bin/env python3
+import importlib.util, json, os, pathlib, shutil, hashlib, statistics, time, resource
+ROOT=pathlib.Path('/tmp/jj-lfs-evaluation'); OUT=ROOT/'performance-sol'
+spec=importlib.util.spec_from_file_location('h',ROOT/'harness/evaluate.py');h=importlib.util.module_from_spec(spec);spec.loader.exec_module(h)
+class Args: out=str(OUT);jj=str(ROOT/'bin/jj-pr-release');only=None
+shutil.rmtree(OUT/'repos',ignore_errors=True)
+s=h.Suite(Args())
+def sha(b):return hashlib.sha256(b).hexdigest()
+def large(f):
+ payload=(hashlib.sha256(b'jj-lfs-perf-seed').digest()*32768)*64
+ f.write('.gitattributes','*.bin filter=lfs diff=lfs merge=lfs -text\n');f.write('large.bin',payload);f.g('add','.');f.g('commit','-m','Seed 64 MiB LFS asset');f.jj('git','init','--colocate');
+ p=f.root/'large.bin';before=sha(p.read_bytes());start=time.monotonic();c=f.jj('status',ok=False,timeout=120);elapsed=time.monotonic()-start;after=sha(p.read_bytes());tree=f.stored('large.bin');f.observations.update(size=len(payload),payload_sha=sha(payload),disk_sha_before=before,disk_sha_after=after,tree_sha=sha(tree),tree_size=len(tree),status_seconds=elapsed,status_rc=c.returncode,status_stdout=c.stdout.decode(),status_stderr=c.stderr.decode());f.check('64 MiB status succeeds',c.returncode==0);f.check('Hydrated disk content unchanged',before==after==sha(payload));f.check('jj tree remains LFS pointer',tree==h.pointer(payload))
+
+def benchmark(f,kind):
+ if kind=='root-patterns': f.write('.gitattributes',''.join(f'nonexistent-{i:04d}.bin filter=lfs\n' for i in range(4999))+'*.bin filter=lfs\n')
+ else:f.write('.gitattributes','')
+ for i in range(3000):
+  if kind=='nested':
+   d=i//50; path=f'd{d:02d}/f{i:04d}.txt'
+   if i%50==0:f.write(f'd{d:02d}/.gitattributes','*.bin filter=lfs\n')
+  else:path=f'd{i//50:02d}/f{i:04d}.txt'
+  f.write(path,f'data-{i}\n')
+ f.g('add','.');f.g('commit','-m','Seed 3000 ordinary files');f.jj('git','init','--colocate');
+ # Warm both modes once before measurements.
+ for mode in ['default','disabled']:
+  a=['status'] if mode=='default' else ['--config=git.ignore-filters=[]','status']; f.jj(*a,timeout=120)
+ timings={'default':[],'disabled':[]}
+ for i in range(5):
+  for mode in (['default','disabled'] if i%2==0 else ['disabled','default']):
+   a=['status'] if mode=='default' else ['--config=git.ignore-filters=[]','status']; start=time.monotonic();c=f.jj(*a,ok=False,timeout=120);timings[mode].append(time.monotonic()-start);f.check(f'{mode} status iteration {i+1} succeeds',c.returncode==0)
+ f.observations.update(kind=kind,file_count=3000,attribute_files=(60 if kind=='nested' else 1),attribute_patterns=(60 if kind=='nested' else 5000 if kind=='root-patterns' else 0),timings_seconds=timings,medians_seconds={k:statistics.median(v) for k,v in timings.items()})
+
+def diagnostic(f):
+ f.seed(attrs='*.bin filter=lfs\n',files={'note.txt':b'seed\n'});f.write('new.bin',h.PAYLOAD);c=f.jj('--debug','status',ok=False);f.observations.update(rc=c.returncode,stdout=c.stdout.decode(errors='replace'),stderr=c.stderr.decode(errors='replace'),path_named='new.bin' in c.stdout.decode(errors='replace')+c.stderr.decode(errors='replace'),filter_named='filter' in (c.stdout+c.stderr).decode(errors='replace').lower());f.check('debug status succeeds',c.returncode==0);f.check('excluded path absent from jj tree','new.bin' not in f.files())
+
+def custom_filter(f):
+ f.seed(attrs='*.crypt filter=crypt\n*.bin filter=lfs\n',files={'note.txt':b'seed\n'});f.write('secret.crypt',h.PAYLOAD);f.write('asset.bin',h.OTHER);c=f.jj('--config=git.ignore-filters=["crypt"]','status',ok=False);files=f.jj('--config=git.ignore-filters=["crypt"]','--ignore-working-copy','file','list').stdout.decode().splitlines();f.observations.update(status=c.stdout.decode(),stderr=c.stderr.decode(),files=files);f.check('custom filter status succeeds',c.returncode==0);f.check('crypt path excluded','secret.crypt' not in files);f.check('lfs path included when not configured for exclusion','asset.bin' in files)
+
+for name,purpose,fn in [('large-64m','64 MiB hydrated LFS asset',large),('bench-none','3000 files with empty root attributes',lambda f:benchmark(f,'none')),('bench-root-patterns','3000 files with 5000 root patterns',lambda f:benchmark(f,'root-patterns')),('bench-nested','3000 files under 60 nested attributes',lambda f:benchmark(f,'nested')),('debug-excluded','debug diagnostic for newly excluded path',diagnostic),('custom-filter','configured crypt filter exclusion',custom_filter)]:s.case(name,purpose,fn,category='performance-diagnostic')

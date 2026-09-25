@@ -1,0 +1,228 @@
+{
+  "id": "P04-missing-object",
+  "purpose": "Missing local object and recovery",
+  "category": "contract",
+  "status": "PASS",
+  "seconds": 0.3985277090000068,
+  "checks": [
+    {
+      "label": "Missing object leaves pointer intact",
+      "pass": true,
+      "actual_sha256": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+      "expected_sha256": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+      "actual_size": 129,
+      "expected_size": 129
+    },
+    {
+      "label": "Missing object does not fabricate disk data",
+      "pass": true,
+      "actual_sha256": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+      "expected_sha256": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+      "actual_size": 129,
+      "expected_size": 129
+    },
+    {
+      "label": "Restored object hydrates correctly",
+      "pass": true,
+      "actual_sha256": "dad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f",
+      "expected_sha256": "dad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f",
+      "actual_size": 2500,
+      "expected_size": 2500
+    }
+  ],
+  "observations": {
+    "checkout": {
+      "rc": 0,
+      "stderr": "Skipped checkout for \"asset.bin\", content not local. Use fetch to download.\n"
+    }
+  },
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "init",
+        "-b",
+        "main"
+      ],
+      "cwd": "/eval/linux/repos/P04-missing-object",
+      "rc": 0,
+      "seconds": 0.015180582999988701,
+      "stdout": "Initialized empty Git repository in /eval/linux/repos/P04-missing-object/.git/\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.name",
+        "LFS Evaluation"
+      ],
+      "cwd": "/eval/linux/repos/P04-missing-object",
+      "rc": 0,
+      "seconds": 0.0037350839999987784,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.email",
+        "eval@example.invalid"
+      ],
+      "cwd": "/eval/linux/repos/P04-missing-object",
+      "rc": 0,
+      "seconds": 0.003560000000021546,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "commit.gpgsign",
+        "false"
+      ],
+      "cwd": "/eval/linux/repos/P04-missing-object",
+      "rc": 0,
+      "seconds": 0.0030446670000117138,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "core.autocrlf",
+        "false"
+      ],
+      "cwd": "/eval/linux/repos/P04-missing-object",
+      "rc": 0,
+      "seconds": 0.007255832999987888,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "lfs",
+        "install",
+        "--local"
+      ],
+      "cwd": "/eval/linux/repos/P04-missing-object",
+      "rc": 0,
+      "seconds": 0.055459541999994144,
+      "stdout": "Updated Git hooks.\nGit LFS initialized.\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "add",
+        "."
+      ],
+      "cwd": "/eval/linux/repos/P04-missing-object",
+      "rc": 0,
+      "seconds": 0.04098537499999111,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "commit",
+        "-m",
+        "Seed LFS fixture"
+      ],
+      "cwd": "/eval/linux/repos/P04-missing-object",
+      "rc": 0,
+      "seconds": 0.07736337500000445,
+      "stdout": "[main (root-commit) b1921fd] Seed LFS fixture\n 3 files changed, 5 insertions(+)\n create mode 100644 .gitattributes\n create mode 100644 asset.bin\n create mode 100644 note.txt\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "/eval/linux/repos/P04-missing-object",
+      "rc": 0,
+      "seconds": 0.0014878750000093532,
+      "stdout": "b1921fda9187f7ec69787566acbec78db65fc756\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/target/debug/jj",
+        "git",
+        "init",
+        "--colocate"
+      ],
+      "cwd": "/eval/linux/repos/P04-missing-object",
+      "rc": 0,
+      "seconds": 0.058801958999993076,
+      "stdout": "",
+      "stderr": "Done importing changes from the underlying Git repo.\nInitialized repo in \".\"\n"
+    },
+    {
+      "argv": [
+        "git",
+        "lfs",
+        "checkout"
+      ],
+      "cwd": "/eval/linux/repos/P04-missing-object",
+      "rc": 0,
+      "seconds": 0.02080033300001105,
+      "stdout": "Checking out LFS objects: 100% (1/1), 2.5 KB | 0 B/s, done.\n",
+      "stderr": "Skipped checkout for \"asset.bin\", content not local. Use fetch to download.\n"
+    },
+    {
+      "argv": [
+        "/target/debug/jj",
+        "status"
+      ],
+      "cwd": "/eval/linux/repos/P04-missing-object",
+      "rc": 0,
+      "seconds": 0.02513325000001032,
+      "stdout": "The working copy has no changes.\nWorking copy  (@) : lmqvyuuo 8926f2fa (empty) (no description set)\nParent commit (@-): tplwkptm b1921fda main | Seed LFS fixture\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/target/debug/jj",
+        "file",
+        "show",
+        "asset.bin"
+      ],
+      "cwd": "/eval/linux/repos/P04-missing-object",
+      "rc": 0,
+      "seconds": 0.021449834000009105,
+      "stdout": "version https://git-lfs.github.com/spec/v1\noid sha256:dad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f\nsize 2500\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "lfs",
+        "checkout"
+      ],
+      "cwd": "/eval/linux/repos/P04-missing-object",
+      "rc": 0,
+      "seconds": 0.03523087499999633,
+      "stdout": "Checking out LFS objects: 100% (1/1), 2.5 KB | 0 B/s, done.\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/target/debug/jj",
+        "status"
+      ],
+      "cwd": "/eval/linux/repos/P04-missing-object",
+      "rc": 0,
+      "seconds": 0.022370958000010432,
+      "stdout": "The working copy has no changes.\nWorking copy  (@) : lmqvyuuo 8926f2fa (empty) (no description set)\nParent commit (@-): tplwkptm b1921fda main | Seed LFS fixture\n",
+      "stderr": ""
+    }
+  ]
+}

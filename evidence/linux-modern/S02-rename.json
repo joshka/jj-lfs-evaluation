@@ -1,0 +1,208 @@
+{
+  "id": "S02-rename",
+  "purpose": "Characterize silent snapshot exclusion: rename",
+  "category": "contract",
+  "status": "PASS",
+  "seconds": 0.2962546250000173,
+  "checks": [
+    {
+      "label": "Stored pointer unchanged by excluded mutation",
+      "pass": true,
+      "actual_sha256": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+      "expected_sha256": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+      "actual_size": 129,
+      "expected_size": 129
+    },
+    {
+      "label": "No new excluded path snapshots",
+      "pass": true
+    }
+  ],
+  "observations": {
+    "status": "The working copy has no changes.\nWorking copy  (@) : qzorwxqv d6cff0f2 (empty) (no description set)\nParent commit (@-): ypktsvyw 5a4c8b63 main | Seed LFS fixture\n",
+    "mutation": "rename",
+    "disk_files": [
+      "note.txt",
+      "renamed.bin",
+      ".gitattributes"
+    ]
+  },
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "init",
+        "-b",
+        "main"
+      ],
+      "cwd": "/eval/linux-modern/repos/S02-rename",
+      "rc": 0,
+      "seconds": 0.019867500000032123,
+      "stdout": "Initialized empty Git repository in /eval/linux-modern/repos/S02-rename/.git/\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.name",
+        "LFS Evaluation"
+      ],
+      "cwd": "/eval/linux-modern/repos/S02-rename",
+      "rc": 0,
+      "seconds": 0.004248167000014291,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.email",
+        "eval@example.invalid"
+      ],
+      "cwd": "/eval/linux-modern/repos/S02-rename",
+      "rc": 0,
+      "seconds": 0.004039833000035742,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "commit.gpgsign",
+        "false"
+      ],
+      "cwd": "/eval/linux-modern/repos/S02-rename",
+      "rc": 0,
+      "seconds": 0.003549583999983952,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "core.autocrlf",
+        "false"
+      ],
+      "cwd": "/eval/linux-modern/repos/S02-rename",
+      "rc": 0,
+      "seconds": 0.004272042000025067,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "lfs",
+        "install",
+        "--local"
+      ],
+      "cwd": "/eval/linux-modern/repos/S02-rename",
+      "rc": 0,
+      "seconds": 0.03557091700002957,
+      "stdout": "Updated Git hooks.\nGit LFS initialized.\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "add",
+        "."
+      ],
+      "cwd": "/eval/linux-modern/repos/S02-rename",
+      "rc": 0,
+      "seconds": 0.02119337499999574,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "commit",
+        "-m",
+        "Seed LFS fixture"
+      ],
+      "cwd": "/eval/linux-modern/repos/S02-rename",
+      "rc": 0,
+      "seconds": 0.051429165999991255,
+      "stdout": "[main (root-commit) 5a4c8b6] Seed LFS fixture\n 3 files changed, 5 insertions(+)\n create mode 100644 .gitattributes\n create mode 100644 asset.bin\n create mode 100644 note.txt\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "/eval/linux-modern/repos/S02-rename",
+      "rc": 0,
+      "seconds": 0.0017766250000477157,
+      "stdout": "5a4c8b63414f85e1940c30aebfd12e4ec82e6f58\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/target/debug/jj",
+        "git",
+        "init",
+        "--colocate"
+      ],
+      "cwd": "/eval/linux-modern/repos/S02-rename",
+      "rc": 0,
+      "seconds": 0.0563675419999754,
+      "stdout": "",
+      "stderr": "Done importing changes from the underlying Git repo.\nInitialized repo in \".\"\n"
+    },
+    {
+      "argv": [
+        "/target/debug/jj",
+        "status"
+      ],
+      "cwd": "/eval/linux-modern/repos/S02-rename",
+      "rc": 0,
+      "seconds": 0.024200082999982442,
+      "stdout": "The working copy has no changes.\nWorking copy  (@) : qzorwxqv d6cff0f2 (empty) (no description set)\nParent commit (@-): ypktsvyw 5a4c8b63 main | Seed LFS fixture\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/target/debug/jj",
+        "file",
+        "show",
+        "asset.bin"
+      ],
+      "cwd": "/eval/linux-modern/repos/S02-rename",
+      "rc": 0,
+      "seconds": 0.02083850000002485,
+      "stdout": "version https://git-lfs.github.com/spec/v1\noid sha256:dad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f\nsize 2500\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/target/debug/jj",
+        "file",
+        "list"
+      ],
+      "cwd": "/eval/linux-modern/repos/S02-rename",
+      "rc": 0,
+      "seconds": 0.02254808300000377,
+      "stdout": ".gitattributes\nasset.bin\nnote.txt\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/target/debug/jj",
+        "file",
+        "list"
+      ],
+      "cwd": "/eval/linux-modern/repos/S02-rename",
+      "rc": 0,
+      "seconds": 0.02437458299999662,
+      "stdout": ".gitattributes\nasset.bin\nnote.txt\n",
+      "stderr": ""
+    }
+  ]
+}

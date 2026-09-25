@@ -1,0 +1,63 @@
+# Git LFS calibration report
+
+The pinned PR binary and installed baseline both report `jj 0.45.1`.
+Git is `git version 2.55.0` and Git LFS is `git-lfs/3.8.0 (GitHub; darwin arm64; go 1.27.0)`. The initial full process took 15.348 seconds, the corrected full process took
+33.862 seconds, and the parent-identified C2-only correction took 1.29 seconds.
+433.995 seconds elapsed from the first execution to the corrected full execution;
+the first-to-final C2 evidence span was 531.034 seconds. Both intervals start at
+the first calibration process, exclude preparation before it, and are not total
+agent wall time.
+
+## Expectations
+
+The PR change documents that Git-backed snapshots skip paths whose `.gitattributes`
+`filter` value appears in `git.ignore-filters`, which defaults to `["lfs"]`
+(`source/docs/git-compatibility.md:77–84`). It also says Git LFS hydration remains an
+external Git LFS operation. The scenarios check both the pointer stored in the jj tree
+and the actual bytes on disk. Content evidence records file sizes, SHA-256 digests, and
+parsed LFS pointer OIDs.
+
+## Observations
+
+- C1 setup completed and all 13 content checks matched. Three repeated snapshots and
+  ordinary-file edits retained the original pointer and hydrated payload. Writing the
+  literal pointer to disk and running `git lfs checkout` restored the payload; a later
+  snapshot kept the stored pointer.
+- C2 root `*.bin filter=lfs` and nested `*.bin -filter` behaved as expected: the root
+  blob remained its original LFS pointer and the changed nested file was stored. The
+  parent audit identified that the first `info-only.bin` also matched the root pattern.
+  The corrected C2-only run used `info-only.dat`. Git `check-attr` reported
+  `info-only.dat: filter: lfs`, while `jj status` showed `A info-only.dat` and the jj
+  tree contained the raw 27-byte payload (SHA-256
+  `d1268c9e9bf39be781d69c41c9704b3d19d01479e50050b6ff8a293cf9c9441d`); jj did not exclude it. This is a Git/jj
+  discrepancy and a potential gap: changed PR prose names `.gitattributes` but does
+  not document `.git/info/attributes` as unsupported. Five of six recorded C2 checks
+  matched; the unmatched check is this observed discrepancy, not a setup failure.
+- C3 recovery checks all matched. With the local cache empty and the loopback LFS
+  endpoint returning 404, `git lfs pull origin main` exited 2; after `jj status`, both
+  disk and jj tree still held the pointer and the object remained absent. After the
+  payload was restored to the disposable endpoint, `git lfs pull` exited 0, hydrated
+  the disk payload, and left the stored pointer unchanged.
+- C4 PR binary: reported `False`, stored before switch
+  `False`, survived on disk `False`;
+  the switch wrote the v1 pointer to disk. The local edit was absent from the jj tree.
+  Snapshot exclusion being intentional does not make this silent loss safe.
+- C4 Homebrew baseline: reported `True`, stored before
+  switch `True`, survived on disk `False`;
+  the switch also wrote the v1 pointer to disk. The baseline stored the local edit in
+  its working-copy tree before switching. The independently created repositories have
+  matching commit IDs: `True`.
+
+## Interpretation and limits
+
+The C4 baseline is the installed `/opt/homebrew/bin/jj` binary, not a second pristine
+build. The PR docs note that existing tracked files may need `jj file untrack` before
+the snapshot ignore takes effect; C4 records the requested workflow without adding that
+step. C3 uses a disposable local bare Git remote and a loopback-only Git LFS API. These
+four small deterministic scenarios do not establish behavior for other attribute
+sources, external LFS servers, or revision-switch workflows.
+
+`results.json` has the final merged machine-readable evidence. `transcript.log` combines
+the corrected full-run transcript and C2 audit transcript. `pre-audit-*` preserves the
+four-case results before the parent-identified C2 path correction; `initial-*` preserves
+the first exploratory run.

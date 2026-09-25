@@ -1,0 +1,16 @@
+
+running 11 tests
+test test_diffedit_command::test_diffedit_existing_instructions ... ok
+test test_diffedit_command::test_diffedit_file_by_file ... ok
+test test_diffedit_command::test_diffedit_gitattributes_filter_in_temp_snapshot ... ok
+test test_diffedit_command::test_diffedit_restore_descendants ... ok
+test test_diffedit_command::test_diffedit_new_file ... ok
+test test_diffedit_command::test_diffedit_old_restore_interactive_tests ... ok
+test test_diffedit_command::test_diffedit_external_tool_conflict_marker_style ... ok
+test test_diffedit_command::test_diffedit_external_tool_eol_conversion ... ok
+test test_diffedit_command::test_diffedit_merge ... ok
+test test_diffedit_command::test_diffedit_3pane ... ok
+test test_diffedit_command::test_diffedit ... ok
+
+test result: ok. 11 passed; 0 failed; 0 ignored; 0 measured; 1105 filtered out; finished in 4.27s
+

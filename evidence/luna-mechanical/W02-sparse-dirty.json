@@ -1,0 +1,181 @@
+{
+  "id": "W02-sparse-dirty",
+  "purpose": "Sparse removal must not silently lose local edits",
+  "category": "data-integrity",
+  "status": "FAIL",
+  "seconds": 1.2195703340694308,
+  "checks": [
+    {
+      "label": "Sparse exclusion preserves, snapshots, or rejects local edits",
+      "pass": false,
+      "stored_sha256": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+      "edited_sha256": "f373b3bf36856f8fd4d1045d39a945690f960207ffaadc274305d5f90619a816"
+    }
+  ],
+  "observations": {
+    "sparse": {
+      "rc": 0,
+      "stderr": "Added 0 files, modified 0 files, removed 2 files\n",
+      "asset_exists": false
+    }
+  },
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "init",
+        "-b",
+        "main"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/luna-mechanical/repos/W02-sparse-dirty",
+      "rc": 0,
+      "seconds": 0.01732429163530469,
+      "stdout": "Initialized empty Git repository in /tmp/jj-lfs-evaluation/luna-mechanical/repos/W02-sparse-dirty/.git/\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.name",
+        "LFS Evaluation"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/luna-mechanical/repos/W02-sparse-dirty",
+      "rc": 0,
+      "seconds": 0.009238374885171652,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.email",
+        "eval@example.invalid"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/luna-mechanical/repos/W02-sparse-dirty",
+      "rc": 0,
+      "seconds": 0.009416957851499319,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "commit.gpgsign",
+        "false"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/luna-mechanical/repos/W02-sparse-dirty",
+      "rc": 0,
+      "seconds": 0.010153625160455704,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "core.autocrlf",
+        "false"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/luna-mechanical/repos/W02-sparse-dirty",
+      "rc": 0,
+      "seconds": 0.00831512501463294,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "lfs",
+        "install",
+        "--local"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/luna-mechanical/repos/W02-sparse-dirty",
+      "rc": 0,
+      "seconds": 0.20665262499824166,
+      "stdout": "Updated Git hooks.\nGit LFS initialized.\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "add",
+        "."
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/luna-mechanical/repos/W02-sparse-dirty",
+      "rc": 0,
+      "seconds": 0.14733754098415375,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "commit",
+        "-m",
+        "Seed LFS fixture"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/luna-mechanical/repos/W02-sparse-dirty",
+      "rc": 0,
+      "seconds": 0.5440850420854986,
+      "stdout": "[main (root-commit) 6fb75de] Seed LFS fixture\n 3 files changed, 5 insertions(+)\n create mode 100644 .gitattributes\n create mode 100644 assets/asset.bin\n create mode 100644 note.txt\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/luna-mechanical/repos/W02-sparse-dirty",
+      "rc": 0,
+      "seconds": 0.010839290916919708,
+      "stdout": "6fb75dec8aaaacc3d4b45c6ff869d1cb6319ade1\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr-release",
+        "git",
+        "init",
+        "--colocate"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/luna-mechanical/repos/W02-sparse-dirty",
+      "rc": 0,
+      "seconds": 0.19202466681599617,
+      "stdout": "",
+      "stderr": "Done importing changes from the underlying Git repo.\nInitialized repo in \".\"\n"
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr-release",
+        "sparse",
+        "set",
+        "--clear",
+        "--add",
+        "note.txt"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/luna-mechanical/repos/W02-sparse-dirty",
+      "rc": 0,
+      "seconds": 0.03301412472501397,
+      "stdout": "",
+      "stderr": "Added 0 files, modified 0 files, removed 2 files\n"
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr-release",
+        "--ignore-working-copy",
+        "file",
+        "show",
+        "assets/asset.bin"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/luna-mechanical/repos/W02-sparse-dirty",
+      "rc": 0,
+      "seconds": 0.028130291029810905,
+      "stdout": "version https://git-lfs.github.com/spec/v1\noid sha256:dad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f\nsize 2500\n",
+      "stderr": ""
+    }
+  ]
+}

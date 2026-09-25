@@ -1,0 +1,1470 @@
+[
+  {
+    "case": "pr-rebase",
+    "commands": [
+      {
+        "argv": [
+          "git",
+          "init",
+          "-b",
+          "main"
+        ],
+        "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/pr/repos/pr-rebase",
+        "rc": 0,
+        "seconds": 0.03143983334302902,
+        "stdout": "Initialized empty Git repository in /tmp/jj-lfs-evaluation/workflows-sol/v4/pr/repos/pr-rebase/.git/\n",
+        "stderr": ""
+      },
+      {
+        "argv": [
+          "git",
+          "config",
+          "user.name",
+          "LFS Evaluation"
+        ],
+        "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/pr/repos/pr-rebase",
+        "rc": 0,
+        "seconds": 0.016004167031496763,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "argv": [
+          "git",
+          "config",
+          "user.email",
+          "eval@example.invalid"
+        ],
+        "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/pr/repos/pr-rebase",
+        "rc": 0,
+        "seconds": 0.015194749925285578,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "argv": [
+          "git",
+          "config",
+          "commit.gpgsign",
+          "false"
+        ],
+        "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/pr/repos/pr-rebase",
+        "rc": 0,
+        "seconds": 0.014717167243361473,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "argv": [
+          "git",
+          "config",
+          "core.autocrlf",
+          "false"
+        ],
+        "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/pr/repos/pr-rebase",
+        "rc": 0,
+        "seconds": 0.016825333703309298,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "argv": [
+          "git",
+          "lfs",
+          "install",
+          "--local"
+        ],
+        "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/pr/repos/pr-rebase",
+        "rc": 0,
+        "seconds": 0.32069241628050804,
+        "stdout": "Updated Git hooks.\nGit LFS initialized.\n",
+        "stderr": ""
+      },
+      {
+        "argv": [
+          "git",
+          "add",
+          "."
+        ],
+        "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/pr/repos/pr-rebase",
+        "rc": 0,
+        "seconds": 0.1884306250140071,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "argv": [
+          "git",
+          "commit",
+          "-m",
+          "Seed LFS fixture"
+        ],
+        "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/pr/repos/pr-rebase",
+        "rc": 0,
+        "seconds": 0.6519268332049251,
+        "stdout": "[main (root-commit) 993bae0] Seed LFS fixture\n 3 files changed, 5 insertions(+)\n create mode 100644 .gitattributes\n create mode 100644 asset.bin\n create mode 100644 note.txt\n",
+        "stderr": ""
+      },
+      {
+        "argv": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/pr/repos/pr-rebase",
+        "rc": 0,
+        "seconds": 0.013269917108118534,
+        "stdout": "993bae0f4f884257be9d3c12494affad630a9ccd\n",
+        "stderr": ""
+      },
+      {
+        "argv": [
+          "/tmp/jj-lfs-evaluation/bin/jj-pr",
+          "git",
+          "init",
+          "--colocate"
+        ],
+        "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/pr/repos/pr-rebase",
+        "rc": 0,
+        "seconds": 0.27873458294197917,
+        "stdout": "",
+        "stderr": "Done importing changes from the underlying Git repo.\nInitialized repo in \".\"\n"
+      },
+      {
+        "argv": [
+          "git",
+          "add",
+          "asset.bin"
+        ],
+        "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/pr/repos/pr-rebase",
+        "rc": 0,
+        "seconds": 0.26409320812672377,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "argv": [
+          "git",
+          "commit",
+          "-m",
+          "Second LFS version"
+        ],
+        "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/pr/repos/pr-rebase",
+        "rc": 0,
+        "seconds": 0.3941643750295043,
+        "stdout": "[main 70e737c] Second LFS version\n 1 file changed, 2 insertions(+), 2 deletions(-)\n",
+        "stderr": ""
+      },
+      {
+        "argv": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/pr/repos/pr-rebase",
+        "rc": 0,
+        "seconds": 0.01618683384731412,
+        "stdout": "70e737cc1fa74bbfee8c6eaa1f35b4f7d7f3f778\n",
+        "stderr": ""
+      },
+      {
+        "argv": [
+          "/tmp/jj-lfs-evaluation/bin/jj-pr",
+          "status"
+        ],
+        "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/pr/repos/pr-rebase",
+        "rc": 0,
+        "seconds": 0.1485735410824418,
+        "stdout": "The working copy has no changes.\nWorking copy  (@) : ultxrtoy 1e9e3571 (empty) (no description set)\nParent commit (@-): yllknklo 70e737cc main | Second LFS version\n",
+        "stderr": "Reset the working copy parent to the new Git HEAD.\nDone importing changes from the underlying Git repo.\n"
+      },
+      {
+        "argv": [
+          "/tmp/jj-lfs-evaluation/bin/jj-pr",
+          "edit",
+          "993bae0f4f884257be9d3c12494affad630a9ccd"
+        ],
+        "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/pr/repos/pr-rebase",
+        "rc": 0,
+        "seconds": 0.09478966612368822,
+        "stdout": "",
+        "stderr": "Working copy  (@) now at: owwquznt 993bae0f Seed LFS fixture\nParent commit (@-)      : zzzzzzzz 00000000 (empty) (no description set)\nAdded 0 files, modified 1 files, removed 0 files\n"
+      },
+      {
+        "argv": [
+          "/tmp/jj-lfs-evaluation/bin/jj-pr",
+          "status"
+        ],
+        "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/pr/repos/pr-rebase",
+        "rc": 0,
+        "seconds": 0.06945662526413798,
+        "stdout": "Working copy changes:\nA .gitattributes\nA asset.bin\nA note.txt\nWorking copy  (@) : owwquznt 993bae0f Seed LFS fixture\nParent commit (@-): zzzzzzzz 00000000 (empty) (no description set)\n",
+        "stderr": ""
+      },
+      {
+        "argv": [
+          "/tmp/jj-lfs-evaluation/bin/jj-pr",
+          "log",
+          "-r",
+          "@",
+          "--no-graph",
+          "-T",
+          "commit_id"
+        ],
+        "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/pr/repos/pr-rebase",
+        "rc": 0,
+        "seconds": 0.06221837503835559,
+        "stdout": "993bae0f4f884257be9d3c12494affad630a9ccd",
+        "stderr": ""
+      },
+      {
+        "argv": [
+          "/tmp/jj-lfs-evaluation/bin/jj-pr",
+          "file",
+          "show",
+          "-r",
+          "993bae0f4f884257be9d3c12494affad630a9ccd",
+          "asset.bin"
+        ],
+        "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/pr/repos/pr-rebase",
+        "rc": 0,
+        "seconds": 0.049922124948352575,
+        "stdout": "version https://git-lfs.github.com/spec/v1\noid sha256:dad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f\nsize 2500\n",
+        "stderr": ""
+      },
+      {
+        "argv": [
+          "/tmp/jj-lfs-evaluation/bin/jj-pr",
+          "rebase",
+          "-r",
+          "@",
+          "-d",
+          "70e737cc1fa74bbfee8c6eaa1f35b4f7d7f3f778"
+        ],
+        "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/pr/repos/pr-rebase",
+        "rc": 0,
+        "seconds": 0.13812691625207663,
+        "stdout": "",
+        "stderr": "Rebased 1 commits to destination.\nRebased 1 descendant commits.\nWorking copy  (@) now at: owwquznt aa12e7ec Seed LFS fixture\nParent commit (@-)      : yllknklo 8712bf5b main | (conflict) Second LFS version\nAdded 0 files, modified 1 files, removed 0 files\nNew conflicts appeared in 1 commits:\n  yllknklo 8712bf5b main | (conflict) Second LFS version\nHint: To resolve the conflicts, start by creating a commit on top of\nthe conflicted commit:\n  jj new yllknklo\nThen use `jj resolve`, or edit the conflict markers in the file directly.\nOnce the conflicts are resolved, you can inspect the result with `jj diff`.\nThen run `jj squash` to move the resolution into the conflicted commit.\n"
+      },
+      {
+        "argv": [
+          "/tmp/jj-lfs-evaluation/bin/jj-pr",
+          "file",
+          "show",
+          "-r",
+          "993bae0f4f884257be9d3c12494affad630a9ccd",
+          "asset.bin"
+        ],
+        "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/pr/repos/pr-rebase",
+        "rc": 0,
+        "seconds": 0.04908183263614774,
+        "stdout": "version https://git-lfs.github.com/spec/v1\noid sha256:dad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f\nsize 2500\n",
+        "stderr": ""
+      }
+    ]
+  },
+  {
+    "case": "pr-switch",
+    "commands": [
+      {
+        "argv": [
+          "git",
+          "init",
+          "-b",
+          "main"
+        ],
+        "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/pr/repos/pr-switch",
+        "rc": 0,
+        "seconds": 0.034243750385940075,
+        "stdout": "Initialized empty Git repository in /tmp/jj-lfs-evaluation/workflows-sol/v4/pr/repos/pr-switch/.git/\n",
+        "stderr": ""
+      },
+      {
+        "argv": [
+          "git",
+          "config",
+          "user.name",
+          "LFS Evaluation"
+        ],
+        "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/pr/repos/pr-switch",
+        "rc": 0,
+        "seconds": 0.027172083035111427,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "argv": [
+          "git",
+          "config",
+          "user.email",
+          "eval@example.invalid"
+        ],
+        "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/pr/repos/pr-switch",
+        "rc": 0,
+        "seconds": 0.015679500065743923,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "argv": [
+          "git",
+          "config",
+          "commit.gpgsign",
+          "false"
+        ],
+        "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/pr/repos/pr-switch",
+        "rc": 0,
+        "seconds": 0.01382979191839695,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "argv": [
+          "git",
+          "config",
+          "core.autocrlf",
+          "false"
+        ],
+        "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/pr/repos/pr-switch",
+        "rc": 0,
+        "seconds": 0.015009916853159666,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "argv": [
+          "git",
+          "lfs",
+          "install",
+          "--local"
+        ],
+        "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/pr/repos/pr-switch",
+        "rc": 0,
+        "seconds": 0.293504917062819,
+        "stdout": "Updated Git hooks.\nGit LFS initialized.\n",
+        "stderr": ""
+      },
+      {
+        "argv": [
+          "git",
+          "add",
+          "."
+        ],
+        "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/pr/repos/pr-switch",
+        "rc": 0,
+        "seconds": 0.17608470935374498,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "argv": [
+          "git",
+          "commit",
+          "-m",
+          "Seed LFS fixture"
+        ],
+        "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/pr/repos/pr-switch",
+        "rc": 0,
+        "seconds": 0.5027349167503417,
+        "stdout": "[main (root-commit) 6042075] Seed LFS fixture\n 3 files changed, 5 insertions(+)\n create mode 100644 .gitattributes\n create mode 100644 asset.bin\n create mode 100644 note.txt\n",
+        "stderr": ""
+      },
+      {
+        "argv": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/pr/repos/pr-switch",
+        "rc": 0,
+        "seconds": 0.016000790987163782,
+        "stdout": "60420751f34698221866b7582088c7e8c1e47bb5\n",
+        "stderr": ""
+      },
+      {
+        "argv": [
+          "/tmp/jj-lfs-evaluation/bin/jj-pr",
+          "git",
+          "init",
+          "--colocate"
+        ],
+        "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/pr/repos/pr-switch",
+        "rc": 0,
+        "seconds": 0.2636882080696523,
+        "stdout": "",
+        "stderr": "Done importing changes from the underlying Git repo.\nInitialized repo in \".\"\n"
+      },
+      {
+        "argv": [
+          "git",
+          "add",
+          "asset.bin"
+        ],
+        "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/pr/repos/pr-switch",
+        "rc": 0,
+        "seconds": 0.17073575034737587,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "argv": [
+          "git",
+          "commit",
+          "-m",
+          "Second LFS version"
+        ],
+        "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/pr/repos/pr-switch",
+        "rc": 0,
+        "seconds": 0.4179364158771932,
+        "stdout": "[main 9754eac] Second LFS version\n 1 file changed, 2 insertions(+), 2 deletions(-)\n",
+        "stderr": ""
+      },
+      {
+        "argv": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/pr/repos/pr-switch",
+        "rc": 0,
+        "seconds": 0.014394083991646767,
+        "stdout": "9754eac9e80f936cbb4cf97d29ac8d9e37824fe6\n",
+        "stderr": ""
+      },
+      {
+        "argv": [
+          "/tmp/jj-lfs-evaluation/bin/jj-pr",
+          "status"
+        ],
+        "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/pr/repos/pr-switch",
+        "rc": 0,
+        "seconds": 0.16228070901706815,
+        "stdout": "The working copy has no changes.\nWorking copy  (@) : oprokkqm 4f3eee09 (empty) (no description set)\nParent commit (@-): tskxvyln 9754eac9 main | Second LFS version\n",
+        "stderr": "Reset the working copy parent to the new Git HEAD.\nDone importing changes from the underlying Git repo.\n"
+      },
+      {
+        "argv": [
+          "/tmp/jj-lfs-evaluation/bin/jj-pr",
+          "edit",
+          "60420751f34698221866b7582088c7e8c1e47bb5"
+        ],
+        "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/pr/repos/pr-switch",
+        "rc": 0,
+        "seconds": 0.10529575031250715,
+        "stdout": "",
+        "stderr": "Working copy  (@) now at: pmmlxsrw 60420751 Seed LFS fixture\nParent commit (@-)      : zzzzzzzz 00000000 (empty) (no description set)\nAdded 0 files, modified 1 files, removed 0 files\n"
+      },
+      {
+        "argv": [
+          "/tmp/jj-lfs-evaluation/bin/jj-pr",
+          "status"
+        ],
+        "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/pr/repos/pr-switch",
+        "rc": 0,
+        "seconds": 0.06283800024539232,
+        "stdout": "Working copy changes:\nA .gitattributes\nA asset.bin\nA note.txt\nWorking copy  (@) : pmmlxsrw 60420751 Seed LFS fixture\nParent commit (@-): zzzzzzzz 00000000 (empty) (no description set)\n",
+        "stderr": ""
+      },
+      {
+        "argv": [
+          "/tmp/jj-lfs-evaluation/bin/jj-pr",
+          "log",
+          "-r",
+          "@",
+          "--no-graph",
+          "-T",
+          "commit_id"
+        ],
+        "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/pr/repos/pr-switch",
+        "rc": 0,
+        "seconds": 0.059347332920879126,
+        "stdout": "60420751f34698221866b7582088c7e8c1e47bb5",
+        "stderr": ""
+      },
+      {
+        "argv": [
+          "/tmp/jj-lfs-evaluation/bin/jj-pr",
+          "file",
+          "show",
+          "-r",
+          "60420751f34698221866b7582088c7e8c1e47bb5",
+          "asset.bin"
+        ],
+        "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/pr/repos/pr-switch",
+        "rc": 0,
+        "seconds": 0.04782995814457536,
+        "stdout": "version https://git-lfs.github.com/spec/v1\noid sha256:dad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f\nsize 2500\n",
+        "stderr": ""
+      },
+      {
+        "argv": [
+          "/tmp/jj-lfs-evaluation/bin/jj-pr",
+          "edit",
+          "9754eac9e80f936cbb4cf97d29ac8d9e37824fe6"
+        ],
+        "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/pr/repos/pr-switch",
+        "rc": 0,
+        "seconds": 0.1022288748063147,
+        "stdout": "",
+        "stderr": "Working copy  (@) now at: tskxvyln 9754eac9 main | Second LFS version\nParent commit (@-)      : pmmlxsrw 60420751 Seed LFS fixture\nAdded 0 files, modified 1 files, removed 0 files\n"
+      },
+      {
+        "argv": [
+          "/tmp/jj-lfs-evaluation/bin/jj-pr",
+          "file",
+          "show",
+          "-r",
+          "60420751f34698221866b7582088c7e8c1e47bb5",
+          "asset.bin"
+        ],
+        "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/pr/repos/pr-switch",
+        "rc": 0,
+        "seconds": 0.051993791945278645,
+        "stdout": "version https://git-lfs.github.com/spec/v1\noid sha256:dad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f\nsize 2500\n",
+        "stderr": ""
+      }
+    ]
+  },
+  {
+    "case": "pr-untrack",
+    "commands": [
+      {
+        "argv": [
+          "git",
+          "init",
+          "-b",
+          "main"
+        ],
+        "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/pr/repos/pr-untrack",
+        "rc": 0,
+        "seconds": 0.032183249946683645,
+        "stdout": "Initialized empty Git repository in /tmp/jj-lfs-evaluation/workflows-sol/v4/pr/repos/pr-untrack/.git/\n",
+        "stderr": ""
+      },
+      {
+        "argv": [
+          "git",
+          "config",
+          "user.name",
+          "LFS Evaluation"
+        ],
+        "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/pr/repos/pr-untrack",
+        "rc": 0,
+        "seconds": 0.015786000061780214,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "argv": [
+          "git",
+          "config",
+          "user.email",
+          "eval@example.invalid"
+        ],
+        "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/pr/repos/pr-untrack",
+        "rc": 0,
+        "seconds": 0.014880707953125238,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "argv": [
+          "git",
+          "config",
+          "commit.gpgsign",
+          "false"
+        ],
+        "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/pr/repos/pr-untrack",
+        "rc": 0,
+        "seconds": 0.01588854193687439,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "argv": [
+          "git",
+          "config",
+          "core.autocrlf",
+          "false"
+        ],
+        "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/pr/repos/pr-untrack",
+        "rc": 0,
+        "seconds": 0.01554054208099842,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "argv": [
+          "git",
+          "lfs",
+          "install",
+          "--local"
+        ],
+        "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/pr/repos/pr-untrack",
+        "rc": 0,
+        "seconds": 0.32746833423152566,
+        "stdout": "Updated Git hooks.\nGit LFS initialized.\n",
+        "stderr": ""
+      },
+      {
+        "argv": [
+          "git",
+          "add",
+          "."
+        ],
+        "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/pr/repos/pr-untrack",
+        "rc": 0,
+        "seconds": 0.17724066693335772,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "argv": [
+          "git",
+          "commit",
+          "-m",
+          "Seed LFS fixture"
+        ],
+        "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/pr/repos/pr-untrack",
+        "rc": 0,
+        "seconds": 0.6563639170490205,
+        "stdout": "[main (root-commit) 6668967] Seed LFS fixture\n 3 files changed, 5 insertions(+)\n create mode 100644 .gitattributes\n create mode 100644 asset.bin\n create mode 100644 note.txt\n",
+        "stderr": ""
+      },
+      {
+        "argv": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/pr/repos/pr-untrack",
+        "rc": 0,
+        "seconds": 0.014346625190228224,
+        "stdout": "6668967ac812f90aa0b92780f806ffe940f6e6f1\n",
+        "stderr": ""
+      },
+      {
+        "argv": [
+          "/tmp/jj-lfs-evaluation/bin/jj-pr",
+          "git",
+          "init",
+          "--colocate"
+        ],
+        "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/pr/repos/pr-untrack",
+        "rc": 0,
+        "seconds": 0.21958595793694258,
+        "stdout": "",
+        "stderr": "Done importing changes from the underlying Git repo.\nInitialized repo in \".\"\n"
+      },
+      {
+        "argv": [
+          "/tmp/jj-lfs-evaluation/bin/jj-pr",
+          "file",
+          "show",
+          "asset.bin"
+        ],
+        "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/pr/repos/pr-untrack",
+        "rc": 0,
+        "seconds": 0.04617879167199135,
+        "stdout": "version https://git-lfs.github.com/spec/v1\noid sha256:dad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f\nsize 2500\n",
+        "stderr": ""
+      },
+      {
+        "argv": [
+          "/tmp/jj-lfs-evaluation/bin/jj-pr",
+          "file",
+          "list"
+        ],
+        "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/pr/repos/pr-untrack",
+        "rc": 0,
+        "seconds": 0.03836629167199135,
+        "stdout": ".gitattributes\nasset.bin\nnote.txt\n",
+        "stderr": ""
+      },
+      {
+        "argv": [
+          "/tmp/jj-lfs-evaluation/bin/jj-pr",
+          "file",
+          "untrack",
+          "asset.bin"
+        ],
+        "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/pr/repos/pr-untrack",
+        "rc": 0,
+        "seconds": 0.10357870906591415,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "argv": [
+          "/tmp/jj-lfs-evaluation/bin/jj-pr",
+          "file",
+          "list"
+        ],
+        "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/pr/repos/pr-untrack",
+        "rc": 0,
+        "seconds": 0.04180487524718046,
+        "stdout": ".gitattributes\nnote.txt\n",
+        "stderr": ""
+      },
+      {
+        "argv": [
+          "/tmp/jj-lfs-evaluation/bin/jj-pr",
+          "file",
+          "show",
+          "asset.bin"
+        ],
+        "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/pr/repos/pr-untrack",
+        "rc": 1,
+        "seconds": 0.04913283325731754,
+        "stdout": "",
+        "stderr": "Error: No such path: asset.bin\n"
+      },
+      {
+        "argv": [
+          "/tmp/jj-lfs-evaluation/bin/jj-pr",
+          "status"
+        ],
+        "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/pr/repos/pr-untrack",
+        "rc": 0,
+        "seconds": 0.05495845805853605,
+        "stdout": "Working copy changes:\nD asset.bin\nWorking copy  (@) : lskuonsm 50ca9b1c (no description set)\nParent commit (@-): rktstkzx 6668967a main | Seed LFS fixture\n",
+        "stderr": ""
+      }
+    ]
+  },
+  {
+    "case": "base-rebase",
+    "commands": [
+      {
+        "argv": [
+          "git",
+          "init",
+          "-b",
+          "main"
+        ],
+        "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/baseline/repos/base-rebase",
+        "rc": 0,
+        "seconds": 0.027774000074714422,
+        "stdout": "Initialized empty Git repository in /tmp/jj-lfs-evaluation/workflows-sol/v4/baseline/repos/base-rebase/.git/\n",
+        "stderr": ""
+      },
+      {
+        "argv": [
+          "git",
+          "config",
+          "user.name",
+          "LFS Evaluation"
+        ],
+        "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/baseline/repos/base-rebase",
+        "rc": 0,
+        "seconds": 0.015538332983851433,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "argv": [
+          "git",
+          "config",
+          "user.email",
+          "eval@example.invalid"
+        ],
+        "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/baseline/repos/base-rebase",
+        "rc": 0,
+        "seconds": 0.01467625005170703,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "argv": [
+          "git",
+          "config",
+          "commit.gpgsign",
+          "false"
+        ],
+        "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/baseline/repos/base-rebase",
+        "rc": 0,
+        "seconds": 0.014033582992851734,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "argv": [
+          "git",
+          "config",
+          "core.autocrlf",
+          "false"
+        ],
+        "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/baseline/repos/base-rebase",
+        "rc": 0,
+        "seconds": 0.018625458236783743,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "argv": [
+          "git",
+          "lfs",
+          "install",
+          "--local"
+        ],
+        "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/baseline/repos/base-rebase",
+        "rc": 0,
+        "seconds": 0.3048334592022002,
+        "stdout": "Updated Git hooks.\nGit LFS initialized.\n",
+        "stderr": ""
+      },
+      {
+        "argv": [
+          "git",
+          "add",
+          "."
+        ],
+        "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/baseline/repos/base-rebase",
+        "rc": 0,
+        "seconds": 0.16973758302628994,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "argv": [
+          "git",
+          "commit",
+          "-m",
+          "Seed LFS fixture"
+        ],
+        "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/baseline/repos/base-rebase",
+        "rc": 0,
+        "seconds": 0.6945099169388413,
+        "stdout": "[main (root-commit) a86c94a] Seed LFS fixture\n 3 files changed, 5 insertions(+)\n create mode 100644 .gitattributes\n create mode 100644 asset.bin\n create mode 100644 note.txt\n",
+        "stderr": ""
+      },
+      {
+        "argv": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/baseline/repos/base-rebase",
+        "rc": 0,
+        "seconds": 0.013437374960631132,
+        "stdout": "a86c94ae6e12ec2c255f0ce173cfc4f832245e6c\n",
+        "stderr": ""
+      },
+      {
+        "argv": [
+          "/tmp/jj-lfs-evaluation/bin/jj-base",
+          "git",
+          "init",
+          "--colocate"
+        ],
+        "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/baseline/repos/base-rebase",
+        "rc": 0,
+        "seconds": 0.37931162491440773,
+        "stdout": "",
+        "stderr": "Done importing changes from the underlying Git repo.\nInitialized repo in \".\"\n"
+      },
+      {
+        "argv": [
+          "git",
+          "add",
+          "asset.bin"
+        ],
+        "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/baseline/repos/base-rebase",
+        "rc": 0,
+        "seconds": 0.17291554203256965,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "argv": [
+          "git",
+          "commit",
+          "-m",
+          "Second LFS version"
+        ],
+        "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/baseline/repos/base-rebase",
+        "rc": 0,
+        "seconds": 0.5050794170238078,
+        "stdout": "[main eab931f] Second LFS version\n 1 file changed, 2 insertions(+), 2 deletions(-)\n",
+        "stderr": ""
+      },
+      {
+        "argv": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/baseline/repos/base-rebase",
+        "rc": 0,
+        "seconds": 0.011020415928214788,
+        "stdout": "eab931fcddb03886b3a21de7f4847dca9c05fb26\n",
+        "stderr": ""
+      },
+      {
+        "argv": [
+          "/tmp/jj-lfs-evaluation/bin/jj-base",
+          "status"
+        ],
+        "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/baseline/repos/base-rebase",
+        "rc": 0,
+        "seconds": 0.20821249997243285,
+        "stdout": "Working copy changes:\nM asset.bin\nWorking copy  (@) : ypxlxlmq 396a0a94 (no description set)\nParent commit (@-): tvmkpzwq eab931fc main | Second LFS version\n",
+        "stderr": "Reset the working copy parent to the new Git HEAD.\nDone importing changes from the underlying Git repo.\n"
+      },
+      {
+        "argv": [
+          "/tmp/jj-lfs-evaluation/bin/jj-base",
+          "edit",
+          "a86c94ae6e12ec2c255f0ce173cfc4f832245e6c"
+        ],
+        "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/baseline/repos/base-rebase",
+        "rc": 0,
+        "seconds": 0.10651350021362305,
+        "stdout": "",
+        "stderr": "Working copy  (@) now at: wtspxvvn a86c94ae Seed LFS fixture\nParent commit (@-)      : zzzzzzzz 00000000 (empty) (no description set)\nAdded 0 files, modified 1 files, removed 0 files\n"
+      },
+      {
+        "argv": [
+          "/tmp/jj-lfs-evaluation/bin/jj-base",
+          "status"
+        ],
+        "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/baseline/repos/base-rebase",
+        "rc": 0,
+        "seconds": 0.13134479196742177,
+        "stdout": "Working copy changes:\nA .gitattributes\nA asset.bin\nA note.txt\nWorking copy  (@) : wtspxvvn add438c5 Seed LFS fixture\nParent commit (@-): zzzzzzzz 00000000 (empty) (no description set)\n",
+        "stderr": "Rebased 3 descendant commits onto updated working copy.\n"
+      },
+      {
+        "argv": [
+          "/tmp/jj-lfs-evaluation/bin/jj-base",
+          "log",
+          "-r",
+          "@",
+          "--no-graph",
+          "-T",
+          "commit_id"
+        ],
+        "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/baseline/repos/base-rebase",
+        "rc": 0,
+        "seconds": 0.05849737487733364,
+        "stdout": "add438c597b430f8159bca610f9927c6dba88699",
+        "stderr": ""
+      },
+      {
+        "argv": [
+          "/tmp/jj-lfs-evaluation/bin/jj-base",
+          "file",
+          "show",
+          "-r",
+          "add438c597b430f8159bca610f9927c6dba88699",
+          "asset.bin"
+        ],
+        "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/baseline/repos/base-rebase",
+        "rc": 0,
+        "seconds": 0.047532790806144476,
+        "stdout": "local modified hydrated asset\u0000\n",
+        "stderr": ""
+      },
+      {
+        "argv": [
+          "/tmp/jj-lfs-evaluation/bin/jj-base",
+          "rebase",
+          "-r",
+          "@",
+          "-d",
+          "eab931fcddb03886b3a21de7f4847dca9c05fb26"
+        ],
+        "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/baseline/repos/base-rebase",
+        "rc": 0,
+        "seconds": 0.14914862485602498,
+        "stdout": "",
+        "stderr": "Rebased 1 commits to destination.\nRebased 3 descendant commits.\nWorking copy  (@) now at: wtspxvvn/0 04d6dcbe (divergent) (conflict) Seed LFS fixture\nParent commit (@-)      : tvmkpzwq/2 eab931fc (divergent) Second LFS version\nAdded 0 files, modified 1 files, removed 0 files\nWarning: There are unresolved conflicts at these paths:\nasset.bin    2-sided conflict\nNew conflicts appeared in 1 commits:\n  wtspxvvn/0 04d6dcbe (divergent) (conflict) Seed LFS fixture\nHint: To resolve the conflicts, start by creating a commit on top of\none of the first conflicted commits:\n  jj new tvmkpzwq/0\n  jj new pkpsllqy\n  jj new wtspxvvn/0\nThen use `jj resolve`, or edit the conflict markers in the file directly.\nOnce the conflicts are resolved, you can inspect the result with `jj diff`.\nThen run `jj squash` to move the resolution into the conflicted commit.\n"
+      },
+      {
+        "argv": [
+          "/tmp/jj-lfs-evaluation/bin/jj-base",
+          "file",
+          "show",
+          "-r",
+          "add438c597b430f8159bca610f9927c6dba88699",
+          "asset.bin"
+        ],
+        "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/baseline/repos/base-rebase",
+        "rc": 0,
+        "seconds": 0.050207083113491535,
+        "stdout": "local modified hydrated asset\u0000\n",
+        "stderr": ""
+      }
+    ]
+  },
+  {
+    "case": "base-switch",
+    "commands": [
+      {
+        "argv": [
+          "git",
+          "init",
+          "-b",
+          "main"
+        ],
+        "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/baseline/repos/base-switch",
+        "rc": 0,
+        "seconds": 0.02213808288797736,
+        "stdout": "Initialized empty Git repository in /tmp/jj-lfs-evaluation/workflows-sol/v4/baseline/repos/base-switch/.git/\n",
+        "stderr": ""
+      },
+      {
+        "argv": [
+          "git",
+          "config",
+          "user.name",
+          "LFS Evaluation"
+        ],
+        "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/baseline/repos/base-switch",
+        "rc": 0,
+        "seconds": 0.016915207728743553,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "argv": [
+          "git",
+          "config",
+          "user.email",
+          "eval@example.invalid"
+        ],
+        "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/baseline/repos/base-switch",
+        "rc": 0,
+        "seconds": 0.016503165941685438,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "argv": [
+          "git",
+          "config",
+          "commit.gpgsign",
+          "false"
+        ],
+        "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/baseline/repos/base-switch",
+        "rc": 0,
+        "seconds": 0.021476459223777056,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "argv": [
+          "git",
+          "config",
+          "core.autocrlf",
+          "false"
+        ],
+        "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/baseline/repos/base-switch",
+        "rc": 0,
+        "seconds": 0.012562416959553957,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "argv": [
+          "git",
+          "lfs",
+          "install",
+          "--local"
+        ],
+        "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/baseline/repos/base-switch",
+        "rc": 0,
+        "seconds": 0.2547049173153937,
+        "stdout": "Updated Git hooks.\nGit LFS initialized.\n",
+        "stderr": ""
+      },
+      {
+        "argv": [
+          "git",
+          "add",
+          "."
+        ],
+        "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/baseline/repos/base-switch",
+        "rc": 0,
+        "seconds": 0.16585416719317436,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "argv": [
+          "git",
+          "commit",
+          "-m",
+          "Seed LFS fixture"
+        ],
+        "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/baseline/repos/base-switch",
+        "rc": 0,
+        "seconds": 0.6721427501179278,
+        "stdout": "[main (root-commit) c60de15] Seed LFS fixture\n 3 files changed, 5 insertions(+)\n create mode 100644 .gitattributes\n create mode 100644 asset.bin\n create mode 100644 note.txt\n",
+        "stderr": ""
+      },
+      {
+        "argv": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/baseline/repos/base-switch",
+        "rc": 0,
+        "seconds": 0.015487042255699635,
+        "stdout": "c60de15d65eb23a36d4cae11f65fb8bad39ad83f\n",
+        "stderr": ""
+      },
+      {
+        "argv": [
+          "/tmp/jj-lfs-evaluation/bin/jj-base",
+          "git",
+          "init",
+          "--colocate"
+        ],
+        "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/baseline/repos/base-switch",
+        "rc": 0,
+        "seconds": 0.9463512497022748,
+        "stdout": "",
+        "stderr": "Done importing changes from the underlying Git repo.\nInitialized repo in \".\"\n"
+      },
+      {
+        "argv": [
+          "git",
+          "add",
+          "asset.bin"
+        ],
+        "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/baseline/repos/base-switch",
+        "rc": 0,
+        "seconds": 0.17330416664481163,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "argv": [
+          "git",
+          "commit",
+          "-m",
+          "Second LFS version"
+        ],
+        "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/baseline/repos/base-switch",
+        "rc": 0,
+        "seconds": 0.25438866624608636,
+        "stdout": "[main f2dbd79] Second LFS version\n 1 file changed, 2 insertions(+), 2 deletions(-)\n",
+        "stderr": ""
+      },
+      {
+        "argv": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/baseline/repos/base-switch",
+        "rc": 0,
+        "seconds": 0.015122042037546635,
+        "stdout": "f2dbd7927436bf479ce0e1768b0e9128ac2b7cc3\n",
+        "stderr": ""
+      },
+      {
+        "argv": [
+          "/tmp/jj-lfs-evaluation/bin/jj-base",
+          "status"
+        ],
+        "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/baseline/repos/base-switch",
+        "rc": 0,
+        "seconds": 0.19552179193124175,
+        "stdout": "Working copy changes:\nM asset.bin\nWorking copy  (@) : rvntmrsl e9760ddc (no description set)\nParent commit (@-): nwwlmvwu f2dbd792 main | Second LFS version\n",
+        "stderr": "Reset the working copy parent to the new Git HEAD.\nDone importing changes from the underlying Git repo.\n"
+      },
+      {
+        "argv": [
+          "/tmp/jj-lfs-evaluation/bin/jj-base",
+          "edit",
+          "c60de15d65eb23a36d4cae11f65fb8bad39ad83f"
+        ],
+        "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/baseline/repos/base-switch",
+        "rc": 0,
+        "seconds": 0.08746029110625386,
+        "stdout": "",
+        "stderr": "Working copy  (@) now at: knyouqno c60de15d Seed LFS fixture\nParent commit (@-)      : zzzzzzzz 00000000 (empty) (no description set)\nAdded 0 files, modified 1 files, removed 0 files\n"
+      },
+      {
+        "argv": [
+          "/tmp/jj-lfs-evaluation/bin/jj-base",
+          "status"
+        ],
+        "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/baseline/repos/base-switch",
+        "rc": 0,
+        "seconds": 0.13886054186150432,
+        "stdout": "Working copy changes:\nA .gitattributes\nA asset.bin\nA note.txt\nWorking copy  (@) : knyouqno e96a1cce Seed LFS fixture\nParent commit (@-): zzzzzzzz 00000000 (empty) (no description set)\n",
+        "stderr": "Rebased 3 descendant commits onto updated working copy.\n"
+      },
+      {
+        "argv": [
+          "/tmp/jj-lfs-evaluation/bin/jj-base",
+          "log",
+          "-r",
+          "@",
+          "--no-graph",
+          "-T",
+          "commit_id"
+        ],
+        "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/baseline/repos/base-switch",
+        "rc": 0,
+        "seconds": 0.05329816695302725,
+        "stdout": "e96a1cceffc271b540fe90ff6470a11f9a40b227",
+        "stderr": ""
+      },
+      {
+        "argv": [
+          "/tmp/jj-lfs-evaluation/bin/jj-base",
+          "file",
+          "show",
+          "-r",
+          "e96a1cceffc271b540fe90ff6470a11f9a40b227",
+          "asset.bin"
+        ],
+        "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/baseline/repos/base-switch",
+        "rc": 0,
+        "seconds": 0.053831332828849554,
+        "stdout": "local modified hydrated asset\u0000\n",
+        "stderr": ""
+      },
+      {
+        "argv": [
+          "/tmp/jj-lfs-evaluation/bin/jj-base",
+          "edit",
+          "f2dbd7927436bf479ce0e1768b0e9128ac2b7cc3"
+        ],
+        "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/baseline/repos/base-switch",
+        "rc": 0,
+        "seconds": 0.09132358338683844,
+        "stdout": "",
+        "stderr": "Working copy  (@) now at: nwwlmvwu/1 f2dbd792 (divergent) Second LFS version\nParent commit (@-)      : knyouqno/1 c60de15d (divergent) Seed LFS fixture\nAdded 0 files, modified 1 files, removed 0 files\n"
+      },
+      {
+        "argv": [
+          "/tmp/jj-lfs-evaluation/bin/jj-base",
+          "file",
+          "show",
+          "-r",
+          "e96a1cceffc271b540fe90ff6470a11f9a40b227",
+          "asset.bin"
+        ],
+        "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/baseline/repos/base-switch",
+        "rc": 0,
+        "seconds": 0.047343708109110594,
+        "stdout": "local modified hydrated asset\u0000\n",
+        "stderr": ""
+      }
+    ]
+  },
+  {
+    "case": "base-untrack",
+    "commands": [
+      {
+        "argv": [
+          "git",
+          "init",
+          "-b",
+          "main"
+        ],
+        "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/baseline/repos/base-untrack",
+        "rc": 0,
+        "seconds": 0.025574208237230778,
+        "stdout": "Initialized empty Git repository in /tmp/jj-lfs-evaluation/workflows-sol/v4/baseline/repos/base-untrack/.git/\n",
+        "stderr": ""
+      },
+      {
+        "argv": [
+          "git",
+          "config",
+          "user.name",
+          "LFS Evaluation"
+        ],
+        "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/baseline/repos/base-untrack",
+        "rc": 0,
+        "seconds": 0.012650709133595228,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "argv": [
+          "git",
+          "config",
+          "user.email",
+          "eval@example.invalid"
+        ],
+        "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/baseline/repos/base-untrack",
+        "rc": 0,
+        "seconds": 0.01653733430430293,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "argv": [
+          "git",
+          "config",
+          "commit.gpgsign",
+          "false"
+        ],
+        "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/baseline/repos/base-untrack",
+        "rc": 0,
+        "seconds": 0.012744625099003315,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "argv": [
+          "git",
+          "config",
+          "core.autocrlf",
+          "false"
+        ],
+        "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/baseline/repos/base-untrack",
+        "rc": 0,
+        "seconds": 0.01840704120695591,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "argv": [
+          "git",
+          "lfs",
+          "install",
+          "--local"
+        ],
+        "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/baseline/repos/base-untrack",
+        "rc": 0,
+        "seconds": 0.3052705000154674,
+        "stdout": "Updated Git hooks.\nGit LFS initialized.\n",
+        "stderr": ""
+      },
+      {
+        "argv": [
+          "git",
+          "add",
+          "."
+        ],
+        "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/baseline/repos/base-untrack",
+        "rc": 0,
+        "seconds": 0.13295720890164375,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "argv": [
+          "git",
+          "commit",
+          "-m",
+          "Seed LFS fixture"
+        ],
+        "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/baseline/repos/base-untrack",
+        "rc": 0,
+        "seconds": 0.6078169168904424,
+        "stdout": "[main (root-commit) 571566c] Seed LFS fixture\n 3 files changed, 5 insertions(+)\n create mode 100644 .gitattributes\n create mode 100644 asset.bin\n create mode 100644 note.txt\n",
+        "stderr": ""
+      },
+      {
+        "argv": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/baseline/repos/base-untrack",
+        "rc": 0,
+        "seconds": 0.016125124879181385,
+        "stdout": "571566c042128afad942e8301a0a8826a6871c18\n",
+        "stderr": ""
+      },
+      {
+        "argv": [
+          "/tmp/jj-lfs-evaluation/bin/jj-base",
+          "git",
+          "init",
+          "--colocate"
+        ],
+        "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/baseline/repos/base-untrack",
+        "rc": 0,
+        "seconds": 0.2712269998155534,
+        "stdout": "",
+        "stderr": "Done importing changes from the underlying Git repo.\nInitialized repo in \".\"\n"
+      },
+      {
+        "argv": [
+          "/tmp/jj-lfs-evaluation/bin/jj-base",
+          "file",
+          "show",
+          "asset.bin"
+        ],
+        "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/baseline/repos/base-untrack",
+        "rc": 0,
+        "seconds": 0.04609854193404317,
+        "stdout": "LFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\n",
+        "stderr": ""
+      },
+      {
+        "argv": [
+          "/tmp/jj-lfs-evaluation/bin/jj-base",
+          "file",
+          "list"
+        ],
+        "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/baseline/repos/base-untrack",
+        "rc": 0,
+        "seconds": 0.047803624998778105,
+        "stdout": ".gitattributes\nasset.bin\nnote.txt\n",
+        "stderr": ""
+      },
+      {
+        "argv": [
+          "/tmp/jj-lfs-evaluation/bin/jj-base",
+          "file",
+          "untrack",
+          "asset.bin"
+        ],
+        "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/baseline/repos/base-untrack",
+        "rc": 1,
+        "seconds": 0.089329291600734,
+        "stdout": "",
+        "stderr": "Error: 'asset.bin' is not ignored.\nHint: Files that are not ignored will be added back by the next command.\nMake sure they're ignored, then try again.\n"
+      },
+      {
+        "argv": [
+          "/tmp/jj-lfs-evaluation/bin/jj-base",
+          "file",
+          "list"
+        ],
+        "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/baseline/repos/base-untrack",
+        "rc": 0,
+        "seconds": 0.04949908284470439,
+        "stdout": ".gitattributes\nasset.bin\nnote.txt\n",
+        "stderr": ""
+      },
+      {
+        "argv": [
+          "/tmp/jj-lfs-evaluation/bin/jj-base",
+          "file",
+          "show",
+          "asset.bin"
+        ],
+        "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/baseline/repos/base-untrack",
+        "rc": 0,
+        "seconds": 0.05324587505310774,
+        "stdout": "LFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\n",
+        "stderr": ""
+      },
+      {
+        "argv": [
+          "/tmp/jj-lfs-evaluation/bin/jj-base",
+          "status"
+        ],
+        "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/baseline/repos/base-untrack",
+        "rc": 0,
+        "seconds": 0.06234866613522172,
+        "stdout": "Working copy changes:\nM asset.bin\nWorking copy  (@) : qwutvzvp e883aedf (no description set)\nParent commit (@-): yrwrlytu 571566c0 main | Seed LFS fixture\n",
+        "stderr": ""
+      }
+    ]
+  }
+]

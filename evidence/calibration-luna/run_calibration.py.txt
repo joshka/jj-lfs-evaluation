@@ -1,0 +1,703 @@
+#!/usr/bin/env python3
+"""Run the four bounded Git LFS/Jujutsu calibration scenarios."""
+
+from __future__ import annotations
+
+import base64
+import hashlib
+import json
+import os
+import re
+import subprocess
+import sys
+import threading
+import time
+from datetime import datetime, timezone
+from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+from pathlib import Path
+from typing import Any
+from urllib.parse import unquote
+
+
+OUT = Path(__file__).resolve().parent
+PR_JJ = Path("/tmp/jj-lfs-evaluation/bin/jj-pr")
+BASELINE_JJ = Path("/opt/homebrew/bin/jj")
+LOG: list[dict[str, Any]] = []
+RUN_STAMP = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+FIXTURES = OUT / "fixtures" / RUN_STAMP
+CONFIG_DIR = OUT / "config"
+JJ_CONFIG_FILE = CONFIG_DIR / "jj.toml"
+GIT_CONFIG_FILE = CONFIG_DIR / "gitconfig"
+COMMIT_DATE = "2020-01-02T03:04:05+0000"
+
+
+class CommandError(RuntimeError):
+    def __init__(self, item: dict[str, Any]):
+        super().__init__(f"command failed with exit {item['exit_code']}: {item['command']}\n{item['stderr']}")
+        self.item = item
+
+
+def isolated_env() -> dict[str, str]:
+    env = os.environ.copy()
+    for key in list(env):
+        if key.startswith("GIT_CONFIG_KEY_") or key.startswith("GIT_CONFIG_VALUE_"):
+            env.pop(key, None)
+    for key in ("GIT_CONFIG_COUNT", "GIT_CONFIG_PARAMETERS", "GIT_CONFIG_SYSTEM"):
+        env.pop(key, None)
+    env.update(
+        {
+            "JJ_CONFIG": str(JJ_CONFIG_FILE),
+            "GIT_CONFIG_GLOBAL": str(GIT_CONFIG_FILE),
+            "GIT_CONFIG_NOSYSTEM": "1",
+            "GIT_ATTR_NOSYSTEM": "1",
+            "GIT_TERMINAL_PROMPT": "0",
+            "GIT_AUTHOR_NAME": "Evaluation",
+            "GIT_AUTHOR_EMAIL": "eval@example.invalid",
+            "GIT_COMMITTER_NAME": "Evaluation",
+            "GIT_COMMITTER_EMAIL": "eval@example.invalid",
+            "GIT_AUTHOR_DATE": COMMIT_DATE,
+            "GIT_COMMITTER_DATE": COMMIT_DATE,
+        }
+    )
+    return env
+
+
+def command(
+    argv: list[str | Path],
+    cwd: Path,
+    *,
+    allow_failure: bool = False,
+    env_extra: dict[str, str] | None = None,
+) -> subprocess.CompletedProcess[bytes]:
+    env = isolated_env()
+    if env_extra:
+        env.update(env_extra)
+    argv_s = [str(x) for x in argv]
+    started = time.perf_counter()
+    proc = subprocess.run(argv_s, cwd=cwd, env=env, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    item = {
+        "command": argv_s,
+        "cwd": str(cwd),
+        "exit_code": proc.returncode,
+        "elapsed_seconds": round(time.perf_counter() - started, 6),
+        "stdout": proc.stdout.decode("utf-8", errors="replace"),
+        "stderr": proc.stderr.decode("utf-8", errors="replace"),
+    }
+    LOG.append(item)
+    if proc.returncode and not allow_failure:
+        raise CommandError(item)
+    return proc
+
+
+def git(repo: Path, *args: str, allow_failure: bool = False) -> subprocess.CompletedProcess[bytes]:
+    return command(["git", *args], repo, allow_failure=allow_failure)
+
+
+def jj(binary: Path, repo: Path, *args: str, allow_failure: bool = False) -> subprocess.CompletedProcess[bytes]:
+    return command([binary, *args], repo, allow_failure=allow_failure)
+
+
+def decode(proc: subprocess.CompletedProcess[bytes]) -> str:
+    return proc.stdout.decode("utf-8", errors="replace")
+
+
+def sha256(data: bytes) -> str:
+    return hashlib.sha256(data).hexdigest()
+
+
+def pointer_for(payload: bytes) -> bytes:
+    return (
+        "version https://git-lfs.github.com/spec/v1\n"
+        f"oid sha256:{sha256(payload)}\n"
+        f"size {len(payload)}\n"
+    ).encode()
+
+
+def parse_pointer(data: bytes) -> dict[str, Any] | None:
+    text = data.decode("ascii", errors="ignore")
+    version = re.search(r"^version https://git-lfs\.github\.com/spec/v1$", text, re.M)
+    oid = re.search(r"^oid sha256:([0-9a-f]{64})$", text, re.M)
+    size = re.search(r"^size ([0-9]+)$", text, re.M)
+    if not (version and oid and size):
+        return None
+    return {"oid": oid.group(1), "size": int(size.group(1)), "pointer_sha256": sha256(data)}
+
+
+def describe_bytes(data: bytes | None) -> dict[str, Any]:
+    if data is None:
+        return {"present": False}
+    return {
+        "present": True,
+        "size": len(data),
+        "sha256": sha256(data),
+        "lfs_pointer": parse_pointer(data),
+        "base64": base64.b64encode(data).decode("ascii"),
+    }
+
+
+def git_blob(repo: Path, revision: str, path: str) -> bytes:
+    return git(repo, "show", f"{revision}:{path}").stdout
+
+
+def jj_blob(binary: Path, repo: Path, revision: str, path: str) -> subprocess.CompletedProcess[bytes]:
+    return jj(binary, repo, "file", "show", "-r", revision, path, allow_failure=True)
+
+
+def write_bytes(path: Path, data: bytes) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_bytes(data)
+
+
+def record_check(case: dict[str, Any], name: str, observed: Any, expected: Any = None) -> None:
+    check = {"name": name, "observed": observed}
+    if expected is not None:
+        check["expected"] = expected
+        check["matches_expected"] = observed == expected
+    case.setdefault("checks", []).append(check)
+
+
+def setup_git_repo(repo: Path, *, branch: str = "main") -> None:
+    repo.mkdir(parents=True, exist_ok=True)
+    command(["git", "init", "-q", "--initial-branch", branch], repo)
+    git(repo, "config", "user.name", "Evaluation")
+    git(repo, "config", "user.email", "eval@example.invalid")
+    git(repo, "config", "commit.gpgsign", "false")
+    git(repo, "config", "tag.gpgsign", "false")
+    git(repo, "lfs", "install", "--local")
+
+
+def make_lfs_commit(repo: Path, path: str, payload: bytes, message: str, *, add_attrs: bool = True) -> bytes:
+    if add_attrs:
+        git(repo, "lfs", "track", "*.bin")
+        git(repo, "add", ".gitattributes")
+    write_bytes(repo / path, payload)
+    git(repo, "add", path)
+    git(repo, "commit", "-m", message)
+    stored = git_blob(repo, "HEAD", path)
+    expected = pointer_for(payload)
+    if stored != expected:
+        raise RuntimeError(f"Git LFS did not store the expected pointer for {path}")
+    return stored
+
+
+def check_disk(case: dict[str, Any], repo: Path, path: str, payload: bytes, tag: str) -> None:
+    actual = (repo / path).read_bytes() if (repo / path).exists() else None
+    record_check(case, f"{tag}.disk", describe_bytes(actual), describe_bytes(payload))
+
+
+def check_jj_pointer(case: dict[str, Any], binary: Path, repo: Path, path: str, pointer: bytes, tag: str) -> None:
+    proc = jj_blob(binary, repo, "@", path)
+    actual = proc.stdout if proc.returncode == 0 else None
+    case[f"{tag}.stored_blob_exit_code"] = proc.returncode
+    record_check(case, f"{tag}.stored_blob", describe_bytes(actual), describe_bytes(pointer))
+
+
+def start_lfs_server(objects: dict[str, bytes]) -> tuple[ThreadingHTTPServer, threading.Thread, list[dict[str, Any]], dict[str, bytes]]:
+    requests: list[dict[str, Any]] = []
+
+    class Handler(BaseHTTPRequestHandler):
+        def log_message(self, _format: str, *_args: Any) -> None:
+            return
+
+        def send_json(self, status: int, value: dict[str, Any]) -> None:
+            data = json.dumps(value, separators=(",", ":")).encode()
+            self.send_response(status)
+            self.send_header("Content-Type", "application/vnd.git-lfs+json")
+            self.send_header("Content-Length", str(len(data)))
+            self.end_headers()
+            self.wfile.write(data)
+
+        def do_POST(self) -> None:  # noqa: N802
+            length = int(self.headers.get("Content-Length", "0"))
+            body = json.loads(self.rfile.read(length) or b"{}")
+            requested = body.get("objects", [])
+            requests.append({"method": "POST", "path": self.path, "body": body})
+            results = []
+            for obj in requested:
+                oid = str(obj.get("oid", ""))
+                item: dict[str, Any] = {"oid": oid, "size": obj.get("size")}
+                if oid in objects:
+                    item["actions"] = {
+                        "download": {
+                            "href": f"http://127.0.0.1:{self.server.server_port}/lfs/objects/{oid}",
+                            "header": {},
+                        }
+                    }
+                else:
+                    item["error"] = {"code": 404, "message": "Object absent from disposable local LFS remote"}
+                results.append(item)
+            self.send_json(200, {"transfer": "basic", "objects": results})
+
+        def do_GET(self) -> None:  # noqa: N802
+            oid = unquote(self.path.rsplit("/", 1)[-1])
+            requests.append({"method": "GET", "path": self.path, "oid": oid})
+            payload = objects.get(oid)
+            if payload is None:
+                self.send_error(404)
+                return
+            self.send_response(200)
+            self.send_header("Content-Type", "application/octet-stream")
+            self.send_header("Content-Length", str(len(payload)))
+            self.end_headers()
+            self.wfile.write(payload)
+
+    server = ThreadingHTTPServer(("127.0.0.1", 0), Handler)
+    thread = threading.Thread(target=server.serve_forever, daemon=True)
+    thread.start()
+    return server, thread, requests, objects
+
+
+def run_c1(binary: Path, repo: Path) -> dict[str, Any]:
+    case: dict[str, Any] = {"id": "C1", "binary": str(binary), "repo": str(repo), "expectation": "filter=lfs files remain valid Git LFS pointers in jj while disk payloads stay hydrated; literal pointers can be rehydrated."}
+    try:
+        setup_git_repo(repo)
+        payload = b"C1 deterministic LFS payload\x00\x01\x02\n"
+        pointer = make_lfs_commit(repo, "asset.bin", payload, "Add LFS asset")
+        record_check(case, "git_stored_pointer", describe_bytes(git_blob(repo, "HEAD", "asset.bin")), describe_bytes(pointer))
+        record_check(case, "initial_hydrated_disk", describe_bytes((repo / "asset.bin").read_bytes()), describe_bytes(payload))
+        jj(binary, repo, "git", "init", "--colocate")
+        for index in range(1, 4):
+            if index == 1:
+                write_bytes(repo / "notes.txt", b"ordinary change one\n")
+            elif index == 2:
+                write_bytes(repo / "notes.txt", b"ordinary change two\n")
+            jj(binary, repo, "status")
+            check_jj_pointer(case, binary, repo, "asset.bin", pointer, f"snapshot_{index}")
+            check_disk(case, repo, "asset.bin", payload, f"snapshot_{index}")
+        write_bytes(repo / "asset.bin", pointer)
+        record_check(case, "literal_pointer_on_disk", describe_bytes((repo / "asset.bin").read_bytes()), describe_bytes(pointer))
+        jj(binary, repo, "status")
+        check_jj_pointer(case, binary, repo, "asset.bin", pointer, "literal_snapshot")
+        check_disk(case, repo, "asset.bin", pointer, "literal_snapshot")
+        command(["git", "lfs", "checkout", "--", "asset.bin"], repo)
+        check_disk(case, repo, "asset.bin", payload, "rehydrated")
+        jj(binary, repo, "status")
+        check_jj_pointer(case, binary, repo, "asset.bin", pointer, "rehydrated_snapshot")
+        case["setup_ok"] = True
+    except Exception as exc:
+        case["setup_ok"] = False
+        case["setup_error"] = repr(exc)
+    return case
+
+
+def run_c2(binary: Path, repo: Path) -> dict[str, Any]:
+    case: dict[str, Any] = {"id": "C2", "binary": str(binary), "repo": str(repo), "expectation": "root filter=lfs is excluded from snapshots; nested -filter overrides it and is tracked. Git check-attr and jj behavior are compared for .git/info/attributes."}
+    try:
+        setup_git_repo(repo)
+        (repo / ".gitattributes").write_text("*.bin filter=lfs\n")
+        (repo / "nested" / ".gitattributes").parent.mkdir(parents=True, exist_ok=True)
+        (repo / "nested" / ".gitattributes").write_text("*.bin -filter\n")
+        root_payload = b"C2 root initial payload\n"
+        nested_payload = b"C2 nested initial raw data\n"
+        write_bytes(repo / "root.bin", root_payload)
+        write_bytes(repo / "nested" / "child.bin", nested_payload)
+        git(repo, "add", ".gitattributes", "nested/.gitattributes", "root.bin", "nested/child.bin")
+        git(repo, "commit", "-m", "Add attributed files")
+        root_pointer = git_blob(repo, "HEAD", "root.bin")
+        nested_commit_blob = git_blob(repo, "HEAD", "nested/child.bin")
+        record_check(case, "root_commit_pointer", describe_bytes(root_pointer), describe_bytes(pointer_for(root_payload)))
+        record_check(case, "nested_commit_raw", describe_bytes(nested_commit_blob), describe_bytes(nested_payload))
+        root_attrs = decode(git(repo, "check-attr", "filter", "--", "root.bin", "nested/child.bin"))
+        case["git_check_attr_committed_paths"] = root_attrs
+        jj(binary, repo, "git", "init", "--colocate")
+        changed_root = b"C2 root changed local payload\n"
+        changed_nested = b"C2 nested changed and should be tracked\n"
+        write_bytes(repo / "root.bin", changed_root)
+        write_bytes(repo / "nested" / "child.bin", changed_nested)
+        jj(binary, repo, "status")
+        root_after = jj_blob(binary, repo, "@", "root.bin")
+        nested_after = jj_blob(binary, repo, "@", "nested/child.bin")
+        case["root_after_snapshot_exit_code"] = root_after.returncode
+        case["nested_after_snapshot_exit_code"] = nested_after.returncode
+        record_check(case, "root_after_snapshot", describe_bytes(root_after.stdout if root_after.returncode == 0 else None), describe_bytes(root_pointer))
+        record_check(case, "nested_after_snapshot", describe_bytes(nested_after.stdout if nested_after.returncode == 0 else None), describe_bytes(changed_nested))
+
+        info_payload = b"C2 info-only local payload\n"
+        (repo / ".git" / "info" / "attributes").write_text("info-only.dat filter=lfs\n")
+        write_bytes(repo / "info-only.dat", info_payload)
+        info_attr = decode(git(repo, "check-attr", "filter", "--", "info-only.dat"))
+        case["git_check_attr_info_only"] = info_attr
+        record_check(case, "git_info_attributes_filter_lfs", "filter: lfs" in info_attr, True)
+        info_status = jj(binary, repo, "status")
+        case["jj_status_info_only"] = {"exit_code": info_status.returncode, "stdout": decode(info_status), "stderr": info_status.stderr.decode(errors="replace")}
+        info_blob = jj_blob(binary, repo, "@", "info-only.dat")
+        case["jj_info_only_tree"] = {"exit_code": info_blob.returncode, **describe_bytes(info_blob.stdout if info_blob.returncode == 0 else None)}
+        record_check(case, "jj_info_attributes_file_excluded", info_blob.returncode != 0, True)
+        case["info_only_discrepancy"] = {
+            "git_reports_filter_lfs": "filter: lfs" in info_attr,
+            "jj_snapshot_excluded": info_blob.returncode != 0,
+            "classification": "observed behavior recorded; documentation comparison pending",
+        }
+        if "filter: lfs" in info_attr and info_blob.returncode != 0:
+            case["info_only_discrepancy"]["classification"] = (
+                "no discrepancy observed; this attribute source is not called out explicitly in changed prose"
+            )
+        elif "filter: lfs" in info_attr:
+            case["info_only_discrepancy"]["classification"] = (
+                "possible gap: Git reports filter=lfs while jj snapshots the file; changed prose names .gitattributes only"
+            )
+        case["setup_ok"] = True
+    except Exception as exc:
+        case["setup_ok"] = False
+        case["setup_error"] = repr(exc)
+    return case
+
+
+def run_c3(binary: Path, repo: Path, remote_repo: Path) -> tuple[dict[str, Any], dict[str, Any]]:
+    case: dict[str, Any] = {"id": "C3", "binary": str(binary), "repo": str(repo), "git_remote": str(remote_repo), "expectation": "a missing local object and absent remote payload cause hydration failure without changing the stored pointer; restoring the remote object permits fetch and hydration."}
+    server: ThreadingHTTPServer | None = None
+    requests: list[dict[str, Any]] = []
+    try:
+        setup_git_repo(repo)
+        remote_repo.parent.mkdir(parents=True, exist_ok=True)
+        command(["git", "init", "-q", "--bare", "--initial-branch", "main", remote_repo], remote_repo.parent)
+        payload = b"C3 disposable remote payload\x10\x00\xff\n"
+        pointer = make_lfs_commit(repo, "asset.bin", payload, "Add remote LFS asset")
+        git(repo, "remote", "add", "origin", str(remote_repo))
+        git(repo, "push", "-u", "origin", "main")
+        jj(binary, repo, "git", "init", "--colocate")
+
+        oid = parse_pointer(pointer)["oid"]
+        server, _server_thread, requests, server_objects = start_lfs_server({})
+        endpoint = f"http://127.0.0.1:{server.server_port}/lfs"
+        git(repo, "config", "lfs.url", endpoint)
+        case["lfs_endpoint"] = endpoint
+        case["git_lfs_env"] = decode(git(repo, "lfs", "env"))
+        object_path = repo / ".git" / "lfs" / "objects" / oid[:2] / oid[2:4] / oid
+        # Remove the object created by `git lfs add` so both the local cache and
+        # the initially empty disposable remote cannot satisfy this fetch.
+        if object_path.exists():
+            object_path.unlink()
+        record_check(case, "local_object_before_failure", object_path.exists(), False)
+        write_bytes(repo / "asset.bin", pointer)
+        failed_pull = git(repo, "lfs", "pull", "origin", "main", allow_failure=True)
+        case["failed_pull"] = {"exit_code": failed_pull.returncode, "stdout": decode(failed_pull), "stderr": failed_pull.stderr.decode(errors="replace")}
+        jj(binary, repo, "status")
+        failure_blob = jj_blob(binary, repo, "@", "asset.bin")
+        case["after_failed_fetch"] = {
+            "disk": describe_bytes((repo / "asset.bin").read_bytes()),
+            "stored_blob": describe_bytes(failure_blob.stdout if failure_blob.returncode == 0 else None),
+            "stored_blob_exit_code": failure_blob.returncode,
+            "local_object_exists": object_path.exists(),
+        }
+        record_check(case, "failed_fetch_exit_nonzero", failed_pull.returncode != 0, True)
+        record_check(case, "failed_fetch_disk_stays_pointer", describe_bytes((repo / "asset.bin").read_bytes()), describe_bytes(pointer))
+        record_check(case, "failed_fetch_tree_stays_pointer", describe_bytes(failure_blob.stdout if failure_blob.returncode == 0 else None), describe_bytes(pointer))
+        record_check(case, "failed_fetch_local_object_absent", object_path.exists(), False)
+
+        server_objects[oid] = payload
+        restored_pull = git(repo, "lfs", "pull", "origin", "main", allow_failure=True)
+        case["restored_pull"] = {"exit_code": restored_pull.returncode, "stdout": decode(restored_pull), "stderr": restored_pull.stderr.decode(errors="replace")}
+        restored_blob = jj_blob(binary, repo, "@", "asset.bin")
+        case["after_restore"] = {
+            "disk": describe_bytes((repo / "asset.bin").read_bytes()) if (repo / "asset.bin").exists() else None,
+            "local_object_exists": object_path.exists(),
+            "local_object": describe_bytes(object_path.read_bytes()) if object_path.exists() else None,
+            "stored_blob": describe_bytes(restored_blob.stdout if restored_blob.returncode == 0 else None),
+            "stored_blob_exit_code": restored_blob.returncode,
+        }
+        record_check(case, "restored_fetch_exit_zero", restored_pull.returncode, 0)
+        record_check(case, "restored_fetch_disk_payload", describe_bytes((repo / "asset.bin").read_bytes()), describe_bytes(payload))
+        record_check(case, "restored_fetch_tree_stays_pointer", describe_bytes(restored_blob.stdout if restored_blob.returncode == 0 else None), describe_bytes(pointer))
+        record_check(case, "restored_fetch_local_object_payload", describe_bytes(object_path.read_bytes() if object_path.exists() else None), describe_bytes(payload))
+        case["lfs_http_requests"] = requests
+        case["setup_ok"] = True
+    except Exception as exc:
+        case["setup_ok"] = False
+        case["setup_error"] = repr(exc)
+        case["lfs_http_requests"] = requests
+    finally:
+        if server is not None:
+            server.shutdown()
+            server.server_close()
+    return case, {}
+
+
+def setup_c4_repo(repo: Path) -> tuple[str, str, bytes, bytes, bytes, bytes]:
+    setup_git_repo(repo)
+    git(repo, "lfs", "track", "*.bin")
+    git(repo, "add", ".gitattributes")
+    v1 = b"C4 revision one payload\x01\x00\x02\n"
+    v2 = b"C4 revision two payload\x03\x00\x04\n"
+    write_bytes(repo / "asset.bin", v1)
+    git(repo, "add", "asset.bin")
+    git(repo, "commit", "-m", "Add LFS version one")
+    c1 = decode(git(repo, "rev-parse", "HEAD")).strip()
+    p1 = git_blob(repo, "HEAD", "asset.bin")
+    write_bytes(repo / "asset.bin", v2)
+    git(repo, "add", "asset.bin")
+    git(repo, "commit", "-m", "Add LFS version two")
+    c2 = decode(git(repo, "rev-parse", "HEAD")).strip()
+    p2 = git_blob(repo, "HEAD", "asset.bin")
+    if p1 != pointer_for(v1) or p2 != pointer_for(v2):
+        raise RuntimeError("C4 setup did not produce valid LFS pointer versions")
+    return c1, c2, v1, v2, p1, p2
+
+
+def run_c4_one(binary: Path, repo: Path, role: str) -> dict[str, Any]:
+    case: dict[str, Any] = {"role": role, "binary": str(binary), "repo": str(repo), "expectation": "a hydrated local edit is observed before and after switching from the second committed LFS pointer version to the first; record report, stored tree, and bytes even if the edit is silently lost."}
+    try:
+        c1, c2, v1, v2, p1, p2 = setup_c4_repo(repo)
+        case["commits"] = {"v1": c1, "v2": c2}
+        case["pointers"] = {"v1": describe_bytes(p1), "v2": describe_bytes(p2)}
+        jj(binary, repo, "git", "init", "--colocate")
+        command(["git", "lfs", "checkout", "--", "asset.bin"], repo)
+        case["before_edit_disk"] = describe_bytes((repo / "asset.bin").read_bytes())
+        record_check(case, "before_edit_disk_v2", case["before_edit_disk"], describe_bytes(v2))
+
+        local_edit = b"C4 user's uncommitted local edit\x99\x00\n"
+        write_bytes(repo / "asset.bin", local_edit)
+        status_before = jj(binary, repo, "status", allow_failure=True)
+        case["status_after_local_edit"] = {"exit_code": status_before.returncode, "stdout": decode(status_before), "stderr": status_before.stderr.decode(errors="replace")}
+        stored_before_proc = jj_blob(binary, repo, "@", "asset.bin")
+        stored_before = stored_before_proc.stdout if stored_before_proc.returncode == 0 else None
+        case["stored_after_local_edit"] = {"exit_code": stored_before_proc.returncode, **describe_bytes(stored_before)}
+        case["disk_after_local_edit"] = describe_bytes((repo / "asset.bin").read_bytes())
+        case["local_edit_observed_in_status"] = "asset.bin" in case["status_after_local_edit"]["stdout"] or "asset.bin" in case["status_after_local_edit"]["stderr"]
+        case["local_edit_stored"] = stored_before == local_edit
+
+        switch = jj(binary, repo, "edit", c1, allow_failure=True)
+        case["switch_to_v1"] = {"exit_code": switch.returncode, "stdout": decode(switch), "stderr": switch.stderr.decode(errors="replace")}
+        switched_disk = (repo / "asset.bin").read_bytes() if (repo / "asset.bin").exists() else None
+        case["disk_immediately_after_switch"] = describe_bytes(switched_disk)
+        switched_tree_proc = jj_blob(binary, repo, "@", "asset.bin")
+        switched_tree = switched_tree_proc.stdout if switched_tree_proc.returncode == 0 else None
+        case["stored_at_v1_after_switch"] = {"exit_code": switched_tree_proc.returncode, **describe_bytes(switched_tree)}
+        status_after = jj(binary, repo, "status", allow_failure=True)
+        case["status_after_switch"] = {"exit_code": status_after.returncode, "stdout": decode(status_after), "stderr": status_after.stderr.decode(errors="replace")}
+        case["local_edit_survived_switch"] = switched_disk == local_edit
+        case["disk_is_v1_pointer_after_switch"] = switched_disk == p1
+        case["stored_tree_is_v1_pointer_after_switch"] = switched_tree == p1
+
+        case["disk_is_v1_payload_after_switch"] = switched_disk == v1
+        case["setup_ok"] = True
+    except Exception as exc:
+        case["setup_ok"] = False
+        case["setup_error"] = repr(exc)
+    return case
+
+
+def write_outputs(results: dict[str, Any], started_at: str, started_perf: float) -> None:
+    results["elapsed_seconds"] = round(time.perf_counter() - started_perf, 3)
+    results["finished_at_utc"] = datetime.now(timezone.utc).isoformat()
+    results["run_stamp"] = RUN_STAMP
+    results["fixture_root"] = str(FIXTURES)
+    results["task_started_at_utc"] = started_at
+    (OUT / "results.json").write_text(json.dumps(results, indent=2, sort_keys=True) + "\n")
+
+    lines = [f"Calibration command transcript ({RUN_STAMP})", ""]
+    for index, item in enumerate(LOG, start=1):
+        lines.append(f"[{index:03d}] exit={item['exit_code']} elapsed={item['elapsed_seconds']:.3f}s cwd={item['cwd']}")
+        lines.append("$ " + " ".join(item["command"]))
+        if item["stdout"]:
+            lines.append("stdout:")
+            lines.extend("  " + line for line in item["stdout"].rstrip("\n").splitlines())
+        if item["stderr"]:
+            lines.append("stderr:")
+            lines.extend("  " + line for line in item["stderr"].rstrip("\n").splitlines())
+        lines.append("")
+    (OUT / "transcript.log").write_text("\n".join(lines))
+
+    c2 = results.get("C2", {})
+    info = c2.get("info_only_discrepancy", {})
+    if info.get("git_reports_filter_lfs") and info.get("jj_snapshot_excluded"):
+        attr_read = (
+            "Git check-attr reported filter=lfs and jj left the new info-only file out of its tree. "
+            "No discrepancy was observed. The changed PR prose names `.gitattributes` but does not "
+            "spell out `.git/info/attributes`; this run demonstrates behavior for that source."
+        )
+    elif info.get("git_reports_filter_lfs") and not info.get("jj_snapshot_excluded"):
+        attr_read = (
+            "Git check-attr reported filter=lfs, while jj included the new info-only file in its tree. "
+            "The PR documentation describes `.gitattributes` filter rules but does not state how "
+            "`.git/info/attributes` is handled, so this is an uncovered behavior and a potential gap, "
+            "not a documented expected result."
+        )
+    else:
+        attr_read = "The Git check-attr / jj comparison did not reach a directly comparable state; see machine results and transcript."
+
+    def c4_summary(key: str) -> str:
+        obj = results.get(key, {})
+        if not obj.get("setup_ok"):
+            return f"{key}: setup did not complete ({obj.get('setup_error', 'unknown error')})."
+        observed = (
+            f"edit_reported={obj.get('local_edit_observed_in_status')}, "
+            f"edit_stored_before_switch={obj.get('local_edit_stored')}, "
+            f"edit_survived_switch={obj.get('local_edit_survived_switch')}, "
+            f"disk_v1_pointer_after_switch={obj.get('disk_is_v1_pointer_after_switch')}, "
+            f"v1_pointer_stored={obj.get('stored_tree_is_v1_pointer_after_switch')}, "
+            f"v1_payload_after_switch={obj.get('disk_is_v1_payload_after_switch')}"
+        )
+        return f"{key}: {observed}."
+
+    c3 = results.get("C3", {})
+    c3_summary = "C3 setup did not complete."
+    if c3.get("setup_ok"):
+        failed = c3.get("failed_pull", {})
+        restored = c3.get("restored_pull", {})
+        after_failure = c3.get("after_failed_fetch", {})
+        after_restore = c3.get("after_restore", {})
+        c3_summary = (
+            f"Failed fetch exit={failed.get('exit_code')}; disk remained pointer="
+            f"{bool(after_failure.get('disk', {}).get('lfs_pointer'))}; local object absent="
+            f"{not after_failure.get('local_object_exists')}. Restored fetch exit={restored.get('exit_code')}; "
+            f"disk equals payload={after_restore.get('disk', {}).get('sha256') == after_restore.get('local_object', {}).get('sha256')}."
+        )
+    c1 = results.get("C1", {})
+    c1_checks = c1.get("checks", [])
+    c1_ok = bool(c1.get("setup_ok")) and bool(c1_checks) and all(item.get("matches_expected") for item in c1_checks)
+    c2_checks = c2.get("checks", [])
+    c2_ok = bool(c2.get("setup_ok")) and bool(c2_checks) and all(item.get("matches_expected") for item in c2_checks)
+    c3_checks = c3.get("checks", [])
+    c3_ok = bool(c3.get("setup_ok")) and bool(c3_checks) and all(item.get("matches_expected") for item in c3_checks)
+    versions = results.get("versions", {})
+    c4_pr = results.get("C4_pr", {})
+    if c4_pr.get("setup_ok") and not c4_pr.get("local_edit_stored") and not c4_pr.get("local_edit_survived_switch"):
+        c4_interpretation = (
+            "The PR run shows the local edit absent from the jj tree and replaced on disk by the older "
+            "pointer after switching. Snapshot exclusion being intentional does not make this silent loss safe."
+        )
+    else:
+        c4_interpretation = "No silent-loss conclusion is drawn beyond the recorded tree and disk evidence."
+    report = f"""# Git LFS calibration report
+
+Run `{RUN_STAMP}` used `{PR_JJ}` for C1–C4 and `{BASELINE_JJ}` as the C4 baseline.
+This run took {results['elapsed_seconds']} seconds; total task time from the first
+attempt was {results.get('total_task_seconds_from_first_run')} seconds. First attempt
+started at {results.get('initial_task_started_at_utc', started_at)}; the corrected run
+completed at {results['finished_at_utc']}.
+Tool versions: `{versions.get('git')}`, `{versions.get('git_lfs')}`, PR
+`{versions.get('jj_pr')}`, baseline `{versions.get('jj_baseline')}`.
+
+## Expectations
+
+The PR change documents that Git-backed snapshots skip paths whose
+`.gitattributes` `filter` value appears in `git.ignore-filters`, which defaults to
+`["lfs"]` (`source/docs/git-compatibility.md:77–84`). It also says Git LFS
+hydration remains an external Git LFS operation.
+The experiment therefore checks both the pointer stored in the jj tree and the
+actual hydrated bytes on disk. Content evidence records lengths and SHA-256
+digests; pointers are parsed for their payload OID and declared size.
+
+## Observations
+
+- C1: setup `{c1.get('setup_ok')}`, checks all match `{c1_ok}` ({len(c1_checks)} checks).
+  Repeated snapshots retained the pointer while the payload hash stayed unchanged;
+  the literal pointer was hydrated again and the stored blob remained a pointer.
+- C2: {attr_read}
+- C2 attribute and snapshot checks all match `{c2_ok}` ({len(c2_checks)} checks).
+- C3: setup `{c3.get('setup_ok')}`, recovery checks all match `{c3_ok}`
+  ({len(c3_checks)} checks). {c3_summary} HTTP request evidence is in `results.json`.
+- C4 pinned PR binary: {c4_summary('C4_pr')}
+- C4 Homebrew baseline: {c4_summary('C4_baseline')}
+  {c4_interpretation}
+
+## Interpretation and limits
+
+Setup failures are recorded separately and are not product passes. The C4 baseline
+uses an independently created repository with identical payloads and deterministic
+Git commit metadata; matching Git commit IDs: `{results.get('C4_pr', {}).get('commits') == results.get('C4_baseline', {}).get('commits')}`.
+The baseline measures the installed Homebrew binary, not an additional pristine
+build. The docs also note that existing tracked files may need `jj file untrack`
+before ignore behavior applies; C4 records the behavior without adding that step.
+C3 uses a disposable
+local bare Git remote plus a loopback-only local Git LFS batch/download endpoint.
+The result describes these four small deterministic scenarios only. It does not
+establish behavior for other Git attribute sources, external LFS servers, or other
+revision-switch workflows.
+
+See `transcript.log` for commands, output, exit codes, and command timing; see
+`results.json` for machine-readable checks and content evidence.
+"""
+    (OUT / "report.md").write_text(report)
+
+
+def write_case_audit_outputs(result: dict[str, Any], started_at: str, started_perf: float) -> None:
+    result["elapsed_seconds"] = round(time.perf_counter() - started_perf, 3)
+    result["task_started_at_utc"] = started_at
+    result["finished_at_utc"] = datetime.now(timezone.utc).isoformat()
+    result["correction_reason"] = (
+        "Parent-identified harness correction: the earlier info-only.bin also matched the root *.bin rule; "
+        "this rerun uses info-only.dat to isolate .git/info/attributes."
+    )
+    (OUT / "c2-audit-results.json").write_text(json.dumps(result, indent=2, sort_keys=True) + "\n")
+    lines = [f"C2-only correction transcript ({RUN_STAMP})", ""]
+    for index, item in enumerate(LOG, start=1):
+        lines.append(f"[{index:03d}] exit={item['exit_code']} elapsed={item['elapsed_seconds']:.3f}s cwd={item['cwd']}")
+        lines.append("$ " + " ".join(item["command"]))
+        if item["stdout"]:
+            lines.append("stdout:")
+            lines.extend("  " + line for line in item["stdout"].rstrip("\n").splitlines())
+        if item["stderr"]:
+            lines.append("stderr:")
+            lines.extend("  " + line for line in item["stderr"].rstrip("\n").splitlines())
+        lines.append("")
+    (OUT / "c2-audit-transcript.log").write_text("\n".join(lines))
+
+
+def main() -> int:
+    started_perf = time.perf_counter()
+    started_at = datetime.now(timezone.utc).isoformat()
+    FIXTURES.mkdir(parents=True, exist_ok=True)
+    CONFIG_DIR.mkdir(parents=True, exist_ok=True)
+    JJ_CONFIG_FILE.write_text('[user]\nname = "Evaluation"\nemail = "eval@example.invalid"\n\n[signing]\nbehavior = "drop"\n')
+    GIT_CONFIG_FILE.write_text("# Isolated empty Git global config for calibration.\n")
+    if not PR_JJ.is_file() or not os.access(PR_JJ, os.X_OK):
+        raise SystemExit(f"Pinned PR binary is unavailable: {PR_JJ}")
+    if not BASELINE_JJ.is_file() or not os.access(BASELINE_JJ, os.X_OK):
+        raise SystemExit(f"Homebrew baseline is unavailable: {BASELINE_JJ}")
+
+    if sys.argv[1:] == ["--case", "C2"]:
+        audit = {
+            "task": "parent-identified C2 correction",
+            "case": run_c2(PR_JJ, FIXTURES / "C2-audit"),
+            "binary": str(PR_JJ),
+            "run_stamp": RUN_STAMP,
+        }
+        write_case_audit_outputs(audit, started_at, started_perf)
+        print(f"Wrote {OUT / 'c2-audit-results.json'}")
+        print(f"Wrote {OUT / 'c2-audit-transcript.log'}")
+        return 0
+
+    results: dict[str, Any] = {
+        "task": "four-case Git LFS calibration",
+        "binaries": {"pr": str(PR_JJ), "baseline": str(BASELINE_JJ)},
+        "environment": {
+            "JJ_CONFIG": str(JJ_CONFIG_FILE),
+            "GIT_CONFIG_GLOBAL": str(GIT_CONFIG_FILE),
+            "GIT_CONFIG_NOSYSTEM": "1",
+            "GIT_ATTR_NOSYSTEM": "1",
+            "home_overridden": False,
+            "git_commit_date": COMMIT_DATE,
+        },
+        "versions": {
+            "git": decode(command(["git", "--version"], OUT)).strip(),
+            "git_lfs": decode(command(["git", "lfs", "version"], OUT)).strip(),
+            "jj_pr": decode(command([PR_JJ, "--version"], OUT)).strip(),
+            "jj_baseline": decode(command([BASELINE_JJ, "--version"], OUT)).strip(),
+        },
+        "C1": run_c1(PR_JJ, FIXTURES / "C1"),
+        "C2": run_c2(PR_JJ, FIXTURES / "C2"),
+    }
+    c3, _ = run_c3(PR_JJ, FIXTURES / "C3", FIXTURES / "C3-remote.git")
+    results["C3"] = c3
+    results["C4_pr"] = run_c4_one(PR_JJ, FIXTURES / "C4-pr", "PR")
+    results["C4_baseline"] = run_c4_one(BASELINE_JJ, FIXTURES / "C4-baseline", "Homebrew baseline")
+    first_run = OUT / "initial-results.json"
+    if first_run.exists():
+        prior = json.loads(first_run.read_text())
+        prior_started = datetime.fromisoformat(prior["task_started_at_utc"])
+        results["initial_task_started_at_utc"] = prior["task_started_at_utc"]
+        results["initial_run_elapsed_seconds"] = prior.get("elapsed_seconds")
+        results["total_task_seconds_from_first_run"] = round(
+            (datetime.now(timezone.utc) - prior_started).total_seconds(), 3
+        )
+    write_outputs(results, started_at, started_perf)
+    print(f"Wrote {OUT / 'report.md'}")
+    print(f"Wrote {OUT / 'results.json'}")
+    print(f"Wrote {OUT / 'transcript.log'}")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

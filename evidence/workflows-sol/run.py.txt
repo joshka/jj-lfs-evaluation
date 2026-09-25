@@ -1,0 +1,189 @@
+#!/usr/bin/env python3
+"""Bounded jj/LFS workflow probes using the shared evaluation fixture."""
+import argparse
+import importlib.util
+import json
+from pathlib import Path
+import shutil
+import sys
+
+H = Path('/tmp/jj-lfs-evaluation/harness/evaluate.py')
+spec = importlib.util.spec_from_file_location('shared_harness', H)
+mod = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(mod)
+OUT = Path(sys.argv[1]).resolve() if len(sys.argv)>1 else Path(__file__).resolve().parent
+PR = '/tmp/jj-lfs-evaluation/bin/jj-pr'
+BASE = '/opt/homebrew/bin/jj'
+PAY = mod.PAYLOAD
+OTHER = mod.OTHER
+
+def record(f, label, cp):
+    f.observations[label] = dict(rc=cp.returncode, out=cp.stdout.decode('utf-8','replace'),
+                                 err=cp.stderr.decode('utf-8','replace'))
+
+def rev(f):
+    return f.jj('log','-r','@','--no-graph','-T','commit_id').stdout.decode().strip()
+
+def hydrate(f, name='asset.bin', payload=PAY):
+    digest = mod.sha(payload)
+    obj = f.root/'.git'/'lfs'/'objects'/digest[:2]/digest[2:4]/digest
+    assert obj.read_bytes() == payload
+    shutil.copy2(obj, f.root/name)
+    f.check('Initial hydration has expected bytes', (f.root/name).read_bytes() == payload)
+
+def seed_two(f):
+    f.seed()
+    a = f.seed_sha
+    f.write('asset.bin', OTHER)
+    f.g('add','asset.bin')
+    f.g('commit','-m','Second LFS version')
+    b = f.g('rev-parse','HEAD').stdout.decode().strip()
+    f.jj('status')
+    return a,b
+
+def local_edit(f, a):
+    record(f,'edit_a',f.jj('edit',a,ok=False))
+    hydrate(f)
+    edited = b'local modified hydrated asset\x00\n'
+    f.write('asset.bin',edited)
+    record(f,'after_local_edit_status',f.jj('status',ok=False))
+    pre = rev(f)
+    stored = f.jj('file','show','-r',pre,'asset.bin',ok=False).stdout
+    f.observations['local'] = dict(edited_sha=mod.sha(edited), stored_sha=mod.sha(stored),
+                                   stored_pointer=stored==mod.pointer(PAY), rev=pre)
+    return edited,pre
+
+def switch(f, op):
+    a,b = seed_two(f)
+    edited,pre = local_edit(f,a)
+    if op == 'switch': cp=f.jj('edit',b,ok=False)
+    elif op == 'rebase': cp=f.jj('rebase','-r','@','-d',b,ok=False)
+    else: raise AssertionError(op)
+    record(f,op,cp)
+    disk=(f.root/'asset.bin').read_bytes()
+    prior=f.jj('file','show','-r',pre,'asset.bin',ok=False)
+    f.observations['after'] = dict(disk_sha=mod.sha(disk), disk_is_pointer=disk in
+                                   (mod.pointer(PAY),mod.pointer(OTHER)),
+                                   prior_rc=prior.returncode, prior_sha=mod.sha(prior.stdout),
+                                   edited_recoverable=prior.stdout==edited)
+    f.check('No silent loss of hydrated edit', cp.returncode!=0 or disk==edited or prior.stdout==edited,
+            operation=op, disk_sha=mod.sha(disk), prior_sha=mod.sha(prior.stdout),
+            edited_sha=mod.sha(edited))
+
+def restore_child(f):
+    f.seed()
+    f.jj('new')
+    hydrate(f)
+    edited=b'local modified hydrated asset\x00\n'
+    f.write('asset.bin',edited)
+    record(f,'pre_status',f.jj('status',ok=False))
+    cp=f.jj('restore','asset.bin',ok=False)
+    record(f,'restore',cp)
+    disk=(f.root/'asset.bin').read_bytes() if (f.root/'asset.bin').exists() else None
+    f.observations['after']=dict(disk_sha=mod.sha(disk) if disk is not None else None,
+                                  missing=disk is None, edited_sha=mod.sha(edited),
+                                  status=f.jj('status',ok=False).stdout.decode())
+    f.check('Explicit restore outcome recorded', cp.returncode==0 and disk is not None,
+            edited_retained=disk==edited,
+            restored_pointer=disk==mod.pointer(PAY))
+
+def squash_split(f, op):
+    f.seed()
+    f.jj('new')
+    hydrate(f)
+    edited=b'workflow modified hydrated asset\x00\n'
+    f.write('asset.bin',edited)
+    f.write('note.txt',b'changed ordinary note\n')
+    record(f,'pre_status',f.jj('status',ok=False))
+    pre=rev(f)
+    if op=='squash': cp=f.jj('squash',ok=False)
+    elif op=='split': cp=f.jj('split','note.txt','-m','Split ordinary note',ok=False)
+    else: raise AssertionError(op)
+    record(f,op,cp)
+    disk=(f.root/'asset.bin').read_bytes()
+    pre_show=f.jj('file','show','-r',pre,'asset.bin',ok=False)
+    f.observations['after']=dict(disk_sha=mod.sha(disk), edited_sha=mod.sha(edited),
+                                  old_revision_sha=mod.sha(pre_show.stdout),
+                                  edited_recoverable=pre_show.stdout==edited,
+                                  status=f.jj('status',ok=False).stdout.decode())
+    f.check('Operation does not silently lose hydrated edit',cp.returncode!=0 or
+            disk==edited or pre_show.stdout==edited)
+
+def untrack(f):
+    f.seed()
+    original=f.stored('asset.bin')
+    before=f.jj('file','list').stdout.decode()
+    cp=f.jj('file','untrack','asset.bin',ok=False)
+    record(f,'untrack',cp)
+    after=f.jj('file','list',ok=False).stdout.decode()
+    now=f.jj('file','show','asset.bin',ok=False)
+    f.observations['effect']=dict(before=before,after=after,
+                                  original_pointer=original==mod.pointer(PAY),
+                                  show_rc=now.returncode, show_sha=mod.sha(now.stdout),
+                                  disk_sha=mod.sha((f.root/'asset.bin').read_bytes()),
+                                  status=f.jj('status',ok=False).stdout.decode())
+    f.check('Committed pointer not silently removed',cp.returncode!=0 or
+            now.stdout==original)
+
+def workspace(f):
+    f.seed()
+    dest=f.root.parent/(f.root.name+'-secondary')
+    cp=f.jj('workspace','add',dest,'--name','secondary',ok=False)
+    record(f,'add_workspace',cp)
+    if cp.returncode: return
+    disk=(dest/'asset.bin').read_bytes()
+    f.observations['initial']=dict(disk_sha=mod.sha(disk),pointer=disk==mod.pointer(PAY),
+                                   has_git=(dest/'.git').exists())
+    # Use explicit Git directory and work tree, as required for non-colocated workspaces.
+    env=f.env.copy()
+    env['GIT_DIR']=str(f.root/'.git')
+    env['GIT_WORK_TREE']=str(dest)
+    checkout=f.run(['git','lfs','checkout','asset.bin'],env=env,cwd=dest,ok=False)
+    record(f,'explicit_git_lfs_checkout',checkout)
+    f.observations['after_checkout']=dict(disk_sha=mod.sha((dest/'asset.bin').read_bytes()),
+                                          hydrated=(dest/'asset.bin').read_bytes()==PAY)
+    status=f.run([f.suite.jj,'status'],cwd=dest,ok=False)
+    record(f,'secondary_jj_status',status)
+    f.check('Explicit hydration yields payload or actionable failure',
+            (dest/'asset.bin').read_bytes()==PAY or checkout.returncode!=0)
+
+def attrs_conflict(f):
+    f.seed()
+    root=f.seed_sha
+    f.jj('new',root)
+    f.write('.gitattributes','*.bin -filter\n')
+    f.jj('status')
+    left=rev(f)
+    f.jj('new',root)
+    f.write('.gitattributes','*.bin filter=custom\n')
+    f.jj('status')
+    right=rev(f)
+    cp=f.jj('new',left,right,ok=False)
+    record(f,'merge_conflicting_attributes',cp)
+    status=f.jj('status',ok=False)
+    record(f,'merge_status',status)
+    f.observations['after']=dict(attr=(f.root/'.gitattributes').read_text(errors='replace'),
+                                  disk_sha=mod.sha((f.root/'asset.bin').read_bytes()),
+                                  disk_pointer=(f.root/'asset.bin').read_bytes()==mod.pointer(PAY))
+    f.check('Conflict is reported', 'conflict' in (status.stdout+status.stderr).decode().lower())
+
+def run_suite(out, binary, prefix, selected=None):
+    args=argparse.Namespace(out=str(out),jj=binary,only=None)
+    suite=mod.Suite(args)
+    for name,fn in [('switch',lambda f:switch(f,'switch')),
+                    ('restore',restore_child),
+                    ('rebase',lambda f:switch(f,'rebase')),
+                    ('squash',lambda f:squash_split(f,'squash')),
+                    ('split',lambda f:squash_split(f,'split')),
+                    ('untrack',untrack),('workspace',workspace),('attrs_conflict',attrs_conflict)]:
+        if selected and name not in selected: continue
+        suite.case(prefix+'-'+name,name,fn)
+    return suite.results
+
+if __name__=='__main__':
+    baseline=sys.argv[2] if len(sys.argv)>2 else BASE
+    selected=set(sys.argv[3].split(',')) if len(sys.argv)>3 else None
+    pr=run_suite(OUT/'pr',PR,'pr',selected)
+    base=run_suite(OUT/'baseline',baseline,'base',selected)
+    (OUT/'comparison.json').write_text(json.dumps({'pr':pr,'baseline':base,
+        'pr_binary':PR,'baseline_binary':baseline},indent=2))

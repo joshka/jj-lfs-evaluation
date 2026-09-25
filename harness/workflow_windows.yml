@@ -1,0 +1,136 @@
+name: Evaluate jj LFS snapshot filtering on Windows
+
+on:
+  workflow_dispatch:
+
+jobs:
+  evaluate:
+    runs-on: windows-latest
+    timeout-minutes: 35
+    env:
+      CARGO_PROFILE_DEV_DEBUG: 0
+      CARGO_INCREMENTAL: 0
+      CARGO_PROFILE_TEST_DEBUG: 0
+      RUST_BACKTRACE: 1
+      PR_HEAD: d8a56d1a38cae110529ef8e67e72e3e2057ed3ca
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Set up Rust
+        shell: pwsh
+        run: |
+          rustup toolchain install stable --profile minimal
+          rustup default stable
+          rustc --version
+          cargo --version
+
+      - name: Ensure Git LFS is available
+        shell: pwsh
+        run: |
+          git lfs version
+          if ($LASTEXITCODE -ne 0) { choco install git-lfs -y --no-progress }
+          git lfs version
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+
+      - name: Download the exact public PR source archive
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force -Path source, results-windows | Out-Null
+          $archive = "https://github.com/jj-vcs/jj/archive/$env:PR_HEAD.tar.gz"
+          Invoke-WebRequest -Uri $archive -OutFile source.tar.gz
+          tar -xzf source.tar.gz -C source --strip-components=1
+          "PR head: $env:PR_HEAD" | Set-Content results-windows/source.txt
+          "Archive: $archive" | Add-Content results-windows/source.txt
+          if (-not (Test-Path source/Cargo.lock)) { throw 'Source archive missing Cargo.lock' }
+
+      - name: Check jj-lib without default features
+        id: no_git_check
+        continue-on-error: true
+        shell: pwsh
+        working-directory: source
+        run: cargo check --locked -p jj-lib --no-default-features
+
+      - name: Test attribute parser and filtering
+        id: lib_unit
+        continue-on-error: true
+        shell: pwsh
+        working-directory: source
+        run: cargo test --locked -p jj-lib --lib gitattributes
+
+      - name: Test local working copy LFS cases
+        id: lib_integration
+        continue-on-error: true
+        shell: pwsh
+        working-directory: source
+        run: cargo test --locked -p jj-lib --test runner gitattributes
+
+      - name: Test CLI temporary snapshot cases
+        id: cli_tests
+        continue-on-error: true
+        shell: pwsh
+        working-directory: source
+        run: |
+          cargo test --locked -p jj-cli --test runner gitattributes_filter_in_temp_snapshot
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+
+      - name: Build exact PR jj executable
+        id: build
+        continue-on-error: true
+        shell: pwsh
+        working-directory: source
+        run: cargo build --locked -p jj-cli --bin jj
+
+      - name: Run independent evaluation harness
+        id: harness
+        if: always() && steps.build.outcome == 'success'
+        continue-on-error: true
+        shell: pwsh
+        run: |
+          python --version
+          python harness/evaluate.py --jj source/target/debug/jj.exe --out results-windows
+          exit $LASTEXITCODE
+
+      - name: Record check outcomes
+        if: always()
+        shell: pwsh
+        env:
+          NO_GIT_CHECK: ${{ steps.no_git_check.outcome }}
+          LIB_UNIT: ${{ steps.lib_unit.outcome }}
+          LIB_INTEGRATION: ${{ steps.lib_integration.outcome }}
+          CLI_TESTS: ${{ steps.cli_tests.outcome }}
+          BUILD: ${{ steps.build.outcome }}
+          HARNESS: ${{ steps.harness.outcome }}
+        run: |
+          New-Item -ItemType Directory -Force -Path results-windows | Out-Null
+          @(
+            "no_git_check=$env:NO_GIT_CHECK"
+            "lib_unit=$env:LIB_UNIT"
+            "lib_integration=$env:LIB_INTEGRATION"
+            "cli_tests=$env:CLI_TESTS"
+            "build=$env:BUILD"
+            "harness=$env:HARNESS"
+          ) | Set-Content results-windows/check-outcomes.txt
+
+      - name: Upload Windows evaluation results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: jj-lfs-eval-windows
+          path: results-windows/
+          if-no-files-found: warn
+
+      - name: Enforce check outcomes
+        if: always()
+        shell: pwsh
+        env:
+          NO_GIT_CHECK: ${{ steps.no_git_check.outcome }}
+          LIB_UNIT: ${{ steps.lib_unit.outcome }}
+          LIB_INTEGRATION: ${{ steps.lib_integration.outcome }}
+          CLI_TESTS: ${{ steps.cli_tests.outcome }}
+          BUILD: ${{ steps.build.outcome }}
+          HARNESS: ${{ steps.harness.outcome }}
+        run: |
+          $outcomes = @($env:NO_GIT_CHECK, $env:LIB_UNIT, $env:LIB_INTEGRATION, $env:CLI_TESTS, $env:BUILD, $env:HARNESS)
+          if ($outcomes | Where-Object { $_ -ne 'success' }) { exit 1 }

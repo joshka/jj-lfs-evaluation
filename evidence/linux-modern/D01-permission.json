@@ -1,0 +1,91 @@
+{
+  "id": "D01-permission",
+  "purpose": "Unreadable attributes have useful error",
+  "category": "contract",
+  "status": "OBSERVED",
+  "seconds": 0.08643179199998485,
+  "checks": [],
+  "observations": {
+    "skip": "Requires non-root Unix permission enforcement."
+  },
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "init",
+        "-b",
+        "main"
+      ],
+      "cwd": "/eval/linux-modern/repos/D01-permission",
+      "rc": 0,
+      "seconds": 0.03820187499997019,
+      "stdout": "Initialized empty Git repository in /eval/linux-modern/repos/D01-permission/.git/\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.name",
+        "LFS Evaluation"
+      ],
+      "cwd": "/eval/linux-modern/repos/D01-permission",
+      "rc": 0,
+      "seconds": 0.006246958000019731,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.email",
+        "eval@example.invalid"
+      ],
+      "cwd": "/eval/linux-modern/repos/D01-permission",
+      "rc": 0,
+      "seconds": 0.003111290999981975,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "commit.gpgsign",
+        "false"
+      ],
+      "cwd": "/eval/linux-modern/repos/D01-permission",
+      "rc": 0,
+      "seconds": 0.002333958999997776,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "core.autocrlf",
+        "false"
+      ],
+      "cwd": "/eval/linux-modern/repos/D01-permission",
+      "rc": 0,
+      "seconds": 0.0021444580000320457,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "lfs",
+        "install",
+        "--local"
+      ],
+      "cwd": "/eval/linux-modern/repos/D01-permission",
+      "rc": 0,
+      "seconds": 0.03405520799998385,
+      "stdout": "Updated Git hooks.\nGit LFS initialized.\n",
+      "stderr": ""
+    }
+  ]
+}

@@ -1,0 +1,655 @@
+Calibration command transcript (20260925T175614Z)
+
+[001] exit=0 elapsed=0.037s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C1
+$ git init -q --initial-branch main
+
+[002] exit=0 elapsed=0.026s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C1
+$ git config user.name Evaluation
+
+[003] exit=0 elapsed=0.022s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C1
+$ git config user.email eval@example.invalid
+
+[004] exit=0 elapsed=0.030s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C1
+$ git config commit.gpgsign false
+
+[005] exit=0 elapsed=0.019s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C1
+$ git config tag.gpgsign false
+
+[006] exit=0 elapsed=0.398s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C1
+$ git lfs install --local
+stdout:
+  Updated Git hooks.
+  Git LFS initialized.
+
+[007] exit=0 elapsed=0.280s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C1
+$ git lfs track *.bin
+stdout:
+  Tracking "*.bin"
+
+[008] exit=0 elapsed=0.015s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C1
+$ git add .gitattributes
+
+[009] exit=0 elapsed=0.253s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C1
+$ git add asset.bin
+
+[010] exit=0 elapsed=0.798s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C1
+$ git commit -m Add LFS asset
+stdout:
+  [main (root-commit) b448465] Add LFS asset
+   2 files changed, 4 insertions(+)
+   create mode 100644 .gitattributes
+   create mode 100644 asset.bin
+
+[011] exit=0 elapsed=0.018s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C1
+$ git show HEAD:asset.bin
+stdout:
+  version https://git-lfs.github.com/spec/v1
+  oid sha256:0df3e3f4c2cdbcadd49f8e4b484d679a0d7099af6b9cfbac6ad1ac56d6f6752d
+  size 32
+
+[012] exit=0 elapsed=0.011s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C1
+$ git show HEAD:asset.bin
+stdout:
+  version https://git-lfs.github.com/spec/v1
+  oid sha256:0df3e3f4c2cdbcadd49f8e4b484d679a0d7099af6b9cfbac6ad1ac56d6f6752d
+  size 32
+
+[013] exit=0 elapsed=0.225s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C1
+$ /tmp/jj-lfs-evaluation/bin/jj-pr git init --colocate
+stderr:
+  Done importing changes from the underlying Git repo.
+  Initialized repo in "."
+
+[014] exit=0 elapsed=0.140s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C1
+$ /tmp/jj-lfs-evaluation/bin/jj-pr status
+stdout:
+  Working copy changes:
+  A notes.txt
+  Working copy  (@) : kpnzskxp bdb665d1 (no description set)
+  Parent commit (@-): wnyywtsx b4484654 main | Add LFS asset
+
+[015] exit=0 elapsed=0.082s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C1
+$ /tmp/jj-lfs-evaluation/bin/jj-pr file show -r @ asset.bin
+stdout:
+  version https://git-lfs.github.com/spec/v1
+  oid sha256:0df3e3f4c2cdbcadd49f8e4b484d679a0d7099af6b9cfbac6ad1ac56d6f6752d
+  size 32
+
+[016] exit=0 elapsed=0.179s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C1
+$ /tmp/jj-lfs-evaluation/bin/jj-pr status
+stdout:
+  Working copy changes:
+  A notes.txt
+  Working copy  (@) : kpnzskxp 425d1729 (no description set)
+  Parent commit (@-): wnyywtsx b4484654 main | Add LFS asset
+
+[017] exit=0 elapsed=0.053s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C1
+$ /tmp/jj-lfs-evaluation/bin/jj-pr file show -r @ asset.bin
+stdout:
+  version https://git-lfs.github.com/spec/v1
+  oid sha256:0df3e3f4c2cdbcadd49f8e4b484d679a0d7099af6b9cfbac6ad1ac56d6f6752d
+  size 32
+
+[018] exit=0 elapsed=0.097s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C1
+$ /tmp/jj-lfs-evaluation/bin/jj-pr status
+stdout:
+  Working copy changes:
+  A notes.txt
+  Working copy  (@) : kpnzskxp 425d1729 (no description set)
+  Parent commit (@-): wnyywtsx b4484654 main | Add LFS asset
+
+[019] exit=0 elapsed=0.065s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C1
+$ /tmp/jj-lfs-evaluation/bin/jj-pr file show -r @ asset.bin
+stdout:
+  version https://git-lfs.github.com/spec/v1
+  oid sha256:0df3e3f4c2cdbcadd49f8e4b484d679a0d7099af6b9cfbac6ad1ac56d6f6752d
+  size 32
+
+[020] exit=0 elapsed=0.088s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C1
+$ /tmp/jj-lfs-evaluation/bin/jj-pr status
+stdout:
+  Working copy changes:
+  A notes.txt
+  Working copy  (@) : kpnzskxp 425d1729 (no description set)
+  Parent commit (@-): wnyywtsx b4484654 main | Add LFS asset
+
+[021] exit=0 elapsed=0.065s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C1
+$ /tmp/jj-lfs-evaluation/bin/jj-pr file show -r @ asset.bin
+stdout:
+  version https://git-lfs.github.com/spec/v1
+  oid sha256:0df3e3f4c2cdbcadd49f8e4b484d679a0d7099af6b9cfbac6ad1ac56d6f6752d
+  size 32
+
+[022] exit=0 elapsed=0.419s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C1
+$ git lfs checkout -- asset.bin
+stdout:
+  Checking out LFS objects: 100% (1/1), 32 B | 0 B/s, done.
+
+[023] exit=0 elapsed=0.067s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C1
+$ /tmp/jj-lfs-evaluation/bin/jj-pr status
+stdout:
+  Working copy changes:
+  A notes.txt
+  Working copy  (@) : kpnzskxp 425d1729 (no description set)
+  Parent commit (@-): wnyywtsx b4484654 main | Add LFS asset
+
+[024] exit=0 elapsed=0.036s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C1
+$ /tmp/jj-lfs-evaluation/bin/jj-pr file show -r @ asset.bin
+stdout:
+  version https://git-lfs.github.com/spec/v1
+  oid sha256:0df3e3f4c2cdbcadd49f8e4b484d679a0d7099af6b9cfbac6ad1ac56d6f6752d
+  size 32
+
+[025] exit=0 elapsed=0.045s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C2
+$ git init -q --initial-branch main
+
+[026] exit=0 elapsed=0.016s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C2
+$ git config user.name Evaluation
+
+[027] exit=0 elapsed=0.014s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C2
+$ git config user.email eval@example.invalid
+
+[028] exit=0 elapsed=0.018s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C2
+$ git config commit.gpgsign false
+
+[029] exit=0 elapsed=0.013s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C2
+$ git config tag.gpgsign false
+
+[030] exit=0 elapsed=0.325s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C2
+$ git lfs install --local
+stdout:
+  Updated Git hooks.
+  Git LFS initialized.
+
+[031] exit=0 elapsed=0.194s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C2
+$ git add .gitattributes nested/.gitattributes root.bin nested/child.bin
+
+[032] exit=0 elapsed=0.631s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C2
+$ git commit -m Add attributed files
+stdout:
+  [main (root-commit) abd4bd8] Add attributed files
+   4 files changed, 6 insertions(+)
+   create mode 100644 .gitattributes
+   create mode 100644 nested/.gitattributes
+   create mode 100644 nested/child.bin
+   create mode 100644 root.bin
+
+[033] exit=0 elapsed=0.015s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C2
+$ git show HEAD:root.bin
+stdout:
+  version https://git-lfs.github.com/spec/v1
+  oid sha256:70249be6d27609529e3a45add45332184061f8cb14e9b9bcc4527d0418b30405
+  size 24
+
+[034] exit=0 elapsed=0.015s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C2
+$ git show HEAD:nested/child.bin
+stdout:
+  C2 nested initial raw data
+
+[035] exit=0 elapsed=0.016s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C2
+$ git check-attr filter -- root.bin nested/child.bin
+stdout:
+  root.bin: filter: lfs
+  nested/child.bin: filter: unset
+
+[036] exit=0 elapsed=0.193s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C2
+$ /tmp/jj-lfs-evaluation/bin/jj-pr git init --colocate
+stderr:
+  Done importing changes from the underlying Git repo.
+  Initialized repo in "."
+
+[037] exit=0 elapsed=0.121s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C2
+$ /tmp/jj-lfs-evaluation/bin/jj-pr status
+stdout:
+  Working copy changes:
+  M nested/child.bin
+  Working copy  (@) : vmvukkmu 7a58782b (no description set)
+  Parent commit (@-): lyznrvsq abd4bd87 main | Add attributed files
+
+[038] exit=0 elapsed=0.045s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C2
+$ /tmp/jj-lfs-evaluation/bin/jj-pr file show -r @ root.bin
+stdout:
+  version https://git-lfs.github.com/spec/v1
+  oid sha256:70249be6d27609529e3a45add45332184061f8cb14e9b9bcc4527d0418b30405
+  size 24
+
+[039] exit=0 elapsed=0.058s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C2
+$ /tmp/jj-lfs-evaluation/bin/jj-pr file show -r @ nested/child.bin
+stdout:
+  C2 nested changed and should be tracked
+
+[040] exit=0 elapsed=0.030s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C2
+$ git check-attr filter -- info-only.bin
+stdout:
+  info-only.bin: filter: lfs
+
+[041] exit=0 elapsed=0.090s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C2
+$ /tmp/jj-lfs-evaluation/bin/jj-pr status
+stdout:
+  Working copy changes:
+  M nested/child.bin
+  Working copy  (@) : vmvukkmu 7a58782b (no description set)
+  Parent commit (@-): lyznrvsq abd4bd87 main | Add attributed files
+
+[042] exit=1 elapsed=0.040s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C2
+$ /tmp/jj-lfs-evaluation/bin/jj-pr file show -r @ info-only.bin
+stderr:
+  Error: No such path: info-only.bin
+
+[043] exit=0 elapsed=0.021s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C3
+$ git init -q --initial-branch main
+
+[044] exit=0 elapsed=0.022s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C3
+$ git config user.name Evaluation
+
+[045] exit=0 elapsed=0.016s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C3
+$ git config user.email eval@example.invalid
+
+[046] exit=0 elapsed=0.010s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C3
+$ git config commit.gpgsign false
+
+[047] exit=0 elapsed=0.013s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C3
+$ git config tag.gpgsign false
+
+[048] exit=0 elapsed=0.304s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C3
+$ git lfs install --local
+stdout:
+  Updated Git hooks.
+  Git LFS initialized.
+
+[049] exit=0 elapsed=0.028s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z
+$ git init -q --bare --initial-branch main /tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C3-remote.git
+
+[050] exit=0 elapsed=0.300s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C3
+$ git lfs track *.bin
+stdout:
+  Tracking "*.bin"
+
+[051] exit=0 elapsed=0.020s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C3
+$ git add .gitattributes
+
+[052] exit=0 elapsed=0.172s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C3
+$ git add asset.bin
+
+[053] exit=0 elapsed=0.855s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C3
+$ git commit -m Add remote LFS asset
+stdout:
+  [main (root-commit) 2a77970] Add remote LFS asset
+   2 files changed, 4 insertions(+)
+   create mode 100644 .gitattributes
+   create mode 100644 asset.bin
+
+[054] exit=0 elapsed=0.011s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C3
+$ git show HEAD:asset.bin
+stdout:
+  version https://git-lfs.github.com/spec/v1
+  oid sha256:9ff0fbb47ea96af5acbbf2d4e15529efaf50ccf9c822aada8c56a3c75bd7ed9b
+  size 32
+
+[055] exit=0 elapsed=0.015s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C3
+$ git remote add origin /tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C3-remote.git
+
+[056] exit=0 elapsed=0.871s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C3
+$ git push -u origin main
+stdout:
+  branch 'main' set up to track 'origin/main'.
+stderr:
+  To /tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C3-remote.git
+   * [new branch]      main -> main
+
+[057] exit=0 elapsed=0.217s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C3
+$ /tmp/jj-lfs-evaluation/bin/jj-pr git init --colocate
+stderr:
+  Done importing changes from the underlying Git repo.
+  Hint: The following remote bookmarks aren't associated with the existing local bookmarks:
+    main@origin
+  Hint: Run the following command to keep local bookmarks updated on future pulls:
+    jj bookmark track main@origin
+  Initialized repo in "."
+
+[058] exit=0 elapsed=0.015s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C3
+$ git config lfs.url http://127.0.0.1:56920/lfs
+
+[059] exit=0 elapsed=0.200s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C3
+$ git lfs env
+stdout:
+  git-lfs/3.8.0 (GitHub; darwin arm64; go 1.27.0)
+  git version 2.55.0
+  
+  Endpoint=http://127.0.0.1:56920/lfs (auth=none)
+  LocalWorkingDir=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C3
+  LocalGitDir=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C3/.git
+  LocalGitStorageDir=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C3/.git
+  LocalMediaDir=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C3/.git/lfs/objects
+  LocalReferenceDirs=
+  TempDir=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C3/.git/lfs/tmp
+  ConcurrentTransfers=8
+  TusTransfers=false
+  BasicTransfersOnly=false
+  SkipDownloadErrors=false
+  FetchRecentAlways=false
+  FetchRecentRefsDays=7
+  FetchRecentCommitsDays=0
+  FetchRecentRefsIncludeRemotes=true
+  PruneOffsetDays=3
+  PruneVerifyRemoteAlways=false
+  PruneVerifyUnreachableAlways=false
+  PruneRemoteName=origin
+  LfsStorageDir=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C3/.git/lfs
+  AccessDownload=none
+  AccessUpload=none
+  DownloadTransfers=basic,lfs-standalone-file,ssh
+  UploadTransfers=basic,lfs-standalone-file,ssh
+  GIT_ATTR_NOSYSTEM=1
+  GIT_AUTHOR_DATE=2020-01-02T03:04:05+0000
+  GIT_AUTHOR_EMAIL=eval@example.invalid
+  GIT_AUTHOR_NAME=Evaluation
+  GIT_COMMITTER_DATE=2020-01-02T03:04:05+0000
+  GIT_COMMITTER_EMAIL=eval@example.invalid
+  GIT_COMMITTER_NAME=Evaluation
+  GIT_CONFIG_GLOBAL=/tmp/jj-lfs-evaluation/calibration-luna/config/gitconfig
+  GIT_CONFIG_NOSYSTEM=1
+  GIT_EXEC_PATH=/opt/homebrew/opt/git/libexec/git-core
+  GIT_PAGER=cat
+  GIT_TERMINAL_PROMPT=0
+  git config filter.lfs.process = "git-lfs filter-process"
+  git config filter.lfs.smudge = "git-lfs smudge -- %f"
+  git config filter.lfs.clean = "git-lfs clean -- %f"
+
+[060] exit=0 elapsed=0.364s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C3
+$ git lfs pull origin main
+
+[061] exit=0 elapsed=0.074s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C3
+$ /tmp/jj-lfs-evaluation/bin/jj-pr status
+stdout:
+  The working copy has no changes.
+  Working copy  (@) : kxmwyxsl 6341bc7e (empty) (no description set)
+  Parent commit (@-): vomopomv 2a77970e main main@origin | Add remote LFS asset
+
+[062] exit=0 elapsed=0.058s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C3
+$ /tmp/jj-lfs-evaluation/bin/jj-pr file show -r @ asset.bin
+stdout:
+  version https://git-lfs.github.com/spec/v1
+  oid sha256:9ff0fbb47ea96af5acbbf2d4e15529efaf50ccf9c822aada8c56a3c75bd7ed9b
+  size 32
+
+[063] exit=0 elapsed=0.278s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C3
+$ git lfs pull origin main
+
+[064] exit=0 elapsed=0.040s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C3
+$ /tmp/jj-lfs-evaluation/bin/jj-pr file show -r @ asset.bin
+stdout:
+  version https://git-lfs.github.com/spec/v1
+  oid sha256:9ff0fbb47ea96af5acbbf2d4e15529efaf50ccf9c822aada8c56a3c75bd7ed9b
+  size 32
+
+[065] exit=0 elapsed=0.020s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C4-pr
+$ git init -q --initial-branch main
+
+[066] exit=0 elapsed=0.011s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C4-pr
+$ git config user.name Evaluation
+
+[067] exit=0 elapsed=0.015s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C4-pr
+$ git config user.email eval@example.invalid
+
+[068] exit=0 elapsed=0.013s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C4-pr
+$ git config commit.gpgsign false
+
+[069] exit=0 elapsed=0.016s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C4-pr
+$ git config tag.gpgsign false
+
+[070] exit=0 elapsed=0.288s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C4-pr
+$ git lfs install --local
+stdout:
+  Updated Git hooks.
+  Git LFS initialized.
+
+[071] exit=0 elapsed=0.211s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C4-pr
+$ git lfs track *.bin
+stdout:
+  Tracking "*.bin"
+
+[072] exit=0 elapsed=0.011s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C4-pr
+$ git add .gitattributes
+
+[073] exit=0 elapsed=0.155s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C4-pr
+$ git add asset.bin
+
+[074] exit=0 elapsed=0.432s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C4-pr
+$ git commit -m Add LFS version one
+stdout:
+  [main (root-commit) 97cf276] Add LFS version one
+   2 files changed, 4 insertions(+)
+   create mode 100644 .gitattributes
+   create mode 100644 asset.bin
+
+[075] exit=0 elapsed=0.012s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C4-pr
+$ git rev-parse HEAD
+stdout:
+  97cf276f6118edea93c93fbde7b533cead485783
+
+[076] exit=0 elapsed=0.020s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C4-pr
+$ git show HEAD:asset.bin
+stdout:
+  version https://git-lfs.github.com/spec/v1
+  oid sha256:b94acc2142fc2287cd8cc2d7f6e219a25b81df20700640c96d27fadb0efa9df3
+  size 27
+
+[077] exit=0 elapsed=0.140s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C4-pr
+$ git add asset.bin
+
+[078] exit=0 elapsed=0.346s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C4-pr
+$ git commit -m Add LFS version two
+stdout:
+  [main d45df76] Add LFS version two
+   1 file changed, 1 insertion(+), 1 deletion(-)
+
+[079] exit=0 elapsed=0.012s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C4-pr
+$ git rev-parse HEAD
+stdout:
+  d45df76aecca803f53a04bea3b0cec1c37172312
+
+[080] exit=0 elapsed=0.015s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C4-pr
+$ git show HEAD:asset.bin
+stdout:
+  version https://git-lfs.github.com/spec/v1
+  oid sha256:c2a90f924d7ad0b224ca759c6557c6f54d4f6978d9a7935de249457e513e7117
+  size 27
+
+[081] exit=0 elapsed=0.210s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C4-pr
+$ /tmp/jj-lfs-evaluation/bin/jj-pr git init --colocate
+stderr:
+  Done importing changes from the underlying Git repo.
+  Initialized repo in "."
+
+[082] exit=0 elapsed=0.062s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C4-pr
+$ /tmp/jj-lfs-evaluation/bin/jj-pr edit d45df76aecca803f53a04bea3b0cec1c37172312
+stderr:
+  Working copy  (@) now at: vrnvlrln d45df76a main | Add LFS version two
+  Parent commit (@-)      : nylpyxou 97cf276f Add LFS version one
+
+[083] exit=0 elapsed=0.153s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C4-pr
+$ git lfs checkout -- asset.bin
+
+[084] exit=0 elapsed=0.061s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C4-pr
+$ /tmp/jj-lfs-evaluation/bin/jj-pr status
+stdout:
+  Working copy changes:
+  M asset.bin
+  Working copy  (@) : vrnvlrln d45df76a main | Add LFS version two
+  Parent commit (@-): nylpyxou 97cf276f Add LFS version one
+
+[085] exit=0 elapsed=0.030s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C4-pr
+$ /tmp/jj-lfs-evaluation/bin/jj-pr file show -r @ asset.bin
+stdout:
+  version https://git-lfs.github.com/spec/v1
+  oid sha256:c2a90f924d7ad0b224ca759c6557c6f54d4f6978d9a7935de249457e513e7117
+  size 27
+
+[086] exit=0 elapsed=0.097s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C4-pr
+$ /tmp/jj-lfs-evaluation/bin/jj-pr edit 97cf276f6118edea93c93fbde7b533cead485783
+stderr:
+  Working copy  (@) now at: nylpyxou 97cf276f Add LFS version one
+  Parent commit (@-)      : zzzzzzzz 00000000 (empty) (no description set)
+  Added 0 files, modified 1 files, removed 0 files
+
+[087] exit=0 elapsed=0.054s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C4-pr
+$ /tmp/jj-lfs-evaluation/bin/jj-pr file show -r @ asset.bin
+stdout:
+  version https://git-lfs.github.com/spec/v1
+  oid sha256:b94acc2142fc2287cd8cc2d7f6e219a25b81df20700640c96d27fadb0efa9df3
+  size 27
+
+[088] exit=0 elapsed=0.074s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C4-pr
+$ /tmp/jj-lfs-evaluation/bin/jj-pr status
+stdout:
+  Working copy changes:
+  A .gitattributes
+  A asset.bin
+  Working copy  (@) : nylpyxou 97cf276f Add LFS version one
+  Parent commit (@-): zzzzzzzz 00000000 (empty) (no description set)
+
+[089] exit=2 elapsed=0.273s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C4-pr
+$ git lfs checkout -- asset.bin
+stderr:
+  Could not checkout
+  
+  Errors logged to '/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C4-pr/.git/lfs/logs/20260925T105626.949124.log'.
+  Use `git lfs logs last` to view the log.
+
+[090] exit=0 elapsed=0.023s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C4-baseline
+$ git init -q --initial-branch main
+
+[091] exit=0 elapsed=0.012s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C4-baseline
+$ git config user.name Evaluation
+
+[092] exit=0 elapsed=0.013s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C4-baseline
+$ git config user.email eval@example.invalid
+
+[093] exit=0 elapsed=0.015s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C4-baseline
+$ git config commit.gpgsign false
+
+[094] exit=0 elapsed=0.016s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C4-baseline
+$ git config tag.gpgsign false
+
+[095] exit=0 elapsed=0.306s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C4-baseline
+$ git lfs install --local
+stdout:
+  Updated Git hooks.
+  Git LFS initialized.
+
+[096] exit=0 elapsed=0.232s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C4-baseline
+$ git lfs track *.bin
+stdout:
+  Tracking "*.bin"
+
+[097] exit=0 elapsed=0.011s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C4-baseline
+$ git add .gitattributes
+
+[098] exit=0 elapsed=0.153s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C4-baseline
+$ git add asset.bin
+
+[099] exit=0 elapsed=0.531s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C4-baseline
+$ git commit -m Add LFS version one
+stdout:
+  [main (root-commit) 97cf276] Add LFS version one
+   2 files changed, 4 insertions(+)
+   create mode 100644 .gitattributes
+   create mode 100644 asset.bin
+
+[100] exit=0 elapsed=0.012s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C4-baseline
+$ git rev-parse HEAD
+stdout:
+  97cf276f6118edea93c93fbde7b533cead485783
+
+[101] exit=0 elapsed=0.014s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C4-baseline
+$ git show HEAD:asset.bin
+stdout:
+  version https://git-lfs.github.com/spec/v1
+  oid sha256:b94acc2142fc2287cd8cc2d7f6e219a25b81df20700640c96d27fadb0efa9df3
+  size 27
+
+[102] exit=0 elapsed=0.169s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C4-baseline
+$ git add asset.bin
+
+[103] exit=0 elapsed=0.368s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C4-baseline
+$ git commit -m Add LFS version two
+stdout:
+  [main d45df76] Add LFS version two
+   1 file changed, 1 insertion(+), 1 deletion(-)
+
+[104] exit=0 elapsed=0.013s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C4-baseline
+$ git rev-parse HEAD
+stdout:
+  d45df76aecca803f53a04bea3b0cec1c37172312
+
+[105] exit=0 elapsed=0.012s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C4-baseline
+$ git show HEAD:asset.bin
+stdout:
+  version https://git-lfs.github.com/spec/v1
+  oid sha256:c2a90f924d7ad0b224ca759c6557c6f54d4f6978d9a7935de249457e513e7117
+  size 27
+
+[106] exit=0 elapsed=0.219s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C4-baseline
+$ /opt/homebrew/bin/jj git init --colocate
+stderr:
+  Done importing changes from the underlying Git repo.
+  Initialized repo in "."
+
+[107] exit=0 elapsed=0.062s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C4-baseline
+$ /opt/homebrew/bin/jj edit d45df76aecca803f53a04bea3b0cec1c37172312
+stderr:
+  Working copy  (@) now at: vrnvlrln d45df76a main | Add LFS version two
+  Parent commit (@-)      : nylpyxou 97cf276f Add LFS version one
+  Added 0 files, modified 1 files, removed 0 files
+
+[108] exit=0 elapsed=0.179s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C4-baseline
+$ git lfs checkout -- asset.bin
+stdout:
+  Checking out LFS objects: 100% (1/1), 27 B | 0 B/s, done.
+
+[109] exit=0 elapsed=0.123s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C4-baseline
+$ /opt/homebrew/bin/jj status
+stdout:
+  Working copy changes:
+  M asset.bin
+  Working copy  (@) : vrnvlrln 204a3652 main | Add LFS version two
+  Parent commit (@-): nylpyxou 97cf276f Add LFS version one
+stderr:
+  Rebased 1 descendant commits onto updated working copy.
+
+[110] exit=0 elapsed=0.021s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C4-baseline
+$ /opt/homebrew/bin/jj file show -r @ asset.bin
+stdout:
+  C4 user's uncommitted local edit� 
+
+[111] exit=0 elapsed=0.059s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C4-baseline
+$ /opt/homebrew/bin/jj edit 97cf276f6118edea93c93fbde7b533cead485783
+stderr:
+  Working copy  (@) now at: nylpyxou 97cf276f Add LFS version one
+  Parent commit (@-)      : zzzzzzzz 00000000 (empty) (no description set)
+  Added 0 files, modified 1 files, removed 0 files
+
+[112] exit=0 elapsed=0.030s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C4-baseline
+$ /opt/homebrew/bin/jj file show -r @ asset.bin
+stdout:
+  version https://git-lfs.github.com/spec/v1
+  oid sha256:b94acc2142fc2287cd8cc2d7f6e219a25b81df20700640c96d27fadb0efa9df3
+  size 27
+
+[113] exit=0 elapsed=0.042s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C4-baseline
+$ /opt/homebrew/bin/jj status
+stdout:
+  Working copy changes:
+  A .gitattributes
+  A asset.bin
+  Working copy  (@) : nylpyxou 97cf276f Add LFS version one
+  Parent commit (@-): zzzzzzzz 00000000 (empty) (no description set)
+
+[114] exit=2 elapsed=0.215s cwd=/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C4-baseline
+$ git lfs checkout -- asset.bin
+stderr:
+  Could not checkout
+  
+  Errors logged to '/tmp/jj-lfs-evaluation/calibration-luna/fixtures/20260925T175614Z/C4-baseline/.git/lfs/logs/20260925T105629.873472.log'.
+  Use `git lfs logs last` to view the log.

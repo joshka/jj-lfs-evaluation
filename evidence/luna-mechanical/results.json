@@ -1,0 +1,163 @@
+[
+  {
+    "id": "S01-hydrated",
+    "purpose": "Ordinary edits and repeated snapshots preserve LFS pointers",
+    "category": "contract",
+    "status": "PASS",
+    "seconds": 1.4204126251861453,
+    "checks": [
+      {
+        "label": "Hydrated payload remains on disk",
+        "pass": true,
+        "actual_sha256": "dad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f",
+        "expected_sha256": "dad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f",
+        "actual_size": 2500,
+        "expected_size": 2500
+      },
+      {
+        "label": "Snapshot preserves pointer",
+        "pass": true,
+        "actual_sha256": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+        "expected_sha256": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+        "actual_size": 129,
+        "expected_size": 129
+      },
+      {
+        "label": "Ordinary edits snapshot",
+        "pass": true,
+        "actual_sha256": "7f8b1dfc466b6249f06cbe55c9174df2578e7754da793fded244ef5cba2a38f1",
+        "expected_sha256": "7f8b1dfc466b6249f06cbe55c9174df2578e7754da793fded244ef5cba2a38f1",
+        "actual_size": 8,
+        "expected_size": 8
+      },
+      {
+        "label": "Unrelated edit preserves pointer",
+        "pass": true,
+        "actual_sha256": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+        "expected_sha256": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+        "actual_size": 129,
+        "expected_size": 129
+      }
+    ],
+    "observations": {}
+  },
+  {
+    "id": "A01-nested-unset",
+    "purpose": "Attribute matching agrees with Git",
+    "category": "contract",
+    "status": "PASS",
+    "seconds": 1.1991975838318467,
+    "checks": [
+      {
+        "label": "Expected exclusion matches Git attribute decision",
+        "pass": true,
+        "expected_excluded": false,
+        "actual_included": true,
+        "git_check_attr": "sub/a.bin: filter: unset\n",
+        "jj_status": "Working copy changes:\nA sub/.gitattributes\nA sub/a.bin\nWorking copy  (@) : twlzvuou 75620f54 (no description set)\nParent commit (@-): umvrpomw e3e0a500 main | Seed LFS fixture\n"
+      }
+    ],
+    "observations": {
+      "stored_payload_sha256": "dad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f"
+    }
+  },
+  {
+    "id": "A01-nested-set",
+    "purpose": "Attribute matching agrees with Git",
+    "category": "contract",
+    "status": "PASS",
+    "seconds": 1.2543145408853889,
+    "checks": [
+      {
+        "label": "Expected exclusion matches Git attribute decision",
+        "pass": true,
+        "expected_excluded": true,
+        "actual_included": false,
+        "git_check_attr": "sub/a.bin: filter: lfs\n",
+        "jj_status": "Working copy changes:\nA sub/.gitattributes\nWorking copy  (@) : pynkxtvz 12338451 (no description set)\nParent commit (@-): stoynylm d744db09 main | Seed LFS fixture\n"
+      }
+    ],
+    "observations": {}
+  },
+  {
+    "id": "A02-info-attributes",
+    "purpose": "Local info attributes protect LFS payload",
+    "category": "compatibility",
+    "status": "FAIL",
+    "seconds": 1.3307461659424007,
+    "checks": [
+      {
+        "label": "Expected exclusion matches Git attribute decision",
+        "pass": false,
+        "expected_excluded": true,
+        "actual_included": true,
+        "git_check_attr": "a.bin: filter: lfs\n",
+        "jj_status": "Working copy changes:\nA a.bin\nWorking copy  (@) : zvvpmszp 5b265edb (no description set)\nParent commit (@-): xwlruuxo 0366ffc6 main | Seed LFS fixture\n"
+      }
+    ],
+    "observations": {
+      "stored_payload_sha256": "dad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f"
+    }
+  },
+  {
+    "id": "P04-missing-object",
+    "purpose": "Missing local object and recovery",
+    "category": "contract",
+    "status": "PASS",
+    "seconds": 1.6717255841940641,
+    "checks": [
+      {
+        "label": "Missing object leaves pointer intact",
+        "pass": true,
+        "actual_sha256": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+        "expected_sha256": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+        "actual_size": 129,
+        "expected_size": 129
+      },
+      {
+        "label": "Missing object does not fabricate disk data",
+        "pass": true,
+        "actual_sha256": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+        "expected_sha256": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+        "actual_size": 129,
+        "expected_size": 129
+      },
+      {
+        "label": "Restored object hydrates correctly",
+        "pass": true,
+        "actual_sha256": "dad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f",
+        "expected_sha256": "dad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f",
+        "actual_size": 2500,
+        "expected_size": 2500
+      }
+    ],
+    "observations": {
+      "checkout": {
+        "rc": 0,
+        "stderr": "Skipped checkout for \"asset.bin\", content not local. Use fetch to download.\n"
+      }
+    }
+  },
+  {
+    "id": "W02-sparse-dirty",
+    "purpose": "Sparse removal must not silently lose local edits",
+    "category": "data-integrity",
+    "status": "FAIL",
+    "seconds": 1.2195703340694308,
+    "checks": [
+      {
+        "label": "Sparse exclusion preserves, snapshots, or rejects local edits",
+        "pass": false,
+        "stored_sha256": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+        "edited_sha256": "f373b3bf36856f8fd4d1045d39a945690f960207ffaadc274305d5f90619a816"
+      }
+    ],
+    "observations": {
+      "sparse": {
+        "rc": 0,
+        "stderr": "Added 0 files, modified 0 files, removed 2 files\n",
+        "asset_exists": false
+      }
+    }
+  }
+]

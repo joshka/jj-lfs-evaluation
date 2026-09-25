@@ -1,0 +1,183 @@
+{
+  "id": "D02-executable",
+  "purpose": "Executable bit-only edits characterized",
+  "category": "contract",
+  "status": "PASS",
+  "seconds": 0.2474378340000385,
+  "checks": [
+    {
+      "label": "Pointer survives executable-bit-only edit",
+      "pass": true
+    }
+  ],
+  "observations": {
+    "status": "The working copy has no changes.\nWorking copy  (@) : xlzzzsmv a7a4079c (empty) (no description set)\nParent commit (@-): xkvqtlkk 88af5e5b main | Seed LFS fixture\n",
+    "git_diff": " mode change 100644 => 100755 asset.bin\n"
+  },
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "init",
+        "-b",
+        "main"
+      ],
+      "cwd": "/eval/linux-modern/repos/D02-executable",
+      "rc": 0,
+      "seconds": 0.014784583000050588,
+      "stdout": "Initialized empty Git repository in /eval/linux-modern/repos/D02-executable/.git/\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.name",
+        "LFS Evaluation"
+      ],
+      "cwd": "/eval/linux-modern/repos/D02-executable",
+      "rc": 0,
+      "seconds": 0.0030552499999885185,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.email",
+        "eval@example.invalid"
+      ],
+      "cwd": "/eval/linux-modern/repos/D02-executable",
+      "rc": 0,
+      "seconds": 0.003472792000025038,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "commit.gpgsign",
+        "false"
+      ],
+      "cwd": "/eval/linux-modern/repos/D02-executable",
+      "rc": 0,
+      "seconds": 0.0032300830000053793,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "core.autocrlf",
+        "false"
+      ],
+      "cwd": "/eval/linux-modern/repos/D02-executable",
+      "rc": 0,
+      "seconds": 0.0028095420000227023,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "lfs",
+        "install",
+        "--local"
+      ],
+      "cwd": "/eval/linux-modern/repos/D02-executable",
+      "rc": 0,
+      "seconds": 0.02891533300004312,
+      "stdout": "Updated Git hooks.\nGit LFS initialized.\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "add",
+        "."
+      ],
+      "cwd": "/eval/linux-modern/repos/D02-executable",
+      "rc": 0,
+      "seconds": 0.021952124999984335,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "commit",
+        "-m",
+        "Seed LFS fixture"
+      ],
+      "cwd": "/eval/linux-modern/repos/D02-executable",
+      "rc": 0,
+      "seconds": 0.06324399999999741,
+      "stdout": "[main (root-commit) 88af5e5] Seed LFS fixture\n 3 files changed, 5 insertions(+)\n create mode 100644 .gitattributes\n create mode 100644 asset.bin\n create mode 100644 note.txt\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "/eval/linux-modern/repos/D02-executable",
+      "rc": 0,
+      "seconds": 0.0015029580000032183,
+      "stdout": "88af5e5b0073d420d293fc468f1963caff7692f4\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/target/debug/jj",
+        "git",
+        "init",
+        "--colocate"
+      ],
+      "cwd": "/eval/linux-modern/repos/D02-executable",
+      "rc": 0,
+      "seconds": 0.05484008299998777,
+      "stdout": "",
+      "stderr": "Done importing changes from the underlying Git repo.\nInitialized repo in \".\"\n"
+    },
+    {
+      "argv": [
+        "/target/debug/jj",
+        "status"
+      ],
+      "cwd": "/eval/linux-modern/repos/D02-executable",
+      "rc": 0,
+      "seconds": 0.02633358399998542,
+      "stdout": "The working copy has no changes.\nWorking copy  (@) : xlzzzsmv a7a4079c (empty) (no description set)\nParent commit (@-): xkvqtlkk 88af5e5b main | Seed LFS fixture\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "diff",
+        "--summary"
+      ],
+      "cwd": "/eval/linux-modern/repos/D02-executable",
+      "rc": 0,
+      "seconds": 0.0021750419999762016,
+      "stdout": " mode change 100644 => 100755 asset.bin\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/target/debug/jj",
+        "file",
+        "show",
+        "asset.bin"
+      ],
+      "cwd": "/eval/linux-modern/repos/D02-executable",
+      "rc": 0,
+      "seconds": 0.01966437499999074,
+      "stdout": "version https://git-lfs.github.com/spec/v1\noid sha256:dad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f\nsize 2500\n",
+      "stderr": ""
+    }
+  ]
+}

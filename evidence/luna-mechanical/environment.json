@@ -1,0 +1,10 @@
+{
+  "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+  "python": "3.14.7 (main, Aug  5 2026, 10:29:49) [Clang 17.0.0 (clang-1700.6.4.2)]",
+  "jj": "/tmp/jj-lfs-evaluation/bin/jj-pr-release",
+  "binary_sha256": "0d742e1f6655e1e7dcc74e107263d1fb948803930ec1f45c11c8d51f4e44239b",
+  "time_utc": "2026-09-25T18:08:35Z",
+  "jj_version": "jj 0.45.1",
+  "git_version": "git version 2.55.0",
+  "lfs_version": "git-lfs/3.8.0 (GitHub; darwin arm64; go 1.27.0)"
+}

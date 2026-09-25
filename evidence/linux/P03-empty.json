@@ -1,0 +1,161 @@
+{
+  "id": "P03-empty",
+  "purpose": "Empty LFS file passthrough",
+  "category": "contract",
+  "status": "PASS",
+  "seconds": 0.1859818329999996,
+  "checks": [
+    {
+      "label": "Empty LFS file passthrough stays empty",
+      "pass": true,
+      "actual_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "expected_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "actual_size": 0,
+      "expected_size": 0
+    }
+  ],
+  "observations": {},
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "init",
+        "-b",
+        "main"
+      ],
+      "cwd": "/eval/linux/repos/P03-empty",
+      "rc": 0,
+      "seconds": 0.013526167000009082,
+      "stdout": "Initialized empty Git repository in /eval/linux/repos/P03-empty/.git/\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.name",
+        "LFS Evaluation"
+      ],
+      "cwd": "/eval/linux/repos/P03-empty",
+      "rc": 0,
+      "seconds": 0.0029592919999856804,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.email",
+        "eval@example.invalid"
+      ],
+      "cwd": "/eval/linux/repos/P03-empty",
+      "rc": 0,
+      "seconds": 0.0026331249999884676,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "commit.gpgsign",
+        "false"
+      ],
+      "cwd": "/eval/linux/repos/P03-empty",
+      "rc": 0,
+      "seconds": 0.003176333999988401,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "core.autocrlf",
+        "false"
+      ],
+      "cwd": "/eval/linux/repos/P03-empty",
+      "rc": 0,
+      "seconds": 0.003276916999993773,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "lfs",
+        "install",
+        "--local"
+      ],
+      "cwd": "/eval/linux/repos/P03-empty",
+      "rc": 0,
+      "seconds": 0.02677054200000839,
+      "stdout": "Updated Git hooks.\nGit LFS initialized.\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "add",
+        "."
+      ],
+      "cwd": "/eval/linux/repos/P03-empty",
+      "rc": 0,
+      "seconds": 0.017378083000011202,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "commit",
+        "-m",
+        "Seed LFS fixture"
+      ],
+      "cwd": "/eval/linux/repos/P03-empty",
+      "rc": 0,
+      "seconds": 0.03692029099997285,
+      "stdout": "[main (root-commit) f906c0e] Seed LFS fixture\n 3 files changed, 2 insertions(+)\n create mode 100644 .gitattributes\n create mode 100644 empty.bin\n create mode 100644 note.txt\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "/eval/linux/repos/P03-empty",
+      "rc": 0,
+      "seconds": 0.0016290000000083182,
+      "stdout": "f906c0e693e18e5976e417635bd54a521336198a\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/target/debug/jj",
+        "git",
+        "init",
+        "--colocate"
+      ],
+      "cwd": "/eval/linux/repos/P03-empty",
+      "rc": 0,
+      "seconds": 0.05524129199997674,
+      "stdout": "",
+      "stderr": "Done importing changes from the underlying Git repo.\nInitialized repo in \".\"\n"
+    },
+    {
+      "argv": [
+        "/target/debug/jj",
+        "file",
+        "show",
+        "empty.bin"
+      ],
+      "cwd": "/eval/linux/repos/P03-empty",
+      "rc": 0,
+      "seconds": 0.02136591599997928,
+      "stdout": "",
+      "stderr": ""
+    }
+  ]
+}

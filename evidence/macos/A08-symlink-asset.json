@@ -1,0 +1,193 @@
+{
+  "id": "A08-symlink-asset",
+  "purpose": "LFS patterns do not suppress symlink versioning",
+  "category": "compatibility",
+  "status": "FAIL",
+  "seconds": 0.9960090001113713,
+  "checks": [
+    {
+      "label": "LFS pattern does not hide a Git symlink",
+      "pass": false,
+      "git_entry": "120000 97922aee98474ad751b77adb4aa5e4f3dce681fe 0\tlink.bin\n"
+    }
+  ],
+  "observations": {},
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "init",
+        "-b",
+        "main"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos/repos/A08-symlink-asset",
+      "rc": 0,
+      "seconds": 0.06507329223677516,
+      "stdout": "Initialized empty Git repository in /tmp/jj-lfs-evaluation/macos/repos/A08-symlink-asset/.git/\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.name",
+        "LFS Evaluation"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos/repos/A08-symlink-asset",
+      "rc": 0,
+      "seconds": 0.019648459274321795,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.email",
+        "eval@example.invalid"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos/repos/A08-symlink-asset",
+      "rc": 0,
+      "seconds": 0.014544958714395761,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "commit.gpgsign",
+        "false"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos/repos/A08-symlink-asset",
+      "rc": 0,
+      "seconds": 0.010618917178362608,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "core.autocrlf",
+        "false"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos/repos/A08-symlink-asset",
+      "rc": 0,
+      "seconds": 0.011047458741813898,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "lfs",
+        "install",
+        "--local"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos/repos/A08-symlink-asset",
+      "rc": 0,
+      "seconds": 0.24252141593024135,
+      "stdout": "Updated Git hooks.\nGit LFS initialized.\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "add",
+        "."
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos/repos/A08-symlink-asset",
+      "rc": 0,
+      "seconds": 0.011265582870692015,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "commit",
+        "-m",
+        "Seed LFS fixture"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos/repos/A08-symlink-asset",
+      "rc": 0,
+      "seconds": 0.36971191596239805,
+      "stdout": "[main (root-commit) 06e04df] Seed LFS fixture\n 2 files changed, 2 insertions(+)\n create mode 100644 .gitattributes\n create mode 100644 note.txt\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos/repos/A08-symlink-asset",
+      "rc": 0,
+      "seconds": 0.007328667212277651,
+      "stdout": "06e04df6e7732005d67bc558ba90f32929b260c2\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr",
+        "git",
+        "init",
+        "--colocate"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos/repos/A08-symlink-asset",
+      "rc": 0,
+      "seconds": 0.1683768332004547,
+      "stdout": "",
+      "stderr": "Done importing changes from the underlying Git repo.\nInitialized repo in \".\"\n"
+    },
+    {
+      "argv": [
+        "git",
+        "add",
+        "link.bin"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos/repos/A08-symlink-asset",
+      "rc": 0,
+      "seconds": 0.01036720909178257,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "ls-files",
+        "--stage",
+        "link.bin"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos/repos/A08-symlink-asset",
+      "rc": 0,
+      "seconds": 0.008179208263754845,
+      "stdout": "120000 97922aee98474ad751b77adb4aa5e4f3dce681fe 0\tlink.bin\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr",
+        "status"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos/repos/A08-symlink-asset",
+      "rc": 0,
+      "seconds": 0.027535957749933004,
+      "stdout": "The working copy has no changes.\nWorking copy  (@) : vlykuznu f3235b9e (empty) (no description set)\nParent commit (@-): vwztvmqv 06e04df6 main | Seed LFS fixture\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr",
+        "file",
+        "list"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos/repos/A08-symlink-asset",
+      "rc": 0,
+      "seconds": 0.028769750148057938,
+      "stdout": ".gitattributes\nnote.txt\n",
+      "stderr": ""
+    }
+  ]
+}

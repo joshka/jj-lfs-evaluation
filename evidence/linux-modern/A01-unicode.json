@@ -1,0 +1,185 @@
+{
+  "id": "A01-unicode",
+  "purpose": "Attribute matching agrees with Git",
+  "category": "contract",
+  "status": "PASS",
+  "seconds": 0.2499940410000363,
+  "checks": [
+    {
+      "label": "Expected exclusion matches Git attribute decision",
+      "pass": true,
+      "expected_excluded": true,
+      "actual_included": false,
+      "git_check_attr": "\"caf\\303\\251.bin\": filter: lfs\n",
+      "jj_status": "The working copy has no changes.\nWorking copy  (@) : nwwsrlxu ff470fac (empty) (no description set)\nParent commit (@-): tluyuxon 3fceb411 main | Seed LFS fixture\n"
+    }
+  ],
+  "observations": {},
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "init",
+        "-b",
+        "main"
+      ],
+      "cwd": "/eval/linux-modern/repos/A01-unicode",
+      "rc": 0,
+      "seconds": 0.014507458000025508,
+      "stdout": "Initialized empty Git repository in /eval/linux-modern/repos/A01-unicode/.git/\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.name",
+        "LFS Evaluation"
+      ],
+      "cwd": "/eval/linux-modern/repos/A01-unicode",
+      "rc": 0,
+      "seconds": 0.0028713749999838,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.email",
+        "eval@example.invalid"
+      ],
+      "cwd": "/eval/linux-modern/repos/A01-unicode",
+      "rc": 0,
+      "seconds": 0.002704042000004847,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "commit.gpgsign",
+        "false"
+      ],
+      "cwd": "/eval/linux-modern/repos/A01-unicode",
+      "rc": 0,
+      "seconds": 0.0020430420000252525,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "core.autocrlf",
+        "false"
+      ],
+      "cwd": "/eval/linux-modern/repos/A01-unicode",
+      "rc": 0,
+      "seconds": 0.0019297919999985425,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "lfs",
+        "install",
+        "--local"
+      ],
+      "cwd": "/eval/linux-modern/repos/A01-unicode",
+      "rc": 0,
+      "seconds": 0.03093945799997755,
+      "stdout": "Updated Git hooks.\nGit LFS initialized.\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "add",
+        "."
+      ],
+      "cwd": "/eval/linux-modern/repos/A01-unicode",
+      "rc": 0,
+      "seconds": 0.007076208000000861,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "commit",
+        "-m",
+        "Seed LFS fixture"
+      ],
+      "cwd": "/eval/linux-modern/repos/A01-unicode",
+      "rc": 0,
+      "seconds": 0.03312212499997713,
+      "stdout": "[main (root-commit) 3fceb41] Seed LFS fixture\n 2 files changed, 2 insertions(+)\n create mode 100644 .gitattributes\n create mode 100644 note.txt\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "/eval/linux-modern/repos/A01-unicode",
+      "rc": 0,
+      "seconds": 0.0015489580000007663,
+      "stdout": "3fceb411e46d9d0083d9a5a794b182a13d4a8a76\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/target/debug/jj",
+        "git",
+        "init",
+        "--colocate"
+      ],
+      "cwd": "/eval/linux-modern/repos/A01-unicode",
+      "rc": 0,
+      "seconds": 0.09240883299997904,
+      "stdout": "",
+      "stderr": "Done importing changes from the underlying Git repo.\nInitialized repo in \".\"\n"
+    },
+    {
+      "argv": [
+        "git",
+        "check-attr",
+        "filter",
+        "--",
+        "caf\u00e9.bin"
+      ],
+      "cwd": "/eval/linux-modern/repos/A01-unicode",
+      "rc": 0,
+      "seconds": 0.003033958999992592,
+      "stdout": "\"caf\\303\\251.bin\": filter: lfs\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/target/debug/jj",
+        "status"
+      ],
+      "cwd": "/eval/linux-modern/repos/A01-unicode",
+      "rc": 0,
+      "seconds": 0.028735708999988674,
+      "stdout": "The working copy has no changes.\nWorking copy  (@) : nwwsrlxu ff470fac (empty) (no description set)\nParent commit (@-): tluyuxon 3fceb411 main | Seed LFS fixture\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/target/debug/jj",
+        "file",
+        "list"
+      ],
+      "cwd": "/eval/linux-modern/repos/A01-unicode",
+      "rc": 0,
+      "seconds": 0.023003999999957614,
+      "stdout": ".gitattributes\nnote.txt\n",
+      "stderr": ""
+    }
+  ]
+}

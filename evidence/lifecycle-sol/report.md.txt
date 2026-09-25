@@ -1,0 +1,48 @@
+# Git LFS lifecycle evaluation against pinned jj PR
+
+Nine disposable scenarios ran against `jj 0.45.1` at
+`/tmp/jj-lfs-evaluation/bin/jj-pr` on macOS with Git LFS 3.8.0.
+The executable script is [run.py](run.py.txt), its compact machine-readable summary is
+[results.json](results.json), and each scenario has a command log and checks in
+`<scenario>.json`. All nine scenarios completed without setup errors.
+
+## Findings
+
+| Area | Observation | Evidence |
+| --- | --- | --- |
+| Unbookmarked jj changes | Git records the commit under `refs/jj/keep/*`; ordinary `git lfs prune --dry-run` and `--recent --dry-run` retained the sole LFS object. | [prune-unbookmarked.json](prune-unbookmarked.json) |
+| Abandoned changes and op history | A keep ref remained after `jj abandon`; ordinary and `--recent` prune retained the object. | [prune-abandoned.json](prune-abandoned.json) |
+| Forced prune | `git lfs prune --force --verbose` deleted the jj-only object in both cases. The local bare origin had no copy. After restoring the pre-abandon jj operation, `git lfs checkout` said `Skipped checkout for "asset.bin", content not local. Use fetch to download.` and left the pointer on disk. | [prune-abandoned.json](prune-abandoned.json) |
+| `lfs.storage` | An absolute shared storage path held the object; jj kept the pointer in its tree and checked out hydrated bytes available in the shared store. | [custom-storage.json](custom-storage.json) |
+| Skip smudge | With `GIT_LFS_SKIP_SMUDGE=1`, Git checkout left a pointer on disk and jj preserved the pointer in its tree. | [skip-smudge.json](skip-smudge.json) |
+| Missing Git LFS executable | With a PATH containing Git but no `git-lfs`, jj status and a remove-and-recreate checkout succeeded; the recreated asset was the pointer. | [missing-lfs.json](missing-lfs.json) |
+| Fetch exclusion | With `lfs.fetchexclude=other.bin`, jj retained both stored pointers. Both payloads were already local, so this does not establish remote fetch-selection behavior. | [fetch-exclude.json](fetch-exclude.json) |
+| Migration import | `git lfs migrate import --include=*.bin --yes` before jj init yielded a jj pointer. The same migration after jj init rewrote Git HEAD; `jj git import` reset jj to the migrated history and yielded a pointer. | [migrate-before.json](migrate-before.json), [migrate-after.json](migrate-after.json) |
+| Migration export | `git lfs migrate export --include=*.bin --yes` after jj init, followed by `jj git import`, yielded raw bytes in jj. Git LFS also pruned the now unused local LFS object during export. | [migrate-export-after.json](migrate-export-after.json) |
+
+The payload's SHA-256 is
+`dad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f`;
+its Git LFS pointer's SHA-256 is
+`e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a`.
+The command logs contain exact arguments, exit codes, stdout, stderr, and fixture paths.
+
+The forced-prune loss is an operational hazard, not established as a PR regression.
+Git LFS documents that `--force` prunes objects required by currently checked-out
+refs while retaining unpushed objects. In these fixtures, `--force` selected an object
+reachable through jj's keep refs, and `git lfs push origin --all` after deletion
+returned success without restoring it. Ordinary prune and `--recent` did retain it.
+The local bare origin contained only the seeded base commit, which did not refer to
+this LFS payload. Thus jj op recovery could restore the Git pointer but not the
+missing payload. See the [official prune manual](https://github.com/git-lfs/git-lfs/blob/main/docs/man/git-lfs-prune.adoc)
+for the documented retention and force rules.
+
+## Scope and limits
+
+The fixtures isolated `JJ_CONFIG`, `GIT_CONFIG_GLOBAL`, and system Git configuration,
+set jj signing behavior to `drop`, and never changed HOME. Version-control commands
+ran sequentially per fixture. The only remote was a disposable local bare Git repo;
+there were no GitHub operations. The evaluation did not test an LFS server's batch
+API, remote hydration with include/exclude, lockable or read-only file permissions,
+long-aged refs, or every possible operation-recovery path. Git LFS migration rewrites
+Git history by design; the [official migration manual](https://github.com/git-lfs/git-lfs/blob/main/docs/man/git-lfs-migrate.adoc)
+describes import and export behavior.

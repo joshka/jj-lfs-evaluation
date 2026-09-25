@@ -1,0 +1,314 @@
+[
+  {
+    "id": "large-64m",
+    "purpose": "64 MiB hydrated LFS asset",
+    "category": "performance-diagnostic",
+    "status": "PASS",
+    "seconds": 1.307264540810138,
+    "checks": [
+      {
+        "label": "64 MiB status succeeds",
+        "pass": true
+      },
+      {
+        "label": "Hydrated disk content unchanged",
+        "pass": true
+      },
+      {
+        "label": "jj tree remains LFS pointer",
+        "pass": true
+      }
+    ],
+    "observations": {
+      "size": 67108864,
+      "payload_sha": "08304218c78b79e8b507b692f5315a0a66baba08e5253afb7c0c6c4432836c71",
+      "disk_sha_before": "08304218c78b79e8b507b692f5315a0a66baba08e5253afb7c0c6c4432836c71",
+      "disk_sha_after": "08304218c78b79e8b507b692f5315a0a66baba08e5253afb7c0c6c4432836c71",
+      "tree_sha": "bbfda7c4b811c12319edc6017ffe1d1b5842558352e710c806757bdec3103676",
+      "tree_size": 133,
+      "status_seconds": 0.016400584019720554,
+      "status_rc": 0,
+      "status_stdout": "The working copy has no changes.\nWorking copy  (@) : rnollmln 7dacf7d9 (empty) (no description set)\nParent commit (@-): puztyxwz fd7b0b68 main | Seed 64 MiB LFS asset\n",
+      "status_stderr": ""
+    }
+  },
+  {
+    "id": "bench-none",
+    "purpose": "3000 files with empty root attributes",
+    "category": "performance-diagnostic",
+    "status": "PASS",
+    "seconds": 2.6621035411953926,
+    "checks": [
+      {
+        "label": "default status iteration 1 succeeds",
+        "pass": true
+      },
+      {
+        "label": "disabled status iteration 1 succeeds",
+        "pass": true
+      },
+      {
+        "label": "disabled status iteration 2 succeeds",
+        "pass": true
+      },
+      {
+        "label": "default status iteration 2 succeeds",
+        "pass": true
+      },
+      {
+        "label": "default status iteration 3 succeeds",
+        "pass": true
+      },
+      {
+        "label": "disabled status iteration 3 succeeds",
+        "pass": true
+      },
+      {
+        "label": "disabled status iteration 4 succeeds",
+        "pass": true
+      },
+      {
+        "label": "default status iteration 4 succeeds",
+        "pass": true
+      },
+      {
+        "label": "default status iteration 5 succeeds",
+        "pass": true
+      },
+      {
+        "label": "disabled status iteration 5 succeeds",
+        "pass": true
+      }
+    ],
+    "observations": {
+      "kind": "none",
+      "file_count": 3000,
+      "attribute_files": 1,
+      "attribute_patterns": 0,
+      "timings_seconds": {
+        "default": [
+          0.019043624866753817,
+          0.01785899978131056,
+          0.018196250312030315,
+          0.019433916080743074,
+          0.018287333194166422
+        ],
+        "disabled": [
+          0.01828095829114318,
+          0.017876415979117155,
+          0.018926917109638453,
+          0.018650625366717577,
+          0.017595957964658737
+        ]
+      },
+      "medians_seconds": {
+        "default": 0.018287333194166422,
+        "disabled": 0.01828095829114318
+      }
+    }
+  },
+  {
+    "id": "bench-root-patterns",
+    "purpose": "3000 files with 5000 root patterns",
+    "category": "performance-diagnostic",
+    "status": "PASS",
+    "seconds": 3.1199491657316685,
+    "checks": [
+      {
+        "label": "default status iteration 1 succeeds",
+        "pass": true
+      },
+      {
+        "label": "disabled status iteration 1 succeeds",
+        "pass": true
+      },
+      {
+        "label": "disabled status iteration 2 succeeds",
+        "pass": true
+      },
+      {
+        "label": "default status iteration 2 succeeds",
+        "pass": true
+      },
+      {
+        "label": "default status iteration 3 succeeds",
+        "pass": true
+      },
+      {
+        "label": "disabled status iteration 3 succeeds",
+        "pass": true
+      },
+      {
+        "label": "disabled status iteration 4 succeeds",
+        "pass": true
+      },
+      {
+        "label": "default status iteration 4 succeeds",
+        "pass": true
+      },
+      {
+        "label": "default status iteration 5 succeeds",
+        "pass": true
+      },
+      {
+        "label": "disabled status iteration 5 succeeds",
+        "pass": true
+      }
+    ],
+    "observations": {
+      "kind": "root-patterns",
+      "file_count": 3000,
+      "attribute_files": 1,
+      "attribute_patterns": 5000,
+      "timings_seconds": {
+        "default": [
+          0.03215795801952481,
+          0.02776958281174302,
+          0.02878645807504654,
+          0.026868584100157022,
+          0.026586833875626326
+        ],
+        "disabled": [
+          0.023176916874945164,
+          0.01984724961221218,
+          0.020226625259965658,
+          0.01829800009727478,
+          0.017998000141233206
+        ]
+      },
+      "medians_seconds": {
+        "default": 0.02776958281174302,
+        "disabled": 0.01984724961221218
+      }
+    }
+  },
+  {
+    "id": "bench-nested",
+    "purpose": "3000 files under 60 nested attributes",
+    "category": "performance-diagnostic",
+    "status": "PASS",
+    "seconds": 3.126058124937117,
+    "checks": [
+      {
+        "label": "default status iteration 1 succeeds",
+        "pass": true
+      },
+      {
+        "label": "disabled status iteration 1 succeeds",
+        "pass": true
+      },
+      {
+        "label": "disabled status iteration 2 succeeds",
+        "pass": true
+      },
+      {
+        "label": "default status iteration 2 succeeds",
+        "pass": true
+      },
+      {
+        "label": "default status iteration 3 succeeds",
+        "pass": true
+      },
+      {
+        "label": "disabled status iteration 3 succeeds",
+        "pass": true
+      },
+      {
+        "label": "disabled status iteration 4 succeeds",
+        "pass": true
+      },
+      {
+        "label": "default status iteration 4 succeeds",
+        "pass": true
+      },
+      {
+        "label": "default status iteration 5 succeeds",
+        "pass": true
+      },
+      {
+        "label": "disabled status iteration 5 succeeds",
+        "pass": true
+      }
+    ],
+    "observations": {
+      "kind": "nested",
+      "file_count": 3000,
+      "attribute_files": 60,
+      "attribute_patterns": 60,
+      "timings_seconds": {
+        "default": [
+          0.02880674973130226,
+          0.029998458921909332,
+          0.031031624879688025,
+          0.03332762513309717,
+          0.028977292124181986
+        ],
+        "disabled": [
+          0.03087620809674263,
+          0.03216137457638979,
+          0.02742395782843232,
+          0.02736854227259755,
+          0.032773541752249
+        ]
+      },
+      "medians_seconds": {
+        "default": 0.029998458921909332,
+        "disabled": 0.03087620809674263
+      }
+    }
+  },
+  {
+    "id": "debug-excluded",
+    "purpose": "debug diagnostic for newly excluded path",
+    "category": "performance-diagnostic",
+    "status": "PASS",
+    "seconds": 1.4349412079900503,
+    "checks": [
+      {
+        "label": "debug status succeeds",
+        "pass": true
+      },
+      {
+        "label": "excluded path absent from jj tree",
+        "pass": true
+      }
+    ],
+    "observations": {
+      "rc": 0,
+      "stdout": "The working copy has no changes.\nWorking copy  (@) : nzsokppr 7d9e881b (empty) (no description set)\nParent commit (@-): npkmppum 3fa0aae0 main | Seed LFS fixture\n",
+      "stderr": "2026-09-25T18:08:17.384037Z  INFO jj_cli::cli_util: debug logging enabled\n2026-09-25T18:08:17.385284Z  INFO run_command:cmd_status:workspace_helper_with_stats: jj_lib::lock::unix: Attempting to lock \"/tmp/jj-lfs-evaluation/performance-sol/repos/debug-excluded/.jj/repo/git_import_export.lock\"\n2026-09-25T18:08:17.385448Z  INFO run_command:cmd_status:workspace_helper_with_stats: jj_lib::lock::unix: Locked \"/tmp/jj-lfs-evaluation/performance-sol/repos/debug-excluded/.jj/repo/git_import_export.lock\"\n2026-09-25T18:08:17.386721Z  INFO run_command:cmd_status:workspace_helper_with_stats:snapshot_impl:snapshot_working_copy: jj_lib::lock::unix: Attempting to lock \"/tmp/jj-lfs-evaluation/performance-sol/repos/debug-excluded/.jj/working_copy/working_copy.lock\"\n2026-09-25T18:08:17.386849Z  INFO run_command:cmd_status:workspace_helper_with_stats:snapshot_impl:snapshot_working_copy: jj_lib::lock::unix: Locked \"/tmp/jj-lfs-evaluation/performance-sol/repos/debug-excluded/.jj/working_copy/working_copy.lock\"\n",
+      "path_named": false,
+      "filter_named": false
+    }
+  },
+  {
+    "id": "custom-filter",
+    "purpose": "configured crypt filter exclusion",
+    "category": "performance-diagnostic",
+    "status": "PASS",
+    "seconds": 0.9242430827580392,
+    "checks": [
+      {
+        "label": "custom filter status succeeds",
+        "pass": true
+      },
+      {
+        "label": "crypt path excluded",
+        "pass": true
+      },
+      {
+        "label": "lfs path included when not configured for exclusion",
+        "pass": true
+      }
+    ],
+    "observations": {
+      "status": "Working copy changes:\nA asset.bin\nWorking copy  (@) : pyyowutq 3a2d58ae (no description set)\nParent commit (@-): pkkzzvlk 389aa405 main | Seed LFS fixture\n",
+      "stderr": "",
+      "files": [
+        ".gitattributes",
+        "asset.bin",
+        "note.txt"
+      ]
+    }
+  }
+]

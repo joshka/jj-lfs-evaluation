@@ -1,0 +1,262 @@
+{
+  "id": "pr-attrs_conflict",
+  "purpose": "attrs_conflict",
+  "category": "contract",
+  "status": "PASS",
+  "seconds": 1.2058238331228495,
+  "checks": [
+    {
+      "label": "Conflict is reported",
+      "pass": true
+    }
+  ],
+  "observations": {
+    "merge_conflicting_attributes": {
+      "rc": 0,
+      "out": "",
+      "err": "Working copy  (@) now at: wtktvppx f8871b18 (conflict) (empty) (no description set)\nParent commit (@-)      : zvwtrwoy 2dc2f6b7 (no description set)\nParent commit (@-)      : wvkrtnpn 73708a27 (no description set)\nAdded 0 files, modified 2 files, removed 0 files\nWarning: There are unresolved conflicts at these paths:\n.gitattributes    2-sided conflict\n"
+    },
+    "merge_status": {
+      "rc": 0,
+      "out": "The working copy has no changes.\nWorking copy  (@) : wtktvppx f8871b18 (conflict) (empty) (no description set)\nParent commit (@-): zvwtrwoy 2dc2f6b7 (no description set)\nParent commit (@-): wvkrtnpn 73708a27 (no description set)\nWarning: There are unresolved conflicts at these paths:\n.gitattributes    2-sided conflict\n",
+      "err": ""
+    },
+    "after": {
+      "attr": "<<<<<<< conflict 1 of 1\n%%%%%%% diff from: wkkurqls 79662b97 \"Seed LFS fixture\"\n\\\\\\\\\\\\\\        to: zvwtrwoy 2dc2f6b7\n-*.bin filter=lfs diff=lfs merge=lfs -text\n+*.bin -filter\n+++++++ wvkrtnpn 73708a27\n*.bin filter=custom\n>>>>>>> conflict 1 of 1 ends\n",
+      "disk_sha": "dad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f",
+      "disk_pointer": false
+    }
+  },
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "init",
+        "-b",
+        "main"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v3/pr/repos/pr-attrs_conflict",
+      "rc": 0,
+      "seconds": 0.013397291768342257,
+      "stdout": "Initialized empty Git repository in /tmp/jj-lfs-evaluation/workflows-sol/v3/pr/repos/pr-attrs_conflict/.git/\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.name",
+        "LFS Evaluation"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v3/pr/repos/pr-attrs_conflict",
+      "rc": 0,
+      "seconds": 0.007222041953355074,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.email",
+        "eval@example.invalid"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v3/pr/repos/pr-attrs_conflict",
+      "rc": 0,
+      "seconds": 0.006738165859133005,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "commit.gpgsign",
+        "false"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v3/pr/repos/pr-attrs_conflict",
+      "rc": 0,
+      "seconds": 0.0068825832568109035,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "core.autocrlf",
+        "false"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v3/pr/repos/pr-attrs_conflict",
+      "rc": 0,
+      "seconds": 0.0067401668056845665,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "lfs",
+        "install",
+        "--local"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v3/pr/repos/pr-attrs_conflict",
+      "rc": 0,
+      "seconds": 0.14010045863687992,
+      "stdout": "Updated Git hooks.\nGit LFS initialized.\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "add",
+        "."
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v3/pr/repos/pr-attrs_conflict",
+      "rc": 0,
+      "seconds": 0.08061225013807416,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "commit",
+        "-m",
+        "Seed LFS fixture"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v3/pr/repos/pr-attrs_conflict",
+      "rc": 0,
+      "seconds": 0.3648593327961862,
+      "stdout": "[main (root-commit) 79662b9] Seed LFS fixture\n 3 files changed, 5 insertions(+)\n create mode 100644 .gitattributes\n create mode 100644 asset.bin\n create mode 100644 note.txt\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v3/pr/repos/pr-attrs_conflict",
+      "rc": 0,
+      "seconds": 0.006365958135575056,
+      "stdout": "79662b977d9d9a26a6a2b5530695165fe791affc\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr",
+        "git",
+        "init",
+        "--colocate"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v3/pr/repos/pr-attrs_conflict",
+      "rc": 0,
+      "seconds": 0.15241862507537007,
+      "stdout": "",
+      "stderr": "Done importing changes from the underlying Git repo.\nInitialized repo in \".\"\n"
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr",
+        "new",
+        "79662b977d9d9a26a6a2b5530695165fe791affc"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v3/pr/repos/pr-attrs_conflict",
+      "rc": 0,
+      "seconds": 0.058953290805220604,
+      "stdout": "",
+      "stderr": "Working copy  (@) now at: zvwtrwoy 47a7078b (empty) (no description set)\nParent commit (@-)      : wkkurqls 79662b97 main | Seed LFS fixture\n"
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr",
+        "status"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v3/pr/repos/pr-attrs_conflict",
+      "rc": 0,
+      "seconds": 0.06882699998095632,
+      "stdout": "Working copy changes:\nM .gitattributes\nM asset.bin\nWorking copy  (@) : zvwtrwoy 2dc2f6b7 (no description set)\nParent commit (@-): wkkurqls 79662b97 main | Seed LFS fixture\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr",
+        "log",
+        "-r",
+        "@",
+        "--no-graph",
+        "-T",
+        "commit_id"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v3/pr/repos/pr-attrs_conflict",
+      "rc": 0,
+      "seconds": 0.029310124926269054,
+      "stdout": "2dc2f6b7da904de6dcb7396e287e8ea07c04b981",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr",
+        "new",
+        "79662b977d9d9a26a6a2b5530695165fe791affc"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v3/pr/repos/pr-attrs_conflict",
+      "rc": 0,
+      "seconds": 0.06623062491416931,
+      "stdout": "",
+      "stderr": "Working copy  (@) now at: wvkrtnpn 11f44083 (empty) (no description set)\nParent commit (@-)      : wkkurqls 79662b97 main | Seed LFS fixture\nAdded 0 files, modified 2 files, removed 0 files\n"
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr",
+        "status"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v3/pr/repos/pr-attrs_conflict",
+      "rc": 0,
+      "seconds": 0.06922058388590813,
+      "stdout": "Working copy changes:\nM .gitattributes\nWorking copy  (@) : wvkrtnpn 73708a27 (no description set)\nParent commit (@-): wkkurqls 79662b97 main | Seed LFS fixture\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr",
+        "log",
+        "-r",
+        "@",
+        "--no-graph",
+        "-T",
+        "commit_id"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v3/pr/repos/pr-attrs_conflict",
+      "rc": 0,
+      "seconds": 0.028398375026881695,
+      "stdout": "73708a27c29fef63ba52033f2cd7ba5b25ab08e9",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr",
+        "new",
+        "2dc2f6b7da904de6dcb7396e287e8ea07c04b981",
+        "73708a27c29fef63ba52033f2cd7ba5b25ab08e9"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v3/pr/repos/pr-attrs_conflict",
+      "rc": 0,
+      "seconds": 0.07044508308172226,
+      "stdout": "",
+      "stderr": "Working copy  (@) now at: wtktvppx f8871b18 (conflict) (empty) (no description set)\nParent commit (@-)      : zvwtrwoy 2dc2f6b7 (no description set)\nParent commit (@-)      : wvkrtnpn 73708a27 (no description set)\nAdded 0 files, modified 2 files, removed 0 files\nWarning: There are unresolved conflicts at these paths:\n.gitattributes    2-sided conflict\n"
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr",
+        "status"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v3/pr/repos/pr-attrs_conflict",
+      "rc": 0,
+      "seconds": 0.027200959157198668,
+      "stdout": "The working copy has no changes.\nWorking copy  (@) : wtktvppx f8871b18 (conflict) (empty) (no description set)\nParent commit (@-): zvwtrwoy 2dc2f6b7 (no description set)\nParent commit (@-): wvkrtnpn 73708a27 (no description set)\nWarning: There are unresolved conflicts at these paths:\n.gitattributes    2-sided conflict\n",
+      "stderr": ""
+    }
+  ]
+}

@@ -1,0 +1,244 @@
+{
+  "id": "pr-split",
+  "purpose": "split",
+  "category": "contract",
+  "status": "PASS",
+  "seconds": 1.0980794159695506,
+  "checks": [
+    {
+      "label": "Initial hydration has expected bytes",
+      "pass": true
+    },
+    {
+      "label": "Operation does not silently lose hydrated edit",
+      "pass": true
+    }
+  ],
+  "observations": {
+    "pre_status": {
+      "rc": 0,
+      "out": "Working copy changes:\nM note.txt\nWorking copy  (@) : mxlzxvmm c4eb2581 (no description set)\nParent commit (@-): yuxwonss 068614e3 (empty) (no description set)\n",
+      "err": ""
+    },
+    "split": {
+      "rc": 0,
+      "out": "",
+      "err": "Warning: All changes have been selected, so the original revision will become empty.\nSelected changes : mxlzxvmm 9da0e2f5 Split ordinary note\nRemaining changes: uxtzrwxu 048a891e (empty) (no description set)\nWorking copy  (@) now at: roomuuox 91549c8c (empty) (no description set)\nParent commit (@-)      : mxlzxvmm 9da0e2f5 Split ordinary note\n"
+    },
+    "after": {
+      "disk_sha": "b6b1d1d512a8a18b62f08c17d28aa5d158e91e02ccba185b17688688e87a0e59",
+      "edited_sha": "b6b1d1d512a8a18b62f08c17d28aa5d158e91e02ccba185b17688688e87a0e59",
+      "old_revision_sha": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+      "edited_recoverable": false,
+      "status": "The working copy has no changes.\nWorking copy  (@) : roomuuox 91549c8c (empty) (no description set)\nParent commit (@-): mxlzxvmm 9da0e2f5 Split ordinary note\n"
+    }
+  },
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "init",
+        "-b",
+        "main"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v3/pr/repos/pr-split",
+      "rc": 0,
+      "seconds": 0.012865959201008081,
+      "stdout": "Initialized empty Git repository in /tmp/jj-lfs-evaluation/workflows-sol/v3/pr/repos/pr-split/.git/\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.name",
+        "LFS Evaluation"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v3/pr/repos/pr-split",
+      "rc": 0,
+      "seconds": 0.007562040816992521,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.email",
+        "eval@example.invalid"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v3/pr/repos/pr-split",
+      "rc": 0,
+      "seconds": 0.006954084150493145,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "commit.gpgsign",
+        "false"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v3/pr/repos/pr-split",
+      "rc": 0,
+      "seconds": 0.006929999683052301,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "core.autocrlf",
+        "false"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v3/pr/repos/pr-split",
+      "rc": 0,
+      "seconds": 0.0070503330789506435,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "lfs",
+        "install",
+        "--local"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v3/pr/repos/pr-split",
+      "rc": 0,
+      "seconds": 0.1487014996819198,
+      "stdout": "Updated Git hooks.\nGit LFS initialized.\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "add",
+        "."
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v3/pr/repos/pr-split",
+      "rc": 0,
+      "seconds": 0.0872826250270009,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "commit",
+        "-m",
+        "Seed LFS fixture"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v3/pr/repos/pr-split",
+      "rc": 0,
+      "seconds": 0.3712530001066625,
+      "stdout": "[main (root-commit) 62a8695] Seed LFS fixture\n 3 files changed, 5 insertions(+)\n create mode 100644 .gitattributes\n create mode 100644 asset.bin\n create mode 100644 note.txt\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v3/pr/repos/pr-split",
+      "rc": 0,
+      "seconds": 0.0064910841174423695,
+      "stdout": "62a8695fd6fad3ebfc80376976c235246c5327eb\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr",
+        "git",
+        "init",
+        "--colocate"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v3/pr/repos/pr-split",
+      "rc": 0,
+      "seconds": 0.15802583377808332,
+      "stdout": "",
+      "stderr": "Done importing changes from the underlying Git repo.\nInitialized repo in \".\"\n"
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr",
+        "new"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v3/pr/repos/pr-split",
+      "rc": 0,
+      "seconds": 0.06154062505811453,
+      "stdout": "",
+      "stderr": "Working copy  (@) now at: mxlzxvmm 025df187 (empty) (no description set)\nParent commit (@-)      : yuxwonss 068614e3 (empty) (no description set)\n"
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr",
+        "status"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v3/pr/repos/pr-split",
+      "rc": 0,
+      "seconds": 0.06568912509828806,
+      "stdout": "Working copy changes:\nM note.txt\nWorking copy  (@) : mxlzxvmm c4eb2581 (no description set)\nParent commit (@-): yuxwonss 068614e3 (empty) (no description set)\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr",
+        "log",
+        "-r",
+        "@",
+        "--no-graph",
+        "-T",
+        "commit_id"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v3/pr/repos/pr-split",
+      "rc": 0,
+      "seconds": 0.029420000035315752,
+      "stdout": "c4eb2581225ed3f8c6af263a2210fa809436cf6c",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr",
+        "split",
+        "note.txt",
+        "-m",
+        "Split ordinary note"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v3/pr/repos/pr-split",
+      "rc": 0,
+      "seconds": 0.07564308308064938,
+      "stdout": "",
+      "stderr": "Warning: All changes have been selected, so the original revision will become empty.\nSelected changes : mxlzxvmm 9da0e2f5 Split ordinary note\nRemaining changes: uxtzrwxu 048a891e (empty) (no description set)\nWorking copy  (@) now at: roomuuox 91549c8c (empty) (no description set)\nParent commit (@-)      : mxlzxvmm 9da0e2f5 Split ordinary note\n"
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr",
+        "file",
+        "show",
+        "-r",
+        "c4eb2581225ed3f8c6af263a2210fa809436cf6c",
+        "asset.bin"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v3/pr/repos/pr-split",
+      "rc": 0,
+      "seconds": 0.02482412476092577,
+      "stdout": "version https://git-lfs.github.com/spec/v1\noid sha256:dad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f\nsize 2500\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr",
+        "status"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v3/pr/repos/pr-split",
+      "rc": 0,
+      "seconds": 0.02571358298882842,
+      "stdout": "The working copy has no changes.\nWorking copy  (@) : roomuuox 91549c8c (empty) (no description set)\nParent commit (@-): mxlzxvmm 9da0e2f5 Split ordinary note\n",
+      "stderr": ""
+    }
+  ]
+}

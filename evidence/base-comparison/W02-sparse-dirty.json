@@ -1,0 +1,165 @@
+{
+  "id": "W02-sparse-dirty",
+  "purpose": "Sparse removal must not silently lose local edits",
+  "category": "data-integrity",
+  "status": "FAIL",
+  "seconds": 1.7036997503601015,
+  "checks": [
+    {
+      "label": "Sparse exclusion preserves or rejects unsnapshotted local edits",
+      "pass": false
+    }
+  ],
+  "observations": {
+    "sparse": {
+      "rc": 0,
+      "stderr": "Added 0 files, modified 0 files, removed 2 files\n",
+      "asset_exists": false
+    }
+  },
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "init",
+        "-b",
+        "main"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/base-comparison/repos/W02-sparse-dirty",
+      "rc": 0,
+      "seconds": 0.027208040934056044,
+      "stdout": "Initialized empty Git repository in /tmp/jj-lfs-evaluation/base-comparison/repos/W02-sparse-dirty/.git/\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.name",
+        "LFS Evaluation"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/base-comparison/repos/W02-sparse-dirty",
+      "rc": 0,
+      "seconds": 0.014412207994610071,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.email",
+        "eval@example.invalid"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/base-comparison/repos/W02-sparse-dirty",
+      "rc": 0,
+      "seconds": 0.023400540929287672,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "commit.gpgsign",
+        "false"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/base-comparison/repos/W02-sparse-dirty",
+      "rc": 0,
+      "seconds": 0.02544358279556036,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "core.autocrlf",
+        "false"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/base-comparison/repos/W02-sparse-dirty",
+      "rc": 0,
+      "seconds": 0.01957283401861787,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "lfs",
+        "install",
+        "--local"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/base-comparison/repos/W02-sparse-dirty",
+      "rc": 0,
+      "seconds": 0.36753691686317325,
+      "stdout": "Updated Git hooks.\nGit LFS initialized.\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "add",
+        "."
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/base-comparison/repos/W02-sparse-dirty",
+      "rc": 0,
+      "seconds": 0.1561144171282649,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "commit",
+        "-m",
+        "Seed LFS fixture"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/base-comparison/repos/W02-sparse-dirty",
+      "rc": 0,
+      "seconds": 0.7039599590934813,
+      "stdout": "[main (root-commit) eb11023] Seed LFS fixture\n 3 files changed, 5 insertions(+)\n create mode 100644 .gitattributes\n create mode 100644 assets/asset.bin\n create mode 100644 note.txt\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/base-comparison/repos/W02-sparse-dirty",
+      "rc": 0,
+      "seconds": 0.010302250273525715,
+      "stdout": "eb11023e11d1ef1fe6d29bf5b666f58db26d2e91\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-base",
+        "git",
+        "init",
+        "--colocate"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/base-comparison/repos/W02-sparse-dirty",
+      "rc": 0,
+      "seconds": 0.2637138329446316,
+      "stdout": "",
+      "stderr": "Done importing changes from the underlying Git repo.\nInitialized repo in \".\"\n"
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-base",
+        "sparse",
+        "set",
+        "--clear",
+        "--add",
+        "note.txt"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/base-comparison/repos/W02-sparse-dirty",
+      "rc": 0,
+      "seconds": 0.08966995915398002,
+      "stdout": "",
+      "stderr": "Added 0 files, modified 0 files, removed 2 files\n"
+    }
+  ]
+}

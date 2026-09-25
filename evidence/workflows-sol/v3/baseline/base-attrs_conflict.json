@@ -1,0 +1,262 @@
+{
+  "id": "base-attrs_conflict",
+  "purpose": "attrs_conflict",
+  "category": "contract",
+  "status": "PASS",
+  "seconds": 1.222489624749869,
+  "checks": [
+    {
+      "label": "Conflict is reported",
+      "pass": true
+    }
+  ],
+  "observations": {
+    "merge_conflicting_attributes": {
+      "rc": 0,
+      "out": "",
+      "err": "Working copy  (@) now at: ykqpltvo 18f88334 (conflict) (empty) (no description set)\nParent commit (@-)      : nrkyouku 4532fd4d (no description set)\nParent commit (@-)      : krzvwows 35cb1716 (no description set)\nAdded 0 files, modified 1 files, removed 0 files\nWarning: There are unresolved conflicts at these paths:\n.gitattributes    2-sided conflict\n"
+    },
+    "merge_status": {
+      "rc": 0,
+      "out": "The working copy has no changes.\nWorking copy  (@) : ykqpltvo 18f88334 (conflict) (empty) (no description set)\nParent commit (@-): nrkyouku 4532fd4d (no description set)\nParent commit (@-): krzvwows 35cb1716 (no description set)\nWarning: There are unresolved conflicts at these paths:\n.gitattributes    2-sided conflict\n",
+      "err": ""
+    },
+    "after": {
+      "attr": "<<<<<<< conflict 1 of 1\n%%%%%%% diff from: qvowpyvv d31839a1 \"Seed LFS fixture\"\n\\\\\\\\\\\\\\        to: nrkyouku 4532fd4d\n-*.bin filter=lfs diff=lfs merge=lfs -text\n+*.bin -filter\n+++++++ krzvwows 35cb1716\n*.bin filter=custom\n>>>>>>> conflict 1 of 1 ends\n",
+      "disk_sha": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+      "disk_pointer": true
+    }
+  },
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "init",
+        "-b",
+        "main"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v3/baseline/repos/base-attrs_conflict",
+      "rc": 0,
+      "seconds": 0.013309750240296125,
+      "stdout": "Initialized empty Git repository in /tmp/jj-lfs-evaluation/workflows-sol/v3/baseline/repos/base-attrs_conflict/.git/\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.name",
+        "LFS Evaluation"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v3/baseline/repos/base-attrs_conflict",
+      "rc": 0,
+      "seconds": 0.00754929194226861,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.email",
+        "eval@example.invalid"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v3/baseline/repos/base-attrs_conflict",
+      "rc": 0,
+      "seconds": 0.007451292127370834,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "commit.gpgsign",
+        "false"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v3/baseline/repos/base-attrs_conflict",
+      "rc": 0,
+      "seconds": 0.007631542161107063,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "core.autocrlf",
+        "false"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v3/baseline/repos/base-attrs_conflict",
+      "rc": 0,
+      "seconds": 0.007447166834026575,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "lfs",
+        "install",
+        "--local"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v3/baseline/repos/base-attrs_conflict",
+      "rc": 0,
+      "seconds": 0.1552767502143979,
+      "stdout": "Updated Git hooks.\nGit LFS initialized.\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "add",
+        "."
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v3/baseline/repos/base-attrs_conflict",
+      "rc": 0,
+      "seconds": 0.08327391697093844,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "commit",
+        "-m",
+        "Seed LFS fixture"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v3/baseline/repos/base-attrs_conflict",
+      "rc": 0,
+      "seconds": 0.3797709168866277,
+      "stdout": "[main (root-commit) d31839a] Seed LFS fixture\n 3 files changed, 5 insertions(+)\n create mode 100644 .gitattributes\n create mode 100644 asset.bin\n create mode 100644 note.txt\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v3/baseline/repos/base-attrs_conflict",
+      "rc": 0,
+      "seconds": 0.007448208052664995,
+      "stdout": "d31839a15b2b7285168951ca768602202285cd29\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/opt/homebrew/Cellar/jj/0.45.1/bin/jj",
+        "git",
+        "init",
+        "--colocate"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v3/baseline/repos/base-attrs_conflict",
+      "rc": 0,
+      "seconds": 0.18276079231873155,
+      "stdout": "",
+      "stderr": "Done importing changes from the underlying Git repo.\nInitialized repo in \".\"\n"
+    },
+    {
+      "argv": [
+        "/opt/homebrew/Cellar/jj/0.45.1/bin/jj",
+        "new",
+        "d31839a15b2b7285168951ca768602202285cd29"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v3/baseline/repos/base-attrs_conflict",
+      "rc": 0,
+      "seconds": 0.05358891701325774,
+      "stdout": "",
+      "stderr": "Working copy  (@) now at: nrkyouku f94183bc (empty) (no description set)\nParent commit (@-)      : qvowpyvv d31839a1 main | Seed LFS fixture\nAdded 0 files, modified 1 files, removed 0 files\n"
+    },
+    {
+      "argv": [
+        "/opt/homebrew/Cellar/jj/0.45.1/bin/jj",
+        "status"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v3/baseline/repos/base-attrs_conflict",
+      "rc": 0,
+      "seconds": 0.06057649990543723,
+      "stdout": "Working copy changes:\nM .gitattributes\nWorking copy  (@) : nrkyouku 4532fd4d (no description set)\nParent commit (@-): qvowpyvv d31839a1 main | Seed LFS fixture\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/opt/homebrew/Cellar/jj/0.45.1/bin/jj",
+        "log",
+        "-r",
+        "@",
+        "--no-graph",
+        "-T",
+        "commit_id"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v3/baseline/repos/base-attrs_conflict",
+      "rc": 0,
+      "seconds": 0.023306708317250013,
+      "stdout": "4532fd4d7414b50ae451d523924d580b919078f4",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/opt/homebrew/Cellar/jj/0.45.1/bin/jj",
+        "new",
+        "d31839a15b2b7285168951ca768602202285cd29"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v3/baseline/repos/base-attrs_conflict",
+      "rc": 0,
+      "seconds": 0.05881008319556713,
+      "stdout": "",
+      "stderr": "Working copy  (@) now at: krzvwows fa9fb46e (empty) (no description set)\nParent commit (@-)      : qvowpyvv d31839a1 main | Seed LFS fixture\nAdded 0 files, modified 1 files, removed 0 files\n"
+    },
+    {
+      "argv": [
+        "/opt/homebrew/Cellar/jj/0.45.1/bin/jj",
+        "status"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v3/baseline/repos/base-attrs_conflict",
+      "rc": 0,
+      "seconds": 0.06649637501686811,
+      "stdout": "Working copy changes:\nM .gitattributes\nWorking copy  (@) : krzvwows 35cb1716 (no description set)\nParent commit (@-): qvowpyvv d31839a1 main | Seed LFS fixture\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/opt/homebrew/Cellar/jj/0.45.1/bin/jj",
+        "log",
+        "-r",
+        "@",
+        "--no-graph",
+        "-T",
+        "commit_id"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v3/baseline/repos/base-attrs_conflict",
+      "rc": 0,
+      "seconds": 0.022172666154801846,
+      "stdout": "35cb1716f88df9094cdc21e4d5279c07aa2cf47d",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/opt/homebrew/Cellar/jj/0.45.1/bin/jj",
+        "new",
+        "4532fd4d7414b50ae451d523924d580b919078f4",
+        "35cb1716f88df9094cdc21e4d5279c07aa2cf47d"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v3/baseline/repos/base-attrs_conflict",
+      "rc": 0,
+      "seconds": 0.06506354082375765,
+      "stdout": "",
+      "stderr": "Working copy  (@) now at: ykqpltvo 18f88334 (conflict) (empty) (no description set)\nParent commit (@-)      : nrkyouku 4532fd4d (no description set)\nParent commit (@-)      : krzvwows 35cb1716 (no description set)\nAdded 0 files, modified 1 files, removed 0 files\nWarning: There are unresolved conflicts at these paths:\n.gitattributes    2-sided conflict\n"
+    },
+    {
+      "argv": [
+        "/opt/homebrew/Cellar/jj/0.45.1/bin/jj",
+        "status"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v3/baseline/repos/base-attrs_conflict",
+      "rc": 0,
+      "seconds": 0.01853620819747448,
+      "stdout": "The working copy has no changes.\nWorking copy  (@) : ykqpltvo 18f88334 (conflict) (empty) (no description set)\nParent commit (@-): nrkyouku 4532fd4d (no description set)\nParent commit (@-): krzvwows 35cb1716 (no description set)\nWarning: There are unresolved conflicts at these paths:\n.gitattributes    2-sided conflict\n",
+      "stderr": ""
+    }
+  ]
+}

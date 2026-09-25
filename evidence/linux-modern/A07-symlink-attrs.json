@@ -1,0 +1,167 @@
+{
+  "id": "A07-symlink-attrs",
+  "purpose": "Do not follow symlinked attribute files",
+  "category": "contract",
+  "status": "PASS",
+  "seconds": 0.2306524589999981,
+  "checks": [
+    {
+      "label": "Symlinked attributes not followed",
+      "pass": true
+    }
+  ],
+  "observations": {},
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "init",
+        "-b",
+        "main"
+      ],
+      "cwd": "/eval/linux-modern/repos/A07-symlink-attrs",
+      "rc": 0,
+      "seconds": 0.014410499999996773,
+      "stdout": "Initialized empty Git repository in /eval/linux-modern/repos/A07-symlink-attrs/.git/\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.name",
+        "LFS Evaluation"
+      ],
+      "cwd": "/eval/linux-modern/repos/A07-symlink-attrs",
+      "rc": 0,
+      "seconds": 0.0030924999999797365,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.email",
+        "eval@example.invalid"
+      ],
+      "cwd": "/eval/linux-modern/repos/A07-symlink-attrs",
+      "rc": 0,
+      "seconds": 0.002935583000009956,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "commit.gpgsign",
+        "false"
+      ],
+      "cwd": "/eval/linux-modern/repos/A07-symlink-attrs",
+      "rc": 0,
+      "seconds": 0.0034158330000195747,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "core.autocrlf",
+        "false"
+      ],
+      "cwd": "/eval/linux-modern/repos/A07-symlink-attrs",
+      "rc": 0,
+      "seconds": 0.0035862919999658516,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "lfs",
+        "install",
+        "--local"
+      ],
+      "cwd": "/eval/linux-modern/repos/A07-symlink-attrs",
+      "rc": 0,
+      "seconds": 0.03113341699997818,
+      "stdout": "Updated Git hooks.\nGit LFS initialized.\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "add",
+        "."
+      ],
+      "cwd": "/eval/linux-modern/repos/A07-symlink-attrs",
+      "rc": 0,
+      "seconds": 0.006932833000007577,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "commit",
+        "-m",
+        "Seed LFS fixture"
+      ],
+      "cwd": "/eval/linux-modern/repos/A07-symlink-attrs",
+      "rc": 0,
+      "seconds": 0.04026908299999832,
+      "stdout": "[main (root-commit) 94bf5ef] Seed LFS fixture\n 2 files changed, 1 insertion(+)\n create mode 100644 .gitattributes\n create mode 100644 note.txt\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "/eval/linux-modern/repos/A07-symlink-attrs",
+      "rc": 0,
+      "seconds": 0.0018389580000075512,
+      "stdout": "94bf5ef132b3d75f70cc3336797fae4facb31fa8\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/target/debug/jj",
+        "git",
+        "init",
+        "--colocate"
+      ],
+      "cwd": "/eval/linux-modern/repos/A07-symlink-attrs",
+      "rc": 0,
+      "seconds": 0.05643379200000709,
+      "stdout": "",
+      "stderr": "Done importing changes from the underlying Git repo.\nInitialized repo in \".\"\n"
+    },
+    {
+      "argv": [
+        "/target/debug/jj",
+        "status"
+      ],
+      "cwd": "/eval/linux-modern/repos/A07-symlink-attrs",
+      "rc": 0,
+      "seconds": 0.03872254100002692,
+      "stdout": "Working copy changes:\nM .gitattributes\nA new.bin\nA rules\nWorking copy  (@) : vzksrnyu 3bdced16 (no description set)\nParent commit (@-): yukrnmwu 94bf5ef1 main | Seed LFS fixture\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/target/debug/jj",
+        "file",
+        "list"
+      ],
+      "cwd": "/eval/linux-modern/repos/A07-symlink-attrs",
+      "rc": 0,
+      "seconds": 0.02574629099996173,
+      "stdout": ".gitattributes\nnew.bin\nnote.txt\nrules\n",
+      "stderr": ""
+    }
+  ]
+}

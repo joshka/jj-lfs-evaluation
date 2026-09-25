@@ -1,0 +1,161 @@
+{
+  "id": "P03-empty",
+  "purpose": "Empty LFS file passthrough",
+  "category": "contract",
+  "status": "PASS",
+  "seconds": 0.9872672911733389,
+  "checks": [
+    {
+      "label": "Empty LFS file passthrough stays empty",
+      "pass": true,
+      "actual_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "expected_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "actual_size": 0,
+      "expected_size": 0
+    }
+  ],
+  "observations": {},
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "init",
+        "-b",
+        "main"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos/repos/P03-empty",
+      "rc": 0,
+      "seconds": 0.01247299974784255,
+      "stdout": "Initialized empty Git repository in /tmp/jj-lfs-evaluation/macos/repos/P03-empty/.git/\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.name",
+        "LFS Evaluation"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos/repos/P03-empty",
+      "rc": 0,
+      "seconds": 0.007294208277016878,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.email",
+        "eval@example.invalid"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos/repos/P03-empty",
+      "rc": 0,
+      "seconds": 0.007733208127319813,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "commit.gpgsign",
+        "false"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos/repos/P03-empty",
+      "rc": 0,
+      "seconds": 0.007054625079035759,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "core.autocrlf",
+        "false"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos/repos/P03-empty",
+      "rc": 0,
+      "seconds": 0.006437084171921015,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "lfs",
+        "install",
+        "--local"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos/repos/P03-empty",
+      "rc": 0,
+      "seconds": 0.28621408343315125,
+      "stdout": "Updated Git hooks.\nGit LFS initialized.\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "add",
+        "."
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos/repos/P03-empty",
+      "rc": 0,
+      "seconds": 0.08932054089382291,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "commit",
+        "-m",
+        "Seed LFS fixture"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos/repos/P03-empty",
+      "rc": 0,
+      "seconds": 0.3790036248974502,
+      "stdout": "[main (root-commit) 3543dc8] Seed LFS fixture\n 3 files changed, 2 insertions(+)\n create mode 100644 .gitattributes\n create mode 100644 empty.bin\n create mode 100644 note.txt\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos/repos/P03-empty",
+      "rc": 0,
+      "seconds": 0.007237792015075684,
+      "stdout": "3543dc8c6e18afcf2b7f674b71fc501ab65dfa44\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr",
+        "git",
+        "init",
+        "--colocate"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos/repos/P03-empty",
+      "rc": 0,
+      "seconds": 0.15798408398404717,
+      "stdout": "",
+      "stderr": "Done importing changes from the underlying Git repo.\nInitialized repo in \".\"\n"
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr",
+        "file",
+        "show",
+        "empty.bin"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos/repos/P03-empty",
+      "rc": 0,
+      "seconds": 0.025695207994431257,
+      "stdout": "",
+      "stderr": ""
+    }
+  ]
+}

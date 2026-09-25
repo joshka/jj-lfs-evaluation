@@ -1,0 +1,228 @@
+{
+  "id": "P04-missing-object",
+  "purpose": "Missing local object and recovery",
+  "category": "contract",
+  "status": "PASS",
+  "seconds": 1.1764645422808826,
+  "checks": [
+    {
+      "label": "Missing object leaves pointer intact",
+      "pass": true,
+      "actual_sha256": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+      "expected_sha256": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+      "actual_size": 129,
+      "expected_size": 129
+    },
+    {
+      "label": "Missing object does not fabricate disk data",
+      "pass": true,
+      "actual_sha256": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+      "expected_sha256": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+      "actual_size": 129,
+      "expected_size": 129
+    },
+    {
+      "label": "Restored object hydrates correctly",
+      "pass": true,
+      "actual_sha256": "dad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f",
+      "expected_sha256": "dad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f",
+      "actual_size": 2500,
+      "expected_size": 2500
+    }
+  ],
+  "observations": {
+    "checkout": {
+      "rc": 0,
+      "stderr": "Skipped checkout for \"asset.bin\", content not local. Use fetch to download.\n"
+    }
+  },
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "init",
+        "-b",
+        "main"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos/repos/P04-missing-object",
+      "rc": 0,
+      "seconds": 0.011806166730821133,
+      "stdout": "Initialized empty Git repository in /tmp/jj-lfs-evaluation/macos/repos/P04-missing-object/.git/\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.name",
+        "LFS Evaluation"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos/repos/P04-missing-object",
+      "rc": 0,
+      "seconds": 0.007549999747425318,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.email",
+        "eval@example.invalid"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos/repos/P04-missing-object",
+      "rc": 0,
+      "seconds": 0.0072739580646157265,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "commit.gpgsign",
+        "false"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos/repos/P04-missing-object",
+      "rc": 0,
+      "seconds": 0.009019333869218826,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "core.autocrlf",
+        "false"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos/repos/P04-missing-object",
+      "rc": 0,
+      "seconds": 0.006779083050787449,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "lfs",
+        "install",
+        "--local"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos/repos/P04-missing-object",
+      "rc": 0,
+      "seconds": 0.14735774975270033,
+      "stdout": "Updated Git hooks.\nGit LFS initialized.\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "add",
+        "."
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos/repos/P04-missing-object",
+      "rc": 0,
+      "seconds": 0.08518595900386572,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "commit",
+        "-m",
+        "Seed LFS fixture"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos/repos/P04-missing-object",
+      "rc": 0,
+      "seconds": 0.3784825843758881,
+      "stdout": "[main (root-commit) b1d37eb] Seed LFS fixture\n 3 files changed, 5 insertions(+)\n create mode 100644 .gitattributes\n create mode 100644 asset.bin\n create mode 100644 note.txt\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos/repos/P04-missing-object",
+      "rc": 0,
+      "seconds": 0.007480292115360498,
+      "stdout": "b1d37eb4b3af58a3695edd75861812eb6f99c969\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr",
+        "git",
+        "init",
+        "--colocate"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos/repos/P04-missing-object",
+      "rc": 0,
+      "seconds": 0.15998379094526172,
+      "stdout": "",
+      "stderr": "Done importing changes from the underlying Git repo.\nInitialized repo in \".\"\n"
+    },
+    {
+      "argv": [
+        "git",
+        "lfs",
+        "checkout"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos/repos/P04-missing-object",
+      "rc": 0,
+      "seconds": 0.09606733312830329,
+      "stdout": "Checking out LFS objects: 100% (1/1), 2.5 KB | 0 B/s, done.\n",
+      "stderr": "Skipped checkout for \"asset.bin\", content not local. Use fetch to download.\n"
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr",
+        "status"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos/repos/P04-missing-object",
+      "rc": 0,
+      "seconds": 0.02662141714245081,
+      "stdout": "The working copy has no changes.\nWorking copy  (@) : wtmoklwm 50db315a (empty) (no description set)\nParent commit (@-): qtqwqqkt b1d37eb4 main | Seed LFS fixture\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr",
+        "file",
+        "show",
+        "asset.bin"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos/repos/P04-missing-object",
+      "rc": 0,
+      "seconds": 0.02622491680085659,
+      "stdout": "version https://git-lfs.github.com/spec/v1\noid sha256:dad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f\nsize 2500\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "lfs",
+        "checkout"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos/repos/P04-missing-object",
+      "rc": 0,
+      "seconds": 0.1779230423271656,
+      "stdout": "Checking out LFS objects: 100% (1/1), 2.5 KB | 0 B/s, done.\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr",
+        "status"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/macos/repos/P04-missing-object",
+      "rc": 0,
+      "seconds": 0.026575916912406683,
+      "stdout": "The working copy has no changes.\nWorking copy  (@) : wtmoklwm 50db315a (empty) (no description set)\nParent commit (@-): qtqwqqkt b1d37eb4 main | Seed LFS fixture\n",
+      "stderr": ""
+    }
+  ]
+}

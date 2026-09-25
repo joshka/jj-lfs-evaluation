@@ -1,0 +1,233 @@
+{
+  "id": "pr-untrack",
+  "purpose": "untrack",
+  "category": "contract",
+  "status": "FAIL",
+  "seconds": 1.8305595419369638,
+  "checks": [
+    {
+      "label": "Committed pointer not silently removed",
+      "pass": false
+    }
+  ],
+  "observations": {
+    "untrack": {
+      "rc": 0,
+      "out": "",
+      "err": ""
+    },
+    "effect": {
+      "before": ".gitattributes\nasset.bin\nnote.txt\n",
+      "after": ".gitattributes\nnote.txt\n",
+      "original_pointer": true,
+      "show_rc": 1,
+      "show_sha": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "disk_sha": "dad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f",
+      "status": "Working copy changes:\nD asset.bin\nWorking copy  (@) : lskuonsm 50ca9b1c (no description set)\nParent commit (@-): rktstkzx 6668967a main | Seed LFS fixture\n"
+    }
+  },
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "init",
+        "-b",
+        "main"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/pr/repos/pr-untrack",
+      "rc": 0,
+      "seconds": 0.032183249946683645,
+      "stdout": "Initialized empty Git repository in /tmp/jj-lfs-evaluation/workflows-sol/v4/pr/repos/pr-untrack/.git/\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.name",
+        "LFS Evaluation"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/pr/repos/pr-untrack",
+      "rc": 0,
+      "seconds": 0.015786000061780214,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.email",
+        "eval@example.invalid"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/pr/repos/pr-untrack",
+      "rc": 0,
+      "seconds": 0.014880707953125238,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "commit.gpgsign",
+        "false"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/pr/repos/pr-untrack",
+      "rc": 0,
+      "seconds": 0.01588854193687439,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "core.autocrlf",
+        "false"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/pr/repos/pr-untrack",
+      "rc": 0,
+      "seconds": 0.01554054208099842,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "lfs",
+        "install",
+        "--local"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/pr/repos/pr-untrack",
+      "rc": 0,
+      "seconds": 0.32746833423152566,
+      "stdout": "Updated Git hooks.\nGit LFS initialized.\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "add",
+        "."
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/pr/repos/pr-untrack",
+      "rc": 0,
+      "seconds": 0.17724066693335772,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "commit",
+        "-m",
+        "Seed LFS fixture"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/pr/repos/pr-untrack",
+      "rc": 0,
+      "seconds": 0.6563639170490205,
+      "stdout": "[main (root-commit) 6668967] Seed LFS fixture\n 3 files changed, 5 insertions(+)\n create mode 100644 .gitattributes\n create mode 100644 asset.bin\n create mode 100644 note.txt\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/pr/repos/pr-untrack",
+      "rc": 0,
+      "seconds": 0.014346625190228224,
+      "stdout": "6668967ac812f90aa0b92780f806ffe940f6e6f1\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr",
+        "git",
+        "init",
+        "--colocate"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/pr/repos/pr-untrack",
+      "rc": 0,
+      "seconds": 0.21958595793694258,
+      "stdout": "",
+      "stderr": "Done importing changes from the underlying Git repo.\nInitialized repo in \".\"\n"
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr",
+        "file",
+        "show",
+        "asset.bin"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/pr/repos/pr-untrack",
+      "rc": 0,
+      "seconds": 0.04617879167199135,
+      "stdout": "version https://git-lfs.github.com/spec/v1\noid sha256:dad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f\nsize 2500\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr",
+        "file",
+        "list"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/pr/repos/pr-untrack",
+      "rc": 0,
+      "seconds": 0.03836629167199135,
+      "stdout": ".gitattributes\nasset.bin\nnote.txt\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr",
+        "file",
+        "untrack",
+        "asset.bin"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/pr/repos/pr-untrack",
+      "rc": 0,
+      "seconds": 0.10357870906591415,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr",
+        "file",
+        "list"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/pr/repos/pr-untrack",
+      "rc": 0,
+      "seconds": 0.04180487524718046,
+      "stdout": ".gitattributes\nnote.txt\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr",
+        "file",
+        "show",
+        "asset.bin"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/pr/repos/pr-untrack",
+      "rc": 1,
+      "seconds": 0.04913283325731754,
+      "stdout": "",
+      "stderr": "Error: No such path: asset.bin\n"
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr",
+        "status"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/workflows-sol/v4/pr/repos/pr-untrack",
+      "rc": 0,
+      "seconds": 0.05495845805853605,
+      "stdout": "Working copy changes:\nD asset.bin\nWorking copy  (@) : lskuonsm 50ca9b1c (no description set)\nParent commit (@-): rktstkzx 6668967a main | Seed LFS fixture\n",
+      "stderr": ""
+    }
+  ]
+}

@@ -1,0 +1,1 @@
+ordinary edit beside existing LFS pointer

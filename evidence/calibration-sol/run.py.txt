@@ -1,0 +1,210 @@
+#!/usr/bin/env python3
+"""Four bounded Git LFS / jj interoperability probes."""
+import hashlib
+import json
+import os
+import pathlib
+import shutil
+import subprocess
+import sys
+import time
+
+ROOT = pathlib.Path(__file__).resolve().parent
+JJ = pathlib.Path(sys.argv[1]) if len(sys.argv) > 1 else pathlib.Path('/tmp/jj-lfs-evaluation/bin/jj-pr')
+BASELINE = pathlib.Path('/opt/homebrew/bin/jj')
+T0 = time.monotonic()
+LOG = []
+RESULT = {}
+ENV = os.environ.copy()
+ENV.update(JJ_CONFIG=str(ROOT / 'jj-config.toml'), GIT_CONFIG_GLOBAL=str(ROOT / 'gitconfig'),
+           GIT_CONFIG_NOSYSTEM='1', GIT_AUTHOR_NAME='Evaluation',
+           GIT_AUTHOR_EMAIL='eval@example.invalid', GIT_COMMITTER_NAME='Evaluation',
+           GIT_COMMITTER_EMAIL='eval@example.invalid', GIT_LFS_SKIP_SMUDGE='0')
+(ROOT / 'jj-config.toml').write_text('[user]\nname = "Evaluation"\nemail = "eval@example.invalid"\n[signing]\nbehavior = "drop"\n')
+(ROOT / 'gitconfig').write_text('[commit]\ngpgsign = false\n')
+
+def run(cwd, *argv, ok=True):
+    t = time.monotonic()
+    p = subprocess.run([str(x) for x in argv], cwd=cwd, env=ENV, capture_output=True, text=True)
+    rec = dict(cwd=str(cwd), argv=[str(x) for x in argv], code=p.returncode,
+               stdout=p.stdout, stderr=p.stderr, seconds=round(time.monotonic()-t, 3))
+    LOG.append(rec)
+    if ok and p.returncode:
+        raise RuntimeError(f'{argv} failed ({p.returncode}): {p.stderr}')
+    return p
+
+def git(cwd, *args, ok=True): return run(cwd, 'git', *args, ok=ok)
+def jj(cwd, binary, *args, ok=True): return run(cwd, binary, *args, ok=ok)
+def lfs(cwd, *args, ok=True): return run(cwd, 'git', 'lfs', *args, ok=ok)
+def sha(data): return hashlib.sha256(data).hexdigest()
+def pointer(data): return f'version https://git-lfs.github.com/spec/v1\noid sha256:{sha(data)}\nsize {len(data)}\n'.encode()
+def write(p, data):
+    p.parent.mkdir(parents=True, exist_ok=True)
+    p.write_bytes(data)
+def blob(cwd, rev, path): return git(cwd, 'show', f'{rev}:{path}').stdout.encode()
+def disk(p):
+    b = p.read_bytes()
+    return dict(sha256=sha(b), size=len(b), pointer=b.startswith(b'version https://git-lfs.github.com/spec/v1'))
+def init(name):
+    p = ROOT / name
+    if p.exists(): shutil.rmtree(p)
+    p.mkdir()
+    git(p, 'init', '-q')
+    lfs(p, 'install', '--local')
+    return p
+def commit(p, msg):
+    git(p, 'add', '-A')
+    git(p, 'commit', '-qm', msg)
+    return git(p, 'rev-parse', 'HEAD').stdout.strip()
+def colocate(p, binary): jj(p, binary, 'git', 'init', '--colocate')
+
+def c1():
+    p = init('c1')
+    lfs(p, 'track', '*.bin')
+    payload = b'C1 deterministic hydrated binary\x00\xff\n'
+    write(p/'asset.bin', payload)
+    write(p/'note.txt', b'initial\n')
+    rev = commit(p, 'Add LFS asset')
+    expected = pointer(payload)
+    initial = dict(stored_pointer=blob(p, rev, 'asset.bin') == expected,
+                   disk=disk(p/'asset.bin'), expected_sha=sha(payload))
+    colocate(p, JJ)
+    snapshots = []
+    for i in range(3):
+        snapshots.append(jj(p, JJ, 'status', ok=False).returncode)
+    write(p/'note.txt', b'ordinary edit\n')
+    edit_status = jj(p, JJ, 'status', ok=False)
+    jj_show = jj(p, JJ, 'file', 'show', '-r', '@', 'asset.bin', ok=False)
+    after = dict(status_code=edit_status.returncode, status=edit_status.stdout+edit_status.stderr,
+                 stored_pointer=blob(p, rev, 'asset.bin') == expected,
+                 jj_stored_pointer=jj_show.returncode == 0 and jj_show.stdout.encode() == expected,
+                 disk=disk(p/'asset.bin'))
+    write(p/'asset.bin', expected)
+    literal = dict(before=disk(p/'asset.bin'), status=jj(p, JJ, 'status', ok=False).returncode)
+    jj_show = jj(p, JJ, 'file', 'show', '-r', '@', 'asset.bin', ok=False)
+    literal['jj_stored_pointer'] = jj_show.returncode == 0 and jj_show.stdout.encode() == expected
+    lfs(p, 'checkout', 'asset.bin', ok=False)
+    literal['after_checkout'] = disk(p/'asset.bin')
+    literal['stored_pointer'] = blob(p, rev, 'asset.bin') == expected
+    return dict(initial=initial, snapshot_codes=snapshots, after_edit=after, literal=literal,
+                expected_pointer=expected.decode())
+
+def c2():
+    p = init('c2')
+    write(p/'.gitattributes', b'*.bin filter=lfs diff=lfs merge=lfs -text\nnested/*.bin -filter\n')
+    write(p/'root.bin', b'root-lfs\n')
+    write(p/'nested'/'override.bin', b'nested-plain\n')
+    rev = commit(p, 'Add attribute precedence fixtures')
+    attrs = {n: git(p, 'check-attr', 'filter', '--', n).stdout.strip() for n in ('root.bin','nested/override.bin')}
+    initial = dict(attrs=attrs, git_root_pointer=blob(p, rev, 'root.bin') == pointer(b'root-lfs\n'),
+                   git_nested_plain=blob(p, rev, 'nested/override.bin') == b'nested-plain\n')
+    colocate(p, JJ)
+    status = jj(p, JJ, 'status', ok=False)
+    initial['jj_status'] = status.stdout+status.stderr
+    initial['jj_status_code'] = status.returncode
+    write(p/'root.bin', b'root-lfs-modified\n')
+    write(p/'nested'/'override.bin', b'nested-plain-modified\n')
+    precedence_status = jj(p, JJ, 'status', ok=False)
+    initial['modified_status'] = precedence_status.stdout+precedence_status.stderr
+    initial['modified_status_code'] = precedence_status.returncode
+    initial['root_disk'] = disk(p/'root.bin')
+    initial['nested_disk'] = disk(p/'nested'/'override.bin')
+    write(p/'.git'/'info'/'attributes', b'info-only.dat filter=lfs\n')
+    write(p/'info-only.dat', b'info-attributes-payload\n')
+    info_attr = git(p, 'check-attr', 'filter', '--', 'info-only.dat').stdout.strip()
+    status = jj(p, JJ, 'status', ok=False)
+    show = jj(p, JJ, 'file', 'show', 'info-only.dat', ok=False)
+    return dict(initial=initial, info_attr=info_attr, status_code=status.returncode,
+                status=status.stdout+status.stderr, jj_file_show_code=show.returncode,
+                jj_file_show_sha=sha(show.stdout.encode()) if show.returncode == 0 else None,
+                disk=disk(p/'info-only.dat'), expected_sha=sha(b'info-attributes-payload\n'))
+
+def c3():
+    p = init('c3')
+    lfs(p, 'track', '*.bin')
+    payload = b'C3 missing object payload\x00\n'
+    write(p/'asset.bin', payload)
+    rev = commit(p, 'Add asset for missing object test')
+    remote = ROOT/'c3-remote.git'
+    if remote.exists(): shutil.rmtree(remote)
+    run(ROOT, 'git', 'init', '--bare', '-q', remote)
+    git(p, 'remote', 'add', 'origin', str(remote))
+    git(p, 'push', 'origin', 'HEAD:refs/heads/main')
+    # Git LFS local file remotes may or may not support uploads; the failure is evidence.
+    push = lfs(p, 'push', 'origin', '--all', ok=False)
+    remote_obj = remote/'lfs'/'objects'/sha(payload)[:2]/sha(payload)[2:4]/sha(payload)
+    remote_object_existed = remote_obj.exists()
+    if remote_obj.exists(): remote_obj.unlink()
+    colocate(p, JJ)
+    expected = pointer(payload)
+    obj = p/'.git'/'lfs'/'objects'/sha(payload)[:2]/sha(payload)[2:4]/sha(payload)
+    saved = ROOT/'c3-object-saved'
+    shutil.copy2(obj, saved)
+    obj.unlink()
+    write(p/'asset.bin', expected)
+    fetch = lfs(p, 'fetch', 'origin', ok=False)
+    checkout = lfs(p, 'checkout', 'asset.bin', ok=False)
+    absent = dict(fetch_code=fetch.returncode, fetch_output=fetch.stdout+fetch.stderr,
+                  checkout_code=checkout.returncode, checkout_output=checkout.stdout+checkout.stderr,
+                  disk=disk(p/'asset.bin'), object_exists=obj.exists(),
+                  stored_pointer=blob(p, rev, 'asset.bin') == expected)
+    status = jj(p, JJ, 'status', ok=False)
+    absent['jj_status_code'] = status.returncode
+    absent['jj_status'] = status.stdout+status.stderr
+    obj.parent.mkdir(parents=True, exist_ok=True)
+    shutil.copy2(saved, obj)
+    restored = lfs(p, 'checkout', 'asset.bin', ok=False)
+    return dict(lfs_push_code=push.returncode, lfs_push_output=push.stdout+push.stderr,
+                remote_object_existed_before_removal=remote_object_existed,
+                missing=absent, restored_checkout_code=restored.returncode,
+                restored_checkout_output=restored.stdout+restored.stderr,
+                restored_disk=disk(p/'asset.bin'), expected_sha=sha(payload),
+                stored_pointer=blob(p, rev, 'asset.bin') == expected)
+
+def c4_variant(name, binary):
+    p = init(name)
+    lfs(p, 'track', '*.bin')
+    a = b'C4 committed version A\x00\n'
+    b = b'C4 committed version B\x00\n'
+    edited = b'C4 local modified hydrated bytes\x00\n'
+    write(p/'asset.bin', a)
+    rev_a = commit(p, 'Add LFS version A')
+    write(p/'asset.bin', b)
+    rev_b = commit(p, 'Add LFS version B')
+    colocate(p, binary)
+    edit_a = jj(p, binary, 'edit', rev_a, ok=False)
+    # jj edit leaves a pointer on disk and Git HEAD is detached/unresolved here;
+    # materialize the real local LFS object by its content-addressed path.
+    obj_a = p/'.git'/'lfs'/'objects'/sha(a)[:2]/sha(a)[2:4]/sha(a)
+    shutil.copy2(obj_a, p/'asset.bin')
+    before = disk(p/'asset.bin')
+    write(p/'asset.bin', edited)
+    status = jj(p, binary, 'status', ok=False)
+    prior_commit = jj(p, binary, 'log', '-r', '@', '--no-graph', '-T', 'commit_id').stdout.strip()
+    stored = jj(p, binary, 'file', 'show', '-r', '@', 'asset.bin', ok=False)
+    switch = jj(p, binary, 'edit', rev_b, ok=False)
+    after = disk(p/'asset.bin')
+    prior = jj(p, binary, 'file', 'show', '-r', prior_commit, 'asset.bin', ok=False) if prior_commit else None
+    return dict(edit_a_code=edit_a.returncode, hydration='copied verified local LFS object',
+                before=before, edited_sha=sha(edited),
+                status_code=status.returncode, status=status.stdout+status.stderr,
+                prior_commit=prior_commit, stored_before_switch_code=stored.returncode,
+                stored_before_switch_sha=sha(stored.stdout.encode()) if stored.returncode == 0 else None,
+                switch_code=switch.returncode, switch_output=switch.stdout+switch.stderr,
+                after=after, prior_show_code=prior.returncode if prior else None,
+                prior_show_sha=sha(prior.stdout.encode()) if prior and prior.returncode == 0 else None,
+                pointer_a=pointer(a).decode(), pointer_b=pointer(b).decode(),
+                committed_a_pointer=blob(p, rev_a, 'asset.bin') == pointer(a),
+                committed_b_pointer=blob(p, rev_b, 'asset.bin') == pointer(b))
+
+for case, fn in [('C1',c1),('C2',c2),('C3',c3),('C4',lambda: {'pr':c4_variant('c4-pr', JJ), 'baseline':c4_variant('c4-baseline', BASELINE)})]:
+    start = time.monotonic()
+    try: RESULT[case] = fn()
+    except Exception as e: RESULT[case] = {'setup_or_execution_error': str(e)}
+    RESULT[case]['seconds'] = round(time.monotonic()-start, 3)
+    (ROOT/'results.json').write_text(json.dumps(RESULT, indent=2))
+    (ROOT/'transcript.json').write_text(json.dumps(LOG, indent=2))
+RESULT['total_seconds'] = round(time.monotonic()-T0, 3)
+(ROOT/'results.json').write_text(json.dumps(RESULT, indent=2))
+(ROOT/'transcript.json').write_text(json.dumps(LOG, indent=2))
+print(json.dumps(RESULT, indent=2))

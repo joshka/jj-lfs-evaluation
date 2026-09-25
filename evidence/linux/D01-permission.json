@@ -1,0 +1,91 @@
+{
+  "id": "D01-permission",
+  "purpose": "Unreadable attributes have useful error",
+  "category": "contract",
+  "status": "OBSERVED",
+  "seconds": 0.06257449999998244,
+  "checks": [],
+  "observations": {
+    "skip": "Requires non-root Unix permission enforcement."
+  },
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "init",
+        "-b",
+        "main"
+      ],
+      "cwd": "/eval/linux/repos/D01-permission",
+      "rc": 0,
+      "seconds": 0.015147624999997333,
+      "stdout": "Initialized empty Git repository in /eval/linux/repos/D01-permission/.git/\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.name",
+        "LFS Evaluation"
+      ],
+      "cwd": "/eval/linux/repos/D01-permission",
+      "rc": 0,
+      "seconds": 0.004745249999984935,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.email",
+        "eval@example.invalid"
+      ],
+      "cwd": "/eval/linux/repos/D01-permission",
+      "rc": 0,
+      "seconds": 0.0029480409999962376,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "commit.gpgsign",
+        "false"
+      ],
+      "cwd": "/eval/linux/repos/D01-permission",
+      "rc": 0,
+      "seconds": 0.004031541999978572,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "core.autocrlf",
+        "false"
+      ],
+      "cwd": "/eval/linux/repos/D01-permission",
+      "rc": 0,
+      "seconds": 0.003239084000000503,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "lfs",
+        "install",
+        "--local"
+      ],
+      "cwd": "/eval/linux/repos/D01-permission",
+      "rc": 0,
+      "seconds": 0.032241499999997814,
+      "stdout": "Updated Git hooks.\nGit LFS initialized.\n",
+      "stderr": ""
+    }
+  ]
+}

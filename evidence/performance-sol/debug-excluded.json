@@ -1,0 +1,178 @@
+{
+  "id": "debug-excluded",
+  "purpose": "debug diagnostic for newly excluded path",
+  "category": "performance-diagnostic",
+  "status": "PASS",
+  "seconds": 1.4349412079900503,
+  "checks": [
+    {
+      "label": "debug status succeeds",
+      "pass": true
+    },
+    {
+      "label": "excluded path absent from jj tree",
+      "pass": true
+    }
+  ],
+  "observations": {
+    "rc": 0,
+    "stdout": "The working copy has no changes.\nWorking copy  (@) : nzsokppr 7d9e881b (empty) (no description set)\nParent commit (@-): npkmppum 3fa0aae0 main | Seed LFS fixture\n",
+    "stderr": "2026-09-25T18:08:17.384037Z  INFO jj_cli::cli_util: debug logging enabled\n2026-09-25T18:08:17.385284Z  INFO run_command:cmd_status:workspace_helper_with_stats: jj_lib::lock::unix: Attempting to lock \"/tmp/jj-lfs-evaluation/performance-sol/repos/debug-excluded/.jj/repo/git_import_export.lock\"\n2026-09-25T18:08:17.385448Z  INFO run_command:cmd_status:workspace_helper_with_stats: jj_lib::lock::unix: Locked \"/tmp/jj-lfs-evaluation/performance-sol/repos/debug-excluded/.jj/repo/git_import_export.lock\"\n2026-09-25T18:08:17.386721Z  INFO run_command:cmd_status:workspace_helper_with_stats:snapshot_impl:snapshot_working_copy: jj_lib::lock::unix: Attempting to lock \"/tmp/jj-lfs-evaluation/performance-sol/repos/debug-excluded/.jj/working_copy/working_copy.lock\"\n2026-09-25T18:08:17.386849Z  INFO run_command:cmd_status:workspace_helper_with_stats:snapshot_impl:snapshot_working_copy: jj_lib::lock::unix: Locked \"/tmp/jj-lfs-evaluation/performance-sol/repos/debug-excluded/.jj/working_copy/working_copy.lock\"\n",
+    "path_named": false,
+    "filter_named": false
+  },
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "init",
+        "-b",
+        "main"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/performance-sol/repos/debug-excluded",
+      "rc": 0,
+      "seconds": 0.019803833682090044,
+      "stdout": "Initialized empty Git repository in /tmp/jj-lfs-evaluation/performance-sol/repos/debug-excluded/.git/\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.name",
+        "LFS Evaluation"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/performance-sol/repos/debug-excluded",
+      "rc": 0,
+      "seconds": 0.010762208141386509,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.email",
+        "eval@example.invalid"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/performance-sol/repos/debug-excluded",
+      "rc": 0,
+      "seconds": 0.010828041937202215,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "commit.gpgsign",
+        "false"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/performance-sol/repos/debug-excluded",
+      "rc": 0,
+      "seconds": 0.011778583284467459,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "core.autocrlf",
+        "false"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/performance-sol/repos/debug-excluded",
+      "rc": 0,
+      "seconds": 0.014367917086929083,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "lfs",
+        "install",
+        "--local"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/performance-sol/repos/debug-excluded",
+      "rc": 0,
+      "seconds": 0.24952029110863805,
+      "stdout": "Updated Git hooks.\nGit LFS initialized.\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "add",
+        "."
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/performance-sol/repos/debug-excluded",
+      "rc": 0,
+      "seconds": 0.014616208150982857,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "commit",
+        "-m",
+        "Seed LFS fixture"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/performance-sol/repos/debug-excluded",
+      "rc": 0,
+      "seconds": 0.40843133302405477,
+      "stdout": "[main (root-commit) 3fa0aae] Seed LFS fixture\n 2 files changed, 2 insertions(+)\n create mode 100644 .gitattributes\n create mode 100644 note.txt\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/performance-sol/repos/debug-excluded",
+      "rc": 0,
+      "seconds": 0.009346750099211931,
+      "stdout": "3fa0aae03020ea9ccfdaa050b1aeec21ba55bf53\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr-release",
+        "git",
+        "init",
+        "--colocate"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/performance-sol/repos/debug-excluded",
+      "rc": 0,
+      "seconds": 0.645194458309561,
+      "stdout": "",
+      "stderr": "Done importing changes from the underlying Git repo.\nInitialized repo in \".\"\n"
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr-release",
+        "--debug",
+        "status"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/performance-sol/repos/debug-excluded",
+      "rc": 0,
+      "seconds": 0.018903249874711037,
+      "stdout": "The working copy has no changes.\nWorking copy  (@) : nzsokppr 7d9e881b (empty) (no description set)\nParent commit (@-): npkmppum 3fa0aae0 main | Seed LFS fixture\n",
+      "stderr": "2026-09-25T18:08:17.384037Z  INFO jj_cli::cli_util: debug logging enabled\n2026-09-25T18:08:17.385284Z  INFO run_command:cmd_status:workspace_helper_with_stats: jj_lib::lock::unix: Attempting to lock \"/tmp/jj-lfs-evaluation/performance-sol/repos/debug-excluded/.jj/repo/git_import_export.lock\"\n2026-09-25T18:08:17.385448Z  INFO run_command:cmd_status:workspace_helper_with_stats: jj_lib::lock::unix: Locked \"/tmp/jj-lfs-evaluation/performance-sol/repos/debug-excluded/.jj/repo/git_import_export.lock\"\n2026-09-25T18:08:17.386721Z  INFO run_command:cmd_status:workspace_helper_with_stats:snapshot_impl:snapshot_working_copy: jj_lib::lock::unix: Attempting to lock \"/tmp/jj-lfs-evaluation/performance-sol/repos/debug-excluded/.jj/working_copy/working_copy.lock\"\n2026-09-25T18:08:17.386849Z  INFO run_command:cmd_status:workspace_helper_with_stats:snapshot_impl:snapshot_working_copy: jj_lib::lock::unix: Locked \"/tmp/jj-lfs-evaluation/performance-sol/repos/debug-excluded/.jj/working_copy/working_copy.lock\"\n"
+    },
+    {
+      "argv": [
+        "/tmp/jj-lfs-evaluation/bin/jj-pr-release",
+        "file",
+        "list"
+      ],
+      "cwd": "/tmp/jj-lfs-evaluation/performance-sol/repos/debug-excluded",
+      "rc": 0,
+      "seconds": 0.018121541012078524,
+      "stdout": ".gitattributes\nnote.txt\n",
+      "stderr": ""
+    }
+  ]
+}

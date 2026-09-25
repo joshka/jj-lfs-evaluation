@@ -1,0 +1,882 @@
+[
+  {
+    "id": "S01-hydrated",
+    "purpose": "Ordinary edits and repeated snapshots preserve LFS pointers",
+    "category": "contract",
+    "status": "PASS",
+    "seconds": 0.5748199170000134,
+    "checks": [
+      {
+        "label": "Hydrated payload remains on disk",
+        "pass": true,
+        "actual_sha256": "dad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f",
+        "expected_sha256": "dad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f",
+        "actual_size": 2500,
+        "expected_size": 2500
+      },
+      {
+        "label": "Snapshot preserves pointer",
+        "pass": true,
+        "actual_sha256": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+        "expected_sha256": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+        "actual_size": 129,
+        "expected_size": 129
+      },
+      {
+        "label": "Ordinary edits snapshot",
+        "pass": true,
+        "actual_sha256": "7f8b1dfc466b6249f06cbe55c9174df2578e7754da793fded244ef5cba2a38f1",
+        "expected_sha256": "7f8b1dfc466b6249f06cbe55c9174df2578e7754da793fded244ef5cba2a38f1",
+        "actual_size": 8,
+        "expected_size": 8
+      },
+      {
+        "label": "Unrelated edit preserves pointer",
+        "pass": true,
+        "actual_sha256": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+        "expected_sha256": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+        "actual_size": 129,
+        "expected_size": 129
+      }
+    ],
+    "observations": {}
+  },
+  {
+    "id": "S02-modify",
+    "purpose": "Characterize silent snapshot exclusion: modify",
+    "category": "contract",
+    "status": "PASS",
+    "seconds": 0.45928666699998644,
+    "checks": [
+      {
+        "label": "Stored pointer unchanged by excluded mutation",
+        "pass": true,
+        "actual_sha256": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+        "expected_sha256": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+        "actual_size": 129,
+        "expected_size": 129
+      },
+      {
+        "label": "No new excluded path snapshots",
+        "pass": true
+      }
+    ],
+    "observations": {
+      "status": "The working copy has no changes.\nWorking copy  (@) : zkvynxuz 5ae2ecc8 (empty) (no description set)\nParent commit (@-): vnwmnyks a18b1a0b main | Seed LFS fixture\n",
+      "mutation": "modify",
+      "disk_files": [
+        "note.txt",
+        ".gitattributes",
+        "asset.bin"
+      ]
+    }
+  },
+  {
+    "id": "S02-delete",
+    "purpose": "Characterize silent snapshot exclusion: delete",
+    "category": "contract",
+    "status": "PASS",
+    "seconds": 0.4660722920000069,
+    "checks": [
+      {
+        "label": "Stored pointer unchanged by excluded mutation",
+        "pass": true,
+        "actual_sha256": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+        "expected_sha256": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+        "actual_size": 129,
+        "expected_size": 129
+      },
+      {
+        "label": "No new excluded path snapshots",
+        "pass": true
+      }
+    ],
+    "observations": {
+      "status": "The working copy has no changes.\nWorking copy  (@) : xxqqmyxz 2bacde05 (empty) (no description set)\nParent commit (@-): yxwvkxmo 56e735e4 main | Seed LFS fixture\n",
+      "mutation": "delete",
+      "disk_files": [
+        "note.txt",
+        ".gitattributes"
+      ]
+    }
+  },
+  {
+    "id": "S02-rename",
+    "purpose": "Characterize silent snapshot exclusion: rename",
+    "category": "contract",
+    "status": "PASS",
+    "seconds": 0.45835412600001746,
+    "checks": [
+      {
+        "label": "Stored pointer unchanged by excluded mutation",
+        "pass": true,
+        "actual_sha256": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+        "expected_sha256": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+        "actual_size": 129,
+        "expected_size": 129
+      },
+      {
+        "label": "No new excluded path snapshots",
+        "pass": true
+      }
+    ],
+    "observations": {
+      "status": "The working copy has no changes.\nWorking copy  (@) : npszkzux dfc78df6 (empty) (no description set)\nParent commit (@-): yxwvkxmo 56e735e4 main | Seed LFS fixture\n",
+      "mutation": "rename",
+      "disk_files": [
+        "note.txt",
+        "renamed.bin",
+        ".gitattributes"
+      ]
+    }
+  },
+  {
+    "id": "S02-new",
+    "purpose": "Characterize silent snapshot exclusion: new",
+    "category": "contract",
+    "status": "PASS",
+    "seconds": 0.6249814589999971,
+    "checks": [
+      {
+        "label": "Stored pointer unchanged by excluded mutation",
+        "pass": true,
+        "actual_sha256": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+        "expected_sha256": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+        "actual_size": 129,
+        "expected_size": 129
+      },
+      {
+        "label": "No new excluded path snapshots",
+        "pass": true
+      }
+    ],
+    "observations": {
+      "status": "The working copy has no changes.\nWorking copy  (@) : wovlurvm fce1742c (empty) (no description set)\nParent commit (@-): osqzvrxv 813002c7 main | Seed LFS fixture\n",
+      "mutation": "new",
+      "disk_files": [
+        "note.txt",
+        ".gitattributes",
+        "asset.bin",
+        "new.bin"
+      ]
+    }
+  },
+  {
+    "id": "A01-nested-unset",
+    "purpose": "Attribute matching agrees with Git",
+    "category": "contract",
+    "status": "PASS",
+    "seconds": 0.3609421250000082,
+    "checks": [
+      {
+        "label": "Expected exclusion matches Git attribute decision",
+        "pass": true,
+        "expected_excluded": false,
+        "actual_included": true,
+        "git_check_attr": "sub/a.bin: filter: unset\n",
+        "jj_status": "Working copy changes:\nA sub/.gitattributes\nA sub/a.bin\nWorking copy  (@) : kmxqmmpr 5a05cc51 (no description set)\nParent commit (@-): snozoksz 5dc69954 main | Seed LFS fixture\n"
+      }
+    ],
+    "observations": {
+      "stored_payload_sha256": "dad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f"
+    }
+  },
+  {
+    "id": "A01-nested-set",
+    "purpose": "Attribute matching agrees with Git",
+    "category": "contract",
+    "status": "PASS",
+    "seconds": 0.2758117909999953,
+    "checks": [
+      {
+        "label": "Expected exclusion matches Git attribute decision",
+        "pass": true,
+        "expected_excluded": true,
+        "actual_included": false,
+        "git_check_attr": "sub/a.bin: filter: lfs\n",
+        "jj_status": "Working copy changes:\nA sub/.gitattributes\nWorking copy  (@) : tmwxqwny a5c6ea11 (no description set)\nParent commit (@-): nwmtvpqs 847e6dda main | Seed LFS fixture\n"
+      }
+    ],
+    "observations": {}
+  },
+  {
+    "id": "A01-macro",
+    "purpose": "Attribute matching agrees with Git",
+    "category": "contract",
+    "status": "PASS",
+    "seconds": 0.4612268340000014,
+    "checks": [
+      {
+        "label": "Expected exclusion matches Git attribute decision",
+        "pass": true,
+        "expected_excluded": true,
+        "actual_included": false,
+        "git_check_attr": "a.bin: filter: lfs\n",
+        "jj_status": "The working copy has no changes.\nWorking copy  (@) : vlonlmoy 816eccb0 (empty) (no description set)\nParent commit (@-): ltnmwmny d7a782ac main | Seed LFS fixture\n"
+      }
+    ],
+    "observations": {}
+  },
+  {
+    "id": "A01-unspecified",
+    "purpose": "Attribute matching agrees with Git",
+    "category": "contract",
+    "status": "PASS",
+    "seconds": 0.3891741670000215,
+    "checks": [
+      {
+        "label": "Expected exclusion matches Git attribute decision",
+        "pass": true,
+        "expected_excluded": false,
+        "actual_included": true,
+        "git_check_attr": "a.bin: filter: unspecified\n",
+        "jj_status": "Working copy changes:\nA a.bin\nWorking copy  (@) : xzwpsnvn acaaf1de (no description set)\nParent commit (@-): oznvvqyn c1dcadc8 main | Seed LFS fixture\n"
+      }
+    ],
+    "observations": {
+      "stored_payload_sha256": "dad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f"
+    }
+  },
+  {
+    "id": "A01-last-wins",
+    "purpose": "Attribute matching agrees with Git",
+    "category": "contract",
+    "status": "PASS",
+    "seconds": 0.39655637500001717,
+    "checks": [
+      {
+        "label": "Expected exclusion matches Git attribute decision",
+        "pass": true,
+        "expected_excluded": false,
+        "actual_included": true,
+        "git_check_attr": "a.bin: filter: other\n",
+        "jj_status": "Working copy changes:\nA a.bin\nWorking copy  (@) : qsxntnqo 658e915b (no description set)\nParent commit (@-): trzwksuu 2c73fedb main | Seed LFS fixture\n"
+      }
+    ],
+    "observations": {
+      "stored_payload_sha256": "dad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f"
+    }
+  },
+  {
+    "id": "A01-quoted-space",
+    "purpose": "Attribute matching agrees with Git",
+    "category": "contract",
+    "status": "PASS",
+    "seconds": 0.3135771249999948,
+    "checks": [
+      {
+        "label": "Expected exclusion matches Git attribute decision",
+        "pass": true,
+        "expected_excluded": true,
+        "actual_included": false,
+        "git_check_attr": "space name.bin: filter: lfs\n",
+        "jj_status": "The working copy has no changes.\nWorking copy  (@) : lrvxxrsz 072b34ea (empty) (no description set)\nParent commit (@-): pxquzmny 6b323350 main | Seed LFS fixture\n"
+      }
+    ],
+    "observations": {}
+  },
+  {
+    "id": "A01-unicode",
+    "purpose": "Attribute matching agrees with Git",
+    "category": "contract",
+    "status": "PASS",
+    "seconds": 0.29950954199998137,
+    "checks": [
+      {
+        "label": "Expected exclusion matches Git attribute decision",
+        "pass": true,
+        "expected_excluded": true,
+        "actual_included": false,
+        "git_check_attr": "\"caf\\303\\251.bin\": filter: lfs\n",
+        "jj_status": "The working copy has no changes.\nWorking copy  (@) : ptyqxkrn 3f209fc7 (empty) (no description set)\nParent commit (@-): nxszsxtm 477a8c00 main | Seed LFS fixture\n"
+      }
+    ],
+    "observations": {}
+  },
+  {
+    "id": "A01-directory-only",
+    "purpose": "Attribute matching agrees with Git",
+    "category": "contract",
+    "status": "PASS",
+    "seconds": 0.356155541999982,
+    "checks": [
+      {
+        "label": "Expected exclusion matches Git attribute decision",
+        "pass": true,
+        "expected_excluded": false,
+        "actual_included": true,
+        "git_check_attr": "assets/a.bin: filter: unspecified\n",
+        "jj_status": "Working copy changes:\nA assets/a.bin\nWorking copy  (@) : qlmmylts 2e9d5afb (no description set)\nParent commit (@-): szkmttkl f0941f34 main | Seed LFS fixture\n"
+      }
+    ],
+    "observations": {
+      "stored_payload_sha256": "dad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f"
+    }
+  },
+  {
+    "id": "A01-recursive",
+    "purpose": "Attribute matching agrees with Git",
+    "category": "contract",
+    "status": "PASS",
+    "seconds": 0.23617829200000529,
+    "checks": [
+      {
+        "label": "Expected exclusion matches Git attribute decision",
+        "pass": true,
+        "expected_excluded": true,
+        "actual_included": false,
+        "git_check_attr": "assets/sub/a.bin: filter: lfs\n",
+        "jj_status": "The working copy has no changes.\nWorking copy  (@) : qupnsnpp a9d8b4e0 (empty) (no description set)\nParent commit (@-): zttrsuxu 56679c3c main | Seed LFS fixture\n"
+      }
+    ],
+    "observations": {}
+  },
+  {
+    "id": "A01-case-sensitive",
+    "purpose": "Attribute matching agrees with Git",
+    "category": "contract",
+    "status": "PASS",
+    "seconds": 0.44387187500001346,
+    "checks": [
+      {
+        "label": "Expected exclusion matches Git attribute decision",
+        "pass": true,
+        "expected_excluded": false,
+        "actual_included": true,
+        "git_check_attr": "a.bin: filter: lfs\n",
+        "jj_status": "Working copy changes:\nA a.bin\nWorking copy  (@) : tuskmsnz 2e0f6df3 (no description set)\nParent commit (@-): rqnvwqzt 5508b5ba main | Seed LFS fixture\n"
+      }
+    ],
+    "observations": {
+      "stored_payload_sha256": "dad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f"
+    }
+  },
+  {
+    "id": "A01-filter-set",
+    "purpose": "Attribute matching agrees with Git",
+    "category": "contract",
+    "status": "PASS",
+    "seconds": 1.152567667999989,
+    "checks": [
+      {
+        "label": "Expected exclusion matches Git attribute decision",
+        "pass": true,
+        "expected_excluded": false,
+        "actual_included": true,
+        "git_check_attr": "a.bin: filter: set\n",
+        "jj_status": "Working copy changes:\nA a.bin\nWorking copy  (@) : uupovuww 340accde (no description set)\nParent commit (@-): rvwvlkkx 254240f4 main | Seed LFS fixture\n"
+      }
+    ],
+    "observations": {
+      "stored_payload_sha256": "dad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f"
+    }
+  },
+  {
+    "id": "A01-subdir-relative",
+    "purpose": "Attribute matching agrees with Git",
+    "category": "contract",
+    "status": "PASS",
+    "seconds": 1.1478937089999874,
+    "checks": [
+      {
+        "label": "Expected exclusion matches Git attribute decision",
+        "pass": true,
+        "expected_excluded": true,
+        "actual_included": false,
+        "git_check_attr": "sub/a.bin: filter: lfs\n",
+        "jj_status": "Working copy changes:\nA sub/.gitattributes\nWorking copy  (@) : krklxkpz 5e3ac537 (no description set)\nParent commit (@-): squxkxvq 8c0ad922 main | Seed LFS fixture\n"
+      }
+    ],
+    "observations": {}
+  },
+  {
+    "id": "A02-info-attributes",
+    "purpose": "Local info attributes protect LFS payload",
+    "category": "compatibility",
+    "status": "FAIL",
+    "seconds": 0.40881554200001347,
+    "checks": [
+      {
+        "label": "Expected exclusion matches Git attribute decision",
+        "pass": false,
+        "expected_excluded": true,
+        "actual_included": true,
+        "git_check_attr": "a.bin: filter: lfs\n",
+        "jj_status": "Working copy changes:\nA a.bin\nWorking copy  (@) : uquqzrws 442fb921 (no description set)\nParent commit (@-): wlmzwxvz 323fc9f7 main | Seed LFS fixture\n"
+      }
+    ],
+    "observations": {
+      "stored_payload_sha256": "dad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f"
+    }
+  },
+  {
+    "id": "A03-global-attributes",
+    "purpose": "Configured global attributes protect LFS payload",
+    "category": "compatibility",
+    "status": "FAIL",
+    "seconds": 0.24585845800001493,
+    "checks": [
+      {
+        "label": "Expected exclusion matches Git attribute decision",
+        "pass": false,
+        "expected_excluded": true,
+        "actual_included": true,
+        "git_check_attr": "a.bin: filter: lfs\n",
+        "jj_status": "Working copy changes:\nA a.bin\nWorking copy  (@) : yssvrkmo 99c89a1d (no description set)\nParent commit (@-): kxypkwsk abdaa4b8 main | Seed LFS fixture\n"
+      }
+    ],
+    "observations": {
+      "stored_payload_sha256": "dad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f"
+    }
+  },
+  {
+    "id": "A04-removed",
+    "purpose": "Attribute removal reaches stable snapshot in one command",
+    "category": "compatibility",
+    "status": "FAIL",
+    "seconds": 0.41310216700000524,
+    "checks": [
+      {
+        "label": "Repeated status without disk changes is stable",
+        "pass": false
+      }
+    ],
+    "observations": {
+      "1": {
+        "status": "Working copy changes:\nD .gitattributes\nWorking copy  (@) : ltplonno a7ffcf0d (no description set)\nParent commit (@-): molsnrow 4193adf1 main | Seed LFS fixture\n",
+        "stored_hash": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+        "is_pointer": true
+      },
+      "2": {
+        "status": "Working copy changes:\nD .gitattributes\nM asset.bin\nWorking copy  (@) : ltplonno 93b740d0 (no description set)\nParent commit (@-): molsnrow 4193adf1 main | Seed LFS fixture\n",
+        "stored_hash": "dad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f",
+        "is_pointer": false
+      },
+      "3": {
+        "status": "Working copy changes:\nD .gitattributes\nM asset.bin\nWorking copy  (@) : ltplonno 93b740d0 (no description set)\nParent commit (@-): molsnrow 4193adf1 main | Seed LFS fixture\n",
+        "stored_hash": "dad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f",
+        "is_pointer": false
+      }
+    }
+  },
+  {
+    "id": "A05-unset",
+    "purpose": "LFS-to-ordinary transition",
+    "category": "contract",
+    "status": "PASS",
+    "seconds": 0.31096549999998047,
+    "checks": [
+      {
+        "label": "Removing filter permits raw snapshot",
+        "pass": true,
+        "actual_sha256": "dad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f",
+        "expected_sha256": "dad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f",
+        "actual_size": 2500,
+        "expected_size": 2500
+      }
+    ],
+    "observations": {}
+  },
+  {
+    "id": "A06-existing-file",
+    "purpose": "Ordinary-to-LFS transition",
+    "category": "contract",
+    "status": "PASS",
+    "seconds": 0.24773683399999413,
+    "checks": [
+      {
+        "label": "Adding filter retains old stored content",
+        "pass": true,
+        "actual_sha256": "dad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f",
+        "expected_sha256": "dad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f",
+        "actual_size": 2500,
+        "expected_size": 2500
+      },
+      {
+        "label": "Edited disk content survives snapshot",
+        "pass": true,
+        "actual_sha256": "f373b3bf36856f8fd4d1045d39a945690f960207ffaadc274305d5f90619a816",
+        "expected_sha256": "f373b3bf36856f8fd4d1045d39a945690f960207ffaadc274305d5f90619a816",
+        "actual_size": 3200,
+        "expected_size": 3200
+      }
+    ],
+    "observations": {}
+  },
+  {
+    "id": "A07-symlink-attrs",
+    "purpose": "Do not follow symlinked attribute files",
+    "category": "contract",
+    "status": "PASS",
+    "seconds": 0.41732337499999517,
+    "checks": [
+      {
+        "label": "Symlinked attributes not followed",
+        "pass": true
+      }
+    ],
+    "observations": {}
+  },
+  {
+    "id": "A08-symlink-asset",
+    "purpose": "LFS patterns do not suppress symlink versioning",
+    "category": "compatibility",
+    "status": "FAIL",
+    "seconds": 0.4197362920000103,
+    "checks": [
+      {
+        "label": "LFS pattern does not hide a Git symlink",
+        "pass": false,
+        "git_entry": "120000 97922aee98474ad751b77adb4aa5e4f3dce681fe 0\tlink.bin\n"
+      }
+    ],
+    "observations": {}
+  },
+  {
+    "id": "A09-ignored-directory",
+    "purpose": "Ignored directory shortcut respects LFS exclusion",
+    "category": "contract",
+    "status": "PASS",
+    "seconds": 0.42830279100002144,
+    "checks": [
+      {
+        "label": "Ignored-dir fast path preserves LFS pointer",
+        "pass": true,
+        "actual_sha256": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+        "expected_sha256": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+        "actual_size": 129,
+        "expected_size": 129
+      },
+      {
+        "label": "Ignored-dir tracked ordinary edit snapshots",
+        "pass": true,
+        "actual_sha256": "11507a0e2f5e69d5dfa40a62a1bd7b6ee57e6bcd85c67c9b8431b36fff21c437",
+        "expected_sha256": "11507a0e2f5e69d5dfa40a62a1bd7b6ee57e6bcd85c67c9b8431b36fff21c437",
+        "actual_size": 3,
+        "expected_size": 3
+      }
+    ],
+    "observations": {}
+  },
+  {
+    "id": "A10-file-directory",
+    "purpose": "File-to-directory replacement is handled",
+    "category": "contract",
+    "status": "FAIL",
+    "seconds": 0.30703045899997505,
+    "checks": [
+      {
+        "label": "File-to-directory transition completes without panic",
+        "pass": false
+      }
+    ],
+    "observations": {
+      "status": {
+        "rc": 101,
+        "stderr": "\nthread 'main' (7095) panicked at lib/src/local_working_copy.rs:1464:13:\nassertion `left == right` failed\n  left: {\".gitattributes\", \"asset.bin/child.txt\", \"asset.bin\", \"note.txt\"}\n right: {\"asset.bin/child.txt\", \"note.txt\", \".gitattributes\"}\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\n"
+      }
+    }
+  },
+  {
+    "id": "C01-disable",
+    "purpose": "Explicit filter opt-out",
+    "category": "contract",
+    "status": "PASS",
+    "seconds": 0.24761883399997942,
+    "checks": [
+      {
+        "label": "Opt-out snapshots raw payload",
+        "pass": true,
+        "actual_sha256": "dad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f",
+        "expected_sha256": "dad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f",
+        "actual_size": 2500,
+        "expected_size": 2500
+      }
+    ],
+    "observations": {}
+  },
+  {
+    "id": "C02-force-track",
+    "purpose": "Explicit tracking has actionable result",
+    "category": "diagnostics",
+    "status": "FAIL",
+    "seconds": 0.36909470800000577,
+    "checks": [
+      {
+        "label": "Explicit tracking either tracks or explains exclusion",
+        "pass": false
+      }
+    ],
+    "observations": {
+      "track": {
+        "rc": 0,
+        "stderr": ""
+      }
+    }
+  },
+  {
+    "id": "C03-invalid-config",
+    "purpose": "Invalid config has useful error",
+    "category": "contract",
+    "status": "PASS",
+    "seconds": 0.2640360000000044,
+    "checks": [
+      {
+        "label": "Invalid config reports key and fails",
+        "pass": true,
+        "stderr": "Internal error: The repository appears broken or inaccessible\nCaused by:\n1: Invalid type or value for git.ignore-filters\n2: invalid type: string \"lfs\", expected a sequence\n\n"
+      }
+    ],
+    "observations": {}
+  },
+  {
+    "id": "P01-pointer",
+    "purpose": "Literal pointer snapshots unchanged",
+    "category": "contract",
+    "status": "PASS",
+    "seconds": 0.2270572090000087,
+    "checks": [
+      {
+        "label": "Filtered arbitrary disk bytes do not alter stored pointer",
+        "pass": true,
+        "actual_sha256": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+        "expected_sha256": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+        "actual_size": 129,
+        "expected_size": 129
+      },
+      {
+        "label": "Snapshot preserves disk bytes",
+        "pass": true,
+        "actual_sha256": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+        "expected_sha256": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+        "actual_size": 129,
+        "expected_size": 129
+      }
+    ],
+    "observations": {}
+  },
+  {
+    "id": "P02-malformed",
+    "purpose": "Malformed pointer-like content remains external",
+    "category": "contract",
+    "status": "PASS",
+    "seconds": 0.20955612500000598,
+    "checks": [
+      {
+        "label": "Filtered arbitrary disk bytes do not alter stored pointer",
+        "pass": true,
+        "actual_sha256": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+        "expected_sha256": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+        "actual_size": 129,
+        "expected_size": 129
+      },
+      {
+        "label": "Snapshot preserves disk bytes",
+        "pass": true,
+        "actual_sha256": "fbca9e87e4825d814194f2c7c4d096eb336fec0e64997b4dd8f8ad66a0ba1ffa",
+        "expected_sha256": "fbca9e87e4825d814194f2c7c4d096eb336fec0e64997b4dd8f8ad66a0ba1ffa",
+        "actual_size": 58,
+        "expected_size": 58
+      }
+    ],
+    "observations": {}
+  },
+  {
+    "id": "P03-empty",
+    "purpose": "Empty LFS file passthrough",
+    "category": "contract",
+    "status": "PASS",
+    "seconds": 0.1859818329999996,
+    "checks": [
+      {
+        "label": "Empty LFS file passthrough stays empty",
+        "pass": true,
+        "actual_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "expected_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "actual_size": 0,
+        "expected_size": 0
+      }
+    ],
+    "observations": {}
+  },
+  {
+    "id": "P04-missing-object",
+    "purpose": "Missing local object and recovery",
+    "category": "contract",
+    "status": "PASS",
+    "seconds": 0.3985277090000068,
+    "checks": [
+      {
+        "label": "Missing object leaves pointer intact",
+        "pass": true,
+        "actual_sha256": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+        "expected_sha256": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+        "actual_size": 129,
+        "expected_size": 129
+      },
+      {
+        "label": "Missing object does not fabricate disk data",
+        "pass": true,
+        "actual_sha256": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+        "expected_sha256": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+        "actual_size": 129,
+        "expected_size": 129
+      },
+      {
+        "label": "Restored object hydrates correctly",
+        "pass": true,
+        "actual_sha256": "dad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f",
+        "expected_sha256": "dad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f",
+        "actual_size": 2500,
+        "expected_size": 2500
+      }
+    ],
+    "observations": {
+      "checkout": {
+        "rc": 0,
+        "stderr": "Skipped checkout for \"asset.bin\", content not local. Use fetch to download.\n"
+      }
+    }
+  },
+  {
+    "id": "W01-sparse",
+    "purpose": "Sparse reset then external hydration",
+    "category": "contract",
+    "status": "PASS",
+    "seconds": 0.7034305840000172,
+    "checks": [
+      {
+        "label": "Sparse reset and hydration restore content",
+        "pass": true,
+        "actual_sha256": "dad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f",
+        "expected_sha256": "dad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f",
+        "actual_size": 2500,
+        "expected_size": 2500
+      }
+    ],
+    "observations": {
+      "sparse": {
+        "rc": 0,
+        "stderr": "Added 0 files, modified 0 files, removed 2 files\n",
+        "asset_exists": false
+      }
+    }
+  },
+  {
+    "id": "W02-sparse-dirty",
+    "purpose": "Sparse removal must not silently lose local edits",
+    "category": "data-integrity",
+    "status": "FAIL",
+    "seconds": 0.5004068759999996,
+    "checks": [
+      {
+        "label": "Sparse exclusion preserves or rejects unsnapshotted local edits",
+        "pass": false
+      }
+    ],
+    "observations": {
+      "sparse": {
+        "rc": 0,
+        "stderr": "Added 0 files, modified 0 files, removed 2 files\n",
+        "asset_exists": false
+      }
+    }
+  },
+  {
+    "id": "W03-workspace",
+    "purpose": "Additional workspace and missing Git context",
+    "category": "contract",
+    "status": "ERROR",
+    "error": "{\"argv\": [\"/target/debug/jj\", \"workspace\", \"add\", \"/eval/linux/repos/W03-workspace-workspace\"], \"cwd\": \"/eval/linux/repos/W03-workspace\", \"rc\": 1, \"seconds\": 0.02667166699998802, \"stdout\": \"\", \"stderr\": \"Error: Git does not recognize required option: orphan (note: Jujutsu requires git >= 2.42.0)\\n\"}",
+    "traceback": "Traceback (most recent call last):\n  File \"/eval/harness/evaluate.py\", line 121, in case\n    fn(f)\n  File \"/eval/harness/evaluate.py\", line 325, in workspace\n    f.jj(\"workspace\", \"add\", str(other))\n  File \"/eval/harness/evaluate.py\", line 62, in jj\n    return self.run([self.suite.jj, *args], **kw)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/eval/harness/evaluate.py\", line 55, in run\n    raise RuntimeError(json.dumps(rec))\nRuntimeError: {\"argv\": [\"/target/debug/jj\", \"workspace\", \"add\", \"/eval/linux/repos/W03-workspace-workspace\"], \"cwd\": \"/eval/linux/repos/W03-workspace\", \"rc\": 1, \"seconds\": 0.02667166699998802, \"stdout\": \"\", \"stderr\": \"Error: Git does not recognize required option: orphan (note: Jujutsu requires git >= 2.42.0)\\n\"}\n",
+    "seconds": 0.21996108299998696,
+    "checks": [],
+    "observations": {}
+  },
+  {
+    "id": "W04-run",
+    "purpose": "Temporary run snapshot preserves filtered paths",
+    "category": "contract",
+    "status": "PASS",
+    "seconds": 0.29577616600002443,
+    "checks": [
+      {
+        "label": "Run temp snapshot preserves pointer",
+        "pass": true,
+        "actual_sha256": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+        "expected_sha256": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+        "actual_size": 129,
+        "expected_size": 129
+      },
+      {
+        "label": "Run captures ordinary edits",
+        "pass": true,
+        "actual_sha256": "73185caf350ed8ed791dbe4ec5604da8d770a97b92c5797cbf988877c9d5bd80",
+        "expected_sha256": "73185caf350ed8ed791dbe4ec5604da8d770a97b92c5797cbf988877c9d5bd80",
+        "actual_size": 12,
+        "expected_size": 12
+      }
+    ],
+    "observations": {}
+  },
+  {
+    "id": "D01-permission",
+    "purpose": "Unreadable attributes have useful error",
+    "category": "contract",
+    "status": "OBSERVED",
+    "seconds": 0.06257449999998244,
+    "checks": [],
+    "observations": {
+      "skip": "Requires non-root Unix permission enforcement."
+    }
+  },
+  {
+    "id": "D02-executable",
+    "purpose": "Executable bit-only edits characterized",
+    "category": "contract",
+    "status": "PASS",
+    "seconds": 0.5096474999999998,
+    "checks": [
+      {
+        "label": "Pointer survives executable-bit-only edit",
+        "pass": true
+      }
+    ],
+    "observations": {
+      "status": "The working copy has no changes.\nWorking copy  (@) : osswzwor 637cf1d1 (empty) (no description set)\nParent commit (@-): ppmsllpo 47f56743 main | Seed LFS fixture\n",
+      "git_diff": " mode change 100644 => 100755 asset.bin\n"
+    }
+  },
+  {
+    "id": "N01-performance",
+    "purpose": "Measure per-snapshot attribute overhead",
+    "category": "performance",
+    "status": "PASS",
+    "seconds": 14.605589882000004,
+    "checks": [
+      {
+        "label": "All ordinary files remain tracked",
+        "pass": true
+      }
+    ],
+    "observations": {
+      "timings_seconds": {
+        "enabled": [
+          1.1254563759999883,
+          1.1694880009999906,
+          1.2262461669999993,
+          1.0958818760000213,
+          1.1306317920000026
+        ],
+        "disabled": [
+          1.1394504170000062,
+          1.1826080010000055,
+          1.075666209000019,
+          1.0965633339999954,
+          1.3546399180000037
+        ]
+      },
+      "fixture": "3000 ordinary files, 120 nested attribute files, same debug binary, warm runs"
+    }
+  }
+]

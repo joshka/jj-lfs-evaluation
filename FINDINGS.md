@@ -8,75 +8,8 @@ Target: [PR 9635](https://github.com/jj-vcs/jj/pull/9635), `d8a56d1a38ca`. Exact
 use `e9f48b3e4c1c`. No implementation fixes were made. Case links below provide setup, rationale,
 acceptance criteria, full commands, and raw evidence. [Methodology](METHODOLOGY.md) records provenance.
 
-The commands below create disposable repositories and were rechecked against the pinned debug
-binary on macOS. Run the shared setup once, then any finding's block. Each creates its own fixture.
-The fixture bytes are smaller than the original evaluation; the same failure conditions are checked.
-Suggested fixes are proposals, not implemented or validated changes.
-
-## Reproduction setup
-
-Prerequisites: Bash, Python 3, Git, Git LFS, and a debug `jj` binary built from
-`d8a56d1a38cae110529ef8e67e72e3e2057ed3ca`. Use debug to reproduce F03; its release command succeeds.
-These Bash reproductions were verified on macOS. Windows findings are supported by the earlier
-native CI evidence; these new shell blocks were not rerun there. F05 requires symlink support.
-
-If needed, build the pinned binary from its source archive in a separate temporary directory:
-
-```sh
-BUILD_DIR="$(mktemp -d "${TMPDIR:-/tmp}/jj-lfs-build.XXXXXX")"
-curl -fL https://github.com/jj-vcs/jj/archive/d8a56d1a38cae110529ef8e67e72e3e2057ed3ca.tar.gz \
-  -o "$BUILD_DIR/source.tar.gz"
-tar -xzf "$BUILD_DIR/source.tar.gz" -C "$BUILD_DIR" --strip-components=1
-(cd "$BUILD_DIR" && cargo build --locked -p jj-cli --bin jj)
-# Use "$BUILD_DIR/target/debug/jj" as JJ_BIN below.
-```
-
-Shared fixture setup (set `JJ_BIN` to the absolute path before running):
-
-```sh
-# Use a fresh Bash session. JJ_BIN must be an absolute path to the pinned debug binary.
-export JJ_BIN=/absolute/path/to/pinned/jj
-export LAB="$(mktemp -d "${TMPDIR:-/tmp}/jj-lfs-report.XXXXXX")"
-export GIT_CONFIG_GLOBAL=/dev/null GIT_CONFIG_NOSYSTEM=1 GIT_ATTR_NOSYSTEM=1
-export GIT_TERMINAL_PROMPT=0 JJ_PAGER=cat
-export JJ_CONFIG="$LAB/jj.toml"
-cat > "$JJ_CONFIG" <<'CONFIG'
-[user]
-name = "LFS Evaluation"
-email = "eval@example.invalid"
-[signing]
-behavior = "drop"
-[ui]
-color = "never"
-CONFIG
-jj() { "$JJ_BIN" "$@"; }
-new_case() {
-  # Arguments: unique case name, optional asset path, optional "plain" rule mode.
-  mkdir "$LAB/$1" && cd "$LAB/$1" || return 1
-  git init -q -b main || return 1
-  git config user.name 'LFS Evaluation'
-  git config user.email eval@example.invalid
-  git config commit.gpgsign false
-  git config core.autocrlf false
-  git lfs install --local || return 1
-  python3 - "${2:-asset.bin}" "${3:-lfs}" <<'SEED'
-from pathlib import Path
-import sys
-asset = Path(sys.argv[1])
-asset.parent.mkdir(parents=True, exist_ok=True)
-asset.write_bytes(b"seed asset\n" * 100)
-Path("note.txt").write_bytes(b"ordinary\n")
-rule = "*.bin filter=lfs diff=lfs merge=lfs -text\n" if sys.argv[2] == "lfs" else ""
-Path(".gitattributes").write_text(rule)
-SEED
-  git add . && git commit -qm 'Seed fixture' || return 1
-  jj git init --colocate || return 1
-}
-```
-
-Do not enable shell `errexit`: several commands intentionally fail, and the next line prints their
-exit code. Fixture setup failures explicitly stop the block. Use unique case names if repeating a
-block in the same session. No command contacts a remote after setup.
+The command excerpts below show each trigger after the stated setup. Full fixture scripts and
+verification commands are linked by case ID. Suggested fixes are proposals, not validated changes.
 
 ## Failures and compatibility gaps
 
@@ -98,44 +31,29 @@ block in the same session. No command contacts a remote after setup.
 **Setup:** A committed LFS pointer at `assets/asset.bin`; its hydrated disk content has a new,
 unrecorded edit.
 
-**Reproduce:**
+**When:**
 
 ```sh
-new_case F01 assets/asset.bin || exit 1
-printf 'unrecorded edit\n' > assets/asset.bin
 jj sparse set --clear --add note.txt
-printf 'sparse exit=%s\n' "$?"
-if test -e assets/asset.bin; then echo 'disk=present'; else echo 'disk=missing'; fi
 jj --ignore-working-copy file show assets/asset.bin
 ```
+
+**Actual:** Exit 0; the disk file is deleted; file-show returns the old pointer. The edited bytes
+are absent from both disk and the inspected tree.
 
 **Expected:** Refuse to remove the edited file, keep it on disk, or save its edited bytes before
 removal.
 
-**Actual:** Sparse-set exits 0 and deletes the disk file. File-show returns the old pointer, not the
-edited bytes.
+**Suggested fix:** Detect unrecorded edits before overwriting or removing excluded files; preserve
+them or refuse with an actionable error. Cover checkout, rebase, and sparse removal.
 
-**Relevant output** (nonconsecutive lines; see the linked transcript):
-
-```text
-sparse exit=0
-disk=missing
-version https://git-lfs.github.com/spec/v1
-```
-
-**Difference:** The edited bytes are missing from both disk and the inspected tree. The exact parent
-saves the raw edit. Revision switching and rebasing also lose edits in separate fixtures.
-
-**Suggested fix:** Before checkout overwrites or removes an excluded file, detect unrecorded content
-and preserve it or refuse with an actionable error. Cover switch, rebase, and sparse removal. Do not
-silently resume storing raw payloads as the LFS solution.
-
-**Scope:** PR regression. Sparse loss reproduces in release and all tested debug configurations.
+**Scope:** PR regression: the exact parent saves the raw edit before checkout. Separate
+switch/rebase cases also lose edits on the PR.
 
 **Cases:** [W02-sparse-dirty](TEST-CASES.md#w02-sparse-dirty) ·
 [X01-checkout-rebase](TEST-CASES.md#x01-checkout-rebase).
 
-**Reproduction transcript:** [F01.txt](evidence/manual-reproductions/F01.txt).
+[Full reproduction and recorded output](TEST-CASES.md#f01-manual-reproduction).
 
 ### F02
 
@@ -144,45 +62,29 @@ silently resume storing raw payloads as the LFS solution.
 **Setup:** An existing committed LFS pointer and hydrated `asset.bin`; follow the proposed untrack
 guidance.
 
-**Reproduce:**
+**When:**
 
 ```sh
-new_case F02 || exit 1
 jj file untrack asset.bin
-printf 'untrack exit=%s\n' "$?"
 jj status
 jj file list
 jj file show asset.bin
-printf 'show exit=%s\n' "$?"
 ```
-
-**Expected:** Following the LFS setup instructions keeps the asset in the revision.
 
 **Actual:** Untrack exits 0. Status reports `D asset.bin`; file-list omits it; file-show exits 1.
 The disk payload remains.
 
-**Relevant output** (nonconsecutive lines; see the linked transcript):
+**Expected:** Following the LFS setup instructions keeps the asset in the revision.
 
-```text
-untrack exit=0
-D asset.bin
-show exit=1
-Error: No such path: asset.bin
-```
+**Suggested fix:** Remove the untrack step. Existing tracked LFS files are already excluded. Replace
+it with a tested pointer-preserving update procedure.
 
-**Difference:** The working revision records a deletion. Publishing that revision removes the asset,
-although its bytes still exist locally.
-
-**Suggested fix:** Remove the untrack instruction. Explain that tracked LFS paths are already
-excluded from snapshots, and provide a tested procedure for updating pointers through external Git
-LFS.
-
-**Scope:** Documentation defect. The untrack command is behaving as requested; the parent refuses
-this operation because the path is not ignored.
+**Scope:** Documentation defect; untrack is behaving as requested. The parent refuses the operation
+because the path is not ignored.
 
 **Cases:** [X02-untrack-recipe](TEST-CASES.md#x02-untrack-recipe).
 
-**Reproduction transcript:** [F02.txt](evidence/manual-reproductions/F02.txt).
+[Full reproduction and recorded output](TEST-CASES.md#f02-manual-reproduction).
 
 ### F03
 
@@ -191,42 +93,28 @@ this operation because the path is not ignored.
 **Setup:** With `*.bin filter=lfs`, replace disk file `asset.bin` with directory
 `asset.bin/child.txt`.
 
-**Reproduce:**
+**When:**
 
 ```sh
-new_case F03 || exit 1
-rm asset.bin
-mkdir asset.bin
-printf 'child\n' > asset.bin/child.txt
 jj status
-printf 'status exit=%s\n' "$?"
 ```
+
+**Actual:** Debug status exits 101 with `assertion left == right failed` at
+`local_working_copy.rs:1464`. Cached file states contain the old file and child; the tree contains
+only the child.
 
 **Expected:** Exit 0 and represent the file-to-directory change consistently.
 
-**Actual:** Debug builds exit 101 at `local_working_copy.rs:1464`. Cached file states contain both
-`asset.bin` and its child; the tree contains only the child.
+**Suggested fix:** Remove or update stale file-state entries during path-kind transitions. Test
+repeated snapshots and the next checkout.
 
-**Relevant output** (nonconsecutive lines; see the linked transcript):
-
-```text
-status exit=101
-assertion `left == right` failed
-```
-
-**Difference:** The path-state cache disagrees with the tree. The exact parent handles the
-transition.
-
-**Suggested fix:** Update or remove stale file-state entries during excluded file-to-directory
-transitions. Add repeated-snapshot and subsequent-checkout regression coverage.
-
-**Scope:** PR regression reproduced on macOS, Linux, and Windows debug builds. macOS release exits
-0; no release crash was demonstrated.
+**Scope:** Reproduces on macOS, Linux, and Windows debug. The parent succeeds. macOS release
+succeeds; no release crash was demonstrated.
 
 **Cases:** [A10-file-directory](TEST-CASES.md#a10-file-directory) · [X01 path-kind
 probes](TEST-CASES.md#x01-checkout-rebase).
 
-**Reproduction transcript:** [F03.txt](evidence/manual-reproductions/F03.txt).
+[Full reproduction and recorded output](TEST-CASES.md#f03-manual-reproduction).
 
 ### F04
 
@@ -234,53 +122,31 @@ probes](TEST-CASES.md#x01-checkout-rebase).
 
 **Setup:** Delete `.gitattributes` while `asset.bin` is hydrated. Make no further disk changes.
 
-**Reproduce:**
+**When:**
 
 ```sh
-new_case F04 || exit 1
-rm .gitattributes
 jj status
-jj --ignore-working-copy file show asset.bin > "$LAB/F04-first"
+jj --ignore-working-copy file show asset.bin
 jj status
-jj --ignore-working-copy file show asset.bin > "$LAB/F04-second"
-python3 - "$LAB" <<'CHECK'
-from pathlib import Path
-import sys
-root = Path(sys.argv[1])
-a, b = [(root / name).read_bytes() for name in ("F04-first", "F04-second")]
-print("first_is_pointer=", a.startswith(b"version https://git-lfs.github.com/spec/v1\n"))
-print("second_is_raw=", b == b"seed asset\n" * 100)
-print("same_bytes=", a == b)
-CHECK
+jj --ignore-working-copy file show asset.bin
 ```
-
-**Expected:** Both inspections return the same stored bytes once the first snapshot has processed
-the deletion.
 
 **Actual:** The first returns the LFS pointer. The second returns the raw payload. A third snapshot
 is stable.
 
-**Relevant output** (nonconsecutive lines; see the linked transcript):
+**Expected:** Both inspections return the same stored bytes once the first snapshot has processed
+the deletion.
 
-```text
-first_is_pointer= True
-second_is_raw= True
-same_bytes= False
-```
+**Suggested fix:** Apply deletion of attribute rules consistently in the first snapshot. Test that a
+second snapshot without disk edits changes nothing.
 
-**Difference:** The number of status calls changes what is stored. The parent does not show this
-two-step transition.
-
-**Suggested fix:** Define when deleted attribute rules stop applying, and use that policy
-consistently within the first snapshot. Test successive snapshots with non-snapshotting inspections.
-
-**Scope:** Reproduces in every tested configuration. The intended policy needs a decision; these
-results do not prescribe whether the first snapshot should retain a pointer or store raw bytes.
+**Scope:** Reproduces on all tested configurations. The parent does not show the two-step
+transition. The intended attribute-deletion policy still needs a decision.
 
 **Cases:** [A04-removed](TEST-CASES.md#a04-removed) · [Parent
 comparison](evidence/base-comparison/A04-removed.json).
 
-**Reproduction transcript:** [F04.txt](evidence/manual-reproductions/F04.txt).
+[Full reproduction and recorded output](TEST-CASES.md#f04-manual-reproduction).
 
 ### F05
 
@@ -288,43 +154,29 @@ comparison](evidence/base-comparison/A04-removed.json).
 
 **Setup:** Under `*.bin filter=lfs`, create `link.bin` as a symlink to ordinary `note.txt`.
 
-**Reproduce:**
+**When:**
 
 ```sh
-new_case F05 || exit 1
-python3 -c 'from pathlib import Path; Path("link.bin").symlink_to("note.txt")'
 git add link.bin
 git ls-files --stage link.bin
 jj status
 jj file list
 ```
 
-**Expected:** Keep `link.bin` as a symlink entry, as Git does.
-
 **Actual:** Git records mode `120000`. jj file-list omits `link.bin`.
 
-**Relevant output** (nonconsecutive lines; see the linked transcript):
+**Expected:** Keep `link.bin` as a symlink entry, as Git does.
 
-```text
-120000 97922aee98474ad751b77adb4aa5e4f3dce681fe 0 link.bin
-The working copy has no changes.
-.gitattributes
-asset.bin
-note.txt
-```
+**Suggested fix:** Do not exclude symlink entries solely because their names match an LFS pattern.
+Test new symlinks and file-to-symlink transitions.
 
-**Difference:** The filter pattern suppresses a normal symlink tree entry. The parent tracks it.
-
-**Suggested fix:** Apply LFS snapshot exclusion to appropriate regular-file content, not symlink
-entries solely because their names match. Test new symlinks and file-to-symlink transitions.
-
-**Scope:** Reproduced on macOS and Linux. Windows symlink probes were skipped. Symlinked
-`.gitattributes` is a separate case and is correctly not followed.
+**Scope:** Reproduces on macOS and Linux; the parent tracks the symlink. Windows symlink tests were
+skipped.
 
 **Cases:** [A08-symlink-asset](TEST-CASES.md#a08-symlink-asset) · [X01 path-kind
 probes](TEST-CASES.md#x01-checkout-rebase).
 
-**Reproduction transcript:** [F05.txt](evidence/manual-reproductions/F05.txt).
+[Full reproduction and recorded output](TEST-CASES.md#f05-manual-reproduction).
 
 ### F06
 
@@ -332,44 +184,27 @@ probes](TEST-CASES.md#x01-checkout-rebase).
 
 **Setup:** Create a new `new.bin` that matches `filter=lfs`.
 
-**Reproduce:**
+**When:**
 
 ```sh
-new_case F06 || exit 1
-printf 'new payload\n' > new.bin
-jj file track new.bin > "$LAB/F06-out" 2> "$LAB/F06-err"
-printf 'track exit=%s\n' "$?"
-printf 'stderr bytes='; wc -c < "$LAB/F06-err"
+jj file track new.bin
 jj file list
 ```
 
-**Expected:** Track the path, return a failure, or explain why it remains excluded.
-
 **Actual:** Track exits 0 with empty stderr. File-list does not contain `new.bin`.
 
-**Relevant output** (nonconsecutive lines; see the linked transcript):
+**Expected:** Track the path, return a failure, or explain why it remains excluded.
 
-```text
-track exit=0
-stderr bytes=       0
-.gitattributes
-asset.bin
-note.txt
-```
+**Suggested fix:** Explain why the explicit track request is excluded and how to proceed. Add debug
+tracing for exclusion decisions.
 
-**Difference:** The explicit request silently does nothing. A separate `jj --debug status` probe
-also does not name the excluded path or filter.
-
-**Suggested fix:** Return an actionable diagnostic for explicit tracking of an excluded path,
-including the filter and supported next step. Add optional debug tracing for exclusion decisions.
-
-**Scope:** Usability gap in every tested configuration. This does not require noisy warnings on
-every ordinary status.
+**Scope:** Reproduces on all tested configurations. A separate debug-status probe also omitted the
+excluded path and filter.
 
 **Cases:** [C02-force-track](TEST-CASES.md#c02-force-track) · [X06 diagnostic
 probe](TEST-CASES.md#x06-performance-config).
 
-**Reproduction transcript:** [F06.txt](evidence/manual-reproductions/F06.txt).
+[Full reproduction and recorded output](TEST-CASES.md#f06-manual-reproduction).
 
 ### F07
 
@@ -378,53 +213,30 @@ probe](TEST-CASES.md#x06-performance-config).
 **Setup:** Put `a.bin filter=lfs` only in `.git/info/attributes`; repeat separately with
 `core.attributesFile`. No repository rule matches.
 
-**Reproduce:**
+**When:**
 
 ```sh
-new_case F07-info asset.bin plain || exit 1
-printf 'a.bin filter=lfs\n' > .git/info/attributes
-printf 'new payload\n' > a.bin
-git check-attr filter -- a.bin
-jj status
-jj file list
-jj file show a.bin
-
-new_case F07-global asset.bin plain || exit 1
-printf 'a.bin filter=lfs\n' > "$LAB/global-attributes"
-git config core.attributesFile "$LAB/global-attributes"
-printf 'new payload\n' > a.bin
 git check-attr filter -- a.bin
 jj status
 jj file list
 jj file show a.bin
 ```
+
+**Actual:** Git reports `a.bin: filter: lfs`. jj adds `a.bin` and stores its raw payload.
 
 **Expected:** For full Git-attribute compatibility, exclude the file that Git identifies as
 LFS-managed.
 
-**Actual:** Git reports `a.bin: filter: lfs`. jj adds `a.bin` and stores its raw payload.
+**Suggested fix:** Document that only repository attribute files are supported, or implement the
+other sources with Git precedence. Keep tests for the chosen boundary.
 
-**Relevant output** (nonconsecutive lines; see the linked transcript):
-
-```text
-a.bin: filter: lfs
-A a.bin
-new payload
-```
-
-**Difference:** Only repository `.gitattributes` rules provide exclusion; local/global rule sources
-do not.
-
-**Suggested fix:** Document the supported sources explicitly and keep regression tests for that
-boundary. If full parity is intended, implement the missing sources with Git precedence semantics.
-
-**Scope:** Not an established regression. This compatibility expectation exceeds the current
-implementation; deferral is reasonable with clear scope.
+**Scope:** Compatibility limitation, not an established regression. Deferral is reasonable if the
+scope is explicit.
 
 **Cases:** [A02-info-attributes](TEST-CASES.md#a02-info-attributes) ·
 [A03-global-attributes](TEST-CASES.md#a03-global-attributes).
 
-**Reproduction transcript:** [F07.txt](evidence/manual-reproductions/F07.txt).
+[Full reproduction and recorded output](TEST-CASES.md#f07-manual-reproduction).
 
 ### F08
 
@@ -433,50 +245,32 @@ implementation; deferral is reasonable with clear scope.
 **Setup:** Create an additional colocated workspace from the LFS fixture. The first command runs in
 the original workspace; the others run in the new workspace.
 
-**Reproduce:**
+**When:**
 
 ```sh
-new_case F08 || exit 1
-jj workspace add "$LAB/F08-extra"
-cd "$LAB/F08-extra" || exit 1
-if test -f .git; then echo 'git context=present'; else echo 'git context=missing'; fi
+jj workspace add /path/to/additional-workspace
+# In the additional workspace:
 git lfs checkout
-printf 'checkout exit=%s\n' "$?"
-python3 - <<'CHECK'
-from pathlib import Path
-print("hydrated=", Path("asset.bin").read_bytes() == b"seed asset\n" * 100)
-CHECK
 jj status
 jj file show asset.bin
 ```
 
+**Actual:** The new workspace has a `.git` file. External checkout hydrates the asset and jj keeps
+its pointer. The documented claim that jj workspaces lack Git context is too broad.
+
 **Expected:** Documentation describes the Git context and external hydration supported by the tested
 layout.
 
-**Actual:** The workspace has a `.git` file. External checkout hydrates the asset, and jj retains
-its stored pointer. The docs broadly say jj workspaces lack Git context.
+**Suggested fix:** Qualify the workspace limitation by layout. Also update stale source
+descriptions: symlinked attributes are not followed, and rules are loaded lazily.
 
-**Relevant output** (nonconsecutive lines; see the linked transcript):
-
-```text
-git context=present
-checkout exit=0
-hydrated= True
-version https://git-lfs.github.com/spec/v1
-```
-
-**Difference:** The documented restriction excludes a workflow that works on all tested
-configurations. Separately, source review found stale PR-description claims about following
-symlinked attributes and eagerly parsing all rules.
-
-**Suggested fix:** Qualify workspace guidance by repository layout. Describe the current symlink
-handling and lazy rule loading rather than older behavior.
-
-**Scope:** Documentation correction. Non-colocated workspace support was not established; lazy
-loading is a source-review observation, not a conclusion from these commands.
+**Scope:** Verified for additional colocated workspaces. Non-colocated support was not established;
+lazy loading is a source-review observation.
 
 **Cases:** [W03-workspace](TEST-CASES.md#w03-workspace) ·
 [A07-symlink-attrs](TEST-CASES.md#a07-symlink-attrs).
+
+[Full reproduction and recorded output](TEST-CASES.md#f08-manual-reproduction).
 
 ## What worked
 

@@ -107,7 +107,8 @@ It is separate from product findings and contains no measured cost or token-effi
 
 ## Standalone finding reproductions
 
-The shared setup and all eight finding blocks in [the report](FINDINGS.md) were executed against the
+The [manual reproductions](TEST-CASES.md#manual-reproduction-setup) for all eight findings were
+executed against the
 pinned macOS debug binary with a 1,100-byte synthetic seed. Each reproduced its stated observation.
 These are reduced confirmations of existing findings, not new core scenarios or a Windows rerun.
 [Transcripts and binary hash](evidence/manual-reproductions) record the verification. Runner-specific

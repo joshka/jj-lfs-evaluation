@@ -581,6 +581,33 @@ configuration.
 [Linux debug](evidence/linux-modern/A02-info-attributes.json),
 [Windows debug](evidence/windows/cases/A02-info-attributes.json).
 
+### F07 manual reproduction
+
+Run the [shared manual setup](#manual-reproduction-setup) once, then this block in the same Bash
+session. It was verified against the pinned macOS debug binary. These smaller fixtures confirm the
+finding; they do not add core scenarios or constitute a Windows rerun.
+
+```sh
+new_case F07-info asset.bin plain || exit 1
+printf 'a.bin filter=lfs\n' > .git/info/attributes
+printf 'new payload\n' > a.bin
+git check-attr filter -- a.bin
+jj status
+jj file list
+jj file show a.bin
+
+new_case F07-global asset.bin plain || exit 1
+printf 'a.bin filter=lfs\n' > "$LAB/global-attributes"
+git config core.attributesFile "$LAB/global-attributes"
+printf 'new payload\n' > a.bin
+git check-attr filter -- a.bin
+jj status
+jj file list
+jj file show a.bin
+```
+
+[Recorded output](evidence/manual-reproductions/F07.txt) · [Finding F07](FINDINGS.md#f07).
+
 ## A03-global-attributes
 
 **Rules in core.attributesFile.** Check the other common source of user-defined LFS rules.
@@ -643,6 +670,32 @@ snapshot. See [F04](FINDINGS.md#f04).
 [macOS debug](evidence/macos/A04-removed.json),
 [Linux debug](evidence/linux-modern/A04-removed.json),
 [Windows debug](evidence/windows/cases/A04-removed.json).
+
+### F04 manual reproduction
+
+Run the [shared manual setup](#manual-reproduction-setup) once, then this block in the same Bash
+session. It was verified against the pinned macOS debug binary. These smaller fixtures confirm the
+finding; they do not add core scenarios or constitute a Windows rerun.
+
+```sh
+new_case F04 || exit 1
+rm .gitattributes
+jj status
+jj --ignore-working-copy file show asset.bin > "$LAB/F04-first"
+jj status
+jj --ignore-working-copy file show asset.bin > "$LAB/F04-second"
+python3 - "$LAB" <<'CHECK'
+from pathlib import Path
+import sys
+root = Path(sys.argv[1])
+a, b = [(root / name).read_bytes() for name in ("F04-first", "F04-second")]
+print("first_is_pointer=", a.startswith(b"version https://git-lfs.github.com/spec/v1\n"))
+print("second_is_raw=", b == b"seed asset\n" * 100)
+print("same_bytes=", a == b)
+CHECK
+```
+
+[Recorded output](evidence/manual-reproductions/F04.txt) · [Finding F04](FINDINGS.md#f04).
 
 ## A05-unset
 
@@ -758,6 +811,23 @@ a hydrated regular file.
 [Linux debug](evidence/linux-modern/A08-symlink-asset.json),
 [Windows debug](evidence/windows/cases/A08-symlink-asset.json).
 
+### F05 manual reproduction
+
+Run the [shared manual setup](#manual-reproduction-setup) once, then this block in the same Bash
+session. It was verified against the pinned macOS debug binary. These smaller fixtures confirm the
+finding; they do not add core scenarios or constitute a Windows rerun.
+
+```sh
+new_case F05 || exit 1
+python3 -c 'from pathlib import Path; Path("link.bin").symlink_to("note.txt")'
+git add link.bin
+git ls-files --stage link.bin
+jj status
+jj file list
+```
+
+[Recorded output](evidence/manual-reproductions/F05.txt) · [Finding F05](FINDINGS.md#f05).
+
 ## A09-ignored-directory
 
 **Tracked files inside an ignored directory.** Exercise the traversal shortcut for directories that
@@ -814,6 +884,23 @@ not demonstrated. See [F03](FINDINGS.md#f03).
 [Linux debug](evidence/linux-modern/A10-file-directory.json),
 [Windows debug](evidence/windows/cases/A10-file-directory.json).
 
+### F03 manual reproduction
+
+Run the [shared manual setup](#manual-reproduction-setup) once, then this block in the same Bash
+session. It was verified against the pinned macOS debug binary. These smaller fixtures confirm the
+finding; they do not add core scenarios or constitute a Windows rerun.
+
+```sh
+new_case F03 || exit 1
+rm asset.bin
+mkdir asset.bin
+printf 'child\n' > asset.bin/child.txt
+jj status
+printf 'status exit=%s\n' "$?"
+```
+
+[Recorded output](evidence/manual-reproductions/F03.txt) · [Finding F03](FINDINGS.md#f03).
+
 ## C01-disable
 
 **Disable snapshot exclusion.** Verify the configuration escape hatch.
@@ -867,6 +954,23 @@ particular UX. See [F06](FINDINGS.md#f06).
 [macOS debug](evidence/macos/C02-force-track.json),
 [Linux debug](evidence/linux-modern/C02-force-track.json),
 [Windows debug](evidence/windows/cases/C02-force-track.json).
+
+### F06 manual reproduction
+
+Run the [shared manual setup](#manual-reproduction-setup) once, then this block in the same Bash
+session. It was verified against the pinned macOS debug binary. These smaller fixtures confirm the
+finding; they do not add core scenarios or constitute a Windows rerun.
+
+```sh
+new_case F06 || exit 1
+printf 'new payload\n' > new.bin
+jj file track new.bin > "$LAB/F06-out" 2> "$LAB/F06-err"
+printf 'track exit=%s\n' "$?"
+printf 'stderr bytes='; wc -c < "$LAB/F06-err"
+jj file list
+```
+
+[Recorded output](evidence/manual-reproductions/F06.txt) · [Finding F06](FINDINGS.md#f06).
 
 ## C03-invalid-config
 
@@ -1304,6 +1408,23 @@ before this change. See [F01](FINDINGS.md#f01).
 [Linux debug](evidence/linux-modern/W02-sparse-dirty.json),
 [Windows debug](evidence/windows/cases/W02-sparse-dirty.json).
 
+### F01 manual reproduction
+
+Run the [shared manual setup](#manual-reproduction-setup) once, then this block in the same Bash
+session. It was verified against the pinned macOS debug binary. These smaller fixtures confirm the
+finding; they do not add core scenarios or constitute a Windows rerun.
+
+```sh
+new_case F01 assets/asset.bin || exit 1
+printf 'unrecorded edit\n' > assets/asset.bin
+jj sparse set --clear --add note.txt
+printf 'sparse exit=%s\n' "$?"
+if test -e assets/asset.bin; then echo 'disk=present'; else echo 'disk=missing'; fi
+jj --ignore-working-copy file show assets/asset.bin
+```
+
+[Recorded output](evidence/manual-reproductions/F01.txt) · [Finding F01](FINDINGS.md#f01).
+
 ## W03-workspace
 
 **Hydrate an additional workspace.** Verify whether an additional colocated workspace supplies Git
@@ -1334,6 +1455,29 @@ evidence. This does not establish non-colocated workspace support. See [F08](FIN
 [macOS debug](evidence/macos-recheck/W03-workspace.json),
 [Linux debug](evidence/linux-modern/W03-workspace.json),
 [Windows debug](evidence/windows/cases/W03-workspace.json).
+
+### F08 manual reproduction
+
+Run the [shared manual setup](#manual-reproduction-setup) once, then this block in the same Bash
+session. It was verified against the pinned macOS debug binary. These smaller fixtures confirm the
+finding; they do not add core scenarios or constitute a Windows rerun.
+
+```sh
+new_case F08 || exit 1
+jj workspace add "$LAB/F08-extra"
+cd "$LAB/F08-extra" || exit 1
+if test -f .git; then echo 'git context=present'; else echo 'git context=missing'; fi
+git lfs checkout
+printf 'checkout exit=%s\n' "$?"
+python3 - <<'CHECK'
+from pathlib import Path
+print("hydrated=", Path("asset.bin").read_bytes() == b"seed asset\n" * 100)
+CHECK
+jj status
+jj file show asset.bin
+```
+
+[Recorded output](evidence/manual-reproductions/F08.txt) · [Finding F08](FINDINGS.md#f08).
 
 ## W04-run
 
@@ -1437,6 +1581,24 @@ untrack should preserve tracked entries. See [F02](FINDINGS.md#f02).
 **Evidence:** original IDs `pr-untrack` and `base-untrack` in the
 [comparison](evidence/workflows-sol/v4/comparison.json) and
 [transcript](evidence/workflows-sol/v4/transcript.json).
+
+### F02 manual reproduction
+
+Run the [shared manual setup](#manual-reproduction-setup) once, then this block in the same Bash
+session. It was verified against the pinned macOS debug binary. These smaller fixtures confirm the
+finding; they do not add core scenarios or constitute a Windows rerun.
+
+```sh
+new_case F02 || exit 1
+jj file untrack asset.bin
+printf 'untrack exit=%s\n' "$?"
+jj status
+jj file list
+jj file show asset.bin
+printf 'show exit=%s\n' "$?"
+```
+
+[Recorded output](evidence/manual-reproductions/F02.txt) · [Finding F02](FINDINGS.md#f02).
 
 ## X03-hosted-roundtrip
 
@@ -1691,3 +1853,68 @@ cargo build --locked -p jj-cli --bin jj
 gates](evidence/windows/README.md),
 and [workflow](harness/workflow_windows.yml). The full repository suite, clippy, MSRV, downstream
 compilation, and a Windows release build were not run.
+
+## Manual reproduction setup
+
+Prerequisites: Bash, Python 3, Git, Git LFS, and a debug `jj` binary built from
+`d8a56d1a38cae110529ef8e67e72e3e2057ed3ca`. Use debug to reproduce F03; its release command succeeds.
+These Bash reproductions were verified on macOS. Windows findings are supported by the earlier
+native CI evidence; these new shell blocks were not rerun there. F05 requires symlink support.
+
+If needed, build the pinned binary from its source archive in a separate temporary directory:
+
+```sh
+BUILD_DIR="$(mktemp -d "${TMPDIR:-/tmp}/jj-lfs-build.XXXXXX")"
+curl -fL https://github.com/jj-vcs/jj/archive/d8a56d1a38cae110529ef8e67e72e3e2057ed3ca.tar.gz \
+  -o "$BUILD_DIR/source.tar.gz"
+tar -xzf "$BUILD_DIR/source.tar.gz" -C "$BUILD_DIR" --strip-components=1
+(cd "$BUILD_DIR" && cargo build --locked -p jj-cli --bin jj)
+# Use "$BUILD_DIR/target/debug/jj" as JJ_BIN below.
+```
+
+Shared fixture setup (set `JJ_BIN` to the absolute path before running):
+
+```sh
+# Use a fresh Bash session. JJ_BIN must be an absolute path to the pinned debug binary.
+export JJ_BIN=/absolute/path/to/pinned/jj
+export LAB="$(mktemp -d "${TMPDIR:-/tmp}/jj-lfs-report.XXXXXX")"
+export GIT_CONFIG_GLOBAL=/dev/null GIT_CONFIG_NOSYSTEM=1 GIT_ATTR_NOSYSTEM=1
+export GIT_TERMINAL_PROMPT=0 JJ_PAGER=cat
+export JJ_CONFIG="$LAB/jj.toml"
+cat > "$JJ_CONFIG" <<'CONFIG'
+[user]
+name = "LFS Evaluation"
+email = "eval@example.invalid"
+[signing]
+behavior = "drop"
+[ui]
+color = "never"
+CONFIG
+jj() { "$JJ_BIN" "$@"; }
+new_case() {
+  # Arguments: unique case name, optional asset path, optional "plain" rule mode.
+  mkdir "$LAB/$1" && cd "$LAB/$1" || return 1
+  git init -q -b main || return 1
+  git config user.name 'LFS Evaluation'
+  git config user.email eval@example.invalid
+  git config commit.gpgsign false
+  git config core.autocrlf false
+  git lfs install --local || return 1
+  python3 - "${2:-asset.bin}" "${3:-lfs}" <<'SEED'
+from pathlib import Path
+import sys
+asset = Path(sys.argv[1])
+asset.parent.mkdir(parents=True, exist_ok=True)
+asset.write_bytes(b"seed asset\n" * 100)
+Path("note.txt").write_bytes(b"ordinary\n")
+rule = "*.bin filter=lfs diff=lfs merge=lfs -text\n" if sys.argv[2] == "lfs" else ""
+Path(".gitattributes").write_text(rule)
+SEED
+  git add . && git commit -qm 'Seed fixture' || return 1
+  jj git init --colocate || return 1
+}
+```
+
+Do not enable shell `errexit`: several commands intentionally fail, and the next line prints their
+exit code. Fixture setup failures explicitly stop the block. Use unique case names if repeating a
+block in the same session. No command contacts a remote after setup.

@@ -5,10 +5,12 @@ the documented untrack recipe removes committed pointers. These are the two high
 The PR does preserve pointers during ordinary snapshots; that narrower behavior works.
 
 Target: [PR 9635](https://github.com/jj-vcs/jj/pull/9635), `d8a56d1a38ca`. Exact-parent comparisons
-use
-`e9f48b3e4c1c`. No implementation fixes were made. Case links below provide setup, rationale,
-acceptance criteria, full commands, and raw evidence. [Methodology](METHODOLOGY.md) records
-provenance.
+use `e9f48b3e4c1c`. No implementation fixes were made. Case links below provide setup, rationale,
+acceptance criteria, full commands, and raw evidence. [Methodology](METHODOLOGY.md) records provenance.
+
+Command blocks are excerpts from the recorded runs, after the stated setup. `jj` denotes the
+pinned binary; temporary paths are normalized. They are not complete setup scripts. Suggested fixes
+are proposals, not implemented or validated changes.
 
 ## Failures and compatibility gaps
 
@@ -25,96 +27,259 @@ provenance.
 
 ### F01
 
-**P1 — Checkout loses unrecorded asset edits. PR regression.**
+**P1 — Edited asset bytes are lost.**
 
-After editing a hydrated asset, `jj status` keeps its old pointer. `jj edit` to a different asset
-revision exits 0 and replaces the edited bytes; the inspected prior revision contains only the old
-pointer. Rebase has the same loss, even though it reports a conflict. Sparse exclusion also exits 0
-and removes the edited file. The exact parent stores the raw edit before checkout, making it
-recoverable. That violates LFS pointer semantics but establishes the regression in recoverability.
+**Setup:** A committed LFS pointer at `assets/asset.bin`; its hydrated disk content has a new,
+unrecorded edit.
 
-Require preservation or a clear refusal before overwriting excluded edits.
-[Checkout/rebase case and comparison](TEST-CASES.md#x01-checkout-rebase) ·
-[Sparse case, including release and Windows](TEST-CASES.md#w02-sparse-dirty).
+**Commands run:**
+
+```sh
+jj sparse set --clear --add note.txt
+jj --ignore-working-copy file show assets/asset.bin
+```
+
+**Expected:** Refuse to remove the edited file, keep it on disk, or save its edited bytes before
+removal.
+
+**Actual:** Sparse-set exits 0 and deletes the disk file. File-show returns the old pointer, not the
+edited bytes.
+
+**Difference:** The edited bytes are missing from both disk and the inspected tree. The exact parent
+saves the raw edit. Revision switching and rebasing also lose edits in separate fixtures.
+
+**Suggested fix:** Before checkout overwrites or removes an excluded file, detect unrecorded content
+and preserve it or refuse with an actionable error. Cover switch, rebase, and sparse removal. Do not
+silently resume storing raw payloads as the LFS solution.
+
+**Scope:** PR regression. Sparse loss reproduces in release and all tested debug configurations.
+
+**Cases:** [W02-sparse-dirty](TEST-CASES.md#w02-sparse-dirty) ·
+[X01-checkout-rebase](TEST-CASES.md#x01-checkout-rebase).
 
 ### F02
 
-**P1 — The documented untrack recipe removes a committed pointer. Documentation defect.**
+**P1 — The documented untrack step deletes the pointer.**
 
-With an existing pointer and hydrated file, `jj file untrack asset.bin` exits 0; status reports
-`D asset.bin`; file-show exits 1. The disk payload remains, but the revision records a deletion.
-Untrack is doing its job. The advice to use it for LFS is wrong: existing tracked assets are already
-excluded from snapshots. The exact parent refuses this untrack because the path is not ignored.
+**Setup:** An existing committed LFS pointer and hydrated `asset.bin`; follow the proposed untrack
+guidance.
 
-Replace the recipe with a tested pointer-preserving procedure.
-[Procedure, commands, and comparison](TEST-CASES.md#x02-untrack-recipe).
+**Commands run:**
+
+```sh
+jj file untrack asset.bin
+jj status
+jj file list
+jj file show asset.bin
+```
+
+**Expected:** Following the LFS setup instructions keeps the asset in the revision.
+
+**Actual:** Untrack exits 0. Status reports `D asset.bin`; file-list omits it; file-show exits 1.
+The disk payload remains.
+
+**Difference:** The working revision records a deletion. Publishing that revision removes the asset,
+although its bytes still exist locally.
+
+**Suggested fix:** Remove the untrack instruction. Explain that tracked LFS paths are already
+excluded from snapshots, and provide a tested procedure for updating pointers through external Git
+LFS.
+
+**Scope:** Documentation defect. The untrack command is behaving as requested; the parent refuses
+this operation because the path is not ignored.
+
+**Cases:** [X02-untrack-recipe](TEST-CASES.md#x02-untrack-recipe).
 
 ### F03
 
-**P2 — File-to-directory replacement breaks a snapshot invariant. PR regression.**
+**P2 — Replacing an asset file with a directory crashes debug builds.**
 
-Replace `asset.bin` with `asset.bin/child.txt` under `*.bin filter=lfs`, then run `jj status`.
-macOS, Linux, and Windows debug builds exit 101 at `local_working_copy.rs:1464`: cached paths
-include
-both the old file and child; the tree contains only the child. The exact parent handles the change.
-The macOS release command succeeds. **A release crash was not demonstrated.**
+**Setup:** With `*.bin filter=lfs`, replace disk file `asset.bin` with directory
+`asset.bin/child.txt`.
 
-Repair the invariant and test subsequent snapshots and checkout, not just the first command.
-[Case and profile-specific evidence](TEST-CASES.md#a10-file-directory).
+**Commands run:**
+
+```sh
+jj status
+```
+
+**Expected:** Exit 0 and represent the file-to-directory change consistently.
+
+**Actual:** Debug builds exit 101 at `local_working_copy.rs:1464`. Cached file states contain both
+`asset.bin` and its child; the tree contains only the child.
+
+**Difference:** The path-state cache disagrees with the tree. The exact parent handles the
+transition.
+
+**Suggested fix:** Update or remove stale file-state entries during excluded file-to-directory
+transitions. Add repeated-snapshot and subsequent-checkout regression coverage.
+
+**Scope:** PR regression reproduced on macOS, Linux, and Windows debug builds. macOS release exits
+0; no release crash was demonstrated.
+
+**Cases:** [A10-file-directory](TEST-CASES.md#a10-file-directory) · [X01 path-kind
+probes](TEST-CASES.md#x01-checkout-rebase).
 
 ### F04
 
-**P2 — Deleting attributes produces a second content change without a disk edit.**
+**P2 — A second status changes stored asset content without another edit.**
 
-Delete `.gitattributes`, then run status twice. The first snapshot retains the asset pointer; the
-second stores raw payload. A third is stable. The parent does not exhibit that transition. Reading
-through `--ignore-working-copy` confirms the difference without triggering extra snapshots.
-The revision's contents therefore depend on how many commands have snapshotted it.
+**Setup:** Delete `.gitattributes` while `asset.bin` is hydrated. Make no further disk changes.
 
-Settle deletion semantics and test successive snapshots.
-[Case](TEST-CASES.md#a04-removed) · [Parent comparison](evidence/base-comparison/A04-removed.json).
+**Commands run:**
+
+```sh
+jj status
+jj --ignore-working-copy file show asset.bin
+jj status
+jj --ignore-working-copy file show asset.bin
+```
+
+**Expected:** Both inspections return the same stored bytes once the first snapshot has processed
+the deletion.
+
+**Actual:** The first returns the LFS pointer. The second returns the raw payload. A third snapshot
+is stable.
+
+**Difference:** The number of status calls changes what is stored. The parent does not show this
+two-step transition.
+
+**Suggested fix:** Define when deleted attribute rules stop applying, and use that policy
+consistently within the first snapshot. Test successive snapshots with non-snapshotting inspections.
+
+**Scope:** Reproduces in every tested configuration. The intended policy needs a decision; these
+results do not prescribe whether the first snapshot should retain a pointer or store raw bytes.
+
+**Cases:** [A04-removed](TEST-CASES.md#a04-removed) · [Parent
+comparison](evidence/base-comparison/A04-removed.json).
 
 ### F05
 
-**P2 — An LFS pattern hides a symlink that Git tracks.**
+**P2 — A matching symlink disappears from the jj tree.**
 
-Create `link.bin` under `*.bin filter=lfs`. Git stages a mode-120000 symlink; jj omits it.
-The parent tracks it. A separate file-to-symlink probe leaves the old pointer stored while the disk
-path is a symlink. This is distinct from symlinked `.gitattributes`, which is correctly not
-followed.
-Windows symlink probes were skipped.
+**Setup:** Under `*.bin filter=lfs`, create `link.bin` as a symlink to ordinary `note.txt`.
 
-[Symlink case](TEST-CASES.md#a08-symlink-asset) ·
-[Path-kind probes](TEST-CASES.md#x01-checkout-rebase).
+**Commands run:**
+
+```sh
+git add link.bin
+git ls-files --stage link.bin
+jj status
+jj file list
+```
+
+**Expected:** Keep `link.bin` as a symlink entry, as Git does.
+
+**Actual:** Git records mode `120000`. jj file-list omits `link.bin`.
+
+**Difference:** The filter pattern suppresses a normal symlink tree entry. The parent tracks it.
+
+**Suggested fix:** Apply LFS snapshot exclusion to appropriate regular-file content, not symlink
+entries solely because their names match. Test new symlinks and file-to-symlink transitions.
+
+**Scope:** Reproduced on macOS and Linux. Windows symlink probes were skipped. Symlinked
+`.gitattributes` is a separate case and is correctly not followed.
+
+**Cases:** [A08-symlink-asset](TEST-CASES.md#a08-symlink-asset) · [X01 path-kind
+probes](TEST-CASES.md#x01-checkout-rebase).
 
 ### F06
 
-**P2 — Explicit track reports success without tracking or explanation.**
+**P2 — Track says success but does not track the file.**
 
-`jj file track new.bin` exits 0 with empty stderr, but file-list omits the filtered path.
-A separate `jj --debug status` shows lock events, not the excluded path or filter. Explicit requests
-need an actionable outcome; routine status need not warn for every hydrated asset.
-[Tracking case](TEST-CASES.md#c02-force-track) · [Logging probe](TEST-CASES.md#x06-performance-config).
+**Setup:** Create a new `new.bin` that matches `filter=lfs`.
+
+**Commands run:**
+
+```sh
+jj file track new.bin
+jj file list
+```
+
+**Expected:** Track the path, return a failure, or explain why it remains excluded.
+
+**Actual:** Track exits 0 with empty stderr. File-list does not contain `new.bin`.
+
+**Difference:** The explicit request silently does nothing. A separate `jj --debug status` probe
+also does not name the excluded path or filter.
+
+**Suggested fix:** Return an actionable diagnostic for explicit tracking of an excluded path,
+including the filter and supported next step. Add optional debug tracing for exclusion decisions.
+
+**Scope:** Usability gap in every tested configuration. This does not require noisy warnings on
+every ordinary status.
+
+**Cases:** [C02-force-track](TEST-CASES.md#c02-force-track) · [X06 diagnostic
+probe](TEST-CASES.md#x06-performance-config).
 
 ### F07
 
-**Compatibility limit — Info and global attributes are not read.**
+**Compatibility gap — Git identifies LFS content that jj stores raw.**
 
-With an LFS rule only in `.git/info/attributes` or `core.attributesFile`, Git reports `filter=lfs`
-but jj adds the raw payload. The implementation reads repository `.gitattributes`. This is not an
-established regression; deferral is reasonable if the support boundary is explicit.
-[Info-attribute case](TEST-CASES.md#a02-info-attributes) ·
-[Global-attribute case](TEST-CASES.md#a03-global-attributes).
+**Setup:** Put `a.bin filter=lfs` only in `.git/info/attributes`; repeat separately with
+`core.attributesFile`. No repository rule matches.
+
+**Commands run:**
+
+```sh
+git check-attr filter -- a.bin
+jj status
+jj file list
+jj file show a.bin
+```
+
+**Expected:** For full Git-attribute compatibility, exclude the file that Git identifies as
+LFS-managed.
+
+**Actual:** Git reports `a.bin: filter: lfs`. jj adds `a.bin` and stores its raw payload.
+
+**Difference:** Only repository `.gitattributes` rules provide exclusion; local/global rule sources
+do not.
+
+**Suggested fix:** Document the supported sources explicitly and keep regression tests for that
+boundary. If full parity is intended, implement the missing sources with Git precedence semantics.
+
+**Scope:** Not an established regression. This compatibility expectation exceeds the current
+implementation; deferral is reasonable with clear scope.
+
+**Cases:** [A02-info-attributes](TEST-CASES.md#a02-info-attributes) ·
+[A03-global-attributes](TEST-CASES.md#a03-global-attributes).
 
 ### F08
 
-**Documentation — Workspace and attribute descriptions are stale.**
+**Documentation — The workspace limitation is too broad.**
 
-The tested colocated additional workspace has a `.git` file and supports `git lfs checkout`,
-contrary to the broad documented limitation. Qualify that advice by layout. The PR description also
-says symlinked attribute files are followed and all rules are parsed every snapshot; current code
-rejects those symlinks and loads visited rules lazily.
-[Workspace case](TEST-CASES.md#w03-workspace) · [Symlinked-rule case](TEST-CASES.md#a07-symlink-attrs).
+**Setup:** Create an additional colocated workspace from the LFS fixture. The first command runs in
+the original workspace; the others run in the new workspace.
+
+**Commands run:**
+
+```sh
+jj workspace add /path/to/additional-workspace
+# In the additional workspace:
+git lfs checkout
+jj status
+jj file show asset.bin
+```
+
+**Expected:** Documentation describes the Git context and external hydration supported by the tested
+layout.
+
+**Actual:** The workspace has a `.git` file. External checkout hydrates the asset, and jj retains
+its stored pointer. The docs broadly say jj workspaces lack Git context.
+
+**Difference:** The documented restriction excludes a workflow that works on all tested
+configurations. Separately, source review found stale PR-description claims about following
+symlinked attributes and eagerly parsing all rules.
+
+**Suggested fix:** Qualify workspace guidance by repository layout. Describe the current symlink
+handling and lazy rule loading rather than older behavior.
+
+**Scope:** Documentation correction. Non-colocated workspace support was not established; lazy
+loading is a source-review observation, not a conclusion from these commands.
+
+**Cases:** [W03-workspace](TEST-CASES.md#w03-workspace) ·
+[A07-symlink-attrs](TEST-CASES.md#a07-symlink-attrs).
 
 ## What worked
 

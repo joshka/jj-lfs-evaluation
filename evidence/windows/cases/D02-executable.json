@@ -1,0 +1,91 @@
+{
+  "id": "D02-executable",
+  "purpose": "Executable bit-only edits characterized",
+  "category": "contract",
+  "status": "OBSERVED",
+  "seconds": 0.6099999999999,
+  "checks": [],
+  "observations": {
+    "skip": "Executable bit is not supported by Windows filesystem semantics."
+  },
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "init",
+        "-b",
+        "main"
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\D02-executable",
+      "rc": 0,
+      "seconds": 0.03199999999992542,
+      "stdout": "Initialized empty Git repository in D:/a/jj-lfs-eval-20260925/jj-lfs-eval-20260925/results-windows/repos/D02-executable/.git/\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.name",
+        "LFS Evaluation"
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\D02-executable",
+      "rc": 0,
+      "seconds": 0.03099999999994907,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.email",
+        "<synthetic-fixture-email>"
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\D02-executable",
+      "rc": 0,
+      "seconds": 0.03099999999994907,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "commit.gpgsign",
+        "false"
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\D02-executable",
+      "rc": 0,
+      "seconds": 0.047000000000025466,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "core.autocrlf",
+        "false"
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\D02-executable",
+      "rc": 0,
+      "seconds": 0.031000000000176442,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "lfs",
+        "install",
+        "--local"
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\D02-executable",
+      "rc": 0,
+      "seconds": 0.4379999999998745,
+      "stdout": "Updated Git hooks.\nGit LFS initialized.\n",
+      "stderr": ""
+    }
+  ]
+}

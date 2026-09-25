@@ -1,0 +1,208 @@
+{
+  "id": "S02-rename",
+  "purpose": "Characterize silent snapshot exclusion: rename",
+  "category": "contract",
+  "status": "PASS",
+  "seconds": 1.7960000000000491,
+  "checks": [
+    {
+      "label": "Stored pointer unchanged by excluded mutation",
+      "pass": true,
+      "actual_sha256": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+      "expected_sha256": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+      "actual_size": 129,
+      "expected_size": 129
+    },
+    {
+      "label": "No new excluded path snapshots",
+      "pass": true
+    }
+  ],
+  "observations": {
+    "status": "The working copy has no changes.\nWorking copy  (@) : otsprkpk d627efea (empty) (no description set)\nParent commit (@-): zqmusywl d72cde68 main | Seed LFS fixture\n",
+    "mutation": "rename",
+    "disk_files": [
+      ".gitattributes",
+      "note.txt",
+      "renamed.bin"
+    ]
+  },
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "init",
+        "-b",
+        "main"
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\S02-rename",
+      "rc": 0,
+      "seconds": 0.04600000000004911,
+      "stdout": "Initialized empty Git repository in D:/a/jj-lfs-eval-20260925/jj-lfs-eval-20260925/results-windows/repos/S02-rename/.git/\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.name",
+        "LFS Evaluation"
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\S02-rename",
+      "rc": 0,
+      "seconds": 0.03199999999992542,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.email",
+        "<synthetic-fixture-email>"
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\S02-rename",
+      "rc": 0,
+      "seconds": 0.03099999999994907,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "commit.gpgsign",
+        "false"
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\S02-rename",
+      "rc": 0,
+      "seconds": 0.031000000000176442,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "core.autocrlf",
+        "false"
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\S02-rename",
+      "rc": 0,
+      "seconds": 0.03099999999994907,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "lfs",
+        "install",
+        "--local"
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\S02-rename",
+      "rc": 0,
+      "seconds": 0.4069999999999254,
+      "stdout": "Updated Git hooks.\nGit LFS initialized.\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "add",
+        "."
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\S02-rename",
+      "rc": 0,
+      "seconds": 0.26500000000010004,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "commit",
+        "-m",
+        "Seed LFS fixture"
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\S02-rename",
+      "rc": 0,
+      "seconds": 0.5939999999998236,
+      "stdout": "[main (root-commit) d72cde6] Seed LFS fixture\n 3 files changed, 5 insertions(+)\n create mode 100644 .gitattributes\n create mode 100644 asset.bin\n create mode 100644 note.txt\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\S02-rename",
+      "rc": 0,
+      "seconds": 0.031000000000176442,
+      "stdout": "d72cde68323db7d65ae9b34cd22332a67c8eab90\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\source\\target\\debug\\jj.exe",
+        "git",
+        "init",
+        "--colocate"
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\S02-rename",
+      "rc": 0,
+      "seconds": 0.09399999999982356,
+      "stdout": "",
+      "stderr": "Done importing changes from the underlying Git repo.\nInitialized repo in \".\"\n"
+    },
+    {
+      "argv": [
+        "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\source\\target\\debug\\jj.exe",
+        "status"
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\S02-rename",
+      "rc": 0,
+      "seconds": 0.06300000000010186,
+      "stdout": "The working copy has no changes.\nWorking copy  (@) : otsprkpk d627efea (empty) (no description set)\nParent commit (@-): zqmusywl d72cde68 main | Seed LFS fixture\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\source\\target\\debug\\jj.exe",
+        "file",
+        "show",
+        "asset.bin"
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\S02-rename",
+      "rc": 0,
+      "seconds": 0.06199999999989814,
+      "stdout": "version https://git-lfs.github.com/spec/v1\noid sha256:dad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f\nsize 2500\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\source\\target\\debug\\jj.exe",
+        "file",
+        "list"
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\S02-rename",
+      "rc": 0,
+      "seconds": 0.047000000000025466,
+      "stdout": ".gitattributes\nasset.bin\nnote.txt\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\source\\target\\debug\\jj.exe",
+        "file",
+        "list"
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\S02-rename",
+      "rc": 0,
+      "seconds": 0.06200000000012551,
+      "stdout": ".gitattributes\nasset.bin\nnote.txt\n",
+      "stderr": ""
+    }
+  ]
+}

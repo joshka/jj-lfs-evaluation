@@ -42,3 +42,15 @@ public for Windows CI. Its author identity uses a public GitHub noreply address 
 The published core harness was rerun from this directory against the pinned release binary using
 six documented cases. It produced two passes and four previously documented gaps, with no setup
 errors. This verifies that the portable entry point still runs; it adds no new independent scenarios.
+
+## Windows follow-up
+
+The completed Windows run contributes selected per-case JSON and status summaries. Fixture email
+strings and runner host labels were sanitized. Raw job logs and disposable repository internals are
+not copied here. The GitHub Actions run is public in the authorized test repository; those public
+runner logs are distinct from the curated evidence in this report.
+
+Two Windows failures were false positives caused by comparing slash-form paths with backslash-form
+CLI output. Original results are preserved beside an audited status list. The published core harness
+now normalizes Windows path separators for that comparison; the Windows run was not repeated after
+this assertion correction. No jj implementation was changed.

@@ -1,0 +1,2 @@
+PR head: d8a56d1a38cae110529ef8e67e72e3e2057ed3ca
+Archive: https://github.com/jj-vcs/jj/archive/d8a56d1a38cae110529ef8e67e72e3e2057ed3ca.tar.gz

@@ -1,0 +1,185 @@
+{
+  "id": "A01-directory-only",
+  "purpose": "Attribute matching agrees with Git",
+  "category": "contract",
+  "status": "FAIL",
+  "seconds": 2.4060000000001764,
+  "checks": [
+    {
+      "label": "Expected exclusion matches Git attribute decision",
+      "pass": false,
+      "expected_excluded": false,
+      "actual_included": false,
+      "git_check_attr": "assets/a.bin: filter: unspecified\n",
+      "jj_status": "Working copy changes:\nA assets\\a.bin\nWorking copy  (@) : mzvunxkt be41ac2e (no description set)\nParent commit (@-): wuvmwoyk d18fb454 main | Seed LFS fixture\n"
+    }
+  ],
+  "observations": {},
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "init",
+        "-b",
+        "main"
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\A01-directory-only",
+      "rc": 0,
+      "seconds": 0.031000000000176442,
+      "stdout": "Initialized empty Git repository in D:/a/jj-lfs-eval-20260925/jj-lfs-eval-20260925/results-windows/repos/A01-directory-only/.git/\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.name",
+        "LFS Evaluation"
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\A01-directory-only",
+      "rc": 0,
+      "seconds": 0.04699999999979809,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.email",
+        "<synthetic-fixture-email>"
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\A01-directory-only",
+      "rc": 0,
+      "seconds": 0.031000000000176442,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "commit.gpgsign",
+        "false"
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\A01-directory-only",
+      "rc": 0,
+      "seconds": 0.03199999999992542,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "core.autocrlf",
+        "false"
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\A01-directory-only",
+      "rc": 0,
+      "seconds": 0.03099999999994907,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "lfs",
+        "install",
+        "--local"
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\A01-directory-only",
+      "rc": 0,
+      "seconds": 1.030999999999949,
+      "stdout": "Updated Git hooks.\nGit LFS initialized.\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "add",
+        "."
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\A01-directory-only",
+      "rc": 0,
+      "seconds": 0.047000000000025466,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "commit",
+        "-m",
+        "Seed LFS fixture"
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\A01-directory-only",
+      "rc": 0,
+      "seconds": 0.8279999999999745,
+      "stdout": "[main (root-commit) d18fb45] Seed LFS fixture\n 2 files changed, 2 insertions(+)\n create mode 100644 .gitattributes\n create mode 100644 note.txt\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\A01-directory-only",
+      "rc": 0,
+      "seconds": 0.031000000000176442,
+      "stdout": "d18fb454ca70687500602fc8e3f8764af8dcb2ac\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\source\\target\\debug\\jj.exe",
+        "git",
+        "init",
+        "--colocate"
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\A01-directory-only",
+      "rc": 0,
+      "seconds": 0.10999999999989996,
+      "stdout": "",
+      "stderr": "Done importing changes from the underlying Git repo.\nInitialized repo in \".\"\n"
+    },
+    {
+      "argv": [
+        "git",
+        "check-attr",
+        "filter",
+        "--",
+        "assets/a.bin"
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\A01-directory-only",
+      "rc": 0,
+      "seconds": 0.03099999999994907,
+      "stdout": "assets/a.bin: filter: unspecified\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\source\\target\\debug\\jj.exe",
+        "status"
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\A01-directory-only",
+      "rc": 0,
+      "seconds": 0.10900000000015098,
+      "stdout": "Working copy changes:\nA assets\\a.bin\nWorking copy  (@) : mzvunxkt be41ac2e (no description set)\nParent commit (@-): wuvmwoyk d18fb454 main | Seed LFS fixture\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\source\\target\\debug\\jj.exe",
+        "file",
+        "list"
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\A01-directory-only",
+      "rc": 0,
+      "seconds": 0.047000000000025466,
+      "stdout": ".gitattributes\nassets\\a.bin\nnote.txt\n",
+      "stderr": ""
+    }
+  ]
+}

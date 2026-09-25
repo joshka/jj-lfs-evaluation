@@ -1,0 +1,6 @@
+no_git_check=success
+lib_unit=success
+lib_integration=success
+cli_tests=success
+build=success
+harness=success

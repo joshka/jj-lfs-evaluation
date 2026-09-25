@@ -1,0 +1,10 @@
+{
+  "platform": "Windows-2025Server-10.0.26100-SP0",
+  "python": "3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)]",
+  "jj": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\source\\target\\debug\\jj.exe",
+  "binary_sha256": "4ca4451b07f8a8047012863cccd063fb88248370623bdaa8ed191e73e251db93",
+  "time_utc": "2026-09-25T18:45:43Z",
+  "jj_version": "jj 0.45.1-ae3af284876d7bad26eab4a7b55affab5c7db3b7",
+  "git_version": "git version 2.55.0.windows.5",
+  "lfs_version": "git-lfs/3.7.1 (GitHub; windows amd64; go 1.25.1; git b84b3384)"
+}

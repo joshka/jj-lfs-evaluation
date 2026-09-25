@@ -1,0 +1,161 @@
+{
+  "id": "P03-empty",
+  "purpose": "Empty LFS file passthrough",
+  "category": "contract",
+  "status": "PASS",
+  "seconds": 1.703000000000202,
+  "checks": [
+    {
+      "label": "Empty LFS file passthrough stays empty",
+      "pass": true,
+      "actual_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "expected_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "actual_size": 0,
+      "expected_size": 0
+    }
+  ],
+  "observations": {},
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "init",
+        "-b",
+        "main"
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\P03-empty",
+      "rc": 0,
+      "seconds": 0.031000000000176442,
+      "stdout": "Initialized empty Git repository in D:/a/jj-lfs-eval-20260925/jj-lfs-eval-20260925/results-windows/repos/P03-empty/.git/\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.name",
+        "LFS Evaluation"
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\P03-empty",
+      "rc": 0,
+      "seconds": 0.03199999999992542,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.email",
+        "<synthetic-fixture-email>"
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\P03-empty",
+      "rc": 0,
+      "seconds": 0.03099999999994907,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "commit.gpgsign",
+        "false"
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\P03-empty",
+      "rc": 0,
+      "seconds": 0.047000000000025466,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "core.autocrlf",
+        "false"
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\P03-empty",
+      "rc": 0,
+      "seconds": 0.03099999999994907,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "lfs",
+        "install",
+        "--local"
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\P03-empty",
+      "rc": 0,
+      "seconds": 0.40600000000017644,
+      "stdout": "Updated Git hooks.\nGit LFS initialized.\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "add",
+        "."
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\P03-empty",
+      "rc": 0,
+      "seconds": 0.2969999999997981,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "commit",
+        "-m",
+        "Seed LFS fixture"
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\P03-empty",
+      "rc": 0,
+      "seconds": 0.5940000000000509,
+      "stdout": "[main (root-commit) 30422b5] Seed LFS fixture\n 3 files changed, 2 insertions(+)\n create mode 100644 .gitattributes\n create mode 100644 empty.bin\n create mode 100644 note.txt\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\P03-empty",
+      "rc": 0,
+      "seconds": 0.03099999999994907,
+      "stdout": "30422b5370dd4c85f6fb50a0f965bd251dbe4356\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\source\\target\\debug\\jj.exe",
+        "git",
+        "init",
+        "--colocate"
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\P03-empty",
+      "rc": 0,
+      "seconds": 0.1410000000000764,
+      "stdout": "",
+      "stderr": "Done importing changes from the underlying Git repo.\nInitialized repo in \".\"\n"
+    },
+    {
+      "argv": [
+        "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\source\\target\\debug\\jj.exe",
+        "file",
+        "show",
+        "empty.bin"
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\P03-empty",
+      "rc": 0,
+      "seconds": 0.06200000000012551,
+      "stdout": "",
+      "stderr": ""
+    }
+  ]
+}

@@ -1,0 +1,185 @@
+{
+  "id": "A01-nested-unset",
+  "purpose": "Attribute matching agrees with Git",
+  "category": "contract",
+  "status": "FAIL",
+  "seconds": 1.3120000000001255,
+  "checks": [
+    {
+      "label": "Expected exclusion matches Git attribute decision",
+      "pass": false,
+      "expected_excluded": false,
+      "actual_included": false,
+      "git_check_attr": "sub/a.bin: filter: unset\n",
+      "jj_status": "Working copy changes:\nA sub\\.gitattributes\nA sub\\a.bin\nWorking copy  (@) : qnwvntto 3b04f91f (no description set)\nParent commit (@-): mxomokxl eb68e4a9 main | Seed LFS fixture\n"
+    }
+  ],
+  "observations": {},
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "init",
+        "-b",
+        "main"
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\A01-nested-unset",
+      "rc": 0,
+      "seconds": 0.047000000000025466,
+      "stdout": "Initialized empty Git repository in D:/a/jj-lfs-eval-20260925/jj-lfs-eval-20260925/results-windows/repos/A01-nested-unset/.git/\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.name",
+        "LFS Evaluation"
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\A01-nested-unset",
+      "rc": 0,
+      "seconds": 0.03099999999994907,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.email",
+        "<synthetic-fixture-email>"
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\A01-nested-unset",
+      "rc": 0,
+      "seconds": 0.031000000000176442,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "commit.gpgsign",
+        "false"
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\A01-nested-unset",
+      "rc": 0,
+      "seconds": 0.03099999999994907,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "core.autocrlf",
+        "false"
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\A01-nested-unset",
+      "rc": 0,
+      "seconds": 0.047000000000025466,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "lfs",
+        "install",
+        "--local"
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\A01-nested-unset",
+      "rc": 0,
+      "seconds": 0.42200000000002547,
+      "stdout": "Updated Git hooks.\nGit LFS initialized.\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "add",
+        "."
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\A01-nested-unset",
+      "rc": 0,
+      "seconds": 0.03099999999994907,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "commit",
+        "-m",
+        "Seed LFS fixture"
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\A01-nested-unset",
+      "rc": 0,
+      "seconds": 0.375,
+      "stdout": "[main (root-commit) eb68e4a] Seed LFS fixture\n 2 files changed, 2 insertions(+)\n create mode 100644 .gitattributes\n create mode 100644 note.txt\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\A01-nested-unset",
+      "rc": 0,
+      "seconds": 0.03199999999992542,
+      "stdout": "eb68e4a90ac19df75dd5bc8e99a9cc6374fdbd4b\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\source\\target\\debug\\jj.exe",
+        "git",
+        "init",
+        "--colocate"
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\A01-nested-unset",
+      "rc": 0,
+      "seconds": 0.09300000000007458,
+      "stdout": "",
+      "stderr": "Done importing changes from the underlying Git repo.\nInitialized repo in \".\"\n"
+    },
+    {
+      "argv": [
+        "git",
+        "check-attr",
+        "filter",
+        "--",
+        "sub/a.bin"
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\A01-nested-unset",
+      "rc": 0,
+      "seconds": 0.03199999999992542,
+      "stdout": "sub/a.bin: filter: unset\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\source\\target\\debug\\jj.exe",
+        "status"
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\A01-nested-unset",
+      "rc": 0,
+      "seconds": 0.07799999999997453,
+      "stdout": "Working copy changes:\nA sub\\.gitattributes\nA sub\\a.bin\nWorking copy  (@) : qnwvntto 3b04f91f (no description set)\nParent commit (@-): mxomokxl eb68e4a9 main | Seed LFS fixture\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\source\\target\\debug\\jj.exe",
+        "file",
+        "list"
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\A01-nested-unset",
+      "rc": 0,
+      "seconds": 0.06200000000012551,
+      "stdout": ".gitattributes\nnote.txt\nsub\\.gitattributes\nsub\\a.bin\n",
+      "stderr": ""
+    }
+  ]
+}

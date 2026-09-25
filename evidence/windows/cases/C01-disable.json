@@ -1,0 +1,173 @@
+{
+  "id": "C01-disable",
+  "purpose": "Explicit filter opt-out",
+  "category": "contract",
+  "status": "PASS",
+  "seconds": 1.7970000000000255,
+  "checks": [
+    {
+      "label": "Opt-out snapshots raw payload",
+      "pass": true,
+      "actual_sha256": "dad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f",
+      "expected_sha256": "dad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f",
+      "actual_size": 2500,
+      "expected_size": 2500
+    }
+  ],
+  "observations": {},
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "init",
+        "-b",
+        "main"
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\C01-disable",
+      "rc": 0,
+      "seconds": 0.03099999999994907,
+      "stdout": "Initialized empty Git repository in D:/a/jj-lfs-eval-20260925/jj-lfs-eval-20260925/results-windows/repos/C01-disable/.git/\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.name",
+        "LFS Evaluation"
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\C01-disable",
+      "rc": 0,
+      "seconds": 0.047000000000025466,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.email",
+        "<synthetic-fixture-email>"
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\C01-disable",
+      "rc": 0,
+      "seconds": 0.031000000000176442,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "commit.gpgsign",
+        "false"
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\C01-disable",
+      "rc": 0,
+      "seconds": 0.03099999999994907,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "core.autocrlf",
+        "false"
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\C01-disable",
+      "rc": 0,
+      "seconds": 0.03199999999992542,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "lfs",
+        "install",
+        "--local"
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\C01-disable",
+      "rc": 0,
+      "seconds": 0.42200000000002547,
+      "stdout": "Updated Git hooks.\nGit LFS initialized.\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "add",
+        "."
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\C01-disable",
+      "rc": 0,
+      "seconds": 0.28099999999994907,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "commit",
+        "-m",
+        "Seed LFS fixture"
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\C01-disable",
+      "rc": 0,
+      "seconds": 0.5940000000000509,
+      "stdout": "[main (root-commit) 2a3a1fa] Seed LFS fixture\n 3 files changed, 5 insertions(+)\n create mode 100644 .gitattributes\n create mode 100644 asset.bin\n create mode 100644 note.txt\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\C01-disable",
+      "rc": 0,
+      "seconds": 0.03099999999994907,
+      "stdout": "2a3a1fa9b742c42d21df730a926afc8a912704cb\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\source\\target\\debug\\jj.exe",
+        "git",
+        "init",
+        "--colocate"
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\C01-disable",
+      "rc": 0,
+      "seconds": 0.125,
+      "stdout": "",
+      "stderr": "Done importing changes from the underlying Git repo.\nInitialized repo in \".\"\n"
+    },
+    {
+      "argv": [
+        "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\source\\target\\debug\\jj.exe",
+        "--config=git.ignore-filters=[]",
+        "status"
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\C01-disable",
+      "rc": 0,
+      "seconds": 0.10900000000015098,
+      "stdout": "Working copy changes:\nM asset.bin\nWorking copy  (@) : xlsmtkkk 8b67e169 (no description set)\nParent commit (@-): mwxzlvrq 2a3a1fa9 main | Seed LFS fixture\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\source\\target\\debug\\jj.exe",
+        "file",
+        "show",
+        "asset.bin"
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\C01-disable",
+      "rc": 0,
+      "seconds": 0.06299999999987449,
+      "stdout": "LFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\n",
+      "stderr": ""
+    }
+  ]
+}

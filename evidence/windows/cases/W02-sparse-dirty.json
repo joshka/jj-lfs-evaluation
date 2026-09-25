@@ -1,0 +1,181 @@
+{
+  "id": "W02-sparse-dirty",
+  "purpose": "Sparse removal must not silently lose local edits",
+  "category": "data-integrity",
+  "status": "FAIL",
+  "seconds": 1.530999999999949,
+  "checks": [
+    {
+      "label": "Sparse exclusion preserves, snapshots, or rejects local edits",
+      "pass": false,
+      "stored_sha256": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+      "edited_sha256": "f373b3bf36856f8fd4d1045d39a945690f960207ffaadc274305d5f90619a816"
+    }
+  ],
+  "observations": {
+    "sparse": {
+      "rc": 0,
+      "stderr": "Added 0 files, modified 0 files, removed 2 files\n",
+      "asset_exists": false
+    }
+  },
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "init",
+        "-b",
+        "main"
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\W02-sparse-dirty",
+      "rc": 0,
+      "seconds": 0.03099999999994907,
+      "stdout": "Initialized empty Git repository in D:/a/jj-lfs-eval-20260925/jj-lfs-eval-20260925/results-windows/repos/W02-sparse-dirty/.git/\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.name",
+        "LFS Evaluation"
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\W02-sparse-dirty",
+      "rc": 0,
+      "seconds": 0.047000000000025466,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.email",
+        "<synthetic-fixture-email>"
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\W02-sparse-dirty",
+      "rc": 0,
+      "seconds": 0.03199999999992542,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "commit.gpgsign",
+        "false"
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\W02-sparse-dirty",
+      "rc": 0,
+      "seconds": 0.03099999999994907,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "core.autocrlf",
+        "false"
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\W02-sparse-dirty",
+      "rc": 0,
+      "seconds": 0.03099999999994907,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "lfs",
+        "install",
+        "--local"
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\W02-sparse-dirty",
+      "rc": 0,
+      "seconds": 0.40600000000017644,
+      "stdout": "Updated Git hooks.\nGit LFS initialized.\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "add",
+        "."
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\W02-sparse-dirty",
+      "rc": 0,
+      "seconds": 0.2819999999999254,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "commit",
+        "-m",
+        "Seed LFS fixture"
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\W02-sparse-dirty",
+      "rc": 0,
+      "seconds": 0.375,
+      "stdout": "[main (root-commit) 079699f] Seed LFS fixture\n 3 files changed, 5 insertions(+)\n create mode 100644 .gitattributes\n create mode 100644 assets/asset.bin\n create mode 100644 note.txt\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\W02-sparse-dirty",
+      "rc": 0,
+      "seconds": 0.03099999999994907,
+      "stdout": "079699f3bfbf8145d3a882ee1ec89a3dd152931e\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\source\\target\\debug\\jj.exe",
+        "git",
+        "init",
+        "--colocate"
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\W02-sparse-dirty",
+      "rc": 0,
+      "seconds": 0.15599999999994907,
+      "stdout": "",
+      "stderr": "Done importing changes from the underlying Git repo.\nInitialized repo in \".\"\n"
+    },
+    {
+      "argv": [
+        "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\source\\target\\debug\\jj.exe",
+        "sparse",
+        "set",
+        "--clear",
+        "--add",
+        "note.txt"
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\W02-sparse-dirty",
+      "rc": 0,
+      "seconds": 0.047000000000025466,
+      "stdout": "",
+      "stderr": "Added 0 files, modified 0 files, removed 2 files\n"
+    },
+    {
+      "argv": [
+        "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\source\\target\\debug\\jj.exe",
+        "--ignore-working-copy",
+        "file",
+        "show",
+        "assets/asset.bin"
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\W02-sparse-dirty",
+      "rc": 0,
+      "seconds": 0.06200000000012551,
+      "stdout": "version https://git-lfs.github.com/spec/v1\noid sha256:dad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f\nsize 2500\n",
+      "stderr": ""
+    }
+  ]
+}

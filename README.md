@@ -50,11 +50,16 @@ The core sweep contains **40 distinct scenarios**, repeated across these environ
 | macOS, PR release | 34 | 6 | 0 | 0 |
 | macOS, PR debug, corrected checks | 33 | 7 | 0 | 0 |
 | Linux, modern Git, PR debug | 32 | 7 | 0 | 1 |
+| Windows Server 2025, PR debug, audited assertions | 30 | 6 | 0 | 4 |
 
 A gap is not automatically a merge blocker. Some expectations intentionally ask for fuller Git
 compatibility than the PR implements. The finding dispositions below provide that distinction.
 The Linux skip is the Unix permission probe: its container ran as root. macOS exercised that probe.
 Initial harness mistakes and corrected assertions are retained rather than hidden; see the plan.
+Windows originally reported 28 passes and eight failures. Two assertions compared slash-form paths
+with backslash-form output; command evidence confirms the expected files were tracked. The audited
+counts correct those two false positives without claiming a rerun. Four Windows probes were skipped.
+See [Windows evidence](evidence/windows/README.md).
 
 Additional independent probes cover six workflow types, three path-kind transitions, nine lifecycle
 scenarios, seven controlled transport failures, seven hosted transport/locking/archive checks, six
@@ -68,8 +73,10 @@ Versions:
 - An initial Debian/bookworm run used Git 2.39.5 and Git LFS 3.3.0. Additional colocated workspace
   creation failed with an explicit Git >= 2.42 requirement. The modern-container run removed that
   environment limitation. Both runs are retained.
-- Windows: the initial attempt did not execute because a runner was unavailable. A follow-up on
-  [the now-public test repository][windows-run] is in progress; its results will be added.
+- Windows Server 2025 x64: Git 2.55.0.windows.5, Git LFS 3.7.1, Python 3.12.10.
+  The [public CI run][windows-run] completed the debug build, focused upstream tests, and harness.
+  Its archive is pinned to the PR head; the binary version suffix identifies the enclosing CI
+  repository, not the source archive revision. See the Windows evidence for provenance.
 
 ## Findings to address before merging
 
@@ -130,7 +137,8 @@ The exact parent processes the transition.
 
 The standard release build completes this transition and can recover when the original path is
 restored. **A release crash was not demonstrated.** The debug assertion still exposes a real
-bookkeeping invariant violation, not an ordinary rejected operation.
+bookkeeping invariant violation, not an ordinary rejected operation. Windows debug also reproduces
+this panic; a Windows release build and exact-parent comparison were not performed.
 
 See [debug evidence](evidence/transitions-sol/debug/comparison.json),
 [release evidence](evidence/transitions-sol/release/comparison.json), and
@@ -300,9 +308,12 @@ Relevant upstream verification passed:
 - `cargo check --locked -p jj-lib --no-default-features`.
 
 That is 174 distinct relevant passing tests; the focused subsets are not counted twice.
-The full repository suite, clippy, MSRV build, downstream compatibility builds, and Windows execution
-were not performed. The no-Git check and backend tests address prior review concerns but do not
-replace those remaining configurations. Logs are in [verification evidence](evidence/verification).
+Windows additionally passed 26 attribute tests, five local-working-copy tests, and two CLI
+temporary-snapshot tests, plus the no-default-features check. These repeat existing scenarios and
+do not increase the distinct-test count.
+The full repository suite, clippy, MSRV build, and downstream compatibility builds were not performed.
+The no-Git check and backend tests address prior review concerns but do not replace those remaining
+configurations. Logs are in [verification evidence](evidence/verification).
 
 ## Rebase onto main
 
@@ -321,8 +332,9 @@ See [conflicts](evidence/verification/rebase-conflicts.txt).
 1. Settle deletion-of-attributes and symlink semantics with regression tests.
 1. Give explicit tracking an actionable outcome and document unsupported attribute sources.
 1. Resolve the main integration conflicts and run the critical suite on the resulting head.
-1. Run Windows validation when execution is available, particularly read-only files, path handling,
-   case changes, and CRLF interactions. Keep native LFS transport as a separate scope decision.
+1. Extend Windows validation to read-only ACLs, case-only renames, CRLF conversion, and release
+   builds. The current harness sets `core.autocrlf=false` and skips symlink and Unix-mode probes.
+   Keep native LFS transport as a separate scope decision.
 
 No review, issue, or comment was posted on the upstream PR, and its branch was not modified.
 The [test repository][hosted-repo] is now public with the owner's authorization. The earlier

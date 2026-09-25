@@ -1,0 +1,213 @@
+{
+  "id": "A03-global-attributes",
+  "purpose": "Configured global attributes protect LFS payload",
+  "category": "compatibility",
+  "status": "FAIL",
+  "seconds": 1.530999999999949,
+  "checks": [
+    {
+      "label": "Expected exclusion matches Git attribute decision",
+      "pass": false,
+      "expected_excluded": true,
+      "actual_included": true,
+      "git_check_attr": "a.bin: filter: lfs\n",
+      "jj_status": "Working copy changes:\nA a.bin\nWorking copy  (@) : vllpzoos 5a2855b4 (no description set)\nParent commit (@-): zxpuonnx 7b03a66d main | Seed LFS fixture\n"
+    }
+  ],
+  "observations": {
+    "stored_payload_sha256": "dad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f"
+  },
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "init",
+        "-b",
+        "main"
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\A03-global-attributes",
+      "rc": 0,
+      "seconds": 0.047000000000025466,
+      "stdout": "Initialized empty Git repository in D:/a/jj-lfs-eval-20260925/jj-lfs-eval-20260925/results-windows/repos/A03-global-attributes/.git/\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.name",
+        "LFS Evaluation"
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\A03-global-attributes",
+      "rc": 0,
+      "seconds": 0.03099999999994907,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.email",
+        "<synthetic-fixture-email>"
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\A03-global-attributes",
+      "rc": 0,
+      "seconds": 0.03099999999994907,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "commit.gpgsign",
+        "false"
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\A03-global-attributes",
+      "rc": 0,
+      "seconds": 0.031000000000176442,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "core.autocrlf",
+        "false"
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\A03-global-attributes",
+      "rc": 0,
+      "seconds": 0.03199999999992542,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "lfs",
+        "install",
+        "--local"
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\A03-global-attributes",
+      "rc": 0,
+      "seconds": 0.4680000000000746,
+      "stdout": "Updated Git hooks.\nGit LFS initialized.\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "add",
+        "."
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\A03-global-attributes",
+      "rc": 0,
+      "seconds": 0.047000000000025466,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "commit",
+        "-m",
+        "Seed LFS fixture"
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\A03-global-attributes",
+      "rc": 0,
+      "seconds": 0.35999999999989996,
+      "stdout": "[main (root-commit) 7b03a66] Seed LFS fixture\n 2 files changed, 1 insertion(+)\n create mode 100644 .gitattributes\n create mode 100644 note.txt\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\A03-global-attributes",
+      "rc": 0,
+      "seconds": 0.03099999999994907,
+      "stdout": "7b03a66db9cb93f3506f978747add589433da540\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\source\\target\\debug\\jj.exe",
+        "git",
+        "init",
+        "--colocate"
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\A03-global-attributes",
+      "rc": 0,
+      "seconds": 0.17200000000002547,
+      "stdout": "",
+      "stderr": "Done importing changes from the underlying Git repo.\nInitialized repo in \".\"\n"
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "core.attributesFile",
+        "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\A03-global-attributes-global-attributes"
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\A03-global-attributes",
+      "rc": 0,
+      "seconds": 0.03099999999994907,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "check-attr",
+        "filter",
+        "--",
+        "a.bin"
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\A03-global-attributes",
+      "rc": 0,
+      "seconds": 0.031000000000176442,
+      "stdout": "a.bin: filter: lfs\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\source\\target\\debug\\jj.exe",
+        "status"
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\A03-global-attributes",
+      "rc": 0,
+      "seconds": 0.10999999999989996,
+      "stdout": "Working copy changes:\nA a.bin\nWorking copy  (@) : vllpzoos 5a2855b4 (no description set)\nParent commit (@-): zxpuonnx 7b03a66d main | Seed LFS fixture\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\source\\target\\debug\\jj.exe",
+        "file",
+        "list"
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\A03-global-attributes",
+      "rc": 0,
+      "seconds": 0.04600000000004911,
+      "stdout": ".gitattributes\na.bin\nnote.txt\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\source\\target\\debug\\jj.exe",
+        "file",
+        "show",
+        "a.bin"
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\A03-global-attributes",
+      "rc": 0,
+      "seconds": 0.06299999999987449,
+      "stdout": "LFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\nLFS evaluation payload\u0000\\xff\n",
+      "stderr": ""
+    }
+  ]
+}

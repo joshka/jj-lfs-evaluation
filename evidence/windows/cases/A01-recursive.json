@@ -1,0 +1,185 @@
+{
+  "id": "A01-recursive",
+  "purpose": "Attribute matching agrees with Git",
+  "category": "contract",
+  "status": "PASS",
+  "seconds": 2.5779999999999745,
+  "checks": [
+    {
+      "label": "Expected exclusion matches Git attribute decision",
+      "pass": true,
+      "expected_excluded": true,
+      "actual_included": false,
+      "git_check_attr": "assets/sub/a.bin: filter: lfs\n",
+      "jj_status": "The working copy has no changes.\nWorking copy  (@) : yrwtmyvw d6b0a1b1 (empty) (no description set)\nParent commit (@-): yluktqmr c82f4819 main | Seed LFS fixture\n"
+    }
+  ],
+  "observations": {},
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "init",
+        "-b",
+        "main"
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\A01-recursive",
+      "rc": 0,
+      "seconds": 0.04699999999979809,
+      "stdout": "Initialized empty Git repository in D:/a/jj-lfs-eval-20260925/jj-lfs-eval-20260925/results-windows/repos/A01-recursive/.git/\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.name",
+        "LFS Evaluation"
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\A01-recursive",
+      "rc": 0,
+      "seconds": 0.031000000000176442,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.email",
+        "<synthetic-fixture-email>"
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\A01-recursive",
+      "rc": 0,
+      "seconds": 0.03199999999992542,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "commit.gpgsign",
+        "false"
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\A01-recursive",
+      "rc": 0,
+      "seconds": 0.03099999999994907,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "core.autocrlf",
+        "false"
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\A01-recursive",
+      "rc": 0,
+      "seconds": 0.03099999999994907,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "lfs",
+        "install",
+        "--local"
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\A01-recursive",
+      "rc": 0,
+      "seconds": 1.4380000000001019,
+      "stdout": "Updated Git hooks.\nGit LFS initialized.\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "add",
+        "."
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\A01-recursive",
+      "rc": 0,
+      "seconds": 0.03099999999994907,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "commit",
+        "-m",
+        "Seed LFS fixture"
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\A01-recursive",
+      "rc": 0,
+      "seconds": 0.5620000000001255,
+      "stdout": "[main (root-commit) c82f481] Seed LFS fixture\n 2 files changed, 2 insertions(+)\n create mode 100644 .gitattributes\n create mode 100644 note.txt\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\A01-recursive",
+      "rc": 0,
+      "seconds": 0.03199999999992542,
+      "stdout": "c82f481983210f7a1a05ad74dadb8ad11b96fa78\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\source\\target\\debug\\jj.exe",
+        "git",
+        "init",
+        "--colocate"
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\A01-recursive",
+      "rc": 0,
+      "seconds": 0.20299999999997453,
+      "stdout": "",
+      "stderr": "Done importing changes from the underlying Git repo.\nInitialized repo in \".\"\n"
+    },
+    {
+      "argv": [
+        "git",
+        "check-attr",
+        "filter",
+        "--",
+        "assets/sub/a.bin"
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\A01-recursive",
+      "rc": 0,
+      "seconds": 0.03099999999994907,
+      "stdout": "assets/sub/a.bin: filter: lfs\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\source\\target\\debug\\jj.exe",
+        "status"
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\A01-recursive",
+      "rc": 0,
+      "seconds": 0.047000000000025466,
+      "stdout": "The working copy has no changes.\nWorking copy  (@) : yrwtmyvw d6b0a1b1 (empty) (no description set)\nParent commit (@-): yluktqmr c82f4819 main | Seed LFS fixture\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\source\\target\\debug\\jj.exe",
+        "file",
+        "list"
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\A01-recursive",
+      "rc": 0,
+      "seconds": 0.06200000000012551,
+      "stdout": ".gitattributes\nnote.txt\n",
+      "stderr": ""
+    }
+  ]
+}

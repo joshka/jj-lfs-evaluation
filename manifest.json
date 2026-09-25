@@ -6,7 +6,24 @@
   "recommendation": "Do not merge pinned head unchanged",
   "core_scenarios": 40,
   "upstream_distinct_relevant_tests_passed": 174,
-  "windows": "Initial execution unavailable; see current report for follow-up results.",
+  "windows": {
+    "run": "https://github.com/joshka/jj-lfs-eval-20260925/actions/runs/36173559917",
+    "profile": "debug",
+    "raw": {
+      "PASS": 28,
+      "FAIL": 8,
+      "OBSERVED": 4,
+      "ERROR": 0
+    },
+    "audited": {
+      "PASS": 30,
+      "FAIL": 6,
+      "SKIP": 4,
+      "ERROR": 0
+    },
+    "focused_upstream_tests_passed": 33,
+    "note": "Two path-separator false positives corrected from command evidence, not a rerun."
+  },
   "temporary_workspace": "/tmp/jj-lfs-evaluation (normalized historical path)",
   "source_files_modified": []
 }

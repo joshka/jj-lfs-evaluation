@@ -1,0 +1,216 @@
+{
+  "id": "W03-workspace",
+  "purpose": "Additional workspace and missing Git context",
+  "category": "contract",
+  "status": "PASS",
+  "seconds": 2.5629999999998745,
+  "checks": [
+    {
+      "label": "Additional workspace initially contains pointer",
+      "pass": true,
+      "actual_sha256": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+      "expected_sha256": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+      "actual_size": 129,
+      "expected_size": 129
+    },
+    {
+      "label": "Colocated additional workspace supports external hydration",
+      "pass": true,
+      "status": "The working copy has no changes.\nWorking copy  (@) : xlyyzvwq 606fb8f7 (empty) (no description set)\nParent commit (@-): kyxxuksl 42f9fc44 main | Seed LFS fixture\n"
+    },
+    {
+      "label": "Hydrated additional workspace retains stored pointer",
+      "pass": true,
+      "actual_sha256": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+      "expected_sha256": "e2bab1dd05bc1ba860a46ff15a49577b3ad9e8ed3389ced930436472ea294e9a",
+      "actual_size": 129,
+      "expected_size": 129
+    }
+  ],
+  "observations": {
+    "plain_git_lfs": {
+      "rc": 0,
+      "stderr": ""
+    },
+    "git_context": "gitdir: ../W03-workspace/.git/worktrees/W03-workspace-workspace\n"
+  },
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "init",
+        "-b",
+        "main"
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\W03-workspace",
+      "rc": 0,
+      "seconds": 0.03199999999992542,
+      "stdout": "Initialized empty Git repository in D:/a/jj-lfs-eval-20260925/jj-lfs-eval-20260925/results-windows/repos/W03-workspace/.git/\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.name",
+        "LFS Evaluation"
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\W03-workspace",
+      "rc": 0,
+      "seconds": 0.047000000000025466,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.email",
+        "<synthetic-fixture-email>"
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\W03-workspace",
+      "rc": 0,
+      "seconds": 0.03099999999994907,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "commit.gpgsign",
+        "false"
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\W03-workspace",
+      "rc": 0,
+      "seconds": 0.03099999999994907,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "core.autocrlf",
+        "false"
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\W03-workspace",
+      "rc": 0,
+      "seconds": 0.031000000000176442,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "lfs",
+        "install",
+        "--local"
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\W03-workspace",
+      "rc": 0,
+      "seconds": 0.42200000000002547,
+      "stdout": "Updated Git hooks.\nGit LFS initialized.\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "add",
+        "."
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\W03-workspace",
+      "rc": 0,
+      "seconds": 0.2969999999997981,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "commit",
+        "-m",
+        "Seed LFS fixture"
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\W03-workspace",
+      "rc": 0,
+      "seconds": 0.5940000000000509,
+      "stdout": "[main (root-commit) 42f9fc4] Seed LFS fixture\n 3 files changed, 5 insertions(+)\n create mode 100644 .gitattributes\n create mode 100644 asset.bin\n create mode 100644 note.txt\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\W03-workspace",
+      "rc": 0,
+      "seconds": 0.03099999999994907,
+      "stdout": "42f9fc442c653b01b8637c6b0e0aff937efa448f\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\source\\target\\debug\\jj.exe",
+        "git",
+        "init",
+        "--colocate"
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\W03-workspace",
+      "rc": 0,
+      "seconds": 0.10900000000015098,
+      "stdout": "",
+      "stderr": "Done importing changes from the underlying Git repo.\nInitialized repo in \".\"\n"
+    },
+    {
+      "argv": [
+        "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\source\\target\\debug\\jj.exe",
+        "workspace",
+        "add",
+        "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\W03-workspace-workspace"
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\W03-workspace",
+      "rc": 0,
+      "seconds": 0.25,
+      "stdout": "",
+      "stderr": "Created Git worktree for the new workspace.\nCreated workspace in \"..\\W03-workspace-workspace\"\nWorking copy  (@) now at: xlyyzvwq 606fb8f7 (empty) (no description set)\nParent commit (@-)      : kyxxuksl 42f9fc44 main | Seed LFS fixture\nAdded 3 files, modified 0 files, removed 0 files\n"
+    },
+    {
+      "argv": [
+        "git",
+        "lfs",
+        "checkout"
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\W03-workspace-workspace",
+      "rc": 0,
+      "seconds": 0.5629999999998745,
+      "stdout": "Checking out LFS objects: 100% (1/1), 2.5 KB | 0 B/s, done.\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\source\\target\\debug\\jj.exe",
+        "status"
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\W03-workspace-workspace",
+      "rc": 0,
+      "seconds": 0.06200000000012551,
+      "stdout": "The working copy has no changes.\nWorking copy  (@) : xlyyzvwq 606fb8f7 (empty) (no description set)\nParent commit (@-): kyxxuksl 42f9fc44 main | Seed LFS fixture\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\source\\target\\debug\\jj.exe",
+        "file",
+        "show",
+        "asset.bin"
+      ],
+      "cwd": "D:\\a\\jj-lfs-eval-20260925\\jj-lfs-eval-20260925\\results-windows\\repos\\W03-workspace-workspace",
+      "rc": 0,
+      "seconds": 0.06299999999987449,
+      "stdout": "version https://git-lfs.github.com/spec/v1\noid sha256:dad4f19fe194b265dd5fa6d900c5710b126c2a982ae623d36538da5fcda5a99f\nsize 2500\n",
+      "stderr": ""
+    }
+  ]
+}

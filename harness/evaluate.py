@@ -80,7 +80,8 @@ class Fixture:
         return self.jj("file", "show", name, ok=False).stdout
 
     def files(self):
-        return self.jj("file", "list").stdout.decode().splitlines()
+        paths = self.jj("file", "list").stdout.decode().splitlines()
+        return [path.replace("\\", "/") for path in paths] if os.name == "nt" else paths
 
     def check(self, label, condition, **evidence):
         self.checks.append({"label": label, "pass": bool(condition), **evidence})

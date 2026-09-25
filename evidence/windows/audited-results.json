@@ -1,0 +1,231 @@
+{
+  "run": 36173559917,
+  "original_counts": {
+    "PASS": 28,
+    "FAIL": 8,
+    "ERROR": 0,
+    "OBSERVED": 4
+  },
+  "audited_counts": {
+    "PASS": 30,
+    "FAIL": 6,
+    "ERROR": 0,
+    "OBSERVED": 4
+  },
+  "status_corrections": [
+    {
+      "id": "A01-directory-only",
+      "original_status": "FAIL",
+      "audited_status": "PASS",
+      "reason": "Windows separator-only harness comparison; jj status and file list show tracked file."
+    },
+    {
+      "id": "A01-nested-unset",
+      "original_status": "FAIL",
+      "audited_status": "PASS",
+      "reason": "Windows separator-only harness comparison; jj status and file list show tracked file."
+    }
+  ],
+  "case_statuses": [
+    {
+      "id": "A01-case-sensitive",
+      "original": "PASS",
+      "audited": "PASS"
+    },
+    {
+      "id": "A01-directory-only",
+      "original": "FAIL",
+      "audited": "PASS"
+    },
+    {
+      "id": "A01-filter-set",
+      "original": "PASS",
+      "audited": "PASS"
+    },
+    {
+      "id": "A01-last-wins",
+      "original": "PASS",
+      "audited": "PASS"
+    },
+    {
+      "id": "A01-macro",
+      "original": "PASS",
+      "audited": "PASS"
+    },
+    {
+      "id": "A01-nested-set",
+      "original": "PASS",
+      "audited": "PASS"
+    },
+    {
+      "id": "A01-nested-unset",
+      "original": "FAIL",
+      "audited": "PASS"
+    },
+    {
+      "id": "A01-quoted-space",
+      "original": "PASS",
+      "audited": "PASS"
+    },
+    {
+      "id": "A01-recursive",
+      "original": "PASS",
+      "audited": "PASS"
+    },
+    {
+      "id": "A01-subdir-relative",
+      "original": "PASS",
+      "audited": "PASS"
+    },
+    {
+      "id": "A01-unicode",
+      "original": "PASS",
+      "audited": "PASS"
+    },
+    {
+      "id": "A01-unspecified",
+      "original": "PASS",
+      "audited": "PASS"
+    },
+    {
+      "id": "A02-info-attributes",
+      "original": "FAIL",
+      "audited": "FAIL"
+    },
+    {
+      "id": "A03-global-attributes",
+      "original": "FAIL",
+      "audited": "FAIL"
+    },
+    {
+      "id": "A04-removed",
+      "original": "FAIL",
+      "audited": "FAIL"
+    },
+    {
+      "id": "A05-unset",
+      "original": "PASS",
+      "audited": "PASS"
+    },
+    {
+      "id": "A06-existing-file",
+      "original": "PASS",
+      "audited": "PASS"
+    },
+    {
+      "id": "A07-symlink-attrs",
+      "original": "OBSERVED",
+      "audited": "OBSERVED"
+    },
+    {
+      "id": "A08-symlink-asset",
+      "original": "OBSERVED",
+      "audited": "OBSERVED"
+    },
+    {
+      "id": "A09-ignored-directory",
+      "original": "PASS",
+      "audited": "PASS"
+    },
+    {
+      "id": "A10-file-directory",
+      "original": "FAIL",
+      "audited": "FAIL"
+    },
+    {
+      "id": "C01-disable",
+      "original": "PASS",
+      "audited": "PASS"
+    },
+    {
+      "id": "C02-force-track",
+      "original": "FAIL",
+      "audited": "FAIL"
+    },
+    {
+      "id": "C03-invalid-config",
+      "original": "PASS",
+      "audited": "PASS"
+    },
+    {
+      "id": "D01-permission",
+      "original": "OBSERVED",
+      "audited": "OBSERVED"
+    },
+    {
+      "id": "D02-executable",
+      "original": "OBSERVED",
+      "audited": "OBSERVED"
+    },
+    {
+      "id": "N01-performance",
+      "original": "PASS",
+      "audited": "PASS"
+    },
+    {
+      "id": "P01-pointer",
+      "original": "PASS",
+      "audited": "PASS"
+    },
+    {
+      "id": "P02-malformed",
+      "original": "PASS",
+      "audited": "PASS"
+    },
+    {
+      "id": "P03-empty",
+      "original": "PASS",
+      "audited": "PASS"
+    },
+    {
+      "id": "P04-missing-object",
+      "original": "PASS",
+      "audited": "PASS"
+    },
+    {
+      "id": "S01-hydrated",
+      "original": "PASS",
+      "audited": "PASS"
+    },
+    {
+      "id": "S02-delete",
+      "original": "PASS",
+      "audited": "PASS"
+    },
+    {
+      "id": "S02-modify",
+      "original": "PASS",
+      "audited": "PASS"
+    },
+    {
+      "id": "S02-new",
+      "original": "PASS",
+      "audited": "PASS"
+    },
+    {
+      "id": "S02-rename",
+      "original": "PASS",
+      "audited": "PASS"
+    },
+    {
+      "id": "W01-sparse",
+      "original": "PASS",
+      "audited": "PASS"
+    },
+    {
+      "id": "W02-sparse-dirty",
+      "original": "FAIL",
+      "audited": "FAIL"
+    },
+    {
+      "id": "W03-workspace",
+      "original": "PASS",
+      "audited": "PASS"
+    },
+    {
+      "id": "W04-run",
+      "original": "PASS",
+      "audited": "PASS"
+    }
+  ]
+}

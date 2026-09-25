@@ -199,7 +199,11 @@ scenarios remain explicit follow-up work rather than implicit passes.
 - Actual quota exhaustion, purchase/overage behavior, and hosted rate-limit timing were deliberately
   not induced. Mock rejection covers only the failure boundary, not GitHub accounting.
 - Full repository tests, clippy, MSRV, downstream library consumers, and the broader feature matrix.
-- Windows CI is prepared but blocked by runner unavailability, not a product failure.
+- Windows debug CI completed: 33 focused upstream tests passed. The core sweep has 30 audited
+  passes, six gaps, and four skips. Two original failures were path-separator assertion errors,
+  corrected by inspecting command evidence; the Windows sweep was not rerun. See
+  [Windows evidence](evidence/windows/README.md). ACL/read-only, CRLF conversion, case-only rename,
+  Windows symlink behavior, and release-profile coverage remain open.
 
 ## Reproduction
 
